@@ -3,3 +3,6 @@
 
 ## poetry dependency lock -- not suggested by developer but currently there is no benefit
 /poetry.lock
+
+## python virtual environment used by poetry -- could contain sensitive data
+.venv
