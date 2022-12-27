@@ -8,6 +8,8 @@ packages = [{include = "dsa_heldenbogen"}]
 
 [tool.poetry.dependencies]
 python = "^3.8"
+## python API for anwer set programming (ASP) by Potassco
+clingo = "^5.6.2"
 
 
 [build-system]
