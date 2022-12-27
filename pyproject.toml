@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "dsa-heldenbogen"
+version = "0.1.0"
+description = ""
+authors = ["bjoern-nowak <dsa-heldenbogen@nowakhub.de>"]
+readme = "README.md"
+packages = [{include = "dsa_heldenbogen"}]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
