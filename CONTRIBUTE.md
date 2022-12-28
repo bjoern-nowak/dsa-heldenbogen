@@ -1,7 +1,3 @@
-# DSA ("Das Schwarze Auge") Heldenbogen
-
-more to come...
-
 # Learn Guide
 
 ## Answer Set Programming (ASP) with Potassco Clingo
@@ -23,7 +19,7 @@ more to come...
 
 ...add a dependency: `poetry add <dependency_name_like_in_pypi.org>`
 
-## History of project setup
+# History of project setup
 
 * Init project with poetry: `poetry new dsa-heldenbogen`
 * Include .venv folder in project root: `poetry config virtualenvs.in-project true --local`
