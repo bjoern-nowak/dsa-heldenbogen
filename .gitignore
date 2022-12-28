@@ -6,3 +6,6 @@
 
 ## python virtual environment used by poetry -- could contain sensitive data
 .venv
+
+## build artifacts
+/out/
