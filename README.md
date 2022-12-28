@@ -2,6 +2,14 @@
 
 more to come...
 
+# Learn Guide
+
+## Answer Set Programming (ASP) with Potassco Clingo
+* https://potassco.org/book/
+* https://teaching.potassco.org/ (!)
+
+# Setup Guide
+
 ## Setup local develop environment
 
 * Install python 3.8
