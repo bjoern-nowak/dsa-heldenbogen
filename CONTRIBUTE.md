@@ -17,26 +17,16 @@
   * (Optional) Activate shell auto-completion: `poetry completions bash >> ~/.bash_completion`
 * Install projects python dependencies: `poetry install`
 
-## Start local server
-
-### by command line
-
-#### with python cli (recommended)
+## Run tests
 
 ```bash
-(cd dsa_heldenbogen && poetry run python main.py)
+./scripts/run_tests.sh
 ```
 
-#### with uvicorn cli
-
-Schema is `uvicorn <file_path>:<variable> <options>`.
-Options:
-
-* `--reload` will automatically load changed py-files.
-* `--log-level debug` values: critical, error, warning, debug, trace.
+## Start server
 
 ```bash
-(cd dsa_heldenbogen && poetry run uvicorn app:app --reload)
+./scripts/start_server.sh
 ```
 
 ### Rest API documentation
