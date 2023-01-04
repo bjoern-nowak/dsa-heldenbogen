@@ -46,3 +46,4 @@ An openAPI documentation is automatically available under `/docs`.
 # HowTo...
 
 * ...add a dependency: `poetry add <dependency_name_like_in_pypi.org>`
+* ...update rest api and generate server code: `TBA` 

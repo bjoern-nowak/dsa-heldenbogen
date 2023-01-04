@@ -1,0 +1,5 @@
+### general
+strictSpec: "true"
+modelNameSuffix: "dto"
+### structure
+#packageName: "api"
