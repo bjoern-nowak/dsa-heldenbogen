@@ -2,6 +2,7 @@
 
 more to come...
 
-## Contribution Guide
+## Documentations
 
-See how to contribute at [CONTRIBUTE.md](./CONTRIBUTE.md).
+* See how to contribute at [docs/CONTRIBUTE.md](./docs/CONTRIBUTE.md).
+* See history of project setup at [docs/HISTORY.md](./docs/HISTORY.md).
