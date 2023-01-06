@@ -1,5 +1,7 @@
 ## intellij idea project folder
 /.idea/
+## include codestyles (for simplicity they are not exported to eclipse or editorconfig format)
+!/.idea/codeStyles
 
 ## poetry dependency lock -- not suggested by developer but currently there is no benefit
 /poetry.lock
