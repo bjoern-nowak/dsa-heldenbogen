@@ -1,0 +1,3 @@
+import dsa_heldenbogen.config.pydantic_config
+
+dsa_heldenbogen.config.pydantic_config.activate_strict_mode()
