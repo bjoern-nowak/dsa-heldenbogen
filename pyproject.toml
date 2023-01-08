@@ -4,7 +4,7 @@ version = "0.1.0"
 description = ""
 authors = ["bjoern-nowak <dsa-heldenbogen@nowakhub.de>"]
 readme = "README.md"
-packages = [{include = "dsa_heldenbogen"}]
+packages = [{ include = "app" }]
 
 [tool.poetry.dependencies]
 python = "^3.8"
