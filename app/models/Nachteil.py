@@ -1,5 +1,7 @@
-from app.models.BaseModel import BaseModel
+from abc import ABC
+
+from app.models.Merkmal import Merkmal
 
 
-class Nachteil(BaseModel):
-    id: str
+class Nachteil(Merkmal, ABC):
+    pass

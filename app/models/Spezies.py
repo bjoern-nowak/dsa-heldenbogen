@@ -1,5 +1,7 @@
-from app.models.BaseModel import BaseModel
+from abc import ABC
+
+from app.models.Merkmal import Merkmal
 
 
-class Spezies(BaseModel):
-    id: str
+class Spezies(Merkmal, ABC):
+    pass

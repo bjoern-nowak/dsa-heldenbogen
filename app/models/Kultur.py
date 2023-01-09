@@ -1,5 +1,7 @@
-from app.models.BaseModel import BaseModel
+from abc import ABC
+
+from app.models.Merkmal import Merkmal
 
 
-class Kultur(BaseModel):
-    id: str
+class Kultur(Merkmal, ABC):
+    pass
