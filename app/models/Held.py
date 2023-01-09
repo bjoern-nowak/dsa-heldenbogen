@@ -1,14 +1,20 @@
+from __future__ import annotations  # required till PEP 563
+
+from typing import TYPE_CHECKING
+
 from pydantic import NonNegativeInt
 
 from app.models.BaseModel import BaseModel
 from app.models.Basiswert import Basiswert
 from app.models.Eigenschaft import Eigenschaft
-from app.models.Fertigkeit import Fertigkeit
-from app.models.Kultur import Kultur
-from app.models.Nachteil import Nachteil
-from app.models.Profession import Profession
-from app.models.Spezies import Spezies
-from app.models.Vorteil import Vorteil
+
+if TYPE_CHECKING:  # break issue of circular reference through type hints
+    from app.models.Fertigkeit import Fertigkeit
+    from app.models.Kultur import Kultur
+    from app.models.Nachteil import Nachteil
+    from app.models.Profession import Profession
+    from app.models.Spezies import Spezies
+    from app.models.Vorteil import Vorteil
 
 
 class Held(BaseModel):
