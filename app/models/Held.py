@@ -1,5 +1,3 @@
-from typing import Dict
-
 from pydantic import NonNegativeInt
 
 from app.models.BaseModel import BaseModel
@@ -19,7 +17,7 @@ class Held(BaseModel):
     spezies: Spezies
     kultur: Kultur
     profession: Profession
-    eigenschaften: Dict[Eigenschaft, int] = {
+    eigenschaften: dict[Eigenschaft, int] = {
         Eigenschaft.MUT: 10,
         Eigenschaft.KLUGHEIT: 10,
         Eigenschaft.INTUITION: 10,
@@ -29,11 +27,11 @@ class Held(BaseModel):
         Eigenschaft.KONSTITUTION: 10,
         Eigenschaft.KORPERKRAFT: 10,
     }
-    fertigkeiten: Dict[int, Fertigkeit]
-    vorteile: Dict[int, Vorteil]
-    nachteile: Dict[int, Nachteil]
+    fertigkeiten: dict[int, Fertigkeit]
+    vorteile: dict[int, Vorteil]
+    nachteile: dict[int, Nachteil]
 
-    basiswerte: Dict[Basiswert, int] = {
+    basiswerte: dict[Basiswert, int] = {
         Basiswert.LEBENSENERGIE: 100,
         Basiswert.ASTRALENERGIE: 100,
         Basiswert.KARMAENERGIE: 100,
