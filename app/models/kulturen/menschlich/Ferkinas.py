@@ -1,5 +1,5 @@
-from app.models.kulturen.menschlich.MenschlicheKultur import MenschlicheKultur
+from . import MenschlicheKultur
 
 
-class Fjarninger(MenschlicheKultur):
-    id = 'Fjarninger'
+class Ferkinas(MenschlicheKultur):
+    id = 'Ferkinas'

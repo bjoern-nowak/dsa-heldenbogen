@@ -1,4 +1,4 @@
-from app.models.Spezies import Spezies
+from app.models import Spezies
 
 
 class Mensch(Spezies):

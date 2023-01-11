@@ -1,6 +1,6 @@
 from abc import ABC
 
-from app.models.Merkmal import Merkmal
+from . import Merkmal
 
 
 class Spezies(Merkmal, ABC):

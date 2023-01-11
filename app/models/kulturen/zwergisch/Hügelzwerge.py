@@ -1,4 +1,4 @@
-from app.models.kulturen.zwergisch.ZwergischeKultur import ZwergischeKultur
+from . import ZwergischeKultur
 
 
 class Hügelzwerge(ZwergischeKultur):

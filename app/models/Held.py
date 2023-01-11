@@ -4,17 +4,17 @@ from typing import TYPE_CHECKING
 
 from pydantic import NonNegativeInt
 
-from app.models.BaseModel import BaseModel
-from app.models.Basiswert import Basiswert
-from app.models.Eigenschaft import Eigenschaft
+from . import BaseModel
+from . import Basiswert
+from . import Eigenschaft
 
 if TYPE_CHECKING:  # break issue of circular reference through type hints
-    from app.models.Fertigkeit import Fertigkeit
-    from app.models.Kultur import Kultur
-    from app.models.Nachteil import Nachteil
-    from app.models.Profession import Profession
-    from app.models.Spezies import Spezies
-    from app.models.Vorteil import Vorteil
+    from . import Fertigkeit
+    from . import Kultur
+    from . import Nachteil
+    from . import Profession
+    from . import Spezies
+    from . import Vorteil
 
 
 class Held(BaseModel):

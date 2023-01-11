@@ -1,6 +1,6 @@
 from abc import ABC
 
-from app.models.BaseModel import BaseModel
+from . import BaseModel
 
 
 class Merkmal(BaseModel, ABC):

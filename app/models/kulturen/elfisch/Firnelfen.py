@@ -1,4 +1,4 @@
-from app.models.kulturen.elfisch.ElfischeKultur import ElfischeKultur
+from . import ElfischeKultur
 
 
 class Firnelfen(ElfischeKultur):

@@ -1,6 +1,6 @@
 from abc import ABC
 
-from app.models.Kultur import Kultur
+from app.models import Kultur
 
 
 class MenschlicheKultur(Kultur, ABC):
