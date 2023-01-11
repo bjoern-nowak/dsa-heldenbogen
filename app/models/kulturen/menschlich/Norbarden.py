@@ -1,5 +1,5 @@
 from app.models.kulturen.menschlich.MenschlicheKultur import MenschlicheKultur
 
 
-class Mohas(MenschlicheKultur):
-    id = 'Mohas'
+class Norbarden(MenschlicheKultur):
+    id = 'Norbarden'
