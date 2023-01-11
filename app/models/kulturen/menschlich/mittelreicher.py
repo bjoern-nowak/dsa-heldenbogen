@@ -1,4 +1,4 @@
-from . import MenschlicheKultur
+from .menschlichekultur import MenschlicheKultur
 
 
 class Mittelreicher(MenschlicheKultur):

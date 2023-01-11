@@ -1,6 +1,6 @@
 from abc import ABC
 
-from . import Merkmal
+from .merkmal import Merkmal
 
 
 class Profession(Merkmal, ABC):

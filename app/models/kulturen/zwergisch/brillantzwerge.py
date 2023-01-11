@@ -1,4 +1,4 @@
-from . import ZwergischeKultur
+from .zwergischekultur import ZwergischeKultur
 
 
 class Brillantzwerge(ZwergischeKultur):

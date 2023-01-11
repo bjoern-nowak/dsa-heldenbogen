@@ -1,4 +1,4 @@
-from . import ElfischeKultur
+from .elfischekultur import ElfischeKultur
 
 
 class Waldelfen(ElfischeKultur):
