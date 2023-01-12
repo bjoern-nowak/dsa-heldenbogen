@@ -16,6 +16,7 @@ class ClingoHeld(Held):
     @classmethod
     def wrap(cls, held: Held) -> ClingoHeld:
         return ClingoHeld(
+            name=held.name,
             spezies=lambda: String(held.spezies),
             kultur=lambda: String(held.kultur)
         )

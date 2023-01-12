@@ -8,6 +8,7 @@ from app.models import Held
 class TestRegelwerk(unittest.TestCase):
     def test_check_kultur(self):
         held = Held(
+            name='TestHeld',
             spezies='Mensch',
             kultur='Thorwaler',
         )
