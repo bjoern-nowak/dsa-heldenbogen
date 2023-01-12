@@ -1,9 +1,6 @@
 from __future__ import annotations  # required till PEP 563
 
-from typing import Callable
-
-from clingo import String
-from clingo import Symbol
+from app.models import BaseModel
 
 
 # from typing import TYPE_CHECKING
@@ -22,13 +19,9 @@ from clingo import Symbol
 #     from .vorteil import Vorteil
 
 
-class Held:
-    spezies: Callable[[], Symbol]
-    kultur: Callable[[], Symbol]
-
-    def __init__(self, spezies: str, kultur: str) -> None:
-        self.spezies = lambda: String(spezies)
-        self.kultur = lambda: String(kultur)
+class Held(BaseModel):
+    spezies: str
+    kultur: str
 
 # class Held(BaseModel):
 #     name: str

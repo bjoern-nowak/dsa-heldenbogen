@@ -5,6 +5,7 @@ from clingo import Model
 from clingo import SolveResult
 
 from app.engine import RegelSet
+from app.engine.clingo_wrapper import ClingoHeld
 from app.engine.resource import get_abs_path
 from app.models import Held
 
@@ -20,7 +21,7 @@ class Regelwerk:
         for lp in self.fakten + self.regelsets:
             ctl.load(lp)
 
-        ctl.ground(context=held)
+        ctl.ground(context=ClingoHeld.wrap(held))
         result: SolveResult = ctl.solve(on_model=lambda m: self._on_model(m, is_print_model))
         return result.satisfiable
 
