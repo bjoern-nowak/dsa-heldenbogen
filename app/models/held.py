@@ -1,6 +1,8 @@
-from __future__ import annotations  # required till PEP 563
+# from __future__ import annotations  # required till PEP 563
 
-from app.models import BaseModel
+from .basemodel import BaseModel
+from .kultur import Kultur
+from .spezies import Spezies
 
 
 # from typing import TYPE_CHECKING
@@ -22,8 +24,8 @@ from app.models import BaseModel
 class Held(BaseModel):
     name: str
 
-    spezies: str
-    kultur: str
+    spezies: Spezies
+    kultur: Kultur
 
 # class Held(BaseModel):
 #     name: str
