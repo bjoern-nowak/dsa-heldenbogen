@@ -6,7 +6,7 @@ from clingo import Model
 from clingo import SolveResult
 
 from app.engine.clingo_held import ClingoHeld
-from app.engine.regelset import clingo_logik
+from app.engine.clingo_logik import clingo_logik
 from app.models import Held
 from app.resource import get_path
 from app.service import RegelSet

@@ -2,7 +2,7 @@ from typing import List
 
 from clingo import Model
 
-from app.engine.regelwerk import ClingoEngine
+from app.engine.clingo_engine import ClingoEngine
 from app.models import Held
 from app.service import RegelSet
 
