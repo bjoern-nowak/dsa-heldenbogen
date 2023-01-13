@@ -1,8 +1,8 @@
-from fastapi import APIRouter
+from fastapi import FastAPI
 
 from app.api.v1.endpoints import held
 from app.api.v1.endpoints import root
 
-router = APIRouter()
-router.include_router(root.router, tags=["v1_root"])
-router.include_router(held.router, prefix="/held", tags=["v1_held"])
+api = FastAPI()
+api.include_router(root.router, tags=["root"])
+api.include_router(held.router, prefix="/held", tags=["held"])

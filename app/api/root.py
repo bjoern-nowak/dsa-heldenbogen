@@ -1,13 +1,22 @@
-from fastapi import FastAPI
+from typing import List
 
-from app.api import v1_router
+from fastapi import FastAPI
+from starlette.responses import RedirectResponse
+
+from .v1.api import api as api_v1
 
 app = FastAPI()
 
 
 @app.get("/")
-def index() -> str:
-    return "Current API is under /api/v1, see /docs"
+def index():
+    return RedirectResponse(url='/docs')
 
 
-app.include_router(v1_router, prefix="/api/v1")
+@app.get("/apis")
+def index() -> List[str]:
+    """List all available apis"""
+    return ["/api/v1"]
+
+
+app.mount("/api/v1", api_v1)
