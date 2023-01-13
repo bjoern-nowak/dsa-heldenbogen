@@ -1,7 +1,8 @@
-from abc import ABC
-
-from .merkmal import Merkmal
+from enum import Enum
 
 
-class Spezies(Merkmal, ABC):
-    pass
+class Spezies(str, Enum):
+    ELFEN = 'Elfen'
+    HALBELFEN = 'Halbelfen'
+    MENSCH = 'Mensch'
+    ZWERG = 'Zwerg'
