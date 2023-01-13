@@ -1,8 +1,8 @@
 import unittest
 
-from app.engine import RegelSet
-from app.engine import Regelwerk
 from app.models import Held
+from app.service import RegelSet
+from app.service import Regelwerk
 
 
 class TestRegelwerk(unittest.TestCase):

@@ -1,8 +1,9 @@
-from enum import Enum
+from pathlib import Path
 
-from app.engine.resource import get_abs_path
+from app.resource import get_path
+from app.service import RegelSet
 
-
-class RegelSet(str, Enum):
-    DSA5_GRUND = get_abs_path('regelwerk/dsa5/grundregeln.lp')
-    DSA5_OPTIONAL = get_abs_path('regelwerk/dsa5/optionale_regeln.lp')
+clingo_logik: dict[RegelSet, Path] = {
+    RegelSet.DSA5_GRUND: get_path('regelwerk/dsa5/grundregeln.lp'),
+    RegelSet.DSA5_OPTIONAL: get_path('regelwerk/dsa5/optionale_regeln.lp'),
+}

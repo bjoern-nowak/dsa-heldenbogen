@@ -3,8 +3,8 @@ from fastapi import HTTPException
 from fastapi import status
 
 from app.api.v1.schema.held import Held
-from app.engine import RegelSet
-from app.engine import Regelwerk
+from app.service import RegelSet
+from app.service import Regelwerk
 
 router = APIRouter()
 
