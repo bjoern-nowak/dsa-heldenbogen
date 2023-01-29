@@ -18,6 +18,11 @@ uvicorn = { extras = ["standard"], version = "0.20.0" }
 [tool.poetry.group.dev.dependencies]
 mypy = "^0.991"
 pylint = "^2.15.10"
+isort = "^5.12.0"
+black = "^22.12.0"
+autopep8 = "^2.0.1"
+yapf = "^0.32.0"
+bandit = "^1.7.4"
 
 [build-system]
 requires = ["poetry-core"]
