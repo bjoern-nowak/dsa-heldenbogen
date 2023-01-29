@@ -16,7 +16,7 @@
   * (Optional) Test installation: `poetry --version`
   * (Optional) Activate shell auto-completion: `poetry completions bash >> ~/.bash_completion`
 * (Only if system python version differs from projects) Tell poetry which python version is to use: ` poetry env use python3.11`
-* Install projects python dependencies: `poetry install`
+* Install projects python dependencies: `make install`
 
 ## Run tests
 

@@ -1,17 +1,23 @@
 
-.DEFAULT_GOAL := prebuild run
+.DEFAULT_GOAL=clean install prebuild run
 
 ## set goals not targeting real files
-.PHONY: typehint test lint prebuild run
+.PHONY: clean install lint typehint test prebuild run
 
 ## meta vars
-ROOT:=./
-SRC:=$(ROOT)app/
-TESTS:=$(ROOT)tests/
-MAIN:=$(SRC)main.py
+ROOT=./
+SRC=$(ROOT)app/
+TESTS=$(ROOT)tests/
+MAIN=$(SRC)main.py
+VENV=.venv/
 
 ## goals
-## TODO may add 'poetry init' as goal
+
+clean:
+	rm -rf $(VENV)
+
+install:
+	poetry install
 
 lint:
 	python -m pylint $(SRC) $(TESTS)
@@ -26,6 +32,3 @@ prebuild: lint typehint test
 
 run:
 	poetry run python $(MAIN)
-
-
-
