@@ -1,6 +1,6 @@
 # Learn Guide
 
-## Answer Set Programming (ASP) with Potassco Clingo
+## Answer Set Programming (ASP) with Clingo by Potassco
 
 * https://potassco.org/book/
 * https://teaching.potassco.org/ (!)
@@ -21,13 +21,13 @@
 ## Run tests
 
 ```bash
-./scripts/run_tests.sh
+make prebuild
 ```
 
 ## Start server
 
 ```bash
-./scripts/start_server.sh
+make run
 ```
 
 ### Rest API documentation

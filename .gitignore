@@ -8,3 +8,6 @@
 
 ## python virtual environment used by poetry -- could contain sensitive data
 .venv
+
+## mypy (typehint check) cache
+.mypy_cache/
