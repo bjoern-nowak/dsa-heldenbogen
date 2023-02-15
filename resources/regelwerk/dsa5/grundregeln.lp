@@ -12,8 +12,11 @@ kultur_spezies("Mensch") :- {
 kultur_spezies("Zwerg") :- {
     kultur("Ambosszwerge"); kultur("Brillantzwerge"); kultur("Erzzwerge"); kultur("Hügelzwerge"); kultur("Wildzwerge")
 } = 1.
+
 %% Regel: Kultur muss bekannt sein (bekannt wenn map'bar).
 :- not kultur_spezies("Elf"), not kultur_spezies("Mensch"), not kultur_spezies("Zwerg").
+%% TODO return fail reason culture is not known
+
 %% Regel: Spezies und kultur passen zusammen (prüft indirekt dass Spezies bekannt ist)
-%% TODO is this correct ?
 {spezies(KS) : kultur_spezies(S)} = 1 :- spezies(S), kultur_spezies(KS).
+%% TODO return fail reason culture not allowed for species

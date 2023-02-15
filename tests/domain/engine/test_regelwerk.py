@@ -1,6 +1,7 @@
 import unittest
 
 from app.models import Held
+from app.models import Kultur
 from app.service import RegelSet
 from app.service import Regelwerk
 
@@ -10,7 +11,7 @@ class TestRegelwerk(unittest.TestCase):
         held = Held(
             name='TestHeld',
             spezies='Mensch',
-            kultur='Thorwaler',
+            kultur=Kultur.THORWALER,
         )
         regelwerk = Regelwerk([RegelSet.DSA5_GRUND, RegelSet.DSA5_OPTIONAL])
         result = regelwerk.check(held, True)
