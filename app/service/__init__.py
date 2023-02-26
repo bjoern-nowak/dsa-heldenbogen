@@ -2,5 +2,5 @@
 Layer: Application
 """
 
-from .regelset import RegelSet
+from .regelengine import RegelEngine
 from .regelwerk import Regelwerk

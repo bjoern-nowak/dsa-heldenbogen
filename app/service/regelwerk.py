@@ -1,20 +1,6 @@
-from typing import List
-
-from clingo import Model
-
-from app.engine.clingo_engine import ClingoEngine
-from app.models import Held
-from app.service import RegelSet
+from enum import Enum
 
 
-class Regelwerk:
-
-    def __init__(self, regelsets: List[RegelSet]) -> None:
-        self.regelsets = regelsets
-
-    def check(self, held: Held, is_print_model: bool = False) -> bool:
-        return ClingoEngine(self.regelsets).check(held, is_print_model)
-
-    def _on_model(self, m: Model, is_print_model: bool):
-        if is_print_model:
-            print(m)
+class Regelwerk(str, Enum):
+    DSA5 = 'dsa5'
+    DSA5_EXPANSION = 'dsa5_expansion'
