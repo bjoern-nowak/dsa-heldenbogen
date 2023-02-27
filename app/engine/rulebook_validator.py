@@ -1,7 +1,7 @@
 from typing import List
 
+from app.models.regelwerk import Regelwerk
 from app.resource import list_files
-from app.service.regelwerk import Regelwerk
 
 
 class RulebookValidator():

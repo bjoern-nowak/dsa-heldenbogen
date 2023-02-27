@@ -3,7 +3,7 @@ from typing import List
 from app.engine.clingo_engine import ClingoEngine
 from app.models import Held
 from app.models.feature import Feature
-from app.service import Regelwerk
+from app.models.regelwerk import Regelwerk
 
 
 class RegelEngine:

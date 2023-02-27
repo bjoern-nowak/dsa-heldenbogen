@@ -10,8 +10,8 @@ from app.engine.rulebook_program import RulebookProgram
 from app.engine.rulebook_validator import RulebookValidator
 from app.models import Held
 from app.models.feature import Feature
+from app.models.regelwerk import Regelwerk
 from app.resource import get_path
-from app.service import Regelwerk
 
 
 class ClingoEngine:

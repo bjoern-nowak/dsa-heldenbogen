@@ -2,8 +2,8 @@ import unittest
 
 from app.models import Held
 from app.models.feature import Feature
+from app.models.regelwerk import Regelwerk
 from app.service import RegelEngine
-from app.service.regelwerk import Regelwerk
 
 
 class TestRegelwerk(unittest.TestCase):
