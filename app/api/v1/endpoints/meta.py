@@ -6,15 +6,16 @@ from fastapi import HTTPException
 from fastapi import Query
 
 from app.api.v1.schema.server_fehler import ServerFehler
-from app.models import Held
+from app.models.feature import Feature
 from app.models.rulebook import Rulebook
 from app.service import RegelEngine
 
 router = APIRouter()
 
 
-@router.post(
-    "/validate",
+@router.get(
+    "/list",
+    description="Get list of possible values for a feature under given context (like active rulebooks).",
     responses={
         HTTPStatus.INTERNAL_SERVER_ERROR: {
             "model": ServerFehler,
@@ -22,9 +23,9 @@ router = APIRouter()
         }
     }
 )
-def validate(held: Held, rulebooks: List[Rulebook] = Query()) -> bool:
+def list_feature(feature: Feature, rulebooks: List[Rulebook] = Query()) -> List[str]:
     try:
-        return RegelEngine(rulebooks).check(held)
+        return RegelEngine(rulebooks).list(feature)
     except Exception as e:
         # TODO [1] not a good practise to catch any error and publish its message
         raise HTTPException(

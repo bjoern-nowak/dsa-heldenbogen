@@ -2,7 +2,7 @@ import unittest
 
 from app.models import Held
 from app.models.feature import Feature
-from app.models.regelwerk import Regelwerk
+from app.models.rulebook import Rulebook
 from app.service import RegelEngine
 
 
@@ -13,12 +13,12 @@ class TestRegelwerk(unittest.TestCase):
             spezies='Mensch',
             kultur='Nordaventurier',
         )
-        engine = RegelEngine([Regelwerk.DSA5])
+        engine = RegelEngine([Rulebook.DSA5])
         result = engine.check(held, True)
         self.assertTrue(result)
 
     def test_list(self):
-        engine = RegelEngine([Regelwerk.DSA5, Regelwerk.DSA5_EXPANSION])
+        engine = RegelEngine([Rulebook.DSA5, Rulebook.DSA5_EXPANSION])
         spezies = engine.list(Feature.Spezies)
         print(f"{len(spezies)} Spezies: {spezies}")
         kulturen = engine.list(Feature.Kultur)

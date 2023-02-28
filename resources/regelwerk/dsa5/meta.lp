@@ -1,6 +1,12 @@
+#program usable.
+%% make presence of this rulebook available for others
+rulebook("dsa5").
+%% this rulebook depends on nothing
+
 
 #program list_spezies.
 spezies("Elf";"Mensch";"Zwerg").
+
 
 #program list_kulturen.
 %% elf
