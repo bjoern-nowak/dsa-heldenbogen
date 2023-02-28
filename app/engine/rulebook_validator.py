@@ -25,7 +25,7 @@ class RulebookValidator():
     @staticmethod
     def _files_valid(rulebook: Rulebook) -> bool:
         # print(f"check {rulebook}")
-        found_files = set(list_files(f"regelwerk/{rulebook.value}"))
+        found_files = set(list_files(f"regelwerk/{rulebook}"))
         # print(f"found: {found_files}")
         if not RulebookValidator.required_files.issubset(found_files):
             return False

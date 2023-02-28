@@ -19,9 +19,9 @@ class TestRegelwerk(unittest.TestCase):
 
     def test_list(self):
         engine = RegelEngine([Rulebook.DSA5, Rulebook.DSA5_EXPANSION])
-        spezies = engine.list(Feature.Spezies)
+        spezies = engine.list(Feature.SPEZIES)
         print(f"{len(spezies)} Spezies: {spezies}")
-        kulturen = engine.list(Feature.Kultur)
+        kulturen = engine.list(Feature.CULTURE)
         print(f"{len(kulturen)} Kulturen: {kulturen}")
 
 

@@ -41,8 +41,8 @@ class ClingoEngine:
     def _get_rules(self) -> List[Path]:
         rules = []
         for book in self.rulebooks:
-            rules.append(get_path(f"regelwerk/{book.value}/meta.lp"))
-            rules.append(get_path(f"regelwerk/{book.value}/base_rules.lp"))
+            rules.append(get_path(f"regelwerk/{book}/meta.lp"))
+            rules.append(get_path(f"regelwerk/{book}/base_rules.lp"))
         return rules
 
     def _is_usable(self) -> None:

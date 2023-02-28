@@ -18,7 +18,7 @@ class RegelEngine:
     def list(self, feature: Feature) -> List[str]:
         features = self.engine.list(feature)
         if not features:
-            raise UnexpectedResultError("List of possible values for feature has not been generated.")
+            raise UnexpectedResultError(f"List of possible values for feature '{feature}' has not been generated.")
         return features
 
     def check(self, held: Held, is_print_model: bool = False) -> bool:
