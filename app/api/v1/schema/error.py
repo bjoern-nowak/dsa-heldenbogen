@@ -1,4 +1,4 @@
-from __future__ import annotations
+from __future__ import annotations  # required till PEP 563
 
 from app.models import BaseModel
 

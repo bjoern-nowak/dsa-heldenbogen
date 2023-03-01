@@ -5,12 +5,12 @@ from fastapi import APIRouter
 from fastapi import HTTPException
 from fastapi import Query
 
-from app.api.v1.schema.error import ClientError
-from app.api.v1.schema.error import ServerError
-from app.engine.clingo_engine import UnusableRulebookError
-from app.models.feature import Feature
-from app.models.rulebook import Rulebook
-from app.service import RuleEngine
+from app.api.v1.schema import ClientError
+from app.api.v1.schema import ServerError
+from app.error import UnusableRulebookError
+from app.models import Feature
+from app.models import Rulebook
+from app.service import MetaService
 
 router = APIRouter()
 
@@ -27,7 +27,7 @@ router = APIRouter()
 )
 def list_feature(feature: Feature, rulebooks: List[Rulebook] = Query()) -> List[str] | ClientError:
     try:
-        return RuleEngine(rulebooks).list(feature)
+        return MetaService().list(feature, rulebooks)
     except UnusableRulebookError as e:
         return ClientError.by(e)
     except Exception as e:

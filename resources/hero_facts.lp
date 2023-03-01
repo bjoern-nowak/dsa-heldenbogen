@@ -1,3 +1,3 @@
-%% [Fakten des Helden]
+#program validate_hero.
 species(@species).
 culture(@culture).

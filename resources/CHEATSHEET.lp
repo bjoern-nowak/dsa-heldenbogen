@@ -436,6 +436,9 @@ step(@increase(S)) :- #maximize{ S : step(S)}.
 %%-----------------------------------------------------------------------------
 
 
+%% TODO write something about #defined
+
+
 %% --- EXTERNAL STATEMENTS
 %% prevents atoms to be discarded for simplifications; if they are
 %%  in the body (of an rule, condition, ...)
