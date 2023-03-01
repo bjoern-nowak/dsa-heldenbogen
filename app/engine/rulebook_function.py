@@ -10,27 +10,27 @@ class RulebookFunction(str, Enum):
     RULEBOOK_UNUSABLE = 'rulebook_unusable'
 
     # base
-    SPEZIES = 'spezies'
-    CULTURE = 'kultur'
+    SPECIES = 'species'
+    CULTURE = 'culture'
     PROFESSION = "profession"
-    VORTEIL = "vorteil"
-    NACHTEIL = "nachteil"
-    FERTIGKEIT = "fertigkeit"
+    ADVANTAGE = "advantage"
+    DISADVANTAGE = "disadvantage"
+    SKILL = "skill"
 
     @staticmethod
-    def of(feature: Feature) -> str:
+    def of(feature: Feature) -> RulebookFunction:
         match feature:
-            case Feature.SPEZIES:
-                return RulebookFunction.SPEZIES
+            case Feature.SPECIES:
+                return RulebookFunction.SPECIES
             case Feature.CULTURE:
                 return RulebookFunction.CULTURE
             case Feature.PROFESSION:
                 return RulebookFunction.PROFESSION
-            case Feature.VORTEIL:
-                return RulebookFunction.VORTEIL
-            case Feature.NACHTEIL:
-                return RulebookFunction.NACHTEIL
-            case Feature.FERTIGKEIT:
-                return RulebookFunction.FERTIGKEIT
+            case Feature.ADVANTAGE:
+                return RulebookFunction.ADVANTAGE
+            case Feature.DISADVANTAGE:
+                return RulebookFunction.DISADVANTAGE
+            case Feature.SKILL:
+                return RulebookFunction.SKILL
             case _:
                 raise NotImplementedError(f"Feature '{feature}' has no associated LP function.")

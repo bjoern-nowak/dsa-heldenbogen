@@ -1,24 +1,24 @@
 %#program base.
 %% [Fakten des Helden]
-spezies(@_spezies).
-kultur(@_kultur).
+species(@_species).
+culture(@_culture).
 
-%#program check_kultur.
+%#program check_culture.
 %% [ermittel Spezies der Kultur]
-kultur_spezies("Elf") :- {
-    kultur("Auelfen"); kultur("Firnelfen"); kultur("Steppenelfen"); kultur("Waldelfen")
+culture_species("Elf") :- {
+    culture("Auelfen"); culture("Firnelfen"); culture("Steppenelfen"); culture("Waldelfen")
 } = 1.
-kultur_spezies("Mensch") :- {
-    kultur("Andergaster"); kultur("Aranier"); kultur("Bornländer"); kultur("Ferkinas"); kultur("Fjarninger");
-    kultur("Gjalsker"); kultur("Horasier"); kultur("Koboldweltler"); kultur("Maraskaner"); kultur("Menschlichekultur");
-    kultur("Mhanadistani"); kultur("Mittelreicher"); kultur("Mohas"); kultur("Nivesen"); kultur("Norbarden");
-    kultur("Nordaventurier"); kultur("Nostrier"); kultur("Novadis"); kultur("Svellttaler"); kultur("Südaventurier");
-    kultur("Thorwaler"); kultur("Trollzacker"); kultur("Zahori"); kultur("Zyklopäer")
+culture_species("Mensch") :- {
+    culture("Andergaster"); culture("Aranier"); culture("Bornländer"); culture("Ferkinas"); culture("Fjarninger");
+    culture("Gjalsker"); culture("Horasier"); culture("Koboldweltler"); culture("Maraskaner"); culture("Menschlichekultur");
+    culture("Mhanadistani"); culture("Mittelreicher"); culture("Mohas"); culture("Nivesen"); culture("Norbarden");
+    culture("Nordaventurier"); culture("Nostrier"); culture("Novadis"); culture("Svellttaler"); culture("Südaventurier");
+    culture("Thorwaler"); culture("Trollzacker"); culture("Zahori"); culture("Zyklopäer")
 } = 1.
-kultur_spezies("Zwerg") :- {
-    kultur("Ambosszwerge"); kultur("Brillantzwerge"); kultur("Erzzwerge"); kultur("Hügelzwerge"); kultur("Wildzwerge")
+culture_species("Zwerg") :- {
+    culture("Ambosszwerge"); culture("Brillantzwerge"); culture("Erzzwerge"); culture("Hügelzwerge"); culture("Wildzwerge")
 } = 1.
 %% Regel: Kultur muss bekannt sein (bekannt wenn map'bar).
-:- not kultur_spezies("Elf"), not kultur_spezies("Mensch"), not kultur_spezies("Zwerg").
-%% Regel: Spezies und kultur passen zusammen
-{spezies(KS) : kultur_spezies(S)} = 1 :- spezies(S), kultur_spezies(KS).
+:- not culture_species("Elf"), not culture_species("Mensch"), not culture_species("Zwerg").
+%% Regel: Spezies und culture passen zusammen
+{species(KS) : culture_species(S)} = 1 :- species(S), culture_species(KS).

@@ -1,13 +1,24 @@
-
-#program usable.
+#program is_usable.
 rulebook("dsa5_expansion").
 %% this rulebook depends on another one
-rulebook_unusable("dsa5_expansion") :- not rulebook("dsa5").
+rulebook_depends("dsa5_expansion", "dsa5").
 
 
-#program list_spezies.
-spezies("Erweiterung_Beispiel_Spezies";).
+#program list_species.
+species("Expansion_Example_Species";).
 
 
-#program list_kulturen.
-kultur("Erweiterung_Beispiel_Kultur").
+#program list_cultures.
+culture("Expansion_Example_Culture").
+
+
+#program list_professions.
+
+
+#program list_advantages.
+
+
+#program list_disadvantages.
+
+
+#program list_skills.

@@ -5,10 +5,10 @@ from fastapi import APIRouter
 from fastapi import HTTPException
 from fastapi import Query
 
-from app.api.v1.schema.server_fehler import ServerFehler
-from app.models import Held
+from app.api.v1.schema.error import ServerError
+from app.models import Hero
 from app.models.rulebook import Rulebook
-from app.service import RegelEngine
+from app.service import RuleEngine
 
 router = APIRouter()
 
@@ -17,19 +17,17 @@ router = APIRouter()
     "/validate",
     responses={
         HTTPStatus.INTERNAL_SERVER_ERROR: {
-            "model": ServerFehler,
-            "description": "Bei unerwarteten Fehlern."
+            "model": ServerError,
+            "description": "Unexpected server error"
         }
     }
 )
-def validate(held: Held, rulebooks: List[Rulebook] = Query()) -> bool:
+def validate(hero: Hero, rulebooks: List[Rulebook] = Query()) -> bool:
     try:
-        return RegelEngine(rulebooks).check(held)
+        return RuleEngine(rulebooks).check(hero)
     except Exception as e:
         # TODO [1] not a good practise to catch any error and publish its message
         raise HTTPException(
             status_code=HTTPStatus.INTERNAL_SERVER_ERROR,
-            detail={
-                "type": type(e).__name__,
-                "message": f"{e}"}
+            detail=ServerError.by(e)
         )

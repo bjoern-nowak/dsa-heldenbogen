@@ -11,6 +11,7 @@ class Collector:
         """
         Collects all first arguments as a string of all functions
         :param found: list to be filled
+        :param model: to search in
         :param by_name: (optional) filter functions by given name
         :return:
         """
@@ -21,6 +22,23 @@ class Collector:
                 continue
             if not by_name or (by_name == sym.name):
                 found.append(sym.arguments[0].string)
+
+    @staticmethod
+    def functions_strings(found: List[List[str]], model: Model, by_name: str = None) -> None:
+        """
+        Collects all arguments as a string of all functions
+        :param found: list to be filled
+        :param model: to search in
+        :param by_name: (optional) filter functions by given name
+        :return:
+        """
+        # print(model)
+        for sym in model.symbols(atoms=True):
+            if not sym.name or not sym.arguments:
+                # skip non function symbols like tuples and constants
+                continue
+            if not by_name or (by_name == sym.name):
+                found.append([arg.string for arg in sym.arguments])
 
     @staticmethod
     def symbols(found: List[Symbol], model: Model) -> None:

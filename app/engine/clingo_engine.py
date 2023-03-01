@@ -10,7 +10,7 @@ from app.engine.hero_wrapper import HeroWrapper
 from app.engine.rulebook_function import RulebookFunction
 from app.engine.rulebook_program import RulebookProgram
 from app.engine.rulebook_validator import RulebookValidator
-from app.models import Held
+from app.models import Hero
 from app.models.feature import Feature
 from app.models.rulebook import Rulebook
 from app.resource import get_path
@@ -41,19 +41,23 @@ class ClingoEngine:
     def _get_rules(self) -> List[Path]:
         rules = []
         for book in self.rulebooks:
+            rules.append(get_path(f"regelwerk/common.lp"))
             rules.append(get_path(f"regelwerk/{book}/meta.lp"))
-            rules.append(get_path(f"regelwerk/{book}/base_rules.lp"))
+            rules.append(get_path(f"regelwerk/{book}/rules.lp"))
         return rules
 
     def _is_usable(self) -> None:
-        self.ctl.ground([(RulebookProgram.USABLE, [])])
-        unusables: List[str] = []
-        self.ctl.solve(on_model=lambda m: Collector.functions_first_string(unusables, m, RulebookFunction.RULEBOOK_UNUSABLE))
+        self.ctl.ground([(RulebookProgram.IS_USABLE, [])])
+        unusables: List[List[str]] = []
+        self.ctl.solve(on_model=lambda m: Collector.functions_strings(unusables, m, RulebookFunction.RULEBOOK_UNUSABLE))
         if unusables:
-            raise UnusableRulebookError(f"requirements not meet for {unusables}")
+            messages = []
+            for a in unusables:
+                messages.append(f"Rulebook '{a[0]}' missing '{a[1]}'.")
+            raise UnusableRulebookError(chr(10).join(messages))
 
-    def check(self, held: Held, is_print_model: bool = False) -> bool:
-        self.ctl.ground(context=HeroWrapper.wrap(held))
+    def check(self, hero: Hero, is_print_model: bool = False) -> bool:
+        self.ctl.ground(context=HeroWrapper.wrap(hero))
         result: SolveResult = self.ctl.solve(on_model=lambda m: ClingoEngine._print_model(m, is_print_model))
         return result.satisfiable
 

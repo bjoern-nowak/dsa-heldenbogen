@@ -1,7 +1,7 @@
 from typing import List
 
 from app.engine.clingo_engine import ClingoEngine
-from app.models import Held
+from app.models import Hero
 from app.models.feature import Feature
 from app.models.rulebook import Rulebook
 
@@ -10,7 +10,7 @@ class UnexpectedResultError(Exception):
     """A result was not expected, since there was no other error the reason seems yet to be unknown/handled"""
 
 
-class RegelEngine:
+class RuleEngine:
 
     def __init__(self, rulebooks: List[Rulebook]) -> None:
         self.engine = ClingoEngine(rulebooks)
@@ -21,8 +21,8 @@ class RegelEngine:
             raise UnexpectedResultError(f"List of possible values for feature '{feature}' has not been generated.")
         return features
 
-    def check(self, held: Held, is_print_model: bool = False) -> bool:
-        valid = self.engine.check(held, is_print_model)
+    def check(self, hero: Hero, is_print_model: bool = False) -> bool:
+        valid = self.engine.check(hero, is_print_model)
         if valid is None:
             raise UnexpectedResultError("Hero has not been checked.")
         return valid

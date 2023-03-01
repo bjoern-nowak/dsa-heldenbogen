@@ -2,12 +2,12 @@ from enum import Enum
 
 
 class Feature(str, Enum):
-    SPEZIES = 'Spezies'
-    CULTURE = 'Kultur'
+    SPECIES = 'Species'
+    CULTURE = 'Culture'
     PROFESSION = 'Profession'
-    VORTEIL = 'Vorteil'
-    NACHTEIL = 'Nachteil'
-    FERTIGKEIT = 'Fertigkeit'
+    ADVANTAGE = 'Advantage'
+    DISADVANTAGE = 'Disadvantage'
+    SKILL = 'Skill'
 
     def __str__(self):
         return self.value

@@ -5,8 +5,8 @@ from app.resource import list_files
 
 
 class RulebookValidator():
-    required_files: set[str] = {"meta.lp", "base_rules.lp"}
-    optional_files: set[str] = {"optional_rules.lp"}
+    required_files: set[str] = {"meta.lp", "rules.lp"}
+    optional_files: set[str] = {"rules_optional.lp"}
 
     @staticmethod
     def filter(rulebooks: List[Rulebook]) -> List[Rulebook]:

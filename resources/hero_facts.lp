@@ -1,3 +1,3 @@
 %% [Fakten des Helden]
-spezies(@spezies).
-kultur(@kultur).
+species(@species).
+culture(@culture).

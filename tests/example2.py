@@ -8,31 +8,31 @@ from pydantic import BaseModel
 
 
 class Held(BaseModel):
-    spezies: str
-    kultur: str
+    species: str
+    culture: str
 
-    def _spezies(self) -> Symbol:
-        return String(self.spezies)
+    def _species(self) -> Symbol:
+        return String(self.species)
 
-    def _kultur(self) -> Symbol:
-        return String(self.kultur)
+    def _culture(self) -> Symbol:
+        return String(self.culture)
 
 
 class Regelwerk:
 
     def check(self, held: Held) -> bool:
         ctl = Control()
-        ctl.load('dsa5.lp')
+        ctl.load('example2.lp')
         ctl.ground(context=held)
         result: SolveResult = ctl.solve(on_model=lambda m: print(m))
         return result.satisfiable
 
 
 class TestRegelwerk(unittest.TestCase):
-    def test_check_kultur(self):
+    def test_check_culture(self):
         held = Held(
-            spezies='Zwerg',
-            kultur='aaaaaa',
+            species='Zwerg',
+            culture='aaaaaa',
         )
         regelwerk = Regelwerk()
         result = regelwerk.check(held)

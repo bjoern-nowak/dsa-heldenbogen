@@ -6,7 +6,7 @@ Create a folder under `<root>/resources/regelwerk`
 
 ### file requirements
 
-Create `meta.lp` having the required `programs` (`list_spezies` and `list_kulturen`)
+Create `meta.lp` having the required `programs` (`list_species` and `list_cultures`)
 
 ## make rulebook / expansion known
 

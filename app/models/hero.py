@@ -3,8 +3,8 @@
 from .basemodel import BaseModel
 
 
-class Held(BaseModel):
+class Hero(BaseModel):
     name: str
 
-    spezies: str
-    kultur: str
+    species: str
+    culture: str

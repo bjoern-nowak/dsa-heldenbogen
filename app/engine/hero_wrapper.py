@@ -5,20 +5,20 @@ from typing import Callable
 from clingo import String
 from clingo import Symbol
 
-from app.models import Held
+from app.models import Hero
 
 
-class HeroWrapper(Held):
+class HeroWrapper(Hero):
     """
     redefine fields to make them callable for clingo
     """
-    spezies: Callable[[], Symbol]
-    kultur: Callable[[], Symbol]
+    species: Callable[[], Symbol]
+    culture: Callable[[], Symbol]
 
     @classmethod
-    def wrap(cls, held: Held) -> HeroWrapper:
+    def wrap(cls, held: Hero) -> HeroWrapper:
         return HeroWrapper(
             name=held.name,
-            spezies=lambda: String(held.spezies),
-            kultur=lambda: String(held.kultur)
+            species=lambda: String(held.species),
+            culture=lambda: String(held.culture)
         )

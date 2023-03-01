@@ -1,21 +1,34 @@
-#program usable.
+#program is_usable.
 %% make presence of this rulebook available for others
 rulebook("dsa5").
 %% this rulebook depends on nothing
 
 
-#program list_spezies.
-spezies("Elf";"Mensch";"Zwerg").
+#program list_species.
+species("Elf";"Mensch";"Zwerg").
 
 
-#program list_kulturen.
+#program list_cultures.
 %% elf
-kultur("Auelfen";"Firnelfen";"Steppenelfen";"Waldelfen").
+culture("Auelfen";"Firnelfen";"Steppenelfen";"Waldelfen").
 %% mensch
-kultur("Andergaster";"Aranier";"Bornländer";"Ferkinas";"Fjarninger").
-kultur("Gjalsker";"Horasier";"Koboldweltler";"Maraskaner";"Menschlichekultur").
-kultur("Mhanadistani";"Mittelreicher";"Mohas";"Nivesen";"Norbarden").
-kultur("Nordaventurier";"Nostrier";"Novadis";"Svellttaler";"Südaventurier").
-kultur("Thorwaler";"Trollzacker";"Zahori";"Zyklopäer").
+culture("Andergaster";"Aranier";"Bornländer";"Ferkinas";"Fjarninger").
+culture("Gjalsker";"Horasier";"Koboldweltler";"Maraskaner";"Menschlichekultur").
+culture("Mhanadistani";"Mittelreicher";"Mohas";"Nivesen";"Norbarden").
+culture("Nordaventurier";"Nostrier";"Novadis";"Svellttaler";"Südaventurier").
+culture("Thorwaler";"Trollzacker";"Zahori";"Zyklopäer").
 %% zwerg
-kultur("Ambosszwerge";"Brillantzwerge";"Erzzwerge";"Hügelzwerge";"Wildzwerge").
+culture("Ambosszwerge";"Brillantzwerge";"Erzzwerge";"Hügelzwerge";"Wildzwerge").
+
+
+#program list_professions.
+
+
+#program list_advantages.
+
+
+#program list_disadvantages.
+
+
+#program list_skills.
+

@@ -7,7 +7,7 @@ from fastapi import FastAPI
 from fastapi.responses import Response
 from starlette.responses import RedirectResponse
 
-from app.api.v1.endpoints import held
+from app.api.v1.endpoints import hero
 from app.api.v1.endpoints import meta
 
 api = FastAPI()
@@ -31,5 +31,5 @@ def read_openapi_yaml():
     return Response(yaml_s.getvalue(), media_type='text/yaml')
 
 
-api.include_router(held.router, prefix="/held", tags=["held"])
+api.include_router(hero.router, prefix="/hero", tags=["hero"])
 api.include_router(meta.router, prefix="/meta", tags=["meta"])
