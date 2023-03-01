@@ -1,10 +1,10 @@
 from typing import List
 
-from app.models.rulebook import Rulebook
+from app.models import Rulebook
 from app.resource import list_files
 
 
-class RulebookValidator():
+class RulebookValidator:
     required_files: set[str] = {"meta.lp", "rules.lp"}
     optional_files: set[str] = {"rules_optional.lp"}
 
@@ -24,9 +24,7 @@ class RulebookValidator():
 
     @staticmethod
     def _files_valid(rulebook: Rulebook) -> bool:
-        # print(f"check {rulebook}")
         found_files = set(list_files(f"regelwerk/{rulebook}"))
-        # print(f"found: {found_files}")
         if not RulebookValidator.required_files.issubset(found_files):
             return False
         return True

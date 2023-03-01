@@ -13,7 +13,6 @@ class ClingoTester(unittest.TestCase):
 
     def on_model(self, m: Model):
         print(m)
-        # print(m.symbols(atoms=True))
 
 
 if __name__ == '__main__':

@@ -1,36 +1,33 @@
 from pathlib import Path
+from symtable import Symbol
 from typing import List
 
 from clingo import Control
-from clingo import Model
 from clingo import SolveResult
 
 from app.engine.collector import Collector
+from app.engine.hero_validation_interpreter import HeroValidationInterpreter
 from app.engine.hero_wrapper import HeroWrapper
 from app.engine.rulebook_function import RulebookFunction
 from app.engine.rulebook_program import RulebookProgram
 from app.engine.rulebook_validator import RulebookValidator
+from app.error import UnusableRulebookError
+from app.models import Feature
 from app.models import Hero
-from app.models.feature import Feature
-from app.models.rulebook import Rulebook
+from app.models import Rulebook
 from app.resource import get_path
 
 
-class UnusableRulebookError(Exception):
-    """Set of rulebooks contains at least one unusable."""
-
-
-class ClingoEngine:
+class Engine:
 
     def __init__(self, _rulebooks: List[Rulebook]) -> None:
         self.rulebooks = RulebookValidator.filter(_rulebooks)
         self.ctl = self._create_control()
-        self._is_usable()
+        self._check_rulebooks_usable()
 
     def _create_control(self) -> Control:
         ctl = Control()
-        for path in ClingoEngine._get_facts() + self._get_rules():
-            # print(f"load {lp}")
+        for path in Engine._get_facts() + self._get_rules():
             ctl.load(path.as_posix())
         return ctl
 
@@ -46,28 +43,34 @@ class ClingoEngine:
             rules.append(get_path(f"regelwerk/{book}/rules.lp"))
         return rules
 
-    def _is_usable(self) -> None:
-        self.ctl.ground([(RulebookProgram.IS_USABLE, [])])
+    def _check_rulebooks_usable(self) -> None:
+        self.ctl.ground([RulebookProgram.RULEBOOK_USABLE])
         unusables: List[List[str]] = []
-        self.ctl.solve(on_model=lambda m: Collector.functions_strings(unusables, m, RulebookFunction.RULEBOOK_UNUSABLE))
+        self.ctl.solve(
+            on_model=lambda m: Collector.functions_strings(unusables, m, RulebookFunction.RULEBOOK_UNUSABLE)
+        )
         if unusables:
             messages = []
             for a in unusables:
                 messages.append(f"Rulebook '{a[0]}' missing '{a[1]}'.")
             raise UnusableRulebookError(chr(10).join(messages))
 
-    def check(self, hero: Hero, is_print_model: bool = False) -> bool:
-        self.ctl.ground(context=HeroWrapper.wrap(hero))
-        result: SolveResult = self.ctl.solve(on_model=lambda m: ClingoEngine._print_model(m, is_print_model))
-        return result.satisfiable
+    def validate(self, hero: Hero) -> List[str] | None:
+        self.ctl.ground([RulebookProgram.BASE, RulebookProgram.VALIDATE_HERO], HeroWrapper.wrap(hero))
+        errors: List[Symbol] = []
+        result: SolveResult = self.ctl.solve(
+            on_model=lambda m: Collector.functions(
+                errors, m, (RulebookFunction.UNKNOWN_SUFFIX, RulebookFunction.UNUSABLE_SUFFIX)
+            )
+        )
+        if not result.satisfiable:
+            return None
+        return [HeroValidationInterpreter.str(e) for e in errors]
 
-    @staticmethod
-    def _print_model(m: Model, is_print_model: bool):
-        if is_print_model:
-            print(m)
-
-    def list(self, merkmal: Feature) -> List[str]:
-        self.ctl.ground([(RulebookProgram.list(merkmal), [])])
+    def list(self, feature: Feature) -> List[str]:
+        self.ctl.ground()
         features: List[str] = []
-        self.ctl.solve(on_model=lambda m: Collector.functions_first_string(features, m, RulebookFunction.of(merkmal)))
+        self.ctl.solve(
+            on_model=lambda m: Collector.functions_first_string(features, m, RulebookFunction.known(feature))
+        )
         return features

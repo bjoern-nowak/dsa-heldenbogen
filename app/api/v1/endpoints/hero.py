@@ -5,10 +5,11 @@ from fastapi import APIRouter
 from fastapi import HTTPException
 from fastapi import Query
 
-from app.api.v1.schema.error import ServerError
+from app.api.v1.schema import HeroValidationResult
+from app.api.v1.schema import ServerError
 from app.models import Hero
-from app.models.rulebook import Rulebook
-from app.service import RuleEngine
+from app.models import Rulebook
+from app.service import HeroService
 
 router = APIRouter()
 
@@ -22,9 +23,13 @@ router = APIRouter()
         }
     }
 )
-def validate(hero: Hero, rulebooks: List[Rulebook] = Query()) -> bool:
+def validate(hero: Hero, rulebooks: List[Rulebook] = Query()) -> HeroValidationResult:
     try:
-        return RuleEngine(rulebooks).check(hero)
+        errors: List[str] = HeroService().validate(hero, rulebooks)
+        if errors:
+            return HeroValidationResult.bad(errors=errors)
+        else:
+            return HeroValidationResult.good()
     except Exception as e:
         # TODO [1] not a good practise to catch any error and publish its message
         raise HTTPException(
