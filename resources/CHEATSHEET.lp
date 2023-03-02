@@ -440,8 +440,8 @@ step(@increase(S)) :- #maximize{ S : step(S)}.
 
 
 %% --- EXTERNAL STATEMENTS
-%% prevents atoms to be discarded for simplifications; if they are
-%%  in the body (of an rule, condition, ...)
+%% prevents atoms to be discarded for simplifications;
+%%  if they are in the body (of an rule, condition, ...)
 %%  but not in any rule head
 %%
 %% form: '#external A:L1,...,Ln'

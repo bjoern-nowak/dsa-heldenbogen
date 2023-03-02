@@ -11,17 +11,34 @@ class TestHeroService(unittest.TestCase):
     service = HeroService()
 
     @parameterized.expand([
-        (0, 'Elf', 'Auelfen'),
-        (1, 'Elf', 'Andergaster'),
-        (0, 'Mensch', 'Andergaster'),
-        (1, 'Mensch', 'Ambosszwerge'),
-        (0, 'Zwerg', 'Ambosszwerge'),
-        (1, 'Zwerg', 'Auelfen'),
+        (0, 'Elf', 'Auelfen', 'Zauberweber'),
+        (1, 'Elf', 'Andergaster', 'Zauberweber'),
+        (0, 'Mensch', 'Andergaster', 'Zauberweber'),
+        (1, 'Mensch', 'Ambosszwerge', 'Zauberweber'),
+        (0, 'Zwerg', 'Ambosszwerge', 'Zauberweber'),
+        (1, 'Zwerg', 'Auelfen', 'Zauberweber'),
     ])
-    def test_validation(self, error_count: int, species: str, culture: str):
+    def test_validation(self,
+                        error_count: int,
+                        species: str,
+                        culture: str,
+                        profession: str,
+                        # characteristics: dict[Characteristic, NonNegativeInt],
+                        # skill: dict[str, NonNegativeInt],
+                        # advantages: List[str],
+                        # disadvantages: List[str],
+                        ):
         # given:
         rulebooks = [Rulebook.DSA5]
-        held = Hero(name='Test', species=species, culture=culture)
+        held = Hero(name='Test',
+                    species=species,
+                    culture=culture,
+                    profession=profession,
+                    # characteristics=characteristics,
+                    # skill=skill,
+                    # advantages=advantages,
+                    # disadvantages=disadvantages,
+                    )
         # when:
         errors = self.service.validate(held, rulebooks)
         # then:

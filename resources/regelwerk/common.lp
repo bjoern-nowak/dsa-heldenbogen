@@ -4,9 +4,12 @@ rulebook_unusable(R,D) :- rulebook_depends(R,D), rulebook(R), not rulebook(D).
 %rulebook_unusable(R,D) : rulebook(R), not rulebook(D) :- not rulebook_depends(R,D).
 
 
-#program validate_hero.
-% step 1: check species
+#program validate_hero_step1. % check species
 species_unknown(S) :- species(S), not known_species(S).
-% step 2: check culture
+
+#program validate_hero_step2. % check culture
 culture_unknown(C) :- culture(C), not known_culture(C).
 culture_unusable :- culture(C), species(S), not known_species_culture(S,C).
+
+#program validate_hero_step3. % check profession
+profession_unknown(P) :- profession(P), not known_profession(P).

@@ -13,3 +13,7 @@ known_species_culture("Zwerg",("Ambosszwerge";"Brillantzwerge";"Erzzwerge";"Hüg
 known_species(S) :- known_species_culture(S,_).
 %% KNOWN cultures
 known_culture(C) :- known_species_culture(_,C).
+%% KNOWN species/culture to profession
+known_species_profession("Elf",("Zauberweber";"Wildnisläuferin")).
+%% KNOWN professions
+known_profession(P) :- known_species_profession(_,P).
