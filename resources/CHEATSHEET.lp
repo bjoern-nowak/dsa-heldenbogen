@@ -436,7 +436,7 @@ step(@increase(S)) :- #maximize{ S : step(S)}.
 %%-----------------------------------------------------------------------------
 
 
-%% TODO write something about #defined
+%% TODO write something about #defined, #project
 
 
 %% --- EXTERNAL STATEMENTS
@@ -470,4 +470,4 @@ p(x,y). %% result in p(42,f(42,z))
 %% TODO may be more to come
 
 %% --- HEURISTIC-DRIVEN SOLVING
-%% TODO may be more to come
+%% TODO may be more to come about #heuristic

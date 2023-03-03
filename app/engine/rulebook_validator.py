@@ -5,8 +5,12 @@ from app.resource import list_files
 
 
 class RulebookValidator:
-    required_files: set[str] = {"meta.lp", "rules.lp"}
-    optional_files: set[str] = {"rules_optional.lp"}
+    """
+    Validates that a rulebook resource folder has specific files.
+    It does not check if any of these files are loaded.
+    Only entrypoint will be loaded by the engine
+    """
+    required_files: set[str] = {Rulebook.entrypoint_name(), "meta.lp", "rules.lp"}
 
     @staticmethod
     def filter(rulebooks: List[Rulebook]) -> List[Rulebook]:
@@ -24,7 +28,7 @@ class RulebookValidator:
 
     @staticmethod
     def _files_valid(rulebook: Rulebook) -> bool:
-        found_files = set(list_files(f"regelwerk/{rulebook}"))
+        found_files = set(list_files(f"{Rulebook.res_folder_name()}/{rulebook}"))
         if not RulebookValidator.required_files.issubset(found_files):
             return False
         return True
