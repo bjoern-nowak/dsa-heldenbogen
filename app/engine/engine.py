@@ -27,13 +27,9 @@ class Engine:
     def _create_control(self) -> Control:
         ctl = Control()
         # TODO may use '#include' in LPs
-        for path in Engine._get_facts() + self._get_rules():
+        for path in self._get_rules():
             ctl.load(path.as_posix())
         return ctl
-
-    @staticmethod
-    def _get_facts() -> List[Path]:
-        return [get_path('hero_facts.lp')]
 
     def _get_rules(self) -> List[Path]:
         rules = []
@@ -64,7 +60,7 @@ class Engine:
         return errors
 
     def validate_step(self, hero: Hero, step: RulebookProgram) -> List[str] | None:
-        self.ctl.ground([RulebookProgram.BASE, RulebookProgram.VALIDATE_HERO, step], HeroWrapper.wrap(hero))
+        self.ctl.ground([RulebookProgram.BASE, RulebookProgram.HERO_FACTS, step], HeroWrapper.wrap(hero))
         errors: List[Symbol] = []
         result: SolveResult = self.ctl.solve(
             on_model=lambda m: Collector.functions(
