@@ -1,3 +1,10 @@
+#program hero_facts.
+species(@hero_species).
+culture(@hero_culture).
+profession(@hero_profession).
+
+
+
 #program rulebook_usable.
 #defined rulebook_depends/2. % supress info 'atom does not occur in any rule head'
 rulebook_unusable(R,D) :- rulebook_depends(R,D), rulebook(R), not rulebook(D).
