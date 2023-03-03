@@ -11,12 +11,20 @@ class TestHeroService(unittest.TestCase):
     service = HeroService()
 
     @parameterized.expand([
+        (0, 'Elf', 'Auelfen', 'Söldner'),
         (0, 'Elf', 'Auelfen', 'Zauberweber'),
-        (1, 'Elf', 'Andergaster', 'Zauberweber'),
-        (0, 'Mensch', 'Andergaster', 'Zauberweber'),
-        (1, 'Mensch', 'Ambosszwerge', 'Zauberweber'),
-        (0, 'Zwerg', 'Ambosszwerge', 'Zauberweber'),
-        (1, 'Zwerg', 'Auelfen', 'Zauberweber'),
+        (1, 'Elf', 'Andergaster', 'Söldner'),
+        (1, 'Elf', 'Ambosszwerge', 'Söldner'),
+
+        (0, 'Mensch', 'Andergaster', 'Söldner'),
+        (1, 'Mensch', 'Auelfen', 'Söldner'),
+        (1, 'Mensch', 'Andergaster', 'Zauberweber'),
+        (1, 'Mensch', 'Ambosszwerge', 'Söldner'),
+
+        (0, 'Zwerg', 'Ambosszwerge', 'Söldner'),
+        (1, 'Zwerg', 'Auelfen', 'Söldner'),
+        (1, 'Zwerg', 'Ambosszwerge', 'Zauberweber'),
+        (1, 'Zwerg', 'Andergaster', 'Söldner'),
     ])
     def test_validation(self,
                         error_count: int,
@@ -42,7 +50,7 @@ class TestHeroService(unittest.TestCase):
         # when:
         errors = self.service.validate(held, rulebooks)
         # then:
-        self.assertIs(len(errors), error_count)
+        self.assertIs(len(errors), error_count, msg=errors)
 
 
 if __name__ == '__main__':

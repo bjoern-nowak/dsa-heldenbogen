@@ -32,7 +32,7 @@ rain.
 %% filters solution candidates: body shall not be satisfied
 %%
 %% keep candidate if: no umbrella but outdoor
-:- umbrella, not outdoor
+:- umbrella, not outdoor.
 
 
 
@@ -204,10 +204,10 @@ grid(X,Y) :- X = (1;2), Y = (1;2).
 a :- b : c.
 %%
 %% usage in head is possible:
-%%  if c then a only if b
-a : b :- c
+%%  if c then a (literal) only if b (condition)
+a : b :- c.
 %%  if c then yield a(X) if b(X)
-a(X) : b(X) :- c
+a(X) : b(X) :- c.
 %%
 %% usages in body with other literals: conditions ends with an ';' (semicolon)
 %% a :- b1, b2 : c1, c2, c3; b3, b4
@@ -244,14 +244,14 @@ next(X,Z) :- set(X), #false : X < Y, Y < Z, set(Y); set(Z), X < Z.
 %% weight refers the first element of a term tuple:
 %%
 %% example: the sum must be below 20
-#sum{ 1 ; 2 ; 4 ; 8 } < 20
+#sum{ 1 ; 2 ; 4 ; 8 } < 20.
 %%
 %% example with conditional literal:
 %%  the sum of credits (weight) by passed modules (mod) must be at least 20
-20 #sum{ 4 : mod(a) ; 4 : mod(b) ; 6 : mod(c) ; 6 : mod(d),mod(dExtra) }
+20 #sum{ 4 : mod(a) ; 4 : mod(b) ; 6 : mod(c) ; 6 : mod(d),mod(dExtra) }.
 %%  the 'sum' will be '10', due to duplicate terms and hence does not satisfy the constraint
 %%  hence non-single tuples can be used make weights (credits) unique (per mod)
-20 #sum{ 4,a : mod(a) ; 4,b : mod(b) ; 6,c : mod(c) ; 6,d : mod(d),mod(dExtra) }
+20 #sum{ 4,a : mod(a) ; 4,b : mod(b) ; 6,c : mod(c) ; 6,d : mod(d),mod(dExtra) }.
 %%
 %% usage of unification/shorthands is possible but
 %%  discouraged due to potential excessive unwrap of possibilities
@@ -366,8 +366,8 @@ valid_b :- check(x,y).
 
 %% --- INCLUDE other logic programs
 %% a logic programm can be split into multiple files
-%% using '#include <file_path>'
-#include held_fakten.lp
+%% using '#include "<file_path>"'
+#include "held_fakten.lp".
 %% looks up 'held_fakten.lp' file path in following order:
 %%  1. relative to current working folder
 %%  2. relative to the file containing the #include statement

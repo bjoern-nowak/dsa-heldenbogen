@@ -5,15 +5,8 @@ rulebook("dsa5").
 
 
 #program base.
-%% KNOWN species to culture
-known_species_culture("Elf",("Auelfen";"Firnelfen";"Steppenelfen";"Waldelfen")).
-known_species_culture("Mensch",("Andergaster";"Aranier";"Bornländer";"Ferkinas";"Fjarninger";"Gjalsker";"Horasier";"Koboldweltler";"Maraskaner";"Menschlichekultur";"Mhanadistani";"Mittelreicher";"Mohas";"Nivesen";"Norbarden";"Nordaventurier";"Nostrier";"Novadis";"Svellttaler";"Südaventurier";"Thorwaler";"Trollzacker";"Zahori";"Zyklopäer")).
-known_species_culture("Zwerg",("Ambosszwerge";"Brillantzwerge";"Erzzwerge";"Hügelzwerge";"Wildzwerge")).
-%% KNOWN species
-known_species(S) :- known_species_culture(S,_).
-%% KNOWN cultures
-known_culture(C) :- known_species_culture(_,C).
-%% KNOWN species/culture to profession
-known_species_profession("Elf",("Zauberweber";"Wildnisläuferin")).
-%% KNOWN professions
-known_profession(P) :- known_species_profession(_,P).
+culture_requires_species("Elf",("Auelfen";"Firnelfen";"Steppenelfen";"Waldelfen")).
+culture_requires_species("Mensch",("Andergaster";"Aranier";"Bornländer";"Ferkinas";"Fjarninger";"Gjalsker";"Horasier";"Koboldweltler";"Maraskaner";"Menschlichekultur";"Mhanadistani";"Mittelreicher";"Mohas";"Nivesen";"Norbarden";"Nordaventurier";"Nostrier";"Novadis";"Svellttaler";"Südaventurier";"Thorwaler";"Trollzacker";"Zahori";"Zyklopäer")).
+culture_requires_species("Zwerg",("Ambosszwerge";"Brillantzwerge";"Erzzwerge";"Hügelzwerge";"Wildzwerge")).
+profession_requires_species("Elf",("Zauberweber";"Wildnisläuferin")).
+known_profession("Söldner").

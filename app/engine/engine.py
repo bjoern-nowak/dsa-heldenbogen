@@ -49,11 +49,11 @@ class Engine:
             raise UnusableRulebookError(chr(10).join(messages))  # chr(10) := '\n' (line break)
 
     def validate(self, hero: Hero) -> List[str] | None:
-        errors: List[str] = self.validate_step(hero, RulebookProgram.VALIDATE_HERO_STEP1)
+        errors = self.validate_step(hero, RulebookProgram.VALIDATE_HERO_STEP1)
         if not errors:
-            errors: List[str] = self.validate_step(hero, RulebookProgram.VALIDATE_HERO_STEP2)
+            errors = self.validate_step(hero, RulebookProgram.VALIDATE_HERO_STEP2)
         if not errors:
-            errors: List[str] = self.validate_step(hero, RulebookProgram.VALIDATE_HERO_STEP3)
+            errors = self.validate_step(hero, RulebookProgram.VALIDATE_HERO_STEP3)
         return errors
 
     def validate_step(self, hero: Hero, step: RulebookProgram) -> List[str] | None:

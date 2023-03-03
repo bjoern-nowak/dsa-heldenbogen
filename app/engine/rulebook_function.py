@@ -24,6 +24,7 @@ class RulebookFunction(str, Enum):
     CULTURE_UNKNOWN = "culture_unknown"
     CULTURE_UNUSABLE = "culture_unusable"
     PROFESSION_UNKNOWN = "profession_unknown"
+    PROFESSION_UNUSABLE = "profession_unusable"
 
     @staticmethod
     def known(feature: Feature) -> RulebookFunction:

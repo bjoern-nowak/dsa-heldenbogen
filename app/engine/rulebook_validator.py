@@ -19,6 +19,7 @@ class RulebookValidator:
             if RulebookValidator._check(book):
                 valid_books.append(book)
             else:
+                # TODO make it a warning and build a testcase for it, this shall not be thrown at runtime
                 print(f"Rulebook {book} is not valid and will be ignored.")
         return valid_books
 
