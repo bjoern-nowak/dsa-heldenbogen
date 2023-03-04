@@ -27,15 +27,15 @@ culture(@hero_culture).
 profession(@hero_profession).
 
 
-#program validate_hero_step1. %% check species
+#program validate_hero_step_100. %% check species
 species_unknown(S) :- species(S), not known_species(S).
 
-#program validate_hero_step2. %% check culture
+#program validate_hero_step_200. %% check culture
 culture_unknown(C) :- culture(C), not known_culture(C).
 #defined known_species_culture/2. %% cultures may not be restricted to a species
 culture_unusable(species) :- culture(C), species(S), #false : not culture_requires_species(C,_); not culture_requires_species(C,S).
 
-#program validate_hero_step3. %% check profession
+#program validate_hero_step_300. %% check profession
 profession_unknown(P) :- profession(P), not known_profession(P).
 #defined profession_requires_species/2. %% professions may not be restricted to a species
 #defined profession_requires_culture/2. %% professions may not be restricted to a culture

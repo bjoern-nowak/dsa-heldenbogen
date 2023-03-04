@@ -12,8 +12,7 @@ _COMMON_FILE = "common.lp"
 class Rulebook(str, Enum):
     DSA5 = 'dsa5'
     DSA5_AVENTURISCHES_KOMPENDIUM_2 = 'dsa5_aventurisches_kompendium_2'
-    DSA5_EXPANSION = 'dsa5_expansion'
-    DSA5_EXPANSION2 = 'dsa5_expansion2'
+    DSA5_AVENTURISCHES_GOETTERWIRKEN_2 = 'dsa5_aventurisches_götterwirken_2'
 
     def entrypoint(self) -> str:
         return get_abs_path(f"{_RULEBOOK_RES_FOLDER}/{self.value}/{_RULEBOOK_ENTRYPOINT}")
