@@ -35,16 +35,10 @@ class Engine:
     @staticmethod
     def _create_control(rulebooks: List[Rulebook]) -> Control:
         ctl = Control()
-        for entrypoint in Engine._get_entrypoint_paths(rulebooks):
-            ctl.load(entrypoint)
-        return ctl
-
-    @staticmethod
-    def _get_entrypoint_paths(rulebooks: List[Rulebook]) -> List[str]:
-        paths = [Rulebook.common_file()]
+        ctl.load(Rulebook.common_file())
         for rulebook in rulebooks:
-            paths.append(rulebook.entrypoint())
-        return paths
+            ctl.load(rulebook.entrypoint())
+        return ctl
 
     def _check_rulebooks_usable(self) -> None:
         self.ctl.ground([RulebookProgram.RULEBOOK_USABLE])
