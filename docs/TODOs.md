@@ -6,3 +6,5 @@
   , or pytest plugin spock (https://github.com/zen-xu/spock)
 * Give hints which hero feature values are usable considering given hero and rulebooks, instead of simple feedback of unusable
   feature value due to 'higher' (in sense of more general) hero feature.
+* Give hero an 'sex' attribute, since it could be used as a requirement (see https://ulisses-regelwiki.de/pro_mawdli.html
+  and https://ulisses-regelwiki.de/ZB_Derwisch.html)

@@ -4,4 +4,4 @@ rulebook_depends("dsa5_aventurisches_kompendium_2", "dsa5").
 
 
 #program base.
-profession_requires_culture("Novadis","Mawdli").
+profession_requires_culture("Mawdli","Novadis").
