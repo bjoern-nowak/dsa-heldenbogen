@@ -15,11 +15,11 @@ router = APIRouter()
 
 
 @router.post(
-    "/validate",
+    '/validate',
     responses={
         HTTPStatus.INTERNAL_SERVER_ERROR: {
-            "model": ServerError,
-            "description": "Unexpected server error"
+            'model': ServerError,
+            'description': "Unexpected server error"
         }
     }
 )

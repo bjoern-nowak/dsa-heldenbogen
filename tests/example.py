@@ -15,8 +15,8 @@ class Context:
 class ClingoExample(unittest.TestCase):
     def test_asp(self):
         ctl = Control()
-        ctl.load("example.lp")
-        ctl.ground([("base", [])], context=Context())
+        ctl.load('example.lp')
+        ctl.ground([('base', [])], context=Context())
         print(ctl.solve(on_model=self.__on_model))
 
     def __on_model(self, m):

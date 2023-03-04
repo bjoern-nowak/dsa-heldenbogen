@@ -4,9 +4,9 @@ from enum import Enum
 
 from app.resource import get_abs_path
 
-_RULEBOOK_RES_FOLDER = "rulebook"
-_RULEBOOK_ENTRYPOINT = "_entrypoint.lp"
-_COMMON_FILE = "common.lp"
+_RULEBOOK_RES_FOLDER = 'rulebook'
+_RULEBOOK_ENTRYPOINT = '_entrypoint.lp'
+_COMMON_FILE = 'common.lp'
 
 
 class Rulebook(str, Enum):
