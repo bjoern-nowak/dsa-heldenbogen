@@ -5,9 +5,11 @@ from enum import Enum
 from app.models import Feature
 
 
+# TODO add information about parameters
 class RulebookFunction(str, Enum):
     # meta
     RULEBOOK_UNUSABLE = 'rulebook_unusable'
+    EXTRA_HERO_VALIDATION_STEP = 'extra_hero_validation_step'
 
     # known
     KNOWN_SPECIES = 'known_species'
