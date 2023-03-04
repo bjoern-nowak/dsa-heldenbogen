@@ -14,19 +14,19 @@ class RulebookFunction(str, Enum):
     # known
     KNOWN_SPECIES = 'known_species'
     KNOWN_CULTURE = 'known_culture'
-    KNOWN_PROFESSION = "known_profession"
-    KNOWN_ADVANTAGE = "known_advantage"
-    KNOWN_DISADVANTAGE = "known_disadvantage"
-    KNOWN_SKILL = "known_skill"
+    KNOWN_PROFESSION = 'known_profession'
+    KNOWN_ADVANTAGE = 'known_advantage'
+    KNOWN_DISADVANTAGE = 'known_disadvantage'
+    KNOWN_SKILL = 'known_skill'
 
     # validate errors
-    UNKNOWN_SUFFIX = "_unknown"
-    UNUSABLE_SUFFIX = "_unusable"
-    SPECIES_UNKNOWN = "species_unknown"
-    CULTURE_UNKNOWN = "culture_unknown"
-    CULTURE_UNUSABLE = "culture_unusable"
-    PROFESSION_UNKNOWN = "profession_unknown"
-    PROFESSION_UNUSABLE = "profession_unusable"
+    UNKNOWN_SUFFIX = '_unknown'
+    UNUSABLE_SUFFIX = '_unusable'
+    SPECIES_UNKNOWN = 'species_unknown'
+    CULTURE_UNKNOWN = 'culture_unknown'
+    CULTURE_UNUSABLE = 'culture_unusable'
+    PROFESSION_UNKNOWN = 'profession_unknown'
+    PROFESSION_UNUSABLE = 'profession_unusable'
 
     @staticmethod
     def known(feature: Feature) -> RulebookFunction:

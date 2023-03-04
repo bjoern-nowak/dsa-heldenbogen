@@ -8,15 +8,15 @@ from .v1.api import api as api_v1
 app = FastAPI()
 
 
-@app.get("/")
+@app.get('/')
 def index():
     return RedirectResponse(url='/docs')
 
 
-@app.get("/apis")
+@app.get('/apis')
 def index() -> List[str]:
     """List all available apis"""
-    return ["/api/v1"]
+    return ['/api/v1']
 
 
-app.mount("/api/v1", api_v1)
+app.mount('/api/v1', api_v1)

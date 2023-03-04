@@ -16,12 +16,12 @@ router = APIRouter()
 
 
 @router.get(
-    "/list",
+    '/list',
     description="Get list of possible values for a feature under given context (like active rulebooks).",
     responses={
         HTTPStatus.INTERNAL_SERVER_ERROR: {
-            "model": ServerError,
-            "description": "Unexpected server error"
+            'model': ServerError,
+            'description': "Unexpected server error"
         }
     }
 )

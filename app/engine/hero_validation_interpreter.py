@@ -5,7 +5,7 @@ from app.engine.rulebook_function import RulebookFunction
 
 class HeroValidationInterpreter:
 
-    # TODO return an error object which also holds a type
+    # TODO return an error object which also holds a type, usable in frontend and testcases
     @staticmethod
     def str(error: Symbol) -> str:
         match error.name:

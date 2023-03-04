@@ -10,7 +10,7 @@ class RulebookValidator:
     It does not check if any of these files are loaded.
     Only entrypoint will be loaded by the engine
     """
-    required_files: set[str] = {Rulebook.entrypoint_name(), "meta.lp", "rules.lp"}
+    required_files: set[str] = {Rulebook.entrypoint_name(), 'meta.lp', 'rules.lp'}
 
     @staticmethod
     def filter(rulebooks: List[Rulebook]) -> List[Rulebook]:
