@@ -1,3 +1,5 @@
+from pydantic import NonNegativeInt
+
 from .basemodel import BaseModel
 
 
@@ -9,6 +11,6 @@ class Hero(BaseModel):
 
     profession: str
     # characteristics: dict[Characteristic, NonNegativeInt]
-    # skill: dict[str, NonNegativeInt]
+    talents: dict[str, NonNegativeInt]
     # advantages: List[str]
     # disadvantages: List[str]

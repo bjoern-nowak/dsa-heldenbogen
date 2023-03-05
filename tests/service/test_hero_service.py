@@ -43,7 +43,7 @@ class TestHeroService(unittest.TestCase):
                     culture=culture,
                     profession=profession,
                     # characteristics=characteristics,
-                    # skill=skill,
+                    talents={},
                     # advantages=advantages,
                     # disadvantages=disadvantages,
                     )

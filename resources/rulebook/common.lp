@@ -25,6 +25,9 @@ known_profession(P) :- profession_requires_culture(P,_).
 species(@hero_species).
 culture(@hero_culture).
 profession(@hero_profession).
+%% TODO this '__hero_talent_wrapper' is a ugly helper construct, try to remove it
+__hero_talent_wrapper(@hero_talents).
+talent(T,L) :- __hero_talent_wrapper((T, L)).
 
 
 #program validate_hero_step_100. %% check species
