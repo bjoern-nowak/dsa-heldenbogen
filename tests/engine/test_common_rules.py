@@ -60,10 +60,10 @@ class TestCommonRules(unittest.TestCase):
 
     @parameterized.expand([
         (1, ''),
-        (0, 'Söldner'),
+        (0, 'Händler'),
         (1, '_invalid_'),
     ])
-    def test_profession_known(self, error_count: int, profession: str, ):
+    def test_profession_known(self, error_count: int, profession: str):
         # given:
         engine = Engine([Rulebook.DSA5])
         held = Hero(name="name", species='Elf', culture='Auelfen', profession=profession, talents={})
@@ -75,13 +75,13 @@ class TestCommonRules(unittest.TestCase):
         self.assertIs(error_count, len(errors), msg=errors)
 
     @parameterized.expand([
-        (0, 'Elf', 'Auelfen', 'Söldner'),
+        (0, 'Elf', 'Auelfen', 'Händler'),
         (0, 'Elf', 'Auelfen', 'Zauberweber'),
         (1, 'Elf', 'Auelfen', '_invalid_'),
         (1, 'Elf', 'Auelfen', 'Mawdli'),  # requires DSA5_AVENTURISCHES_KOMPENDIUM_2
         (1, 'Zwerg', 'Ambosszwerge', 'Zauberweber'),
     ])
-    def test_profession_usable(self, error_count: int, species: str, culture: str, profession: str, ):
+    def test_profession_usable(self, error_count: int, species: str, culture: str, profession: str):
         # given:
         engine = Engine([Rulebook.DSA5, Rulebook.DSA5_AVENTURISCHES_KOMPENDIUM_2])
         held = Hero(name="name", species=species, culture=culture, profession=profession, talents={})
