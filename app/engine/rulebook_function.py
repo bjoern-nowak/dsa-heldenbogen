@@ -22,11 +22,13 @@ class RulebookFunction(str, Enum):
     # validate errors
     UNKNOWN_SUFFIX = '_unknown'
     UNUSABLE_SUFFIX = '_unusable'
+    MISSING_SUFFIX = '_missing'
     SPECIES_UNKNOWN = 'species_unknown'
     CULTURE_UNKNOWN = 'culture_unknown'
     CULTURE_UNUSABLE = 'culture_unusable'
     PROFESSION_UNKNOWN = 'profession_unknown'
     PROFESSION_UNUSABLE = 'profession_unusable'
+    PROFESSION_MISSING = 'profession_missing'
 
     @staticmethod
     def known(feature: Feature) -> RulebookFunction:

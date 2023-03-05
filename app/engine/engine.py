@@ -78,7 +78,7 @@ class Engine:
         errors: List[Symbol] = []
         result: SolveResult = self.ctl.solve(
             on_model=lambda m: Collector.functions(
-                errors, m, [RulebookFunction.UNKNOWN_SUFFIX, RulebookFunction.UNUSABLE_SUFFIX]
+                errors, m, [RulebookFunction.UNKNOWN_SUFFIX, RulebookFunction.UNUSABLE_SUFFIX, RulebookFunction.MISSING_SUFFIX]
             )
         )
         if not result.satisfiable:

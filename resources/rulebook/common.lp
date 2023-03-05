@@ -36,15 +36,20 @@ species_unknown(S) :- species(S), not known_species(S).
 #program validate_hero_step_200. %% check culture
 culture_unknown(C) :- culture(C), not known_culture(C).
 #defined known_species_culture/2. %% cultures may not be restricted to a species
+%% only check if there is a restriction ('#false : not' part)
+%% TODO extract all restriction condition ('#false : not' part) as separate fact, so that other rulebooks can reuse it
 culture_unusable(species) :- culture(C), species(S), #false : not culture_requires_species(C,_); not culture_requires_species(C,S).
 
 #program validate_hero_step_300. %% check profession
 profession_unknown(P) :- profession(P), not known_profession(P).
 #defined profession_requires_species/2. %% professions may not be restricted to a species
 #defined profession_requires_culture/2. %% professions may not be restricted to a culture
-%% only check if there is a restriction ('#false : not' part)
 profession_unusable(species) :- profession(P), species(S), #false : not profession_requires_species(P,_); not profession_requires_species(P,S).
 profession_unusable(culture) :- profession(P), culture(C), #false : not profession_requires_culture(P,_); not profession_requires_culture(P,C).
 %% HINT: below did not work because 'conditional literal' behaves differently in head
 %profession_unusable(species) : species(S), not profession_requires_species(P,S) :- profession(P), profession_requires_species(P,_).
 %profession_unusable(culture) : culture(C), not profession_requires_culture(P,C) :- profession(P), profession_requires_culture(P,_).
+#defined talent/2. %% hero may does not have any talents
+#defined profession_requires_talent/3. %% professions may not be restricted to a talent
+profession_missing(talent(T,X)) :- profession(P), #false : not profession_requires_talent(P,_,_); profession_requires_talent(P,T,X), not talent(T,_).
+profession_missing(talent(T,X)) :- profession(P), #false : not profession_requires_talent(P,_,_); profession_requires_talent(P,T,X), talent(T,L), L < X.
