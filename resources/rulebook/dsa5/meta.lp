@@ -13,3 +13,17 @@ culture_requires_species(
 culture_requires_species(("Ambosszwerge";"Brillantzwerge";"Erzzwerge";"Hügelzwerge";"Wildzwerge"),"Zwerg").
 profession_requires_species(("Zauberweber";"Wildnisläuferin"),"Elf").
 known_profession(("Söldner";"Händler")).
+%% TODO make below better in modelling, may use tuples with pooling
+profession_requires_talent("Söldner", "Körperbeherrschung", 3).
+profession_requires_talent("Söldner", "Kraftakt", 3).
+profession_requires_talent("Söldner", "Selbstbeherrschung", 4).
+profession_requires_talent("Söldner", "Zechen", 5).
+profession_requires_talent("Söldner", "Menschenkenntnis", 3).
+profession_requires_talent("Söldner", "Überreden", 3).
+profession_requires_talent("Söldner", "Orientierung", 4).
+profession_requires_talent("Söldner", "Wildnisleben", 3).
+profession_requires_talent("Söldner", "Götter & Kulte", 3).
+profession_requires_talent("Söldner", "Kriegskunst", 6).
+profession_requires_talent("Söldner", "Sagen & Legenden", 5).
+profession_requires_talent("Söldner", "Handel", 3).
+profession_requires_talent("Söldner", "Heilkunde Wunden", 4).
