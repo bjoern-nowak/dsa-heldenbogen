@@ -1,7 +1,12 @@
 from __future__ import annotations  # required till PEP 563
 
+from fastapi.encoders import jsonable_encoder
+
 from app.models import BaseModel
 
+
+# reason for 'jsonable_encoder': nested models, see
+# https://stackoverflow.com/questions/72092365/fastapi-using-nested-model-gives-json-serialization-error
 
 class ExceptionDetails(BaseModel):
     type: str
@@ -13,7 +18,7 @@ class ServerError(BaseModel):
 
     @staticmethod
     def by(e: Exception) -> ServerError:
-        return ServerError(detail=ExceptionDetails(type=type(e).__name__, message=f"{e}"))
+        return jsonable_encoder(ServerError(detail=ExceptionDetails(type=type(e).__name__, message=f"{e}")))
 
 
 class ClientError(BaseModel):
@@ -21,4 +26,4 @@ class ClientError(BaseModel):
 
     @staticmethod
     def by(e: Exception) -> ClientError:
-        return ClientError(detail=ExceptionDetails(type=type(e).__name__, message=f"{e}"))
+        return jsonable_encoder(ClientError(detail=ExceptionDetails(type=type(e).__name__, message=f"{e}")))
