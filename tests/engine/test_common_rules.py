@@ -18,7 +18,7 @@ class TestCommonRules(unittest.TestCase):
     def test_species_known(self, error_count: int, species: str):
         # given:
         engine = Engine([Rulebook.DSA5])
-        held = Hero(name="name", species=species, culture='', profession='')
+        held = Hero(name="name", species=species, culture='', profession='', talents={})
         # when:
         errors = engine._validate_step(held, RulebookProgram.VALIDATE_HERO_STEP_100)
         # then:
@@ -32,7 +32,7 @@ class TestCommonRules(unittest.TestCase):
     def test_culture_known(self, error_count: int, culture: str):
         # given:
         engine = Engine([Rulebook.DSA5])
-        held = Hero(name="name", species='Elf', culture=culture, profession='')
+        held = Hero(name="name", species='Elf', culture=culture, profession='', talents={})
         # when: actual step is called
         self._check_pre_step(engine, held, RulebookProgram.VALIDATE_HERO_STEP_100)
         errors = engine._validate_step(held, RulebookProgram.VALIDATE_HERO_STEP_200)
@@ -46,7 +46,7 @@ class TestCommonRules(unittest.TestCase):
     def test_culture_usable(self, error_count: int, species: str, culture: str):
         # given:
         engine = Engine([Rulebook.DSA5])
-        held = Hero(name="name", species=species, culture=culture, profession='')
+        held = Hero(name="name", species=species, culture=culture, profession='', talents={})
         # when:
         self._check_pre_step(engine, held, RulebookProgram.VALIDATE_HERO_STEP_100)
         errors = engine._validate_step(held, RulebookProgram.VALIDATE_HERO_STEP_200)
@@ -66,7 +66,7 @@ class TestCommonRules(unittest.TestCase):
     def test_profession_known(self, error_count: int, profession: str, ):
         # given:
         engine = Engine([Rulebook.DSA5])
-        held = Hero(name="name", species='Elf', culture='Auelfen', profession=profession)
+        held = Hero(name="name", species='Elf', culture='Auelfen', profession=profession, talents={})
         # when: actual step is called
         self._check_pre_step(engine, held, RulebookProgram.VALIDATE_HERO_STEP_100)
         self._check_pre_step(engine, held, RulebookProgram.VALIDATE_HERO_STEP_200)
@@ -84,7 +84,7 @@ class TestCommonRules(unittest.TestCase):
     def test_profession_usable(self, error_count: int, species: str, culture: str, profession: str, ):
         # given:
         engine = Engine([Rulebook.DSA5, Rulebook.DSA5_AVENTURISCHES_KOMPENDIUM_2])
-        held = Hero(name="name", species=species, culture=culture, profession=profession)
+        held = Hero(name="name", species=species, culture=culture, profession=profession, talents={})
         # when: actual step is called
         self._check_pre_step(engine, held, RulebookProgram.VALIDATE_HERO_STEP_100)
         self._check_pre_step(engine, held, RulebookProgram.VALIDATE_HERO_STEP_200)

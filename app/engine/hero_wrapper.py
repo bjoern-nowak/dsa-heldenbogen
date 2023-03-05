@@ -1,8 +1,12 @@
 from __future__ import annotations  # required till PEP 563
 
 from typing import Callable
+from typing import List
 
+from clingo import Function
+from clingo import Number
 from clingo import String
+from clingo import Tuple_
 
 from app.models import BaseModel
 from app.models import Hero
@@ -16,6 +20,7 @@ class HeroWrapper(BaseModel):
     hero_species: Callable[[], String]
     hero_culture: Callable[[], String]
     hero_profession: Callable[[], String]
+    hero_talents: Callable[[], List[Function]]
 
     @classmethod
     def wrap(cls, hero: Hero) -> HeroWrapper:
@@ -23,4 +28,5 @@ class HeroWrapper(BaseModel):
             hero_species=lambda: String(hero.species),
             hero_culture=lambda: String(hero.culture),
             hero_profession=lambda: String(hero.profession),
+            hero_talents=lambda: [Tuple_([String(key), Number(hero.talents[key])]) for key in hero.talents],
         )
