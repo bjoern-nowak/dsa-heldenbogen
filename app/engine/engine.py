@@ -23,8 +23,11 @@ _DEFAULT_HERO_VALIDATION_STEPS = [100, 200, 300]
 class Engine:
     hero_validation_steps: dict[int, RulebookProgram | int] = {
         100: RulebookProgram.VALIDATE_HERO_STEP_100,
+        150: RulebookProgram.VALIDATE_HERO_STEP_150,
         200: RulebookProgram.VALIDATE_HERO_STEP_200,
+        250: RulebookProgram.VALIDATE_HERO_STEP_250,
         300: RulebookProgram.VALIDATE_HERO_STEP_300,
+        350: RulebookProgram.VALIDATE_HERO_STEP_350,
     }
 
     def __init__(self, rulebooks: List[Rulebook]) -> None:
