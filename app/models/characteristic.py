@@ -1,9 +1,9 @@
-from enum import Enum
+from app.models.base_enum import BaseEnum
 
 
 # TODO [ASK] are there expansions which adss more?
 #  then this must be dynamiclly in the LP
-class Characteristic(str, Enum):
+class Characteristic(str, BaseEnum):
     COURAGE = 'Courage'
     WISDOM = 'Wisdom'
     INTUITION = 'Intuition'
