@@ -74,7 +74,7 @@ class Engine:
 
     def _validate_step(self, hero: Hero, step: RulebookProgram | int) -> List[str] | None:
         program = step if isinstance(step, RulebookProgram) else RulebookProgram.hero_validation_step_for(step)
-        self.ctl.ground([RulebookProgram.BASE, RulebookProgram.HERO_FACTS, program], HeroWrapper.wrap(hero))
+        self.ctl.ground([RulebookProgram.BASE, RulebookProgram.HERO_FACTS, program], HeroWrapper(hero))
         errors: List[Symbol] = []
         result: SolveResult = self.ctl.solve(
             on_model=lambda m: Collector.functions(
