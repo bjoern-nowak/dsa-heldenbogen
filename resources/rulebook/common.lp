@@ -9,14 +9,13 @@ rulebook_unusable(R,D) :- rulebook_depends(R,D), rulebook(R), not rulebook(D).
 %% if a restriction is specified (like culture to species) they (the culture) must not be specified directly
 %% since it will be 'unpacked' with below:
 %% TODO this is debatable: do we want implicit generation of e.g. species by any restriction
-known_species(S) :- culture_requires_species(_,S).
-known_species(S) :- profession_requires_species(_,S).
-%
-known_culture(C) :- culture_requires_species(C,_).
-known_culture(C) :- profession_requires_culture(_,C).
-%
-known_profession(P) :- profession_requires_species(P,_).
-known_profession(P) :- profession_requires_culture(P,_).
+#defined requires/2. %% may there is no restriction
+known_species(S) :- requires(species(S),_).
+known_species(S) :- requires(_,species(S)).
+known_culture(C) :- requires(culture(C),_).
+known_culture(C) :- requires(_,culture(C)).
+known_profession(P) :- requires(profession(P),_).
+known_profession(P) :- requires(_,profession(P)).
 
 
 #program hero_facts.
@@ -28,36 +27,32 @@ profession(@profession).
 %% TODO this '__talent_wrapper' is a ugly helper construct, try to remove it
 __talent_wrapper(@talents).
 talent(T,L) :- __talent_wrapper((T, L)).
+#defined talent/2. %% hero may does not have any talents
 %% TODO this '__combat_technique_wrapper' is a ugly helper construct, try to remove it
 __combat_technique_wrapper(@combat_techniques).
 combat_technique(C,L) :- __combat_technique_wrapper((C, L)).
+#defined combat_technique/2. %% hero may does not have any combat techniques
 
 
+% TODO make unknown checks an separate step
 #program validate_hero_step_100. %% check species
 unknown(species(S)) :- species(S), not known_species(S).
 
 #program validate_hero_step_200. %% check culture
 unknown(culture(C)) :- culture(C), not known_culture(C).
-#defined known_species_culture/2. %% cultures may not be restricted to a species
 %% only check if there is a restriction ('#false : not' part)
-%% TODO extract all restriction condition ('#false : not' part) as separate fact, so that other rulebooks can reuse it
-unusable_by(culture,species) :- culture(C), species(S), #false : not culture_requires_species(C,_); not culture_requires_species(C,S).
+%% TODO extract all restriction conditions ('#false : not' part) as separate fact, so that other rulebooks can reuse it
+unusable_by(culture,species) :- culture(C), species(S), #false : not requires(culture(C),species(_)); not requires(culture(C),species(S)).
 
 #program validate_hero_step_300. %% check profession
 unknown(profession(P)) :- profession(P), not known_profession(P).
-#defined profession_requires_species/2. %% professions may not be restricted to a species
-#defined profession_requires_culture/2. %% professions may not be restricted to a culture
-unusable_by(profession,species) :- profession(P), species(S), #false : not profession_requires_species(P,_); not profession_requires_species(P,S).
-unusable_by(profession,culture) :- profession(P), culture(C), #false : not profession_requires_culture(P,_); not profession_requires_culture(P,C).
+unusable_by(profession,species) :- profession(P), species(S), #false : not requires(profession(P),species(_)); not requires(profession(P),species(S)).
+unusable_by(profession,culture) :- profession(P), culture(C), #false : not requires(profession(P),culture(_)); not requires(profession(P),culture(C)).
 %% HINT: below did not work because 'conditional literal' behaves differently in head
 %profession_unusable(species) : species(S), not profession_requires_species(P,S) :- profession(P), profession_requires_species(P,_).
 %profession_unusable(culture) : culture(C), not profession_requires_culture(P,C) :- profession(P), profession_requires_culture(P,_).
-#defined talent/2. %% hero may does not have any talents
-#defined profession_requires_talent/3. %% professions may not be restricted to a talent
-missing_level(profession,talent(T,X)) :- profession(P), #false : not profession_requires_talent(P,_,_); profession_requires_talent(P,T,X), not talent(T,_).
-missing_level(profession,talent(T,X)) :- profession(P), #false : not profession_requires_talent(P,_,_); profession_requires_talent(P,T,X), talent(T,L), L < X.
-#defined combat_technique/2. %% hero may does not have any combat techniques
-#defined profession_requires_combat_technique/3. %% professions may not be restricted to a combat technique
-missing_level(profession,combat_technique(C,X)) :- profession(P), #false : not profession_requires_combat_technique(P,_,_); profession_requires_combat_technique(P,C,X), not combat_technique(C,_).
-missing_level(profession,combat_technique(C,X)) :- profession(P), #false : not profession_requires_combat_technique(P,_,_); profession_requires_combat_technique(P,C,X), combat_technique(C,L), L < X.
-missing_level(profession,combat_technique(any_of(1,Cs),X)) :- profession(P), #false : not profession_requires_one_combat_technique(P,_,_); profession_requires_one_combat_technique(P,Cs,X), #false : @any_of_has_minimum_level(1,combat_technique,Cs,X) = 1.
+missing_level(profession,talent(T,MIN)) :- profession(P), #false : not requires(profession(P),talent(_,_)); requires(profession(P),talent(T,MIN)), not talent(T,_).
+missing_level(profession,talent(T,MIN)) :- profession(P), #false : not requires(profession(P),talent(_,_)); requires(profession(P),talent(T,MIN)), talent(T,L), L < MIN.
+missing_level(profession,combat_technique(CT,MIN)) :- profession(P), #false : not requires(profession(P),combat_technique(_,_)); requires(profession(P),combat_technique(CT,MIN)), not combat_technique(CT,_).
+missing_level(profession,combat_technique(CT,MIN)) :- profession(P), #false : not requires(profession(P),combat_technique(_,_)); requires(profession(P),combat_technique(CT,MIN)), combat_technique(CT,L), L < MIN.
+missing_level(profession,combat_technique(any_of(1,CTs),MIN)) :- profession(P), #false : not requires(profession(P),any_of(_,combat_technique,_,_)); requires(profession(P),any_of(CHOICES,combat_technique,CTs,MIN)), #false : @any_of_has_minimum_level(CHOICES,combat_technique,CTs,MIN) = 1.
