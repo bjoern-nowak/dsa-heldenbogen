@@ -60,3 +60,4 @@ profession_missing(talent(T,X)) :- profession(P), #false : not profession_requir
 #defined profession_requires_combat_technique/3. %% professions may not be restricted to a combat technique
 profession_missing(combat_technique(C,X)) :- profession(P), #false : not profession_requires_combat_technique(P,_,_); profession_requires_combat_technique(P,C,X), not combat_technique(C,_).
 profession_missing(combat_technique(C,X)) :- profession(P), #false : not profession_requires_combat_technique(P,_,_); profession_requires_combat_technique(P,C,X), combat_technique(C,L), L < X.
+profession_missing(one_combat_technique(Cs,X)) :- profession(P), #false : not profession_requires_one_combat_technique(P,_,_); profession_requires_one_combat_technique(P,Cs,X), #false : @one_combat_technique_at_minimum(Cs,X) = 1.

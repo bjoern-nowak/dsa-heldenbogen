@@ -8,6 +8,7 @@ from app.engine.rulebook_function import RulebookFunction
 class HeroValidationErrors(str, Enum):
     TALENT = 'talent'
     COMBAT_TECHNIQUE = 'combat_technique'
+    ONE_COMBAT_TECHNIQUE = 'one_combat_technique'
 
 
 class HeroValidationInterpreter:
@@ -33,6 +34,8 @@ class HeroValidationInterpreter:
                         return f"Profession is missing talent '{reason.arguments[0].string}' on minimum level {reason.arguments[1]}."
                     case HeroValidationErrors.COMBAT_TECHNIQUE:
                         return f"Profession is missing combat technique '{reason.arguments[0].string}' on minimum level {reason.arguments[1]}."
+                    case HeroValidationErrors.ONE_COMBAT_TECHNIQUE:
+                        return f"Profession is missing ONE combat technique on minimum level {reason.arguments[1]} of {[a.string for a in reason.arguments[0].arguments]}."
                     case _:
                         return f"(Generic; non pre-defined)" \
                                f"Profession is missing {reason.name} with '{reason.arguments}'."
