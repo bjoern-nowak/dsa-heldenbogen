@@ -1,8 +1,8 @@
-from enum import Enum
+from app.models.base_enum import BaseEnum
 
 
 # TODO to be used
-class Basevalue(str, Enum):
+class Basevalue(str, BaseEnum):
     LIFEENERGY = 'Lifeenergy'
     ASTRALENERGY = 'Astralenergy'
     CARMAENERGY = 'Carmaenergy'

@@ -1,13 +1,10 @@
-from enum import Enum
+from app.models.base_enum import BaseEnum
 
 
-class Feature(str, Enum):
+class Feature(str, BaseEnum):
     SPECIES = 'Species'
     CULTURE = 'Culture'
     PROFESSION = 'Profession'
     ADVANTAGE = 'Advantage'
     DISADVANTAGE = 'Disadvantage'
     SKILL = 'Skill'
-
-    def __str__(self):
-        return self.value

@@ -1,12 +1,13 @@
-from enum import Enum
 from typing import Sequence
 
 from clingo import Symbol
 
+from app.models.base_enum import BaseEnum
+
 _VALIDATE_HERO_STEP_PREFIX = 'validate_hero_step_'
 
 
-class RulebookProgram(tuple[str, Sequence[Symbol]], Enum):
+class RulebookProgram(tuple[str, Sequence[Symbol]], BaseEnum):
     BASE = ('base', [])
     RULEBOOK_USABLE = ('rulebook_usable', [])
     META = ('meta', [])
