@@ -44,6 +44,7 @@ class TestHeroService(unittest.TestCase):
                     profession=profession,
                     # characteristics=characteristics,
                     talents={},
+                    combat_techniques={},
                     # advantages=advantages,
                     # disadvantages=disadvantages,
                     )
