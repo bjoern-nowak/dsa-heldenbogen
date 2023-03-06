@@ -12,18 +12,18 @@ class TestHeroService(unittest.TestCase):
 
     @parameterized.expand([
         (0, 'Elf', 'Auelfen', 'Händler'),
-        (0, 'Elf', 'Auelfen', 'Zauberweber'),
+        (0, 'Elf', 'Auelfen', 'Wildnisläuferin'),
         (1, 'Elf', 'Andergaster', 'Händler'),
         (1, 'Elf', 'Ambosszwerge', 'Händler'),
 
         (0, 'Mensch', 'Andergaster', 'Händler'),
         (1, 'Mensch', 'Auelfen', 'Händler'),
-        (1, 'Mensch', 'Andergaster', 'Zauberweber'),
+        (1, 'Mensch', 'Andergaster', 'Wildnisläuferin'),
         (1, 'Mensch', 'Ambosszwerge', 'Händler'),
 
         (0, 'Zwerg', 'Ambosszwerge', 'Händler'),
         (1, 'Zwerg', 'Auelfen', 'Händler'),
-        (1, 'Zwerg', 'Ambosszwerge', 'Zauberweber'),
+        (1, 'Zwerg', 'Ambosszwerge', 'Wildnisläuferin'),
         (1, 'Zwerg', 'Andergaster', 'Händler'),
     ])
     def test_validation(self,

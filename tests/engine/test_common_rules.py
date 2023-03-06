@@ -76,10 +76,10 @@ class TestCommonRules(unittest.TestCase):
 
     @parameterized.expand([
         (0, 'Elf', 'Auelfen', 'Händler'),
-        (0, 'Elf', 'Auelfen', 'Zauberweber'),
+        (0, 'Elf', 'Auelfen', 'Wildnisläuferin'),
         (1, 'Elf', 'Auelfen', '_invalid_'),
         (1, 'Elf', 'Auelfen', 'Mawdli'),  # requires DSA5_AVENTURISCHES_KOMPENDIUM_2
-        (1, 'Zwerg', 'Ambosszwerge', 'Zauberweber'),
+        (1, 'Zwerg', 'Ambosszwerge', 'Wildnisläuferin'),
     ])
     def test_profession_usable(self, error_count: int, species: str, culture: str, profession: str):
         # given:
