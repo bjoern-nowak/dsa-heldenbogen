@@ -48,9 +48,6 @@ unusable_by(culture,species) :- culture(C), species(S), #false : not requires(cu
 unknown(profession(P)) :- profession(P), not known_profession(P).
 unusable_by(profession,species) :- profession(P), species(S), #false : not requires(profession(P),species(_)); not requires(profession(P),species(S)).
 unusable_by(profession,culture) :- profession(P), culture(C), #false : not requires(profession(P),culture(_)); not requires(profession(P),culture(C)).
-%% HINT: below did not work because 'conditional literal' behaves differently in head
-%profession_unusable(species) : species(S), not profession_requires_species(P,S) :- profession(P), profession_requires_species(P,_).
-%profession_unusable(culture) : culture(C), not profession_requires_culture(P,C) :- profession(P), profession_requires_culture(P,_).
 missing_level(profession,talent(T,MIN)) :- profession(P), #false : not requires(profession(P),talent(_,_)); requires(profession(P),talent(T,MIN)), not talent(T,_).
 missing_level(profession,talent(T,MIN)) :- profession(P), #false : not requires(profession(P),talent(_,_)); requires(profession(P),talent(T,MIN)), talent(T,L), L < MIN.
 missing_level(profession,combat_technique(CT,MIN)) :- profession(P), #false : not requires(profession(P),combat_technique(_,_)); requires(profession(P),combat_technique(CT,MIN)), not combat_technique(CT,_).
