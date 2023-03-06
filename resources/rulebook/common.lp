@@ -28,6 +28,9 @@ profession(@hero_profession).
 %% TODO this '__hero_talent_wrapper' is a ugly helper construct, try to remove it
 __hero_talent_wrapper(@hero_talents).
 talent(T,L) :- __hero_talent_wrapper((T, L)).
+%% TODO this '__hero_combat_technique_wrapper' is a ugly helper construct, try to remove it
+__hero_combat_technique_wrapper(@hero_combat_techniques).
+combat_technique(C,L) :- __hero_combat_technique_wrapper((C, L)).
 
 
 #program validate_hero_step_100. %% check species

@@ -21,6 +21,7 @@ class HeroWrapper(BaseModel):
     hero_culture: Callable[[], String]
     hero_profession: Callable[[], String]
     hero_talents: Callable[[], List[Function]]
+    hero_combat_techniques: Callable[[], List[Function]]
 
     @classmethod
     def wrap(cls, hero: Hero) -> HeroWrapper:
@@ -29,4 +30,6 @@ class HeroWrapper(BaseModel):
             hero_culture=lambda: String(hero.culture),
             hero_profession=lambda: String(hero.profession),
             hero_talents=lambda: [Tuple_([String(key), Number(hero.talents[key])]) for key in hero.talents],
+            hero_combat_techniques=lambda: [Tuple_([String(key), Number(hero.combat_techniques[key])]) for key in
+                                            hero.combat_techniques],
         )
