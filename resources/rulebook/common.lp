@@ -22,15 +22,15 @@ known_profession(P) :- profession_requires_culture(P,_).
 #program hero_facts.
 %% to be used with programs 'validate_hero_step<X>'
 %% requires 'hero_wrapper.py' as 'context'
-species(@hero_species).
-culture(@hero_culture).
-profession(@hero_profession).
-%% TODO this '__hero_talent_wrapper' is a ugly helper construct, try to remove it
-__hero_talent_wrapper(@hero_talents).
-talent(T,L) :- __hero_talent_wrapper((T, L)).
-%% TODO this '__hero_combat_technique_wrapper' is a ugly helper construct, try to remove it
-__hero_combat_technique_wrapper(@hero_combat_techniques).
-combat_technique(C,L) :- __hero_combat_technique_wrapper((C, L)).
+species(@species).
+culture(@culture).
+profession(@profession).
+%% TODO this '__talent_wrapper' is a ugly helper construct, try to remove it
+__talent_wrapper(@talents).
+talent(T,L) :- __talent_wrapper((T, L)).
+%% TODO this '__combat_technique_wrapper' is a ugly helper construct, try to remove it
+__combat_technique_wrapper(@combat_techniques).
+combat_technique(C,L) :- __combat_technique_wrapper((C, L)).
 
 
 #program validate_hero_step_100. %% check species

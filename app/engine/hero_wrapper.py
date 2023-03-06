@@ -1,35 +1,37 @@
 from __future__ import annotations  # required till PEP 563
 
-from typing import Callable
 from typing import List
 
-from clingo import Function
 from clingo import Number
 from clingo import String
+from clingo import Symbol
 from clingo import Tuple_
 
-from app.models import BaseModel
 from app.models import Hero
 
 
 # TODO may provide a method which returns a list of literals instead of using a extra LP asking each feature
-class HeroWrapper(BaseModel):
+class HeroWrapper():
     """
     provide callables returning hero attributes as clingo symbols
     """
-    hero_species: Callable[[], String]
-    hero_culture: Callable[[], String]
-    hero_profession: Callable[[], String]
-    hero_talents: Callable[[], List[Function]]
-    hero_combat_techniques: Callable[[], List[Function]]
+    __hero: Hero
 
-    @classmethod
-    def wrap(cls, hero: Hero) -> HeroWrapper:
-        return HeroWrapper(
-            hero_species=lambda: String(hero.species),
-            hero_culture=lambda: String(hero.culture),
-            hero_profession=lambda: String(hero.profession),
-            hero_talents=lambda: [Tuple_([String(key), Number(hero.talents[key])]) for key in hero.talents],
-            hero_combat_techniques=lambda: [Tuple_([String(key), Number(hero.combat_techniques[key])]) for key in
-                                            hero.combat_techniques],
-        )
+    def __init__(self, hero: Hero) -> None:
+        super().__init__()
+        self.__hero = hero
+
+    def species(self) -> Symbol:
+        return String(self.__hero.species)
+
+    def culture(self) -> Symbol:
+        return String(self.__hero.culture)
+
+    def profession(self) -> Symbol:
+        return String(self.__hero.profession)
+
+    def talents(self) -> List[Symbol]:
+        return [Tuple_([String(key), Number(self.__hero.talents[key])]) for key in self.__hero.talents]
+
+    def combat_techniques(self) -> List[Symbol]:
+        return [Tuple_([String(key), Number(self.__hero.combat_techniques[key])]) for key in self.__hero.combat_techniques]
