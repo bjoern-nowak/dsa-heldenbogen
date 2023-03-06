@@ -56,3 +56,7 @@ profession_unusable(culture) :- profession(P), culture(C), #false : not professi
 #defined profession_requires_talent/3. %% professions may not be restricted to a talent
 profession_missing(talent(T,X)) :- profession(P), #false : not profession_requires_talent(P,_,_); profession_requires_talent(P,T,X), not talent(T,_).
 profession_missing(talent(T,X)) :- profession(P), #false : not profession_requires_talent(P,_,_); profession_requires_talent(P,T,X), talent(T,L), L < X.
+#defined combat_technique/2. %% hero may does not have any combat techniques
+#defined profession_requires_combat_technique/3. %% professions may not be restricted to a combat technique
+profession_missing(combat_technique(C,X)) :- profession(P), #false : not profession_requires_combat_technique(P,_,_); profession_requires_combat_technique(P,C,X), not combat_technique(C,_).
+profession_missing(combat_technique(C,X)) :- profession(P), #false : not profession_requires_combat_technique(P,_,_); profession_requires_combat_technique(P,C,X), combat_technique(C,L), L < X.
