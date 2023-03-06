@@ -5,19 +5,15 @@ rulebook("dsa5").
 
 
 #program base.
-culture_requires_species(("Auelfen";"Firnelfen";"Steppenelfen";"Waldelfen"),"Elf").
-culture_requires_species(
-    ("Andergaster";"Aranier";"Bornländer";"Ferkinas";"Fjarninger";"Gjalsker";"Horasier";"Koboldweltler";"Maraskaner";"Menschlichekultur";"Mhanadistani";"Mittelreicher";"Mohas";"Nivesen";"Norbarden";"Nordaventurier";"Nostrier";"Novadis";"Svellttaler";"Südaventurier";"Thorwaler";"Trollzacker";"Zahori";"Zyklopäer"),
-    "Mensch"
+requires(culture("Auelfen";"Firnelfen";"Steppenelfen";"Waldelfen"),species("Elf")).
+requires(
+    culture("Andergaster";"Aranier";"Bornländer";"Ferkinas";"Fjarninger";"Gjalsker";"Horasier";"Koboldweltler";"Maraskaner";"Menschlichekultur";"Mhanadistani";"Mittelreicher";"Mohas";"Nivesen";"Norbarden";"Nordaventurier";"Nostrier";"Novadis";"Svellttaler";"Südaventurier";"Thorwaler";"Trollzacker";"Zahori";"Zyklopäer"),
+    species("Mensch")
 ).
-culture_requires_species(("Ambosszwerge";"Brillantzwerge";"Erzzwerge";"Hügelzwerge";"Wildzwerge"),"Zwerg").
-profession_requires_species(("Zauberweber";"Wildnisläuferin"),"Elf").
-known_profession(("Söldner";"Händler")).
-profession_requires_talent(
-    "Söldner","Körperbeherrschung",3;"Söldner","Kraftakt",3;"Söldner","Selbstbeherrschung",4;"Söldner","Zechen",5;"Söldner","Menschenkenntnis",3;"Söldner","Überreden",3;"Söldner","Orientierung",4;"Söldner","Wildnisleben",3;"Söldner","Götter & Kulte",3;"Söldner","Kriegskunst",6;"Söldner","Sagen & Legenden",5;"Söldner","Handel",3;"Söldner","Heilkunde Wunden",4;
-    "Zauberweber","Körperbeherrschung",4;"Zauberweber","Schwimmen",4;"Zauberweber","Singen",5;"Zauberweber","Willenskraft",3;"Zauberweber","Fährtensuchen",4;"Zauberweber","Orientierung",3;"Zauberweber","Pflanzenkunde",5;"Zauberweber","Wildnisleben",4;"Zauberweber","Geschichtswissen",4;"Zauberweber","Götter & Kulte",4;"Zauberweber","Magiekunde",5;"Zauberweber","Sternkunde",5;"Zauberweber","Musizieren",7;
-).
-profession_requires_combat_technique(
-    "Söldner","Armbrüste",10;"Söldner","Raufen",10;
-).
-profession_requires_one_combat_technique("Söldner",("Hiebwaffen","Schwerter","Stangenwaffen","Zweihandschwerter","Zweihandhiebwaffen"),10).
+requires(culture("Ambosszwerge";"Brillantzwerge";"Erzzwerge";"Hügelzwerge";"Wildzwerge"),species("Zwerg")).
+known_profession("Händler").
+requires(profession("Söldner"),talent("Körperbeherrschung",3;"Kraftakt",3;"Selbstbeherrschung",4;"Zechen",5;"Menschenkenntnis",3;"Überreden",3;"Orientierung",4;"Wildnisleben",3;"Götter & Kulte",3;"Kriegskunst",6;"Sagen & Legenden",5;"Handel",3;"Heilkunde Wunden",4)).
+requires(profession("Söldner"),combat_technique("Armbrüste",10;"Raufen",10)).
+requires(profession("Söldner"),any_of(1,combat_technique,("Hiebwaffen","Schwerter","Stangenwaffen","Zweihandschwerter","Zweihandhiebwaffen"),10)).
+requires(profession("Zauberweber";"Wildnisläuferin"),species("Elf")).
+requires(profession("Zauberweber"),talent("Körperbeherrschung",4;"Schwimmen",4;"Singen",5;"Willenskraft",3;"Fährtensuchen",4;"Orientierung",3;"Pflanzenkunde",5;"Wildnisleben",4;"Geschichtswissen",4;"Götter & Kulte",4;"Magiekunde",5;"Sternkunde",5;"Musizieren",7)).
