@@ -196,6 +196,12 @@ grid((1;2),(1;2)).
 %%
 %% below is same but uses unification which enables us to add constraints
 grid(X,Y) :- X = (1;2), Y = (1;2).
+%%
+%% other variants: first returns tuples, seconds splits arguments
+p((1,2;3,4)).
+%% result: p((1,2)). p((3,4)).
+p(1,2;3,4).
+%% result: p(1,2). p(3,4)
 
 
 %% --- CONDITIONAL LITERAL
