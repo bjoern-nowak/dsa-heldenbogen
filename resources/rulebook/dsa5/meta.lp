@@ -20,3 +20,4 @@ profession_requires_talent(
 profession_requires_combat_technique(
     "Söldner","Armbrüste",10;"Söldner","Raufen",10;
 ).
+profession_requires_one_combat_technique("Söldner",("Hiebwaffen","Schwerter","Stangenwaffen","Zweihandschwerter","Zweihandhiebwaffen"),10).

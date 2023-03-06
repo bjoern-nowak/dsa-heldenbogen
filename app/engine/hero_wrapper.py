@@ -35,3 +35,10 @@ class HeroWrapper():
 
     def combat_techniques(self) -> List[Symbol]:
         return [Tuple_([String(key), Number(self.__hero.combat_techniques[key])]) for key in self.__hero.combat_techniques]
+
+    # TODO find out how to return a boolean to clingo
+    def one_combat_technique_at_minimum(self, ct_tuple: Symbol, minimum: Symbol) -> Symbol:
+        for ct in ct_tuple.arguments:
+            if ct.string in self.__hero.combat_techniques and minimum.number <= self.__hero.combat_techniques[ct.string]:
+                return Number(1)
+        return Number(0)
