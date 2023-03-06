@@ -34,20 +34,30 @@ combat_technique(C,L) :- __combat_technique_wrapper((C, L)).
 #defined combat_technique/2. %% hero may does not have any combat techniques
 
 
-% TODO make unknown checks an separate step
-#program validate_hero_step_100. %% check species
+#program validate_hero_step_100. %% check species usable
 unknown(species(S)) :- species(S), not known_species(S).
 
-#program validate_hero_step_200. %% check culture
+
+#program validate_hero_step_150. %% check species requirements
+
+
+#program validate_hero_step_200. %% check culture usable
 unknown(culture(C)) :- culture(C), not known_culture(C).
 %% only check if there is a restriction ('#false : not' part)
 %% TODO extract all restriction conditions ('#false : not' part) as separate fact, so that other rulebooks can reuse it
 unusable_by(culture,species) :- culture(C), species(S), #false : not requires(culture(C),species(_)); not requires(culture(C),species(S)).
 
-#program validate_hero_step_300. %% check profession
+
+#program validate_hero_step_250. %% check culture requirements
+
+
+#program validate_hero_step_300. %% check profession usable
 unknown(profession(P)) :- profession(P), not known_profession(P).
 unusable_by(profession,species) :- profession(P), species(S), #false : not requires(profession(P),species(_)); not requires(profession(P),species(S)).
 unusable_by(profession,culture) :- profession(P), culture(C), #false : not requires(profession(P),culture(_)); not requires(profession(P),culture(C)).
+
+
+#program validate_hero_step_350. %% check profession requirements
 missing_level(profession,talent(T,MIN)) :- profession(P), #false : not requires(profession(P),talent(_,_)); requires(profession(P),talent(T,MIN)), not talent(T,_).
 missing_level(profession,talent(T,MIN)) :- profession(P), #false : not requires(profession(P),talent(_,_)); requires(profession(P),talent(T,MIN)), talent(T,L), L < MIN.
 missing_level(profession,combat_technique(CT,MIN)) :- profession(P), #false : not requires(profession(P),combat_technique(_,_)); requires(profession(P),combat_technique(CT,MIN)), not combat_technique(CT,_).
