@@ -34,30 +34,30 @@ combat_technique(C,L) :- __combat_technique_wrapper((C, L)).
 
 
 #program validate_hero_step_100. %% check species
-species_unknown(S) :- species(S), not known_species(S).
+unknown(species(S)) :- species(S), not known_species(S).
 
 #program validate_hero_step_200. %% check culture
-culture_unknown(C) :- culture(C), not known_culture(C).
+unknown(culture(C)) :- culture(C), not known_culture(C).
 #defined known_species_culture/2. %% cultures may not be restricted to a species
 %% only check if there is a restriction ('#false : not' part)
 %% TODO extract all restriction condition ('#false : not' part) as separate fact, so that other rulebooks can reuse it
-culture_unusable(species) :- culture(C), species(S), #false : not culture_requires_species(C,_); not culture_requires_species(C,S).
+unusable_by(culture,species) :- culture(C), species(S), #false : not culture_requires_species(C,_); not culture_requires_species(C,S).
 
 #program validate_hero_step_300. %% check profession
-profession_unknown(P) :- profession(P), not known_profession(P).
+unknown(profession(P)) :- profession(P), not known_profession(P).
 #defined profession_requires_species/2. %% professions may not be restricted to a species
 #defined profession_requires_culture/2. %% professions may not be restricted to a culture
-profession_unusable(species) :- profession(P), species(S), #false : not profession_requires_species(P,_); not profession_requires_species(P,S).
-profession_unusable(culture) :- profession(P), culture(C), #false : not profession_requires_culture(P,_); not profession_requires_culture(P,C).
+unusable_by(profession,species) :- profession(P), species(S), #false : not profession_requires_species(P,_); not profession_requires_species(P,S).
+unusable_by(profession,culture) :- profession(P), culture(C), #false : not profession_requires_culture(P,_); not profession_requires_culture(P,C).
 %% HINT: below did not work because 'conditional literal' behaves differently in head
 %profession_unusable(species) : species(S), not profession_requires_species(P,S) :- profession(P), profession_requires_species(P,_).
 %profession_unusable(culture) : culture(C), not profession_requires_culture(P,C) :- profession(P), profession_requires_culture(P,_).
 #defined talent/2. %% hero may does not have any talents
 #defined profession_requires_talent/3. %% professions may not be restricted to a talent
-profession_missing(talent(T,X)) :- profession(P), #false : not profession_requires_talent(P,_,_); profession_requires_talent(P,T,X), not talent(T,_).
-profession_missing(talent(T,X)) :- profession(P), #false : not profession_requires_talent(P,_,_); profession_requires_talent(P,T,X), talent(T,L), L < X.
+missing_level(profession,talent(T,X)) :- profession(P), #false : not profession_requires_talent(P,_,_); profession_requires_talent(P,T,X), not talent(T,_).
+missing_level(profession,talent(T,X)) :- profession(P), #false : not profession_requires_talent(P,_,_); profession_requires_talent(P,T,X), talent(T,L), L < X.
 #defined combat_technique/2. %% hero may does not have any combat techniques
 #defined profession_requires_combat_technique/3. %% professions may not be restricted to a combat technique
-profession_missing(combat_technique(C,X)) :- profession(P), #false : not profession_requires_combat_technique(P,_,_); profession_requires_combat_technique(P,C,X), not combat_technique(C,_).
-profession_missing(combat_technique(C,X)) :- profession(P), #false : not profession_requires_combat_technique(P,_,_); profession_requires_combat_technique(P,C,X), combat_technique(C,L), L < X.
-profession_missing(one_combat_technique(Cs,X)) :- profession(P), #false : not profession_requires_one_combat_technique(P,_,_); profession_requires_one_combat_technique(P,Cs,X), #false : @one_combat_technique_at_minimum(Cs,X) = 1.
+missing_level(profession,combat_technique(C,X)) :- profession(P), #false : not profession_requires_combat_technique(P,_,_); profession_requires_combat_technique(P,C,X), not combat_technique(C,_).
+missing_level(profession,combat_technique(C,X)) :- profession(P), #false : not profession_requires_combat_technique(P,_,_); profession_requires_combat_technique(P,C,X), combat_technique(C,L), L < X.
+missing_level(profession,combat_technique(any_of(1,Cs),X)) :- profession(P), #false : not profession_requires_one_combat_technique(P,_,_); profession_requires_one_combat_technique(P,Cs,X), #false : @any_of_has_minimum_level(1,combat_technique,Cs,X) = 1.

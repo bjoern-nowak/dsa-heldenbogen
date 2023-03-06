@@ -1,49 +1,29 @@
 from __future__ import annotations  # required till PEP 563
 
-from enum import Enum
-
 from app.models import Feature
+from app.models.base_enum import BaseEnum
 
 
 # TODO add information about parameters
-class RulebookFunction(str, Enum):
+class RulebookFunction(str, BaseEnum):
     # meta
     RULEBOOK_UNUSABLE = 'rulebook_unusable'
     EXTRA_HERO_VALIDATION_STEP = 'extra_hero_validation_step'
 
-    # known
-    KNOWN_SPECIES = 'known_species'
-    KNOWN_CULTURE = 'known_culture'
-    KNOWN_PROFESSION = 'known_profession'
-    KNOWN_ADVANTAGE = 'known_advantage'
-    KNOWN_DISADVANTAGE = 'known_disadvantage'
-    KNOWN_SKILL = 'known_skill'
-
-    # validate errors
-    UNKNOWN_SUFFIX = '_unknown'
-    UNUSABLE_SUFFIX = '_unusable'
-    MISSING_SUFFIX = '_missing'
-    SPECIES_UNKNOWN = 'species_unknown'
-    CULTURE_UNKNOWN = 'culture_unknown'
-    CULTURE_UNUSABLE = 'culture_unusable'
-    PROFESSION_UNKNOWN = 'profession_unknown'
-    PROFESSION_UNUSABLE = 'profession_unusable'
-    PROFESSION_MISSING = 'profession_missing'
-
     @staticmethod
-    def known(feature: Feature) -> RulebookFunction:
+    def known(feature: Feature) -> str:
         match feature:
             case Feature.SPECIES:
-                return RulebookFunction.KNOWN_SPECIES
+                return 'known_species'
             case Feature.CULTURE:
-                return RulebookFunction.KNOWN_CULTURE
+                return 'known_culture'
             case Feature.PROFESSION:
-                return RulebookFunction.KNOWN_PROFESSION
+                return 'known_profession'
             case Feature.ADVANTAGE:
-                return RulebookFunction.KNOWN_ADVANTAGE
+                return 'known_advantage'
             case Feature.DISADVANTAGE:
-                return RulebookFunction.KNOWN_DISADVANTAGE
+                return 'known_disadvantage'
             case Feature.SKILL:
-                return RulebookFunction.KNOWN_SKILL
+                return 'known_skill'
             case _:
                 raise NotImplementedError(f"Feature '{feature}' has no associated LP 'known' function.")

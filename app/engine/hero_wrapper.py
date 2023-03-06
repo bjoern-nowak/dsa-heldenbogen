@@ -36,9 +36,24 @@ class HeroWrapper():
     def combat_techniques(self) -> List[Symbol]:
         return [Tuple_([String(key), Number(self.__hero.combat_techniques[key])]) for key in self.__hero.combat_techniques]
 
-    # TODO find out how to return a boolean to clingo
-    def one_combat_technique_at_minimum(self, ct_tuple: Symbol, minimum: Symbol) -> Symbol:
-        for ct in ct_tuple.arguments:
-            if ct.string in self.__hero.combat_techniques and minimum.number <= self.__hero.combat_techniques[ct.string]:
-                return Number(1)
-        return Number(0)
+    def any_of_has_minimum_level(self, choices: Symbol, feature: Symbol, selection: Symbol, minimum_level: Symbol) -> Symbol:
+        """
+        can be read as: any <number of choices> <feature> of <selection> has a minimum level of <minimum_level>
+        like: any two talents of <talent selection list> has a minimum level of 10
+        """
+        feature_elements: dict[str, int]
+        match feature.name:
+            case 'talent':
+                feature_elements = self.__hero.talents
+            case 'combat_technique':
+                feature_elements = self.__hero.combat_techniques
+            case _:
+                raise RuntimeError(f"HeroWrappers 'any_has_minimum_level' method called with an unsupported feature '{feature.name}'.")
+
+        passed = 0
+        for option in selection.arguments:
+            if option.string in feature_elements and minimum_level.number <= feature_elements[option.string]:
+                passed += 1
+
+        # TODO find out how to return a boolean to clingo
+        return Number(1) if passed >= choices.number else Number(0)

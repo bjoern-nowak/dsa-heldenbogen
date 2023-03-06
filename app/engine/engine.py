@@ -6,6 +6,7 @@ from clingo import SolveResult
 from clingo import Symbol
 
 from app.engine.collector import Collector
+from app.engine.hero_validation_interpreter import HeroValidationError
 from app.engine.hero_validation_interpreter import HeroValidationInterpreter
 from app.engine.hero_wrapper import HeroWrapper
 from app.engine.rulebook_function import RulebookFunction
@@ -44,9 +45,7 @@ class Engine:
     def _check_rulebooks_usable(self) -> None:
         self.ctl.ground([RulebookProgram.RULEBOOK_USABLE])
         unusables: List[List[str]] = []
-        self.ctl.solve(
-            on_model=lambda m: Collector.functions_strings(unusables, m, RulebookFunction.RULEBOOK_UNUSABLE)
-        )
+        self.ctl.solve(on_model=lambda m: Collector.functions_strings(unusables, m, RulebookFunction.RULEBOOK_UNUSABLE))
         if unusables:
             messages = []
             for a in unusables:
@@ -76,11 +75,7 @@ class Engine:
         program = step if isinstance(step, RulebookProgram) else RulebookProgram.hero_validation_step_for(step)
         self.ctl.ground([RulebookProgram.BASE, RulebookProgram.HERO_FACTS, program], HeroWrapper(hero))
         errors: List[Symbol] = []
-        result: SolveResult = self.ctl.solve(
-            on_model=lambda m: Collector.functions(
-                errors, m, [RulebookFunction.UNKNOWN_SUFFIX, RulebookFunction.UNUSABLE_SUFFIX, RulebookFunction.MISSING_SUFFIX]
-            )
-        )
+        result: SolveResult = self.ctl.solve(on_model=lambda m: Collector.functions(errors, m, HeroValidationError.list()))
         if not result.satisfiable:
             return None
         return [HeroValidationInterpreter.str(e) for e in errors]
@@ -88,7 +83,5 @@ class Engine:
     def list(self, feature: Feature) -> List[str]:
         self.ctl.ground()
         features: List[str] = []
-        self.ctl.solve(
-            on_model=lambda m: Collector.functions_first_string(features, m, RulebookFunction.known(feature))
-        )
+        self.ctl.solve(on_model=lambda m: Collector.functions_first_string(features, m, RulebookFunction.known(feature)))
         return features
