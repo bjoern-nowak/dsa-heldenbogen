@@ -68,6 +68,10 @@ format: ## TODO currently experimental
 .PHONY: prebuild 
 prebuild: lint typehint test
 
-.PHONY: start 
+.PHONY: debug
+debug:
+	poetry run python $(MAIN) --reload --loglevel debug
+
+.PHONY: start
 start: test
 	poetry run python $(MAIN)
