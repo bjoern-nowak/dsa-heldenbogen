@@ -3,13 +3,31 @@ from typing import List
 from clingo import Model
 from clingo import Symbol
 
+from app.engine.hero_validation_interpreter import HeroValidationError
 from app.engine.rulebook_function import RulebookFunction
+from app.models import Feature
 
 
 class Collector:
 
-    @staticmethod
-    def functions_first_string(found: List[str], model: Model, by_name: str = None) -> None:
+    @classmethod
+    def unusable_rulebooks(cls, model: Model, unusables: List[List[str]]):
+        cls._functions_strings(unusables, model, RulebookFunction.RULEBOOK_UNUSABLE)
+
+    @classmethod
+    def extra_hero_validation_steps(cls, model: Model, steps: List[Symbol]):
+        cls._functions(steps, model, [RulebookFunction.EXTRA_HERO_VALIDATION_STEP])
+
+    @classmethod
+    def hero_validation_errors(cls, model: Model, target: List[Symbol]):
+        cls._functions(target, model, HeroValidationError.list())
+
+    @classmethod
+    def known_feature_values(cls, model: Model, known_values: List[str], feature: Feature):
+        cls._functions_first_string(known_values, model, RulebookFunction.known(feature))
+
+    @classmethod
+    def _functions_first_string(cls, found: List[str], model: Model, by_name: str = None) -> None:
         """
         Collects all first arguments as a string of all functions
         :param found: list to be filled
@@ -18,12 +36,12 @@ class Collector:
         :return:
         """
         functions_args: List[List[str]] = []
-        Collector.functions_strings(functions_args, model, by_name)
+        cls._functions_strings(functions_args, model, by_name)
         for func_args in functions_args:
             found.append(func_args[0])
 
-    @staticmethod
-    def functions_strings(found: List[List[str]], model: Model, by_name: RulebookFunction = None) -> None:
+    @classmethod
+    def _functions_strings(cls, found: List[List[str]], model: Model, by_name: RulebookFunction = None) -> None:
         """
         Collects all arguments as a string of all functions
         :param found: list to be filled
@@ -32,13 +50,13 @@ class Collector:
         :return:
         """
         functions: List[Symbol] = []
-        Collector.functions(functions, model)
+        cls._functions(functions, model)
         for func in functions:
             if not by_name or (by_name == func.name):
                 found.append([arg.string for arg in func.arguments])
 
     @staticmethod
-    def functions(found: List[Symbol], model: Model, suffixes: List[RulebookFunction] = None) -> None:
+    def _functions(found: List[Symbol], model: Model, suffixes: List[RulebookFunction] = None) -> None:
         """
         Collects all functions having given suffix in name
         :param found: list to be filled
@@ -54,6 +72,6 @@ class Collector:
                 found.append(sym)
 
     @staticmethod
-    def symbols(found: List[Symbol], model: Model) -> None:
+    def _symbols(found: List[Symbol], model: Model) -> None:
         for sym in model.symbols(atoms=True):
             found.append(sym)
