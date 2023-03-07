@@ -74,4 +74,4 @@ debug:
 
 .PHONY: start
 start: test
-	poetry run python $(MAIN)
+	poetry run python $(MAIN) --workers 4
