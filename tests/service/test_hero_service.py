@@ -38,7 +38,7 @@ class TestHeroService(unittest.TestCase):
                         ):
         # given:
         rulebooks = [Rulebook.DSA5]
-        held = Hero(name='Test',
+        hero = Hero(name='Test',
                     species=species,
                     culture=culture,
                     profession=profession,
@@ -49,7 +49,7 @@ class TestHeroService(unittest.TestCase):
                     # disadvantages=disadvantages,
                     )
         # when:
-        errors = self.service.validate(held, rulebooks)
+        errors = self.service.validate(hero, rulebooks)
         # then:
         self.assertIs(len(errors), error_count, msg=errors)
 
