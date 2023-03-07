@@ -15,26 +15,26 @@ class HeroWrapper():
     """
     provide callables returning hero attributes as clingo symbols
     """
-    __hero: Hero
+    _hero: Hero
 
     def __init__(self, hero: Hero) -> None:
         super().__init__()
-        self.__hero = hero
+        self._hero = hero
 
     def species(self) -> Symbol:
-        return String(self.__hero.species)
+        return String(self._hero.species)
 
     def culture(self) -> Symbol:
-        return String(self.__hero.culture)
+        return String(self._hero.culture)
 
     def profession(self) -> Symbol:
-        return String(self.__hero.profession)
+        return String(self._hero.profession)
 
     def talents(self) -> List[Symbol]:
-        return [Tuple_([String(key), Number(self.__hero.talents[key])]) for key in self.__hero.talents]
+        return [Tuple_([String(key), Number(self._hero.talents[key])]) for key in self._hero.talents]
 
     def combat_techniques(self) -> List[Symbol]:
-        return [Tuple_([String(key), Number(self.__hero.combat_techniques[key])]) for key in self.__hero.combat_techniques]
+        return [Tuple_([String(key), Number(self._hero.combat_techniques[key])]) for key in self._hero.combat_techniques]
 
     def any_of_has_minimum_level(self, choices: Symbol, feature: Symbol, selection: Symbol, minimum_level: Symbol) -> Symbol:
         """
@@ -44,9 +44,9 @@ class HeroWrapper():
         feature_elements: dict[str, int]
         match feature.name:
             case 'talent':
-                feature_elements = self.__hero.talents
+                feature_elements = self._hero.talents
             case 'combat_technique':
-                feature_elements = self.__hero.combat_techniques
+                feature_elements = self._hero.combat_techniques
             case _:
                 raise RuntimeError(f"HeroWrappers 'any_has_minimum_level' method called with an unsupported feature '{feature.name}'.")
 
