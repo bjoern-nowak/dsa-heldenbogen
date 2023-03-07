@@ -29,7 +29,7 @@ router = APIRouter()
 )
 def list_feature(feature: Feature, rulebooks: List[Rulebook] = Query()) -> List[str] | ClientError:
     try:
-        logger.debug(f"(Request) feature value list\nrulebooks: {rulebooks}\nfeature: {feature}")
+        logger.trace(f"(Request) feature value list\nrulebooks: {rulebooks}\nfeature: {feature}")
         return MetaService().list(feature, rulebooks)
     except UnusableRulebookError as e:
         return ClientError.by(e)

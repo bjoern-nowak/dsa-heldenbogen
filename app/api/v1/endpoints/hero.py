@@ -27,7 +27,7 @@ router = APIRouter()
 )
 def validate(hero: Hero, rulebooks: List[Rulebook] = Query()) -> HeroValidationResult:
     try:
-        logger.debug(f"(Request) validate\nrulebooks {rulebooks}\nhero: {hero}")
+        logger.trace(f"(Request) validate\nrulebooks {rulebooks}\nhero: {hero}")
         errors: List[str] = HeroService().validate(hero, rulebooks)
         if errors:
             return HeroValidationResult.bad(errors=errors)
