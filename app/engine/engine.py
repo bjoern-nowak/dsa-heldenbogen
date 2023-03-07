@@ -82,7 +82,8 @@ class Engine:
             else:
                 self.hero_validation_steps[step] = step
 
-    def validate(self, hero: Hero) -> List[str] | None:
+    def validate(self, _hero: Hero) -> List[str] | None:
+        hero = HeroWrapper(_hero)
         errors = []
         for step in self.hero_validation_steps:
             program = step if isinstance(step, RulebookProgram) else RulebookProgram.hero_validation_step_for(step)
@@ -91,11 +92,11 @@ class Engine:
                 break
         return errors
 
-    def _perform_hero_validation_step(self, hero: Hero, program: Tuple[str, Sequence[Symbol]]) -> List[str] | None:
+    def _perform_hero_validation_step(self, hero: HeroWrapper, program: Tuple[str, Sequence[Symbol]]) -> List[str] | None:
         errors: List[Symbol] = []
         self._execute(
             ground_parts=[RulebookProgram.BASE, RulebookProgram.HERO_FACTS, program],
-            context=HeroWrapper(hero),
+            context=hero,
             on_model=lambda m: Collector.hero_validation_errors(m, errors),
             on_fail_raise=UnexpectedResultError(f"Hero validation could not be performed at: {program[0]}")
         )
