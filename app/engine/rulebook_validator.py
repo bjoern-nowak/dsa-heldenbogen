@@ -1,7 +1,10 @@
+import logging
 from typing import List
 
 from app.models import Rulebook
 from app.resource import list_files
+
+logger = logging.getLogger(__name__)
 
 
 class RulebookValidator:
@@ -20,7 +23,7 @@ class RulebookValidator:
                 valid_books.append(book)
             else:
                 # TODO make it a warning and build a testcase for it, this shall not be thrown at runtime
-                print(f"Rulebook {book} is not valid and will be ignored.")
+                logger.warning(f"Rulebook '{book}' is not valid and will be ignored.")
         return valid_books
 
     @staticmethod

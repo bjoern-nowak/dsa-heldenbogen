@@ -1,3 +1,4 @@
+import logging
 from symtable import Symbol
 from typing import Any
 from typing import Callable
@@ -21,6 +22,8 @@ from app.error import UnusableRulebookError
 from app.models import Feature
 from app.models import Hero
 from app.models import Rulebook
+
+logger = logging.getLogger(__name__)
 
 
 class Engine:
@@ -68,13 +71,17 @@ class Engine:
             on_model=lambda m: Collector.extra_hero_validation_steps(m, steps),
             on_fail_raise=UnexpectedResultError(f"Failed to find extra hero validation steps.")
         )
+        if steps:
+            logger.debug(f"Found extra hero validation steps: {steps}")
 
         for step in [step.arguments[0].number for step in steps]:
-            self.hero_validation_steps[step] = step
             if step in self.DEFAULT_HERO_VALIDATION_STEPS:
-                # TODO make it a warning, and it should be a testcase instead of a runtime check
-                print(f"Some of the given rulebooks redeclare the default hero validation step '{step}' as an additional."
-                      f"It does not harm but it is not recommended.")
+                # TODO should be a testcase instead of a runtime check
+                logger.warning(f"Some rulebook redeclare default hero validation step '{step}' as extra. "
+                               f"It does not harm but it is not recommended for clarity. "
+                               f"Used rulebooks: {self.rulebooks}")
+            else:
+                self.hero_validation_steps[step] = step
 
     def validate(self, hero: Hero) -> List[str] | None:
         errors = []
@@ -113,3 +120,5 @@ class Engine:
         if not result.satisfiable:
             if on_fail_raise:
                 raise on_fail_raise
+            else:
+                logger.warning(f"No exception raise defined, but could not execute programs: {[p[0] for p in ground_parts]}")

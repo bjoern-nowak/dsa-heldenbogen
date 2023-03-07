@@ -1,3 +1,4 @@
+import logging
 from http import HTTPStatus
 from typing import List
 
@@ -12,6 +13,7 @@ from app.models import Feature
 from app.models import Rulebook
 from app.service import MetaService
 
+logger = logging.getLogger(__name__)
 router = APIRouter()
 
 
@@ -27,10 +29,12 @@ router = APIRouter()
 )
 def list_feature(feature: Feature, rulebooks: List[Rulebook] = Query()) -> List[str] | ClientError:
     try:
+        logger.debug(f"(Request) value list of feature '{feature}' with rulebooks {rulebooks}")
         return MetaService().list(feature, rulebooks)
     except UnusableRulebookError as e:
         return ClientError.by(e)
     except Exception as e:
+        logger.exception("Some exception occurred.")
         # TODO [1] not a good practise to catch any error and publish its message
         raise HTTPException(
             status_code=HTTPStatus.INTERNAL_SERVER_ERROR,
