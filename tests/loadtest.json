@@ -1,0 +1,27 @@
+{
+    "name": "string",
+    "species": "Elf",
+    "culture": "Auelfen",
+    "profession": "Söldner",
+    "talents": {
+        "Körperbeherrschung": 3,
+        "Kraftakt": 3,
+        "Selbstbeherrschung": 4,
+        "Zechen": 5,
+        "Menschenkenntnis": 3,
+        "Überreden": 3,
+        "Orientierung": 4,
+        "Wildnisleben": 3,
+        "Götter & Kulte": 3,
+        "Kriegskunst": 6,
+        "Sagen & Legenden": 5,
+        "Handel": 3,
+        "Heilkunde Wunden": 4
+    },
+    "combat_techniques": {
+        "Armbrüste": 10,
+        "Raufen": 10,
+        "Stangenwaffen": 9,
+        "Zweihandschwerter": 10
+    }
+}

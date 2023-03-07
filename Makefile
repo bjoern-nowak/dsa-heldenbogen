@@ -5,6 +5,7 @@ ROOT=./
 SRC=$(ROOT)app/
 TESTS=$(ROOT)tests/
 MAIN=$(SRC)main.py
+LOADTEST=$(TESTS)loadtest.sh
 
 ## goals
 .DEFAULT_GOAL=help
@@ -21,6 +22,7 @@ help:
 	@echo "  prebuild    goals: lint, typehint and test"
 	@echo "  format      format code (experimental, check code changes)"
 	@echo "  run         start server"
+	@echo "  loadtest    start loadtest of hero validation, requires running server"
 	@echo ""
 
 .PHONY: clean 
@@ -75,3 +77,7 @@ debug:
 .PHONY: start
 start: test
 	poetry run python $(MAIN)
+
+.PHONY: loadtest
+loadtest:
+	bash $(LOADTEST)
