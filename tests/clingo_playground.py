@@ -4,10 +4,10 @@ from clingo import Model
 from clingo.control import Control
 
 
-class ClingoTester(unittest.TestCase):
+class ClingoPlayground(unittest.TestCase):
     def test_asp(self):
         ctl = Control()
-        ctl.load('TESTER.lp')
+        ctl.load('clingo_playground.lp')
         ctl.ground()
         print(ctl.solve(on_model=self.on_model))
 
