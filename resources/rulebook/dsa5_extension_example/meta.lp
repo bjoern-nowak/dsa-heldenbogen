@@ -5,8 +5,8 @@ rulebook("dsa5_extension_example").
 
 #program meta.
 %% this rulebook declares that it has an extra hero validation step to be executed
-extra_hero_validation_step(150).
+extra_hero_validation_step(175).
 
 
-#program validate_hero_step_150.
-%% this program/step gets executed in order, so it will be between the defaults 100 and 200
+#program validate_hero_step_175.
+%% this program/step gets executed in order, so it will be between the defaults 150 and 200
