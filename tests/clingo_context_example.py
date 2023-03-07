@@ -17,9 +17,9 @@ class ClingoContextExample(unittest.TestCase):
         ctl = Control()
         ctl.load('clingo_context_example.lp')
         ctl.ground([('base', [])], context=Context())
-        print(ctl.solve(on_model=self.__on_model))
+        print(ctl.solve(on_model=self._on_model))
 
-    def __on_model(self, m):
+    def _on_model(self, m):
         print(m)
 
 
