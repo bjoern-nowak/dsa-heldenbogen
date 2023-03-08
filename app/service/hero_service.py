@@ -2,7 +2,7 @@ import logging
 from typing import List
 
 from app.engine.engine import Engine
-from app.engine.errors import HeroInvalidError
+from app.engine.exceptions import HeroInvalidError
 from app.models import Hero
 from app.models.rulebook import Rulebook
 

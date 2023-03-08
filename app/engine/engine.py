@@ -14,9 +14,9 @@ from clingo import SolveResult
 from clingo import Symbol
 
 from app.engine.collector import Collector
-from app.engine.errors import HeroInvalidError
-from app.engine.errors import UnexpectedResultError
-from app.engine.errors import UnusableRulebookError
+from app.engine.exceptions import HeroInvalidError
+from app.engine.exceptions import UnexpectedResultError
+from app.engine.exceptions import UnusableRulebookError
 from app.engine.hero_validation_error import HeroValidationError
 from app.engine.hero_wrapper import HeroWrapper
 from app.engine.rulebook_program import RulebookProgram

@@ -8,7 +8,7 @@ from fastapi import Query
 
 from app.api.v1.schema import ClientError
 from app.api.v1.schema import ServerError
-from app.engine.errors import UnusableRulebookError
+from app.engine.exceptions import UnusableRulebookError
 from app.models import Feature
 from app.models import Rulebook
 from app.service import MetaService
