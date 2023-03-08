@@ -2,17 +2,18 @@ from __future__ import annotations  # required till PEP 563
 
 from typing import List
 
+from app.engine.hero_validation_interpreter import HeroValidationError
 from app.models import BaseModel
 
 
 class HeroValidationResult(BaseModel):
     valid: bool
-    errors: List[str]
+    errors: List[HeroValidationError]
 
     @staticmethod
-    def good() -> HeroValidationResult:
+    def passed() -> HeroValidationResult:
         return HeroValidationResult(valid=True, errors=[])
 
     @staticmethod
-    def bad(errors: List[str]) -> HeroValidationResult:
+    def failed(errors: List[HeroValidationError]) -> HeroValidationResult:
         return HeroValidationResult(valid=False, errors=errors)

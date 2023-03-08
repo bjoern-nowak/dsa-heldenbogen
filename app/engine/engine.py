@@ -1,3 +1,5 @@
+from __future__ import annotations  # required till PEP 563
+
 import logging
 from typing import Any
 from typing import Callable
@@ -12,12 +14,13 @@ from clingo import SolveResult
 from clingo import Symbol
 
 from app.engine.collector import Collector
-from app.engine.hero_validation_interpreter import HeroValidationInterpreter
+from app.engine.errors import HeroInvalidError
+from app.engine.errors import UnexpectedResultError
+from app.engine.errors import UnusableRulebookError
+from app.engine.hero_validation_interpreter import HeroValidationError
 from app.engine.hero_wrapper import HeroWrapper
 from app.engine.rulebook_program import RulebookProgram
 from app.engine.rulebook_validator import RulebookValidator
-from app.error import UnexpectedResultError
-from app.error import UnusableRulebookError
 from app.models import Feature
 from app.models import Hero
 from app.models import Rulebook
@@ -82,17 +85,18 @@ class Engine:
             else:
                 self.hero_validation_steps[step] = step
 
-    def validate(self, _hero: Hero) -> List[str] | None:
+    def validate(self, _hero: Hero):
+        """
+        If this method passes without an exception the hero has passed the validation positively
+        :raises HeroInvalidError: whenever any hero validation step having an error
+        :raises UnexpectedResultError: whenever any hero validation step could not be performed
+        """
         hero = HeroWrapper(_hero)
-        errors = []
         for step in self.hero_validation_steps:
             program = step if isinstance(step, RulebookProgram) else RulebookProgram.hero_validation_step_for(step)
-            errors = self._perform_hero_validation_step(hero, program)
-            if errors:
-                break
-        return errors
+            self._perform_hero_validation_step(hero, program)
 
-    def _perform_hero_validation_step(self, hero: HeroWrapper, program: Tuple[str, Sequence[Symbol]]) -> List[str] | None:
+    def _perform_hero_validation_step(self, hero: HeroWrapper, program: Tuple[str, Sequence[Symbol]]):
         errors: List[Symbol] = []
         self._execute(
             ground_parts=[RulebookProgram.BASE, RulebookProgram.HERO_FACTS, program],
@@ -100,7 +104,8 @@ class Engine:
             on_model=lambda m: Collector.hero_validation_errors(m, errors),
             on_fail_raise=UnexpectedResultError(f"Hero validation could not be performed at: {program[0]}")
         )
-        return [HeroValidationInterpreter.str(e) for e in errors]
+        if errors:
+            raise HeroInvalidError([HeroValidationError.from_(e) for e in errors])
 
     def list(self, feature: Feature) -> List[str]:
         known_values: List[str] = []
