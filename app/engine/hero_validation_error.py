@@ -23,8 +23,6 @@ class HeroValidationError(BaseModel):
     """
     Represents a single hero validation error.
 
-    Field 'type' is only 'None' on an unspecified error
-    Optional field 'addon' is an addon to field 'type',
     Field 'message' uses single quote for used 'parameters'
     Field 'parameters' contains relevant evaluable data. May not all are used in 'message'.
     """

@@ -9,6 +9,7 @@ from fastapi import Query
 from app.api.v1.schema import HeroValidationResult
 from app.api.v1.schema import ServerError
 from app.engine.exceptions import HeroInvalidError
+from app.engine.hero_validation_warning import HeroValidationWarning
 from app.models import Hero
 from app.models import Rulebook
 from app.service import HeroService
@@ -29,10 +30,10 @@ router = APIRouter()
 def validate(hero: Hero, rulebooks: List[Rulebook] = Query()) -> HeroValidationResult:
     try:
         logger.trace(f"(Request) validate\nrulebooks {rulebooks}\nhero: {hero}")
-        HeroService().validate(hero, rulebooks)
-        return HeroValidationResult.passed()
+        warnings: List[HeroValidationWarning] = HeroService().validate(hero, rulebooks)
+        return HeroValidationResult.passed(warnings)
     except HeroInvalidError as e:
-        return HeroValidationResult.failed(errors=e.errors)
+        return HeroValidationResult.failed(e.errors, e.warnings)
     except Exception as e:
         logger.exception("Some exception occurred.")
         # TODO [1] not a good practise to catch any error and publish its message

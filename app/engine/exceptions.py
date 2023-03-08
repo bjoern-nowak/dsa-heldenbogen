@@ -1,6 +1,7 @@
 from typing import List
 
 from app.engine.hero_validation_error import HeroValidationError
+from app.engine.hero_validation_warning import HeroValidationWarning
 
 
 # TODO should this be in model module/package?
@@ -16,9 +17,13 @@ class UnusableRulebookError(Exception):
 
 class HeroInvalidError(Exception):
     """
-    Thrown if a hero validation was not passed, containing all errors.
+    Thrown if a hero validation was not passed, containing errors of failed step and step-wide warnings.
     """
 
-    def __init__(self, errors: List[HeroValidationError], message: str = "Hero is not valid."):
+    def __init__(self,
+                 errors: List[HeroValidationError],
+                 warnings: List[HeroValidationWarning],
+                 message: str = "Hero is not valid."):
         self.errors = errors
+        self.warnings = warnings
         self.message = message

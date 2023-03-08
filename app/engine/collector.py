@@ -5,6 +5,7 @@ from clingo import Model
 from clingo import Symbol
 
 from app.engine.hero_validation_error import HeroValidationErrorType
+from app.engine.hero_validation_warning import HeroValidationWarningType
 from app.engine.rulebook_function import RulebookFunction
 from app.models import Feature
 
@@ -22,8 +23,9 @@ class Collector:
         cls._functions(steps, model, [RulebookFunction.EXTRA_HERO_VALIDATION_STEP])
 
     @classmethod
-    def hero_validation_errors(cls, model: Model, errors: List[Symbol]):
+    def hero_validation_errors_and_warnings(cls, model: Model, errors: List[Symbol], warnings: List[Symbol]):
         cls._functions(errors, model, HeroValidationErrorType.list())
+        cls._functions(warnings, model, HeroValidationWarningType.list())
         if errors:
             logger.trace(f"Model of failed hero validation:\n{model}")
 

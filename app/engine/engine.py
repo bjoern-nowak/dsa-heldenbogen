@@ -18,6 +18,7 @@ from app.engine.exceptions import HeroInvalidError
 from app.engine.exceptions import UnexpectedResultError
 from app.engine.exceptions import UnusableRulebookError
 from app.engine.hero_validation_error import HeroValidationError
+from app.engine.hero_validation_warning import HeroValidationWarning
 from app.engine.hero_wrapper import HeroWrapper
 from app.engine.rulebook_program import RulebookProgram
 from app.engine.rulebook_validator import RulebookValidator
@@ -85,27 +86,45 @@ class Engine:
             else:
                 self.hero_validation_steps[step] = step
 
-    def validate(self, _hero: Hero):
+    def validate(self, _hero: Hero) -> List[HeroValidationWarning]:
         """
         If this method passes without an exception the hero has passed the validation positively
-        :raises HeroInvalidError: whenever any hero validation step having an error
+        It breaks validation steps-wise on validation errors, but collect warnings step-wide.
+        :returns: list of warnings, when validation passed
+        :raises HeroInvalidError: whenever any hero validation step has an error
         :raises UnexpectedResultError: whenever any hero validation step could not be performed
         """
         hero = HeroWrapper(_hero)
+        warnings: List[HeroValidationWarning] = []
         for step in self.hero_validation_steps:
             program = step if isinstance(step, RulebookProgram) else RulebookProgram.hero_validation_step_for(step)
-            self._perform_hero_validation_step(hero, program)
+            step_errors, step_warnings = self._perform_hero_validation_step(hero, program)
+            warnings += [HeroValidationWarning.from_(w) for w in step_warnings]
+            if step_errors:
+                # TODO 'return' vs 'raise' is discussable.
+                #  One could argue that an HeroInvalidError should only be raised if the input values are e.g. unknown
+                #   and 'hero validation errors' are seen as normal case hence should be returned.
+                #  In contrast the main point is to find errors and should be prominent whenever found.
+                #   Using an return (tuple or class) could lead to higher chances of mishandling.
+                #  What is bad now, is that warnings may be fetched by return or raise.
+                raise HeroInvalidError([HeroValidationError.from_(e) for e in step_errors], warnings)
+        return warnings
 
-    def _perform_hero_validation_step(self, hero: HeroWrapper, program: Tuple[str, Sequence[Symbol]]):
+    def _perform_hero_validation_step(self,
+                                      hero: HeroWrapper,
+                                      program: Tuple[str, Sequence[Symbol]]) -> Tuple[List[Symbol], List[Symbol]]:
+        """
+        :return: tuple of errors and warnings
+        """
         errors: List[Symbol] = []
+        warnings: List[Symbol] = []
         self._execute(
             ground_parts=[RulebookProgram.BASE, RulebookProgram.HERO_FACTS, program],
             context=hero,
-            on_model=lambda m: Collector.hero_validation_errors(m, errors),
+            on_model=lambda m: Collector.hero_validation_errors_and_warnings(m, errors, warnings),
             on_fail_raise=UnexpectedResultError(f"Hero validation could not be performed at: {program[0]}")
         )
-        if errors:
-            raise HeroInvalidError([HeroValidationError.from_(e) for e in errors])
+        return errors, warnings
 
     def list_known_for(self, feature: Feature) -> List[str]:
         known_values: List[str] = []
