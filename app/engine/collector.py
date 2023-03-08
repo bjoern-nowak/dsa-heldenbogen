@@ -4,7 +4,7 @@ from typing import List
 from clingo import Model
 from clingo import Symbol
 
-from app.engine.hero_validation_interpreter import HeroValidationErrorType
+from app.engine.hero_validation_error import HeroValidationErrorType
 from app.engine.rulebook_function import RulebookFunction
 from app.models import Feature
 

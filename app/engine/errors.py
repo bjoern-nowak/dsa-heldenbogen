@@ -1,6 +1,6 @@
 from typing import List
 
-from app.engine.hero_validation_interpreter import HeroValidationError
+from app.engine.hero_validation_error import HeroValidationError
 
 
 # TODO should this be in model module/package?

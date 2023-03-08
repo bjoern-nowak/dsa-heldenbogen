@@ -2,7 +2,7 @@ from __future__ import annotations  # required till PEP 563
 
 from typing import List
 
-from app.engine.hero_validation_interpreter import HeroValidationError
+from app.engine.hero_validation_error import HeroValidationError
 from app.models import BaseModel
 
 
