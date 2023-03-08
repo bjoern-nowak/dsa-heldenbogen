@@ -3,7 +3,7 @@ import unittest
 from parameterized import parameterized
 
 from app.models import Hero
-from app.models.rulebook import Rulebook
+from app.models import Rulebook
 from app.service import HeroService
 
 
@@ -31,10 +31,6 @@ class TestHeroService(unittest.TestCase):
                         species: str,
                         culture: str,
                         profession: str,
-                        # characteristics: dict[Characteristic, NonNegativeInt],
-                        # skill: dict[str, NonNegativeInt],
-                        # advantages: List[str],
-                        # disadvantages: List[str],
                         ):
         # given:
         rulebooks = [Rulebook.DSA5]
@@ -42,11 +38,10 @@ class TestHeroService(unittest.TestCase):
                     species=species,
                     culture=culture,
                     profession=profession,
-                    # characteristics=characteristics,
                     talents={},
                     combat_techniques={},
-                    # advantages=advantages,
-                    # disadvantages=disadvantages,
+                    advantages={},
+                    disadvantages={},
                     )
         # when:
         errors = self.service.validate(hero, rulebooks)

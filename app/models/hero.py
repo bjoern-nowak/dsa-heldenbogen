@@ -1,3 +1,5 @@
+from typing import Tuple
+
 from pydantic import NonNegativeInt
 
 from .basemodel import BaseModel
@@ -14,5 +16,5 @@ class Hero(BaseModel):
     # characteristics: dict[Characteristic, NonNegativeInt]
     talents: dict[str, NonNegativeInt]
     combat_techniques: dict[str, NonNegativeInt]
-    # advantages: List[str]
-    # disadvantages: List[str]
+    advantages: dict[str, Tuple[NonNegativeInt, str]]  # tuples last entry must be set but can be empty
+    disadvantages: dict[str, Tuple[NonNegativeInt, str]]  # tuples last entry must be set but can be empty

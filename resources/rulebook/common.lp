@@ -11,14 +11,19 @@ rulebook_unusable(R,D) :- rulebook_depends(R,D), rulebook(R), not rulebook(D).
 #program base.
 #show. %% hide everything in output but
 %% hero facts
-#defined species/1. #defined culture/1. #defined profession/1. #defined talent/2. #defined combat_technique/2.
-#show species/1. #show culture/1. #show profession/1. #show talent/2. #show combat_technique/2.
+#defined species/1. #show species/1.
+#defined culture/1. #show culture/1.
+#defined profession/1. #show profession/1.
+#defined talent/2. #show talent/2.
+#defined combat_technique/2. #show combat_technique/2.
+#defined advantage/3. #show advantage/3.
+#defined disadvantage/3. #show disadvantage/3.
 %% hero validation errors
-#defined unknown/1. #defined unusable_by/2. #defined missing_level/2.
-#show unknown/1. #show unusable_by/2. #show missing_level/2.
+#defined unknown/1. #show unknown/1.
+#defined unusable_by/2. #show unusable_by/2.
+#defined missing_level/2. #show missing_level/2.
 %% hero validation warnings
-#defined unusual_for/2.
-#show unusual_for/2.
+#defined unusual_for/2. #show unusual_for/2.
 %
 %% TODO [2] move below known/restriction stuff into other program, and make base program executed always
 %% there can be more specified directly as 'known_' by rulebooks
@@ -40,12 +45,16 @@ known_profession(P) :- requires(_,profession(P)).
 species(@species).
 culture(@culture).
 profession(@profession).
-%% TODO this '__talent_wrapper' is a ugly helper construct, try to remove it
+%
+%% TODO these '__<XYZ>_wrapper' are ugly helper facts, try to remove it
 __talent_wrapper(@talents).
-talent(T,L) :- __talent_wrapper((T, L)).
-%% TODO this '__combat_technique_wrapper' is a ugly helper construct, try to remove it
 __combat_technique_wrapper(@combat_techniques).
-combat_technique(C,L) :- __combat_technique_wrapper((C, L)).
+__advantage_wrapper(@advantages).
+__disadvantage_wrapper(@disadvantages).
+talent(T,L) :- __talent_wrapper((T,L)).
+combat_technique(CT,L) :- __combat_technique_wrapper((CT,L)).
+advantage(A,L,U) :- __advantage_wrapper((A,L,U)).
+disadvantage(DA,L,U) :- __disadvantage_wrapper((DA,L,U)).
 
 
 #program validate_hero_step_100. %% check species usable

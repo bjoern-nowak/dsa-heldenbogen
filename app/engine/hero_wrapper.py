@@ -1,13 +1,26 @@
 from __future__ import annotations  # required till PEP 563
 
 from typing import List
+from typing import Tuple
 
 from clingo import Number
 from clingo import String
 from clingo import Symbol
 from clingo import Tuple_
+from pydantic import NonNegativeInt
 
 from app.models import Hero
+
+
+def _map_feature_with_level(d: dict[str, NonNegativeInt]) -> List[Symbol]:
+    return [Tuple_([String(key), Number(d[key])]) for key in d]
+
+
+def _map_feature_with_level_and_using(d: dict[str, Tuple[NonNegativeInt, str]]) -> List[Symbol]:
+    """
+    :return: list of three-element tuples of '(<feature>,<level>,<feature_using>)'
+    """
+    return [Tuple_([String(key), Number(d[key][0]), String(d[key][1])]) for key in d]
 
 
 # TODO may provide a method which returns a list of literals instead of using a extra LP asking each feature
@@ -31,10 +44,16 @@ class HeroWrapper():
         return String(self._hero.profession)
 
     def talents(self) -> List[Symbol]:
-        return [Tuple_([String(key), Number(self._hero.talents[key])]) for key in self._hero.talents]
+        return _map_feature_with_level(self._hero.talents)
 
     def combat_techniques(self) -> List[Symbol]:
-        return [Tuple_([String(key), Number(self._hero.combat_techniques[key])]) for key in self._hero.combat_techniques]
+        return _map_feature_with_level(self._hero.combat_techniques)
+
+    def advantages(self) -> List[Symbol]:
+        return _map_feature_with_level_and_using(self._hero.advantages)
+
+    def disadvantages(self) -> List[Symbol]:
+        return _map_feature_with_level_and_using(self._hero.disadvantages)
 
     def any_of_has_minimum_level(self, choices: Symbol, feature: Symbol, selection: Symbol, minimum_level: Symbol) -> Symbol:
         """
