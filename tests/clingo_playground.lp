@@ -1,9 +1,9 @@
 %% KNOWN species to culture
-known_species_culture("Elf","Auelfen").
+known_species_culture("Elfen","Auelfen").
 known_species_culture("Mensch","Andergaster").
 known_species_culture("Zwerg","Ambosszwerge").
 %% KNOWN species/culture to profession
-%known_species_profession("Elf","Zauberweber").
+%known_species_profession("Elfen","Zauberweber").
 known_species_profession("Zwerg","Zauberweber").
 known_culture_profession("Auelfen","Zauberweber").
 known_profession("Söldner").
@@ -13,7 +13,7 @@ known_culture(C) :- known_species_culture(_,C).
 known_profession(P) :- known_species_profession(_,P).
 known_profession(P) :- known_culture_profession(_,P).
 %% facts
-species("Elf").
+species("Elfen").
 culture("Auelfen").
 profession("Zauberweber").
 %profession("Söldner").

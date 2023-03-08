@@ -11,10 +11,10 @@ class TestHeroService(unittest.TestCase):
     service = HeroService()
 
     @parameterized.expand([
-        (0, 'Elf', 'Auelfen', 'Händler'),
-        (0, 'Elf', 'Auelfen', 'Wildnisläuferin'),
-        (1, 'Elf', 'Andergaster', 'Händler'),
-        (1, 'Elf', 'Ambosszwerge', 'Händler'),
+        (0, 'Elfen', 'Auelfen', 'Händler'),
+        (0, 'Elfen', 'Auelfen', 'Wildnisläuferin'),
+        (1, 'Elfen', 'Andergaster', 'Händler'),
+        (1, 'Elfen', 'Ambosszwerge', 'Händler'),
 
         (0, 'Mensch', 'Andergaster', 'Händler'),
         (1, 'Mensch', 'Auelfen', 'Händler'),

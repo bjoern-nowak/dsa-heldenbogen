@@ -10,7 +10,7 @@ from app.models.rulebook import Rulebook
 class TestHeroValidation(unittest.TestCase):
 
     @parameterized.expand([
-        (0, 'Elf'),
+        (0, 'Elfen'),
         (1, '',),
         (1, '_invalid_'),
     ])
@@ -24,10 +24,10 @@ class TestHeroValidation(unittest.TestCase):
         self.assertIs(error_count, len(errors), msg=errors)
 
     @parameterized.expand([
-        (0, 'Elf', 'Auelfen'),
-        (1, 'Elf', ''),
-        (1, 'Elf', '_invalid_'),
-        (1, 'Elf', 'Menschlichekultur'),
+        (0, 'Elfen', 'Auelfen'),
+        (1, 'Elfen', ''),
+        (1, 'Elfen', '_invalid_'),
+        (1, 'Elfen', 'Menschlichekultur'),
     ])
     def test_culture_usable(self, error_count: int, species: str, culture: str):
         # given:
