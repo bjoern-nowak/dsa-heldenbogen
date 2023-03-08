@@ -2,7 +2,7 @@
 
 
 #program rulebook_usable. %% this program is required to an rulebook to be valid
-rulebook("dsa5_extension_example").
+rulebook("dsa5_extension_example").  %% TODO add rulebook validation requires correct rulebook name, or atleast an testcase
 %% this rulebook actually does not need the base dsa5
 
 

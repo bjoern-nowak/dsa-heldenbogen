@@ -8,3 +8,7 @@
   feature value due to 'higher' (in sense of more general) hero feature.
 * Give hero an 'sex' attribute, since it could be used as a requirement (see https://ulisses-regelwiki.de/pro_mawdli.html
   and https://ulisses-regelwiki.de/ZB_Derwisch.html)
+* Add user management, supporting web sessions and storing heros in a database
+* Add an import and export endpoint, may use a format already supported by other tools
+* Add species 'Halbelfen' from dsa5 base rulebook.
+* Add handling of optional rules
