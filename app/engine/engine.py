@@ -42,17 +42,9 @@ class Engine:
 
     def __init__(self, rulebooks: List[Rulebook]) -> None:
         self.rulebooks = RulebookValidator.filter(rulebooks)
-        self.ctl = self._create_control()
         self._check_rulebooks_usable()
         self._find_extra_hero_validation_steps()
         self.hero_validation_steps = dict(sorted(self.hero_validation_steps.items()))  # sort by keys
-
-    def _create_control(self) -> Control:
-        ctl = Control()
-        ctl.load(Rulebook.common_file())
-        for rulebook in self.rulebooks:
-            ctl.load(rulebook.entrypoint())
-        return ctl
 
     def _check_rulebooks_usable(self) -> None:
         unusables: List[List[str]] = []
@@ -139,10 +131,18 @@ class Engine:
                  context: Any = None,
                  on_model: Optional[Callable[[Model], Optional[bool]]] = None,
                  on_fail_raise: Exception = None):
-        self.ctl.ground(ground_parts, context)
-        result: SolveResult = self.ctl.solve(on_model=on_model)
+        ctl = self._create_control()
+        ctl.ground(ground_parts, context)
+        result: SolveResult = ctl.solve(on_model=on_model)
         if not result.satisfiable:
             if on_fail_raise:
                 raise on_fail_raise
             else:
                 logger.warning(f"No exception raise defined, but could not execute programs: {[p[0] for p in ground_parts]}")
+
+    def _create_control(self) -> Control:
+        ctl = Control()
+        ctl.load(Rulebook.common_file())
+        for rulebook in self.rulebooks:
+            ctl.load(rulebook.entrypoint())
+        return ctl
