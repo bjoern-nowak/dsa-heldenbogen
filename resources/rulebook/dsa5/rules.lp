@@ -11,3 +11,5 @@ requires(profession("Söldner"),combat_technique("Armbrüste",10;"Raufen",10)).
 requires(profession("Söldner"),any_of(1,combat_technique,("Hiebwaffen","Schwerter","Stangenwaffen","Zweihandschwerter","Zweihandhiebwaffen"),10)).
 requires(profession("Zauberweber";"Wildnisläuferin"),species("Elf")).
 requires(profession("Zauberweber"),talent("Körperbeherrschung",4;"Schwimmen",4;"Singen",5;"Willenskraft",3;"Fährtensuchen",4;"Orientierung",3;"Pflanzenkunde",5;"Wildnisleben",4;"Geschichtswissen",4;"Götter & Kulte",4;"Magiekunde",5;"Sternkunde",5;"Musizieren",7)).
+has_usual(species("Elf"),culture("Auelfen";"Firnelfen";"Waldelfen")).
+has_usual(species("Zwerg"),culture("Ambosszwerge";"Brillantzwerge";"Erzzwerge";"Hügelzwerge")).

@@ -16,6 +16,9 @@ rulebook_unusable(R,D) :- rulebook_depends(R,D), rulebook(R), not rulebook(D).
 %% hero validation errors
 #defined unknown/1. #defined unusable_by/2. #defined missing_level/2.
 #show unknown/1. #show unusable_by/2. #show missing_level/2.
+%% hero validation warnings
+#defined unusual_for/2.
+#show unusual_for/2.
 %
 %% TODO [2] move below known/restriction stuff into other program, and make base program executed always
 %% there can be more specified directly as 'known_' by rulebooks
@@ -57,6 +60,8 @@ unknown(culture(C)) :- culture(C), not known_culture(C).
 %% only check if there is a restriction ('#false : not' part)
 %% TODO extract all restriction conditions ('#false : not' part) as separate fact, so that other rulebooks can reuse it
 unusable_by(culture(C),species(S)) :- culture(C), species(S), #false : not requires(culture(C),species(_)); not requires(culture(C),species(S)).
+% WARNINGS
+unusual_for(species(S),culture(C)) :- species(S), culture(C), #false : not has_usual(species(S),culture(_)); not has_usual(species(S),culture(C)).
 
 
 #program validate_hero_step_250. %% check culture requirements

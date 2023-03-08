@@ -7,7 +7,7 @@ from app.models.base_enum import BaseEnum
 
 
 class HeroValidationWarningType(str, BaseEnum):
-    pass
+    UNUSUAL_FOR = 'unusual_for'
 
 
 class HeroValidationWarning(BaseModel):
@@ -23,8 +23,22 @@ class HeroValidationWarning(BaseModel):
 
     @staticmethod
     def from_(warning: Symbol) -> HeroValidationWarning:
-        feature = warning.arguments[0]
+        caused_feature = warning.arguments[0]
+        caused_feature_value = caused_feature.arguments[0].string
+        referred_feature = warning.arguments[1]
+        referred_feature_value = referred_feature.arguments[0].string
         match warning.name:
+            case HeroValidationWarningType.UNUSUAL_FOR:
+                return HeroValidationWarning(
+                    type=HeroValidationWarningType.UNUSUAL_FOR,
+                    message=f"Heros '{caused_feature.name}' is unusual for heros '{referred_feature.name}'.",
+                    parameter={
+                        'caused_feature': caused_feature.name,
+                        'caused_feature_value': caused_feature_value,
+                        'referred_feature': referred_feature.name,
+                        'referred_feature_value': referred_feature_value,
+                    },
+                )
             case _:
                 raise NotImplementedError(f"Found hero validation warning without parsing definition.\n"
                                           f"Warning name: {warning.name}\n"
