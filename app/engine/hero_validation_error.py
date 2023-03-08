@@ -18,6 +18,9 @@ class HeroValidationErrorType(str, BaseEnum):
 class HeroValidationErrorAddon(str, BaseEnum):
     ANY_OF = 'any_of'
 
+    def matches(self, symbol: Symbol) -> bool:
+        return symbol.type == SymbolType.Function and symbol.name == self.value
+
 
 class HeroValidationError(BaseModel):
     """
@@ -34,61 +37,66 @@ class HeroValidationError(BaseModel):
     # TODO reduce step count but also implement an error filtering to root causes
     @staticmethod
     def from_(error: Symbol) -> HeroValidationError:
-        feature = error.arguments[0]
+        caused_feature = error.arguments[0]
+        caused_feature_value = caused_feature.arguments[0].string
         match error.name:
             case HeroValidationErrorType.UNKNOWN:
                 return HeroValidationError(
                     type=HeroValidationErrorType.UNKNOWN,
-                    message=f"Heros '{feature.name}' value of '{feature.arguments[0].string}' is not known.",
+                    message=f"Heros '{caused_feature.name}' value of '{caused_feature_value}' is not known.",
                     parameter={
-                        'caused_feature': feature.name,
-                        'caused_feature_value': feature.arguments[0].string,
+                        'caused_feature': caused_feature.name,
+                        'caused_feature_value': caused_feature_value,
                     },
                 )
             case HeroValidationErrorType.UNUSABLE_BY:
+                referred_feature = error.arguments[1]
+                referred_feature_value = referred_feature.arguments[0].string
                 return HeroValidationError(
                     type=HeroValidationErrorType.UNUSABLE_BY,
-                    message=f"Heros '{feature.name}' is unusable for heros '{error.arguments[1].name}'.",
+                    message=f"Heros '{caused_feature.name}' is unusable for heros '{referred_feature.name}'.",
                     parameter={
-                        'caused_feature': feature.name,
-                        'caused_feature_value': feature.arguments[0].string,
-                        'referred_feature': error.arguments[1].name,
+                        'caused_feature': caused_feature.name,
+                        'caused_feature_value': caused_feature_value,
+                        'referred_feature': referred_feature.name,
+                        'referred_feature_value': referred_feature_value,
                     },
                 )
             case HeroValidationErrorType.MISSING_LEVEL:
-                required_feature_type = error.arguments[1]
-                required_feature = required_feature_type.arguments[0]
-                required_level = required_feature_type.arguments[1]
-                if required_feature.type == SymbolType.Function and required_feature.name == HeroValidationErrorAddon.ANY_OF:
-                    # hence it is a function (or constant), not an actual feature (String)
-                    choices = required_feature.arguments[0]
-                    selection = [a.string for a in required_feature.arguments[1].arguments]
+                referred_feature = error.arguments[1]
+                referred_feature_sym = referred_feature.arguments[0]
+                required_level = referred_feature.arguments[1]
+                if HeroValidationErrorAddon.ANY_OF.matches(referred_feature_sym):
+                    # referred_feature_sym is the addon
+                    choices = referred_feature_sym.arguments[0]
+                    selection = [a.string for a in referred_feature_sym.arguments[1].arguments]
                     return HeroValidationError(
                         type=HeroValidationErrorType.MISSING_LEVEL,
                         addon=HeroValidationErrorAddon.ANY_OF,
-                        message=f"Heros '{feature.name}' is missing minimum level '{required_level}'"
-                                f" for '{choices}' '{required_feature_type.name}'"
+                        message=f"Heros '{caused_feature.name}' is missing minimum level '{required_level}'"
+                                f" for '{choices}' '{referred_feature.name}'"
                                 f" of '{selection}'.",
                         parameter={
-                            'caused_feature': feature.name,
-                            'caused_feature_value': feature.arguments[0].string,
-                            'referred_feature': required_feature_type.name,
+                            'caused_feature': caused_feature.name,
+                            'caused_feature_value': caused_feature_value,
+                            'referred_feature': referred_feature.name,
                             'referred_feature_value_selection': str(selection),
                             'referred_feature_value_minimum_level': required_level.number,
                             'referred_feature_value_selection_minium_choices': choices.number,
                         },
                     )
                 else:
+                    # referred_feature_sym is the actual referred feature value (String)
                     return HeroValidationError(
                         type=HeroValidationErrorType.MISSING_LEVEL,
-                        message=f"Heros '{feature.name}' is missing minimum level '{required_level}'"
-                                f" for '{required_feature_type.name}'"
-                                f" of '{required_feature.string}'.",
+                        message=f"Heros '{caused_feature.name}' is missing minimum level '{required_level}'"
+                                f" for '{referred_feature.name}'"
+                                f" of '{referred_feature_sym.string}'.",
                         parameter={
-                            'caused_feature': feature.name,
-                            'caused_feature_value': feature.arguments[0].string,
-                            'referred_feature': required_feature_type.name,
-                            'referred_feature_value': required_feature.string,
+                            'caused_feature': caused_feature.name,
+                            'caused_feature_value': caused_feature_value,
+                            'referred_feature': referred_feature.name,
+                            'referred_feature_value': referred_feature_sym.string,
                             'referred_feature_value_minimum_level': required_level.number,
                         },
                     )
