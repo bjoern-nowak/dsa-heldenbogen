@@ -10,8 +10,8 @@ logger = logging.getLogger(__name__)
 
 class MetaService:
 
-    def list(self, feature: Feature, rulebooks: List[Rulebook]) -> List[str]:
+    def list_known_feature_values(self, feature: Feature, rulebooks: List[Rulebook]) -> List[str]:
         engine = Engine(rulebooks)
-        known_values = engine.list(feature)
+        known_values = engine.list_known_for(feature)
         logger.debug(f"Value list of '{feature}' with rulebooks {[str(r) for r in rulebooks]}: {known_values}")
         return known_values

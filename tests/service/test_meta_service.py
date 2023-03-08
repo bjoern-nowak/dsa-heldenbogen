@@ -18,7 +18,7 @@ class TestMetaService(unittest.TestCase):
         # given:
         rulebooks = [Rulebook.DSA5]
         # when:
-        found = self.service.list(feature, rulebooks)
+        found = self.service.list_known_feature_values(feature, rulebooks)
         # then:
         self.assertIs(len(found), expected_count)
 

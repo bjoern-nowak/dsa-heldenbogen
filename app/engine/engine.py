@@ -107,7 +107,7 @@ class Engine:
         if errors:
             raise HeroInvalidError([HeroValidationError.from_(e) for e in errors])
 
-    def list(self, feature: Feature) -> List[str]:
+    def list_known_for(self, feature: Feature) -> List[str]:
         known_values: List[str] = []
         self._execute(
             on_model=lambda m: Collector.known_feature_values(m, known_values, feature),
