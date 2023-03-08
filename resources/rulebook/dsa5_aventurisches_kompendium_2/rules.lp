@@ -1,1 +1,2 @@
-%% this file is required to an rulebook to be valid
+#program base.
+requires(profession("Mawdli"),culture("Novadis")).
