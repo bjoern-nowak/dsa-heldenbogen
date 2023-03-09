@@ -27,7 +27,7 @@ class Collector:
         cls._functions(errors, model, HeroValidationErrorType.list())
         cls._functions(warnings, model, HeroValidationWarningType.list())
         if errors:
-            logger.trace(f"Model of failed hero validation:\n{model}")
+            logger.trace(f"Model of failed hero validation:\n{model.symbols(shown=True)}")
 
     @classmethod
     def known_feature_values(cls, model: Model, known_values: List[str], feature: Feature):
