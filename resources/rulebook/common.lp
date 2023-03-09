@@ -96,6 +96,8 @@ unknown(disadvantage(DA,USES,LVL)) :- disadvantage(DA,USES,LVL), not known_disad
 % WARNINGS
 missing_typical(species(S),advantage(A,USES,LVL)) :- species(S), #false : not has_typical(species(S),advantage(_,_,_)); has_typical(species(S),advantage(A,USES,LVL)), not advantage(A,USES,LVL).
 missing_typical(species(S),disadvantage(DA,USES,LVL)) :- species(S), #false : not has_typical(species(S),disadvantage(_,_,_)); has_typical(species(S),disadvantage(DA,USES,LVL)), not disadvantage(DA,USES,LVL).
+atypical(species(S),advantage(A,USES)) :- species(S), #false : not has_atypical(species(S),advantage(_,_,_)); has_atypical(species(S),advantage(A,USES,_)), advantage(A,USES,_).
+atypical(species(S),disadvantage(DA,USES)) :- species(S), #false : not has_atypical(species(S),disadvantage(_,_,_)); has_atypical(species(S),disadvantage(DA,USES,_)), disadvantage(DA,USES,_).
 
 
 #program validate_hero_step_500. %% check skills (talents, combat techniques) usable

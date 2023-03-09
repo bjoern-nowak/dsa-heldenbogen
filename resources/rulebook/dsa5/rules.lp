@@ -11,3 +11,4 @@ has_usual(species("Elfen"),culture("Auelfen";"Firnelfen";"Waldelfen")).
 has_usual(species("Zwerg"),culture("Ambosszwerge";"Brillantzwerge";"Erzzwerge";"Hügelzwerge")).
 has_typical(species("Elfen"),advantage("Begabung","Singen",1;"Begabung","Musizieren",1;"Beidhändig","",1;"Dunkelsicht","",2)).
 has_typical(species("Elfen"),disadvantage("Körpergebundene Kraft","",1;"Lästige Mindergeister","",1;"Wahrer Name","",1)).
+has_atypical(species("Elfen"),disadvantage("Blutrausch","",1;"Eingeschränkter Sinn","",1;"Fettleibig","",1;"Nachtblind","",1)).

@@ -63,19 +63,19 @@ class Collector:
                 found.append([arg.string for arg in func.arguments])
 
     @staticmethod
-    def _functions(found: List[Symbol], model: Model, suffixes: List[RulebookFunction] = None) -> None:
+    def _functions(found: List[Symbol], model: Model, name_whitelist: List[str] = None) -> None:
         """
         Collects all functions having given suffix in name
         :param found: list to be filled
         :param model: to search in
-        :param suffixes: to filter function names by
+        :param name_whitelist: to filter function names by
         :return:
         """
         for sym in model.symbols(atoms=True):
             if not sym.name:  # use 'or not sym.arguments:' to skip constants
                 # skip tuples but keep constants
                 continue
-            if not suffixes or sym.name.endswith(tuple(suffixes)):
+            if not name_whitelist or sym.name in name_whitelist:
                 found.append(sym)
 
     @staticmethod

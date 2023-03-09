@@ -11,6 +11,6 @@ known_profession("Händler";"Söldner";"Zauberweber";"Wildnisläuferin").
 known_advantage("Begabung",("Singen";"Musizieren"),1).
 known_advantage("Beidhändig","",1).
 known_advantage("Dunkelsicht","",(1..2)).
-known_disadvantage(("Körpergebundene Kraft";"Lästige Mindergeister";"Wahrer Name"),"",1).
+known_disadvantage(("Körpergebundene Kraft";"Lästige Mindergeister";"Wahrer Name";"Blutrausch";"Eingeschränkter Sinn";"Fettleibig";"Nachtblind"),"",1).
 known_talent("Körperbeherrschung";"Kraftakt";"Selbstbeherrschung";"Sinnesschärfe";"Bekehren & Überzeugen";"Zechen";"Menschenkenntnis";"Überreden";"Orientierung";"Wildnisleben";"Götter & Kulte";"Kriegskunst";"Sagen & Legenden";"Handel";"Heilkunde Wunden";"Körperbeherrschung";"Schwimmen";"Singen";"Willenskraft";"Fährtensuchen";"Pflanzenkunde";"Geschichtswissen";"Magiekunde";"Sternkunde";"Musizieren";"Einschüchtern";"Etikette";"Tierkunde";"Rechnen";"Rechtskunde";"Heilkunde Krankheiten";"Heilkunde Seele").
 known_combat_technique("Armbrüste";"Raufen";"Hiebwaffen";"Schwerter";"Stangenwaffen";"Zweihandschwerter";"Zweihandhiebwaffen").

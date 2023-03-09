@@ -10,6 +10,7 @@ from app.models.base_enum import BaseEnum
 class HeroValidationWarningType(str, BaseEnum):
     MISSING_USUAL = 'missing_usual'
     MISSING_TYPICAL = 'missing_typical'
+    ATYPICAL = 'atypical'
 
 
 class HeroValidationWarning(BaseModel):
@@ -31,6 +32,24 @@ class HeroValidationWarning(BaseModel):
         referred_feature = warning.arguments[1]
         referred_feature_value = referred_feature.arguments[0].string
         match warning.name:
+            case HeroValidationWarningType.ATYPICAL:
+                if RulebookFunction.is_dis_advantage(referred_feature):
+                    referred_feature_using = referred_feature.arguments[1].string
+                    return HeroValidationWarning(
+                        type=HeroValidationWarningType.ATYPICAL,
+                        message=f"Heros '{caused_feature.name}' declares '{referred_feature.name}'"
+                                f" of '{referred_feature_value}'"
+                                f" using '{referred_feature_using}' atypical.",
+                        parameter={
+                            'caused_feature': caused_feature.name,
+                            'caused_feature_value': caused_feature_value,
+                            'referred_feature': referred_feature.name,
+                            'referred_feature_value': referred_feature_value,
+                            'referred_feature_using': referred_feature_using,
+                        },
+                    )
+                else:
+                    raise NotImplementedError("Using 'atypical' referring non (dis)advantages is yet to be implemented.")
             case HeroValidationWarningType.MISSING_TYPICAL:
                 if RulebookFunction.is_dis_advantage(referred_feature):
                     referred_feature_using = referred_feature.arguments[1].string
