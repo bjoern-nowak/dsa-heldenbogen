@@ -4,7 +4,7 @@ from parameterized import parameterized
 
 from app.models.hero import Hero
 from app.models.rulebook import Rulebook
-from app.service.hero_service import HeroService
+from app.services.hero_service import HeroService
 
 
 class TestHeroService(unittest.TestCase):

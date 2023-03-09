@@ -4,7 +4,7 @@ from parameterized import parameterized
 
 from app.models.feature import Feature
 from app.models.rulebook import Rulebook
-from app.service import MetaService
+from app.services.meta_service import MetaService
 
 
 class TestMetaService(unittest.TestCase):

@@ -6,12 +6,12 @@ from fastapi import APIRouter
 from fastapi import HTTPException
 from fastapi import Query
 
-from app.api.schema.errors import ClientError
-from app.api.schema.errors import ServerError
+from app.api.schemas.errors import ClientError
+from app.api.schemas.errors import ServerError
 from app.engine.exceptions import UnusableRulebookError
 from app.models.feature import Feature
 from app.models.rulebook import Rulebook
-from app.service.meta_service import MetaService
+from app.services.meta_service import MetaService
 
 logger = logging.getLogger(__name__)
 router = APIRouter()
