@@ -4,10 +4,9 @@ from typing import List
 
 from app.engine.hero_validation_error import HeroValidationError
 from app.engine.hero_validation_warning import HeroValidationWarning
-from app.models.basemodel import BaseModel
+from app.models.base_model import BaseModel
 
 
-# TODO rename file/module to reflect class name
 class HeroValidationResult(BaseModel):
     valid: bool
     errors: List[HeroValidationError]

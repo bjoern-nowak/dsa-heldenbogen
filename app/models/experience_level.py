@@ -2,7 +2,7 @@ from enum import Enum
 
 from pydantic import NonNegativeInt
 
-from app.models.basemodel import BaseModel
+from app.models.base_model import BaseModel
 
 
 class ExperienceLevelType(BaseModel):
