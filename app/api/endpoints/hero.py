@@ -10,7 +10,7 @@ from app.api.schemas.errors import ServerError
 from app.api.schemas.hero import Hero
 from app.api.schemas.hero_validation_result import HeroValidationResult
 from app.engine.exceptions import HeroInvalidError
-from app.engine.hero_validation_warning import HeroValidationWarning
+from app.models.hero_validation_warning import HeroValidationWarning
 from app.models.rulebook import Rulebook
 from app.services.hero_service import HeroService
 

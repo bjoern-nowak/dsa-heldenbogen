@@ -12,23 +12,27 @@ from clingo import Model
 from clingo import SolveResult
 from clingo import Symbol
 
+from app.engine import hero_validation_interpreter
 from app.engine.collector import Collector
 from app.engine.exceptions import HeroInvalidError
 from app.engine.exceptions import UnexpectedResultError
 from app.engine.exceptions import UnusableRulebookError
-from app.engine.hero_validation_error import HeroValidationError
-from app.engine.hero_validation_warning import HeroValidationWarning
 from app.engine.hero_wrapper import HeroWrapper
 from app.engine.rulebook_program import RulebookProgram
 from app.engine.rulebook_validator import RulebookValidator
 from app.models.feature import Feature
 from app.models.hero import Hero
+from app.models.hero_validation_warning import HeroValidationWarning
 from app.models.rulebook import Rulebook
 
 logger = logging.getLogger(__name__)
 
 
 class Engine:
+    # TODO one could argue that these step count is execcsive.
+    #  To reduce this would require an error/warning filtering to root causes
+    #   so that only one step per feature (instead of currently two) is used
+    #  Anyway having steps is useful, since it allows rulebooks to intervene
     hero_validation_steps: dict[int, RulebookProgram | int] = {
         100: RulebookProgram.VALIDATE_HERO_STEP_100,
         150: RulebookProgram.VALIDATE_HERO_STEP_150,
@@ -94,7 +98,7 @@ class Engine:
         for step in self.hero_validation_steps:
             program = step if isinstance(step, RulebookProgram) else RulebookProgram.hero_validation_step_for(step)
             step_errors, step_warnings = self._perform_hero_validation_step(hero, program)
-            warnings += [HeroValidationWarning.from_(w) for w in step_warnings]
+            warnings += [hero_validation_interpreter.as_warning(w) for w in step_warnings]
             if step_errors:
                 # TODO 'return' vs 'raise' is discussable.
                 #  One could argue that an HeroInvalidError should only be raised if the input values are e.g. unknown
@@ -102,7 +106,7 @@ class Engine:
                 #  In contrast the main point is to find errors and should be prominent whenever found.
                 #   Using an return (tuple or class) could lead to higher chances of mishandling.
                 #  What is bad now, is that warnings may be fetched by return or raise.
-                raise HeroInvalidError([HeroValidationError.from_(e) for e in step_errors], warnings)
+                raise HeroInvalidError([hero_validation_interpreter.as_error(e) for e in step_errors], warnings)
         return warnings
 
     def _perform_hero_validation_step(self,

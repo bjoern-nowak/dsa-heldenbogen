@@ -3,8 +3,8 @@ from typing import List
 
 from app.engine.engine import Engine
 from app.engine.exceptions import HeroInvalidError
-from app.engine.hero_validation_warning import HeroValidationWarning
 from app.models.hero import Hero
+from app.models.hero_validation_warning import HeroValidationWarning
 from app.models.rulebook import Rulebook
 
 logger = logging.getLogger(__name__)

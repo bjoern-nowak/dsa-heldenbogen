@@ -1,7 +1,7 @@
 from typing import List
 
-from app.engine.hero_validation_error import HeroValidationError
-from app.engine.hero_validation_warning import HeroValidationWarning
+from app.models.hero_validation_error import HeroValidationError
+from app.models.hero_validation_warning import HeroValidationWarning
 
 
 # TODO should this be in model module/package?

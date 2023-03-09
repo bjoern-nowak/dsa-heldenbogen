@@ -2,9 +2,9 @@ from __future__ import annotations  # required till PEP 563
 
 from typing import List
 
-from app.engine.hero_validation_error import HeroValidationError
-from app.engine.hero_validation_warning import HeroValidationWarning
 from app.models.base_model import BaseModel
+from app.models.hero_validation_error import HeroValidationError
+from app.models.hero_validation_warning import HeroValidationWarning
 
 
 class HeroValidationResult(BaseModel):

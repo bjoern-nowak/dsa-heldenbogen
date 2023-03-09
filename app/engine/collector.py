@@ -4,8 +4,7 @@ from typing import List
 from clingo import Model
 from clingo import Symbol
 
-from app.engine.hero_validation_error import HeroValidationErrorType
-from app.engine.hero_validation_warning import HeroValidationWarningType
+from app.engine import hero_validation_interpreter
 from app.engine.rulebook_function import RulebookFunction
 from app.models.feature import Feature
 
@@ -24,8 +23,8 @@ class Collector:
 
     @classmethod
     def hero_validation_errors_and_warnings(cls, model: Model, errors: List[Symbol], warnings: List[Symbol]):
-        cls._functions(errors, model, HeroValidationErrorType.list())
-        cls._functions(warnings, model, HeroValidationWarningType.list())
+        cls._functions(errors, model, hero_validation_interpreter.ErrorAtom.list())
+        cls._functions(warnings, model, hero_validation_interpreter.WarningAtom.list())
         if errors:
             logger.trace(f"Model of failed hero validation:\n{model.symbols(shown=True)}")
 
