@@ -48,10 +48,10 @@ __talent_wrapper(@talents).
 __combat_technique_wrapper(@combat_techniques).
 __advantage_wrapper(@advantages).
 __disadvantage_wrapper(@disadvantages).
-talent(T,L) :- __talent_wrapper((T,L)).
-combat_technique(CT,L) :- __combat_technique_wrapper((CT,L)).
-advantage(A,L,U) :- __advantage_wrapper((A,L,U)).
-disadvantage(DA,L,U) :- __disadvantage_wrapper((DA,L,U)).
+talent(T,LVL) :- __talent_wrapper((T,LVL)).
+combat_technique(CT,LVL) :- __combat_technique_wrapper((CT,LVL)).
+advantage(A,LVL,USES) :- __advantage_wrapper((A,LVL,USES)).
+disadvantage(DA,LVL,USES) :- __disadvantage_wrapper((DA,LVL,USES)).
 
 
 #program validate_hero_step_100. %% check species usable
@@ -80,22 +80,22 @@ unusable_by(profession(P),culture(C)) :- profession(P), culture(C), #false : not
 
 
 #program validate_hero_step_350. %% check profession requirements
-missing_level(profession(P),talent(T,MIN)) :- profession(P), #false : not requires(profession(P),talent(_,_)); requires(profession(P),talent(T,MIN)), not talent(T,_).
-missing_level(profession(P),talent(T,MIN)) :- profession(P), #false : not requires(profession(P),talent(_,_)); requires(profession(P),talent(T,MIN)), talent(T,L), L < MIN.
-missing_level(profession(P),combat_technique(CT,MIN)) :- profession(P), #false : not requires(profession(P),combat_technique(_,_)); requires(profession(P),combat_technique(CT,MIN)), not combat_technique(CT,_).
-missing_level(profession(P),combat_technique(CT,MIN)) :- profession(P), #false : not requires(profession(P),combat_technique(_,_)); requires(profession(P),combat_technique(CT,MIN)), combat_technique(CT,L), L < MIN.
-missing_level(profession(P),combat_technique(any_of(1,CTs),MIN)) :- profession(P), #false : not requires(profession(P),any_of(_,combat_technique,_,_)); requires(profession(P),any_of(CHOICES,combat_technique,CTs,MIN)), #false : @any_of_has_minimum_level(CHOICES,combat_technique,CTs,MIN) = 1.
+missing_level(profession(P),talent(T,MIN_LVL)) :- profession(P), #false : not requires(profession(P),talent(_,_)); requires(profession(P),talent(T,MIN_LVL)), not talent(T,_).
+missing_level(profession(P),talent(T,MIN_LVL)) :- profession(P), #false : not requires(profession(P),talent(_,_)); requires(profession(P),talent(T,MIN_LVL)), talent(T,LVL), LVL < MIN_LVL.
+missing_level(profession(P),combat_technique(CT,MIN_LVL)) :- profession(P), #false : not requires(profession(P),combat_technique(_,_)); requires(profession(P),combat_technique(CT,MIN_LVL)), not combat_technique(CT,_).
+missing_level(profession(P),combat_technique(CT,MIN_LVL)) :- profession(P), #false : not requires(profession(P),combat_technique(_,_)); requires(profession(P),combat_technique(CT,MIN_LVL)), combat_technique(CT,LVL), LVL < MIN_LVL.
+missing_level(profession(P),combat_technique(any_of(1,CTs),MIN_LVL)) :- profession(P), #false : not requires(profession(P),any_of(_,combat_technique,_,_)); requires(profession(P),any_of(CHOICES,combat_technique,CTs,MIN_LVL)), #false : @any_of_has_minimum_level(CHOICES,combat_technique,CTs,MIN_LVL) = 1.
 
 
 #program validate_hero_step_400. %% check (dis)advantage usable
-unknown(advantage(A,L,U)) :- advantage(A,L,U), not known_advantage(A,L,U).
-unknown(disadvantage(DA,L,U)) :- disadvantage(DA,L,U), not known_disadvantage(DA,L,U).
+unknown(advantage(A,LVL,USES)) :- advantage(A,LVL,USES), not known_advantage(A,LVL,USES).
+unknown(disadvantage(DA,LVL,USES)) :- disadvantage(DA,LVL,USES), not known_disadvantage(DA,LVL,USES).
 
 
 #program validate_hero_step_450. %% check (dis)advantage requirements
 % WARNINGS
-missing_typical(species(S),advantage(A,L,U)) :- species(S), #false : not has_typical(species(S),advantage(_,_,_)); has_typical(species(S),advantage(A,L,U)), not advantage(A,L,U).
-missing_typical(species(S),disadvantage(DA,L,U)) :- species(S), #false : not has_typical(species(S),disadvantage(_,_,_)); has_typical(species(S),disadvantage(DA,L,U)), not disadvantage(DA,L,U).
+missing_typical(species(S),advantage(A,LVL,USES)) :- species(S), #false : not has_typical(species(S),advantage(_,_,_)); has_typical(species(S),advantage(A,LVL,USES)), not advantage(A,LVL,USES).
+missing_typical(species(S),disadvantage(DA,LVL,USES)) :- species(S), #false : not has_typical(species(S),disadvantage(_,_,_)); has_typical(species(S),disadvantage(DA,LVL,USES)), not disadvantage(DA,LVL,USES).
 
 
 #program validate_hero_step_500. %% check skills (talents, combat techniques) usable
