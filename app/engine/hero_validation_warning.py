@@ -4,7 +4,7 @@ from clingo import Symbol
 
 from app.engine.rulebook_function import RulebookFunction
 from app.models.base_enum import BaseEnum
-from app.models.basemodel import BaseModel
+from app.models.base_model import BaseModel
 
 
 class HeroValidationWarningType(str, BaseEnum):

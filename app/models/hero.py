@@ -2,7 +2,7 @@ from typing import List
 
 from pydantic import NonNegativeInt
 
-from .basemodel import BaseModel
+from .base_model import BaseModel
 
 
 # TODO use classes instead of simple dict to provide semantics to key and value
