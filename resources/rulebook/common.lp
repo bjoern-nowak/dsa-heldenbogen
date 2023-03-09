@@ -10,6 +10,8 @@ rulebook_unusable(R,D) :- rulebook_depends(R,D), rulebook(R), not rulebook(D).
 
 #program base.
 #show. %% hide everything in output but
+%% rules
+#defined requires/2.
 %% hero facts
 #defined species/1. #show species/1.
 #defined culture/1. #show culture/1.
@@ -24,19 +26,6 @@ rulebook_unusable(R,D) :- rulebook_depends(R,D), rulebook(R), not rulebook(D).
 #defined missing_level/2. #show missing_level/2.
 %% hero validation warnings
 #defined unusual_for/2. #show unusual_for/2.
-%
-%% TODO [2] move below known/restriction stuff into other program, and make base program executed always
-%% there can be more specified directly as 'known_' by rulebooks
-%% if a restriction is specified (like culture to species) they (the culture) must not be specified directly
-%% since it will be 'unpacked' with below:
-%% TODO this is debatable: do we want implicit generation of e.g. species by any restriction
-#defined requires/2. %% may there is no restriction
-known_species(S) :- requires(species(S),_).
-known_species(S) :- requires(_,species(S)).
-known_culture(C) :- requires(culture(C),_).
-known_culture(C) :- requires(_,culture(C)).
-known_profession(P) :- requires(profession(P),_).
-known_profession(P) :- requires(_,profession(P)).
 
 
 #program hero_facts.

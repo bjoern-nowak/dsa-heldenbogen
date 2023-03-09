@@ -5,7 +5,6 @@ requires(
     species("Mensch")
 ).
 requires(culture("Ambosszwerge";"Brillantzwerge";"Erzzwerge";"Hügelzwerge";"Wildzwerge"),species("Zwerg")).
-known_profession("Händler").
 requires(profession("Söldner"),talent("Körperbeherrschung",3;"Kraftakt",3;"Selbstbeherrschung",4;"Zechen",5;"Menschenkenntnis",3;"Überreden",3;"Orientierung",4;"Wildnisleben",3;"Götter & Kulte",3;"Kriegskunst",6;"Sagen & Legenden",5;"Handel",3;"Heilkunde Wunden",4)).
 requires(profession("Söldner"),combat_technique("Armbrüste",10;"Raufen",10)).
 requires(profession("Söldner"),any_of(1,combat_technique,("Hiebwaffen","Schwerter","Stangenwaffen","Zweihandschwerter","Zweihandhiebwaffen"),10)).
