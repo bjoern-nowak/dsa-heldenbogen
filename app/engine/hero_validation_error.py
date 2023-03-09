@@ -5,6 +5,7 @@ from typing import Optional
 from clingo import Symbol
 from clingo import SymbolType
 
+from app.engine.rulebook_function import RulebookFunction
 from app.models import BaseModel
 from app.models.base_enum import BaseEnum
 
@@ -41,14 +42,29 @@ class HeroValidationError(BaseModel):
         caused_feature_value = caused_feature.arguments[0].string
         match error.name:
             case HeroValidationErrorType.UNKNOWN:
-                return HeroValidationError(
-                    type=HeroValidationErrorType.UNKNOWN,
-                    message=f"Heros '{caused_feature.name}' value of '{caused_feature_value}' is not known.",
-                    parameter={
-                        'caused_feature': caused_feature.name,
-                        'caused_feature_value': caused_feature_value,
-                    },
-                )
+                if RulebookFunction.is_dis_advantage(caused_feature):
+                    caused_feature_level = caused_feature.arguments[1].number
+                    caused_feature_using = caused_feature.arguments[2].string
+                    return HeroValidationError(
+                        type=HeroValidationErrorType.UNKNOWN,
+                        message=f"Heros '{caused_feature.name}' value of '{caused_feature_value}'"
+                                f" at level '{caused_feature_level}' using '{caused_feature_using}' is not known.",
+                        parameter={
+                            'caused_feature': caused_feature.name,
+                            'caused_feature_value': caused_feature_value,
+                            'caused_feature_level': caused_feature_level,
+                            'caused_feature_using': caused_feature_using,
+                        },
+                    )
+                else:
+                    return HeroValidationError(
+                        type=HeroValidationErrorType.UNKNOWN,
+                        message=f"Heros '{caused_feature.name}' value of '{caused_feature_value}' is not known.",
+                        parameter={
+                            'caused_feature': caused_feature.name,
+                            'caused_feature_value': caused_feature_value,
+                        },
+                    )
             case HeroValidationErrorType.UNUSABLE_BY:
                 referred_feature = error.arguments[1]
                 referred_feature_value = referred_feature.arguments[0].string

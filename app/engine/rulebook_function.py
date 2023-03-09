@@ -1,5 +1,8 @@
 from __future__ import annotations  # required till PEP 563
 
+from clingo import Symbol
+from clingo import SymbolType
+
 from app.models import Feature
 from app.models.base_enum import BaseEnum
 
@@ -9,6 +12,13 @@ class RulebookFunction(str, BaseEnum):
     # meta
     RULEBOOK_UNUSABLE = 'rulebook_unusable'
     EXTRA_HERO_VALIDATION_STEP = 'extra_hero_validation_step'
+    # hero facts
+    ADVANTAGE = 'advantage'
+    DISADVANTAGE = 'disadvantage'
+
+    @staticmethod
+    def is_dis_advantage(sym: Symbol) -> bool:
+        return sym.type == SymbolType.Function and sym.name in [RulebookFunction.ADVANTAGE, RulebookFunction.DISADVANTAGE]
 
     @staticmethod
     def known(feature: Feature) -> str:
