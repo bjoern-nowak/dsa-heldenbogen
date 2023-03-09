@@ -1,17 +1,18 @@
-#program rulebook_usable.
-#defined rulebook_depends/2. %% supress info 'atom does not occur in any rule head'
-rulebook_unusable(R,D) :- rulebook_depends(R,D), rulebook(R), not rulebook(D).
-%
-%% TODO move below to base progam when 'TODO [2]' is solved
-#show. %% hide everything in output but
-#defined rulebook_unusable/2.
-#show rulebook_unusable/2.
-
-
 #program base.
 #show. %% hide everything in output but
-%% rules
+%% rulebook_usable
+#defined rulebook_depends/2.
+#defined rulebook_unusable/2. #show rulebook_unusable/2.
+%% world facts
+#defined known_species/1.
+#defined known_culture/1.
+#defined known_profession/1.
+#defined known_advantage/3.
+#defined known_disadvantage/3.
+#defined known_talent/2.
+#defined known_combat_technique/2.
 #defined requires/2.
+#defined has_usual/2.
 %% hero facts
 #defined species/1. #show species/1.
 #defined culture/1. #show culture/1.
@@ -26,6 +27,11 @@ rulebook_unusable(R,D) :- rulebook_depends(R,D), rulebook(R), not rulebook(D).
 #defined missing_level/2. #show missing_level/2.
 %% hero validation warnings
 #defined unusual_for/2. #show unusual_for/2.
+
+
+#program rulebook_usable.
+rulebook_unusable(R,D) :- rulebook_depends(R,D), rulebook(R), not rulebook(D).
+%% TODO add check that rulebook only uses known feature values, hence requires program world_facts
 
 
 #program hero_facts.

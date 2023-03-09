@@ -52,7 +52,7 @@ class Engine:
     def _check_rulebooks_usable(self) -> None:
         unusables: List[List[str]] = []
         self._execute(
-            ground_parts=[RulebookProgram.RULEBOOK_USABLE],
+            programs=[RulebookProgram.RULEBOOK_USABLE],
             on_model=lambda m: Collector.unusable_rulebooks(m, unusables),
             on_fail_raise=UnexpectedResultError(f"Failed to collect unusable rulebooks.")
         )
@@ -65,7 +65,7 @@ class Engine:
     def _find_extra_hero_validation_steps(self) -> None:
         steps: List[Symbol] = []
         self._execute(
-            ground_parts=[RulebookProgram.META],
+            programs=[RulebookProgram.META],
             on_model=lambda m: Collector.extra_hero_validation_steps(m, steps),
             on_fail_raise=UnexpectedResultError(f"Failed to find extra hero validation steps.")
         )
@@ -114,7 +114,7 @@ class Engine:
         errors: List[Symbol] = []
         warnings: List[Symbol] = []
         self._execute(
-            ground_parts=[RulebookProgram.BASE, RulebookProgram.HERO_FACTS, program],
+            programs=[RulebookProgram.WORLD_FACTS, RulebookProgram.HERO_FACTS, program],
             context=hero,
             on_model=lambda m: Collector.hero_validation_errors_and_warnings(m, errors, warnings),
             on_fail_raise=UnexpectedResultError(f"Hero validation could not be performed at: {program[0]}")
@@ -124,24 +124,25 @@ class Engine:
     def list_known_for(self, feature: Feature) -> List[str]:
         known_values: List[str] = []
         self._execute(
+            programs=[RulebookProgram.WORLD_FACTS],
             on_model=lambda m: Collector.known_feature_values(m, known_values, feature),
             on_fail_raise=UnexpectedResultError(f"Value listing for feature '{feature}' failed.")
         )
         return known_values
 
     def _execute(self,
-                 ground_parts: Sequence[tuple[str, Sequence[Symbol]]] = (RulebookProgram.BASE,),
+                 programs: List[tuple[str, Sequence[Symbol]]],
                  context: Any = None,
                  on_model: Optional[Callable[[Model], Optional[bool]]] = None,
                  on_fail_raise: Exception = None):
         ctl = self._create_control()
-        ctl.ground(ground_parts, context)
+        ctl.ground(programs + [RulebookProgram.BASE], context)
         result: SolveResult = ctl.solve(on_model=on_model)
         if not result.satisfiable:
             if on_fail_raise:
                 raise on_fail_raise
             else:
-                logger.warning(f"No exception raise defined, but could not execute programs: {[p[0] for p in ground_parts]}")
+                logger.warning(f"No exception raise defined, but could not execute programs: {[p[0] for p in programs]}")
 
     def _create_control(self) -> Control:
         ctl = Control()

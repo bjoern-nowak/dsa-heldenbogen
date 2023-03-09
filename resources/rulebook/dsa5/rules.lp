@@ -1,4 +1,4 @@
-#program base.
+#program world_facts.
 requires(culture("Auelfen";"Firnelfen";"Steppenelfen";"Waldelfen"),species("Elfen")).
 requires(
     culture("Andergaster";"Aranier";"Bornländer";"Ferkinas";"Fjarninger";"Gjalsker";"Horasier";"Koboldweltler";"Maraskaner";"Menschlichekultur";"Mhanadistani";"Mittelreicher";"Mohas";"Nivesen";"Norbarden";"Nordaventurier";"Nostrier";"Novadis";"Svellttaler";"Südaventurier";"Thorwaler";"Trollzacker";"Zahori";"Zyklopäer"),

@@ -4,7 +4,7 @@ rulebook("dsa5").
 %% this rulebook depends on nothing
 
 
-#program base.
+#program world_facts.
 known_species("Elfen";"Mensch";"Zwerg").
 known_culture(
     "Auelfen";"Firnelfen";"Steppenelfen";"Waldelfen";

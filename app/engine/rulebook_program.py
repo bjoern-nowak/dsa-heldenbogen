@@ -9,13 +9,16 @@ _VALIDATE_HERO_STEP = 'validate_hero_step'
 
 class RulebookProgram(tuple[str, Sequence[Symbol]], BaseEnum):
     BASE = ('base', [])
-    """Must contain all known feature values and restrictions"""
+    """Is always executed, controls default clingo output and pre-defines possible atoms"""
 
     RULEBOOK_USABLE = ('rulebook_usable', [])
     """Checks whenever the rulebook requirements are met"""
 
     META = ('meta', [])
     """May contain information about the rulebook for processing, like extra hero validation steps"""
+
+    WORLD_FACTS = ('world_facts', [])
+    """Must contain all facts known about the worlds of the rulebook"""
 
     HERO_FACTS = ('hero_facts', [])
     """Must contain all facts about the hero which can be directly taken from it"""
