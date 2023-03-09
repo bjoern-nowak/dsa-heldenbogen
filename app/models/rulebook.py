@@ -1,5 +1,3 @@
-from __future__ import annotations  # required till PEP 563
-
 from app.models.base_enum import BaseEnum
 from app.resource import get_abs_path
 
