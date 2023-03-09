@@ -17,6 +17,7 @@ class HeroValidationErrorType(str, BaseEnum):
 
 
 class HeroValidationErrorAddon(str, BaseEnum):
+    # TODO may add (dis)advantages as addon for clarification
     ANY_OF = 'any_of'
 
     def matches(self, symbol: Symbol) -> bool:

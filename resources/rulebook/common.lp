@@ -13,6 +13,7 @@
 #defined known_combat_technique/2.
 #defined requires/2.
 #defined has_usual/2.
+#defined has_typical/2.
 %% hero facts
 #defined species/1. #show species/1.
 #defined culture/1. #show culture/1.
@@ -27,6 +28,7 @@
 #defined missing_level/2. #show missing_level/2.
 %% hero validation warnings
 #defined unusual_for/2. #show unusual_for/2.
+#defined missing_typical/2. #show missing_typical/2.
 
 
 #program rulebook_usable.
@@ -91,6 +93,9 @@ unknown(disadvantage(DA,L,U)) :- disadvantage(DA,L,U), not known_disadvantage(DA
 
 
 #program validate_hero_step_450. %% check (dis)advantage requirements
+% WARNINGS
+missing_typical(species(S),advantage(A,L,U)) :- species(S), #false : not has_typical(species(S),advantage(_,_,_)); has_typical(species(S),advantage(A,L,U)), not advantage(A,L,U).
+missing_typical(species(S),disadvantage(DA,L,U)) :- species(S), #false : not has_typical(species(S),disadvantage(_,_,_)); has_typical(species(S),disadvantage(DA,L,U)), not disadvantage(DA,L,U).
 
 
 #program validate_hero_step_500. %% check skills (talents, combat techniques) usable

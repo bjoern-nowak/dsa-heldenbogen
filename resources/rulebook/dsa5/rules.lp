@@ -12,3 +12,5 @@ requires(profession("Zauberweber";"Wildnisläuferin"),species("Elfen")).
 requires(profession("Zauberweber"),talent("Körperbeherrschung",4;"Schwimmen",4;"Singen",5;"Willenskraft",3;"Fährtensuchen",4;"Orientierung",3;"Pflanzenkunde",5;"Wildnisleben",4;"Geschichtswissen",4;"Götter & Kulte",4;"Magiekunde",5;"Sternkunde",5;"Musizieren",7)).
 has_usual(species("Elfen"),culture("Auelfen";"Firnelfen";"Waldelfen")).
 has_usual(species("Zwerg"),culture("Ambosszwerge";"Brillantzwerge";"Erzzwerge";"Hügelzwerge")).
+has_typical(species("Elfen"),advantage("Begabung",1,"Singen";"Begabung",1,"Musizieren";"Beidhändig",1,"";"Dunkelsicht",2,"")).
+has_typical(species("Elfen"),disadvantage("Körpergebundene Kraft",1,"";"Lästige Mindergeister",1,"";"Wahrer Name",1,"";)).
