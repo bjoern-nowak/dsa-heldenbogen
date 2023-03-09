@@ -1,11 +1,10 @@
 from typing import List
 
-from pydantic import NonNegativeInt
+from app.models.base_model import BaseModel
+from app.models.dis_advantage import DisAdvantage
+from app.models.skill import Skill
 
-from .base_model import BaseModel
 
-
-# TODO use classes instead of simple dict to provide semantics to key and value
 class Hero(BaseModel):
     name: str
 
@@ -13,8 +12,7 @@ class Hero(BaseModel):
     culture: str
 
     profession: str
-    # characteristics: dict[Characteristic, NonNegativeInt]
-    talents: dict[str, NonNegativeInt]
-    combat_techniques: dict[str, NonNegativeInt]
-    advantages: List[tuple[str, str, NonNegativeInt]]  # tuples second entry must be set but can be empty
-    disadvantages: List[tuple[str, str, NonNegativeInt]]  # tuples second entry must be set but can be empty
+    talents: List[Skill]
+    combat_techniques: List[Skill]
+    advantages: List[DisAdvantage]
+    disadvantages: List[DisAdvantage]
