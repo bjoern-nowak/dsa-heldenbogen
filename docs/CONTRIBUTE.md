@@ -31,9 +31,24 @@ make prebuild
 make run
 ```
 
+### Required infrastructure
+
+App needs a database, from project root:
+
+```bash
+# start with
+docker compose up -d 
+# check logs
+docker compose logs -f
+# stop with
+docker compose up down 
+```
+
 ### Available URLs
 
 * Backend OpenAPI Documentation: http://localhost:8000/docs
+* PostgreSQL Management (PGAdmin): http://localhost:5050
+  * Add DB server using 'db docker container name' (possibly: dsa-heldenbogen-db-1) as host
 
 # HowTo...
 
