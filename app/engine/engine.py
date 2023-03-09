@@ -6,7 +6,6 @@ from typing import Callable
 from typing import List
 from typing import Optional
 from typing import Sequence
-from typing import Tuple
 
 from clingo import Control
 from clingo import Model
@@ -108,7 +107,7 @@ class Engine:
 
     def _perform_hero_validation_step(self,
                                       hero: HeroWrapper,
-                                      program: Tuple[str, Sequence[Symbol]]) -> Tuple[List[Symbol], List[Symbol]]:
+                                      program: tuple[str, Sequence[Symbol]]) -> tuple[List[Symbol], List[Symbol]]:
         """
         :return: tuple of errors and warnings
         """
@@ -131,7 +130,7 @@ class Engine:
         return known_values
 
     def _execute(self,
-                 ground_parts: Sequence[Tuple[str, Sequence[Symbol]]] = (RulebookProgram.BASE,),
+                 ground_parts: Sequence[tuple[str, Sequence[Symbol]]] = (RulebookProgram.BASE,),
                  context: Any = None,
                  on_model: Optional[Callable[[Model], Optional[bool]]] = None,
                  on_fail_raise: Exception = None):

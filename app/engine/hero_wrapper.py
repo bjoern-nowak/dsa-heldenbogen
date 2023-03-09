@@ -1,7 +1,6 @@
 from __future__ import annotations  # required till PEP 563
 
 from typing import List
-from typing import Tuple
 
 from clingo import Number
 from clingo import String
@@ -16,7 +15,7 @@ def _map_feature_with_level(d: dict[str, NonNegativeInt]) -> List[Symbol]:
     return [Tuple_([String(key), Number(d[key])]) for key in d]
 
 
-def _map_feature_with_level_and_using(d: dict[str, Tuple[NonNegativeInt, str]]) -> List[Symbol]:
+def _map_feature_with_level_and_using(d: dict[str, tuple[NonNegativeInt, str]]) -> List[Symbol]:
     """
     :return: list of three-element tuples of '(<feature>,<level>,<feature_using>)'
     """
