@@ -12,3 +12,5 @@ known_culture(
     "Ambosszwerge";"Brillantzwerge";"Erzzwerge";"Hügelzwerge";"Wildzwerge"
 ).
 known_profession("Händler";"Söldner";"Zauberweber";"Wildnisläuferin").
+known_talent("Körperbeherrschung";"Kraftakt";"Selbstbeherrschung";"Sinnesschärfe";"Bekehren & Überzeugen";"Zechen";"Menschenkenntnis";"Überreden";"Orientierung";"Wildnisleben";"Götter & Kulte";"Kriegskunst";"Sagen & Legenden";"Handel";"Heilkunde Wunden";"Körperbeherrschung";"Schwimmen";"Singen";"Willenskraft";"Fährtensuchen";"Pflanzenkunde";"Geschichtswissen";"Magiekunde";"Sternkunde";"Musizieren";"Einschüchtern";"Etikette";"Tierkunde";"Rechnen";"Rechtskunde";"Heilkunde Krankheiten";"Heilkunde Seele").
+known_combat_technique("Armbrüste";"Raufen";"Hiebwaffen";"Schwerter";"Stangenwaffen";"Zweihandschwerter";"Zweihandhiebwaffen").
