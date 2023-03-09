@@ -6,8 +6,8 @@ from clingo import Symbol
 from clingo import SymbolType
 
 from app.engine.rulebook_function import RulebookFunction
-from app.models import BaseModel
 from app.models.base_enum import BaseEnum
+from app.models.basemodel import BaseModel
 
 
 class HeroValidationErrorType(str, BaseEnum):

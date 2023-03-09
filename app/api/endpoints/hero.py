@@ -6,13 +6,13 @@ from fastapi import APIRouter
 from fastapi import HTTPException
 from fastapi import Query
 
-from app.api.schema import HeroValidationResult
-from app.api.schema import ServerError
+from app.api.schema.errors import ServerError
 from app.api.schema.hero import Hero
+from app.api.schema.validation_result import HeroValidationResult
 from app.engine.exceptions import HeroInvalidError
 from app.engine.hero_validation_warning import HeroValidationWarning
-from app.models import Rulebook
-from app.service import HeroService
+from app.models.rulebook import Rulebook
+from app.service.hero_service import HeroService
 
 logger = logging.getLogger(__name__)
 router = APIRouter()

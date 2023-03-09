@@ -3,8 +3,8 @@ from __future__ import annotations  # required till PEP 563
 from clingo import Symbol
 from clingo import SymbolType
 
-from app.models import Feature
 from app.models.base_enum import BaseEnum
+from app.models.feature import Feature
 
 
 # TODO add information about parameters

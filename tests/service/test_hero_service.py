@@ -2,9 +2,9 @@ import unittest
 
 from parameterized import parameterized
 
-from app.models import Hero
-from app.models import Rulebook
-from app.service import HeroService
+from app.models.hero import Hero
+from app.models.rulebook import Rulebook
+from app.service.hero_service import HeroService
 
 
 class TestHeroService(unittest.TestCase):

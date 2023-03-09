@@ -1,7 +1,7 @@
 import logging
 from typing import List
 
-from app.models import Rulebook
+from app.models.rulebook import Rulebook
 from app.resource import list_files
 
 logger = logging.getLogger(__name__)

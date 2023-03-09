@@ -2,7 +2,7 @@ from typing import List
 
 from pydantic import NonNegativeInt
 
-from app.models import BaseModel
+from app.models.basemodel import BaseModel
 from app.models.hero import Hero as ModelHero
 
 

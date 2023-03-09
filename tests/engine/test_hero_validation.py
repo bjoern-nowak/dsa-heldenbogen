@@ -2,8 +2,8 @@ import unittest
 
 from parameterized import parameterized
 
-from app.engine import Engine
-from app.models import Hero
+from app.engine.engine import Engine
+from app.models.hero import Hero
 from app.models.rulebook import Rulebook
 
 
