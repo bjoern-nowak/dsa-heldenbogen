@@ -3,7 +3,7 @@ from typing import List
 from fastapi import FastAPI
 from starlette.responses import RedirectResponse
 
-from .v1.api import api as api_v1
+from .api import api
 
 app = FastAPI()
 
@@ -16,7 +16,7 @@ def index():
 @app.get('/apis')
 def index() -> List[str]:
     """List all available apis"""
-    return ['/api/v1']
+    return ['/api']
 
 
-app.mount('/api/v1', api_v1)
+app.mount('/api', api)

@@ -6,8 +6,8 @@ from fastapi import APIRouter
 from fastapi import HTTPException
 from fastapi import Query
 
-from app.api.v1.schema import ClientError
-from app.api.v1.schema import ServerError
+from app.api.schema import ClientError
+from app.api.schema import ServerError
 from app.engine.exceptions import UnusableRulebookError
 from app.models import Feature
 from app.models import Rulebook

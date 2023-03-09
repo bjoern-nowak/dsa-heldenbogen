@@ -7,8 +7,8 @@ from fastapi import FastAPI
 from fastapi.responses import Response
 from starlette.responses import RedirectResponse
 
-from app.api.v1.endpoints import hero
-from app.api.v1.endpoints import meta
+from app.api.endpoints import hero
+from app.api.endpoints import meta
 
 api = FastAPI()
 
@@ -18,7 +18,7 @@ router = APIRouter()
 @api.get('/', tags=['root'])
 def index():
     # TODO we shall not must use the api prefix manually
-    return RedirectResponse(url='/api/v1/docs')
+    return RedirectResponse(url='/api/docs')
 
 
 # Source: https://github.com/tiangolo/fastapi/issues/1140

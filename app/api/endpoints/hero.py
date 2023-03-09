@@ -7,8 +7,8 @@ from fastapi import Body
 from fastapi import HTTPException
 from fastapi import Query
 
-from app.api.v1.schema import HeroValidationResult
-from app.api.v1.schema import ServerError
+from app.api.schema import HeroValidationResult
+from app.api.schema import ServerError
 from app.engine.exceptions import HeroInvalidError
 from app.engine.hero_validation_warning import HeroValidationWarning
 from app.models import Hero
