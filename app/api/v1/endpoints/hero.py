@@ -3,6 +3,7 @@ from http import HTTPStatus
 from typing import List
 
 from fastapi import APIRouter
+from fastapi import Body
 from fastapi import HTTPException
 from fastapi import Query
 
@@ -17,6 +18,21 @@ from app.service import HeroService
 logger = logging.getLogger(__name__)
 router = APIRouter()
 
+HERO_EXAMPLE = {
+    "name": "UncleBob",
+    "species": "Elfen",
+    "culture": "Auelfen",
+    "profession": "Söldner",
+    "talents": {"Körperbeherrschung": 3, "Kraftakt": 3, "Selbstbeherrschung": 4, "Zechen": 5, "Menschenkenntnis": 3,
+                "Überreden": 3, "Orientierung": 4, "Wildnisleben": 3, "Götter & Kulte": 3, "Kriegskunst": 6,
+                "Sagen & Legenden": 5, "Handel": 3, "Heilkunde Wunden": 4},
+    "combat_techniques": {"Armbrüste": 10, "Raufen": 10, "Stangenwaffen": 9, "Zweihandschwerter": 10},
+    "advantages": [("Begabung", "Singen", 1), ("Begabung", "Musizieren", 1), ("Beidhändig", "", 1),
+                   ("Dunkelsicht", "", 2)],
+    "disadvantages": [("Körpergebundene Kraft", "", 1), ("Lästige Mindergeister", "", 1), ("Wahrer Name", "", 1),
+                      ("Blutrausch", "", 1)]
+}
+
 
 @router.post(
     '/validate',
@@ -27,7 +43,7 @@ router = APIRouter()
         }
     }
 )
-def validate(hero: Hero, rulebooks: List[Rulebook] = Query()) -> HeroValidationResult:
+def validate(hero: Hero = Body(example=HERO_EXAMPLE), rulebooks: List[Rulebook] = Query()) -> HeroValidationResult:
     try:
         logger.trace(f"(Request) validate\nrulebooks {rulebooks}\nhero: {hero}")
         warnings: List[HeroValidationWarning] = HeroService().validate(hero, rulebooks)
