@@ -15,11 +15,8 @@ def _map_feature_with_level(d: dict[str, NonNegativeInt]) -> List[Symbol]:
     return [Tuple_([String(key), Number(d[key])]) for key in d]
 
 
-def _map_feature_with_level_and_using(d: dict[str, tuple[NonNegativeInt, str]]) -> List[Symbol]:
-    """
-    :return: list of three-element tuples of '(<feature>,<level>,<feature_using>)'
-    """
-    return [Tuple_([String(key), Number(d[key][0]), String(d[key][1])]) for key in d]
+def _map_feature_uses_with_level(l: List[tuple[str, str, NonNegativeInt]]) -> List[Symbol]:
+    return [Tuple_([String(feature), String(uses), Number(lvl)]) for feature, uses, lvl in l]
 
 
 # TODO may provide a method which returns a list of literals instead of using a extra LP asking each feature
@@ -49,10 +46,10 @@ class HeroWrapper():
         return _map_feature_with_level(self._hero.combat_techniques)
 
     def advantages(self) -> List[Symbol]:
-        return _map_feature_with_level_and_using(self._hero.advantages)
+        return _map_feature_uses_with_level(self._hero.advantages)
 
     def disadvantages(self) -> List[Symbol]:
-        return _map_feature_with_level_and_using(self._hero.disadvantages)
+        return _map_feature_uses_with_level(self._hero.disadvantages)
 
     def any_of_has_minimum_level(self, choices: Symbol, feature: Symbol, selection: Symbol, minimum_level: Symbol) -> Symbol:
         """

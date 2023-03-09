@@ -33,15 +33,15 @@ class HeroValidationWarning(BaseModel):
         match warning.name:
             case HeroValidationWarningType.MISSING_TYPICAL:
                 if RulebookFunction.is_dis_advantage(referred_feature):
-                    referred_feature_level = referred_feature.arguments[1].number
-                    referred_feature_using = referred_feature.arguments[2].string
+                    referred_feature_using = referred_feature.arguments[1].string
+                    referred_feature_level = referred_feature.arguments[2].number
                     # TODO only add 'referred_feature_using' to message and parameter when not empty
                     return HeroValidationWarning(
                         type=HeroValidationWarningType.MISSING_TYPICAL,
                         message=f"Heros '{caused_feature.name}' is missing typical '{referred_feature.name}'"
                                 f" of '{referred_feature_value}'"
-                                f" at level '{referred_feature_level}'"
-                                f" using '{referred_feature_using}'.",
+                                f" using '{referred_feature_using}'"
+                                f" at level '{referred_feature_level}'.",
                         parameter={
                             'caused_feature': caused_feature.name,
                             'caused_feature_value': caused_feature_value,

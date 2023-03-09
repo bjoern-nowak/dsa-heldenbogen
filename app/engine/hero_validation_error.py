@@ -44,12 +44,12 @@ class HeroValidationError(BaseModel):
         match error.name:
             case HeroValidationErrorType.UNKNOWN:
                 if RulebookFunction.is_dis_advantage(caused_feature):
-                    caused_feature_level = caused_feature.arguments[1].number
-                    caused_feature_using = caused_feature.arguments[2].string
+                    caused_feature_using = caused_feature.arguments[1].string
+                    caused_feature_level = caused_feature.arguments[2].number
                     return HeroValidationError(
                         type=HeroValidationErrorType.UNKNOWN,
-                        message=f"Heros '{caused_feature.name}' value of '{caused_feature_value}'"
-                                f" at level '{caused_feature_level}' using '{caused_feature_using}' is not known.",
+                        message=f"Heros '{caused_feature.name}' of '{caused_feature_value}' using '{caused_feature_using}'"
+                                f" at level '{caused_feature_level}' is not known.",
                         parameter={
                             'caused_feature': caused_feature.name,
                             'caused_feature_value': caused_feature_value,

@@ -50,8 +50,8 @@ __advantage_wrapper(@advantages).
 __disadvantage_wrapper(@disadvantages).
 talent(T,LVL) :- __talent_wrapper((T,LVL)).
 combat_technique(CT,LVL) :- __combat_technique_wrapper((CT,LVL)).
-advantage(A,LVL,USES) :- __advantage_wrapper((A,LVL,USES)).
-disadvantage(DA,LVL,USES) :- __disadvantage_wrapper((DA,LVL,USES)).
+advantage(A,USES,LVL) :- __advantage_wrapper((A,USES,LVL)).
+disadvantage(DA,USES,LVL) :- __disadvantage_wrapper((DA,USES,LVL)).
 
 
 #program validate_hero_step_100. %% check species usable
@@ -88,14 +88,14 @@ missing_level(profession(P),combat_technique(any_of(1,CTs),MIN_LVL)) :- professi
 
 
 #program validate_hero_step_400. %% check (dis)advantage usable
-unknown(advantage(A,LVL,USES)) :- advantage(A,LVL,USES), not known_advantage(A,LVL,USES).
-unknown(disadvantage(DA,LVL,USES)) :- disadvantage(DA,LVL,USES), not known_disadvantage(DA,LVL,USES).
+unknown(advantage(A,USES,LVL)) :- advantage(A,USES,LVL), not known_advantage(A,USES,LVL).
+unknown(disadvantage(DA,USES,LVL)) :- disadvantage(DA,USES,LVL), not known_disadvantage(DA,USES,LVL).
 
 
 #program validate_hero_step_450. %% check (dis)advantage requirements
 % WARNINGS
-missing_typical(species(S),advantage(A,LVL,USES)) :- species(S), #false : not has_typical(species(S),advantage(_,_,_)); has_typical(species(S),advantage(A,LVL,USES)), not advantage(A,LVL,USES).
-missing_typical(species(S),disadvantage(DA,LVL,USES)) :- species(S), #false : not has_typical(species(S),disadvantage(_,_,_)); has_typical(species(S),disadvantage(DA,LVL,USES)), not disadvantage(DA,LVL,USES).
+missing_typical(species(S),advantage(A,USES,LVL)) :- species(S), #false : not has_typical(species(S),advantage(_,_,_)); has_typical(species(S),advantage(A,USES,LVL)), not advantage(A,USES,LVL).
+missing_typical(species(S),disadvantage(DA,USES,LVL)) :- species(S), #false : not has_typical(species(S),disadvantage(_,_,_)); has_typical(species(S),disadvantage(DA,USES,LVL)), not disadvantage(DA,USES,LVL).
 
 
 #program validate_hero_step_500. %% check skills (talents, combat techniques) usable
