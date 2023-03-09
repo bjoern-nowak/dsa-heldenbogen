@@ -38,6 +38,12 @@ class RulebookProgram(tuple[str, Sequence[Symbol]], BaseEnum):
     VALIDATE_HERO_STEP_350 = (f"{_VALIDATE_HERO_STEP}_350", [])
     """Validates hero profession requirements"""
 
+    VALIDATE_HERO_STEP_500 = (f"{_VALIDATE_HERO_STEP}_500", [])
+    """Validates hero skills (talents, combat techniques) usable"""
+
+    VALIDATE_HERO_STEP_550 = (f"{_VALIDATE_HERO_STEP}_550", [])
+    """Validates hero skills (talents, combat techniques) requirements"""
+
     @staticmethod
     def hero_validation_step_for(number: int) -> tuple[str, Sequence[Symbol]]:
         return f"{_VALIDATE_HERO_STEP}_{number}", []

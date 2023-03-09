@@ -77,3 +77,11 @@ missing_level(profession(P),talent(T,MIN)) :- profession(P), #false : not requir
 missing_level(profession(P),combat_technique(CT,MIN)) :- profession(P), #false : not requires(profession(P),combat_technique(_,_)); requires(profession(P),combat_technique(CT,MIN)), not combat_technique(CT,_).
 missing_level(profession(P),combat_technique(CT,MIN)) :- profession(P), #false : not requires(profession(P),combat_technique(_,_)); requires(profession(P),combat_technique(CT,MIN)), combat_technique(CT,L), L < MIN.
 missing_level(profession(P),combat_technique(any_of(1,CTs),MIN)) :- profession(P), #false : not requires(profession(P),any_of(_,combat_technique,_,_)); requires(profession(P),any_of(CHOICES,combat_technique,CTs,MIN)), #false : @any_of_has_minimum_level(CHOICES,combat_technique,CTs,MIN) = 1.
+
+
+#program validate_hero_step_500. %% check skills (talents, combat techniques) usable
+unknown(talent(T)) :- talent(T,_), not known_talent(T).
+unknown(combat_technique(CT)) :- combat_technique(CT,_), not known_combat_technique(CT).
+
+
+#program validate_hero_step_550. %% check skills (talents, combat techniques) requirements

@@ -37,6 +37,8 @@ class Engine:
         250: RulebookProgram.VALIDATE_HERO_STEP_250,
         300: RulebookProgram.VALIDATE_HERO_STEP_300,
         350: RulebookProgram.VALIDATE_HERO_STEP_350,
+        500: RulebookProgram.VALIDATE_HERO_STEP_500,
+        550: RulebookProgram.VALIDATE_HERO_STEP_550,
     }
     DEFAULT_HERO_VALIDATION_STEPS = hero_validation_steps.keys()
 
