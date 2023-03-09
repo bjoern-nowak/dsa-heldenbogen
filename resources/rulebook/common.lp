@@ -67,7 +67,7 @@ unknown(culture(C)) :- culture(C), not known_culture(C).
 %% TODO extract all restriction conditions ('#false : not' part) as separate fact, so that other rulebooks can reuse it
 unusable_by(culture(C),species(S)) :- culture(C), species(S), #false : not requires(culture(C),species(_)); not requires(culture(C),species(S)).
 % WARNINGS
-unusual_for(species(S),culture(C)) :- species(S), culture(C), #false : not has_usual(species(S),culture(_)); not has_usual(species(S),culture(C)).
+missing_usual(species(S),culture(C)) :- species(S), culture(C), #false : not has_usual(species(S),culture(_)); not has_usual(species(S),culture(C)).
 
 
 #program validate_hero_step_250. %% check culture requirements

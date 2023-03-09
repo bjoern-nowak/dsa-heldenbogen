@@ -8,7 +8,7 @@ from app.models.base_enum import BaseEnum
 
 
 class HeroValidationWarningType(str, BaseEnum):
-    UNUSUAL_FOR = 'unusual_for'
+    MISSING_USUAL = 'missing_usual'
     MISSING_TYPICAL = 'missing_typical'
 
 
@@ -64,10 +64,11 @@ class HeroValidationWarning(BaseModel):
                             'referred_feature_value': referred_feature_value,
                         },
                     )
-            case HeroValidationWarningType.UNUSUAL_FOR:
+            case HeroValidationWarningType.MISSING_USUAL:
                 return HeroValidationWarning(
-                    type=HeroValidationWarningType.UNUSUAL_FOR,
-                    message=f"Heros '{caused_feature.name}' is unusual for heros '{referred_feature.name}'.",
+                    type=HeroValidationWarningType.MISSING_USUAL,
+                    message=f"Heros '{caused_feature.name}' is missing usual '{referred_feature.name}'"
+                            f" of '{referred_feature_value}'.",
                     parameter={
                         'caused_feature': caused_feature.name,
                         'caused_feature_value': caused_feature_value,
