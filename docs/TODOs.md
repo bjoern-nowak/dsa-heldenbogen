@@ -14,3 +14,4 @@
 * Add species 'Halbelfen' from dsa5 base rulebook.
 * Add handling of optional rules
 * Decide how to handle non-filled hero features (like supporting pre-checks, were only a species and culture has been selected)
+* May dockerize this app, see exmaple https://github.com/tiangolo/full-stack-fastapi-postgresql
