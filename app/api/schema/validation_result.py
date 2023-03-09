@@ -4,7 +4,7 @@ from typing import List
 
 from app.engine.hero_validation_error import HeroValidationError
 from app.engine.hero_validation_warning import HeroValidationWarning
-from app.models import BaseModel
+from app.models.basemodel import BaseModel
 
 
 # TODO rename file/module to reflect class name

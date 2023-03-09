@@ -21,9 +21,9 @@ from app.engine.hero_validation_warning import HeroValidationWarning
 from app.engine.hero_wrapper import HeroWrapper
 from app.engine.rulebook_program import RulebookProgram
 from app.engine.rulebook_validator import RulebookValidator
-from app.models import Feature
-from app.models import Hero
-from app.models import Rulebook
+from app.models.feature import Feature
+from app.models.hero import Hero
+from app.models.rulebook import Rulebook
 
 logger = logging.getLogger(__name__)
 

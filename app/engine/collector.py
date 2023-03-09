@@ -7,7 +7,7 @@ from clingo import Symbol
 from app.engine.hero_validation_error import HeroValidationErrorType
 from app.engine.hero_validation_warning import HeroValidationWarningType
 from app.engine.rulebook_function import RulebookFunction
-from app.models import Feature
+from app.models.feature import Feature
 
 logger = logging.getLogger(__name__)
 

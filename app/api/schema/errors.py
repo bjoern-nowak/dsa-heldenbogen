@@ -2,7 +2,7 @@ from __future__ import annotations  # required till PEP 563
 
 from fastapi.encoders import jsonable_encoder
 
-from app.models import BaseModel
+from app.models.basemodel import BaseModel
 
 
 # reason for 'jsonable_encoder': nested models, see

@@ -3,8 +3,8 @@ from __future__ import annotations  # required till PEP 563
 from clingo import Symbol
 
 from app.engine.rulebook_function import RulebookFunction
-from app.models import BaseModel
 from app.models.base_enum import BaseEnum
+from app.models.basemodel import BaseModel
 
 
 class HeroValidationWarningType(str, BaseEnum):

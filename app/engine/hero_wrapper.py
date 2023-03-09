@@ -8,7 +8,7 @@ from clingo import Symbol
 from clingo import Tuple_
 from pydantic import NonNegativeInt
 
-from app.models import Hero
+from app.models.hero import Hero
 
 
 def _map_feature_with_level(d: dict[str, NonNegativeInt]) -> List[Symbol]:
