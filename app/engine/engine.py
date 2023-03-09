@@ -37,6 +37,8 @@ class Engine:
         250: RulebookProgram.VALIDATE_HERO_STEP_250,
         300: RulebookProgram.VALIDATE_HERO_STEP_300,
         350: RulebookProgram.VALIDATE_HERO_STEP_350,
+        400: RulebookProgram.VALIDATE_HERO_STEP_400,
+        450: RulebookProgram.VALIDATE_HERO_STEP_450,
         500: RulebookProgram.VALIDATE_HERO_STEP_500,
         550: RulebookProgram.VALIDATE_HERO_STEP_550,
     }

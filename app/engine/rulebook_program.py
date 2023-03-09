@@ -38,6 +38,12 @@ class RulebookProgram(tuple[str, Sequence[Symbol]], BaseEnum):
     VALIDATE_HERO_STEP_350 = (f"{_VALIDATE_HERO_STEP}_350", [])
     """Validates hero profession requirements"""
 
+    VALIDATE_HERO_STEP_400 = (f"{_VALIDATE_HERO_STEP}_400", [])
+    """Validates hero (dis)advantages usable"""
+
+    VALIDATE_HERO_STEP_450 = (f"{_VALIDATE_HERO_STEP}_450", [])
+    """Validates hero (dis)advantages requirements"""
+
     VALIDATE_HERO_STEP_500 = (f"{_VALIDATE_HERO_STEP}_500", [])
     """Validates hero skills (talents, combat techniques) usable"""
 
