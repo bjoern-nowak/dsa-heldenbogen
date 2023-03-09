@@ -135,8 +135,9 @@ class Engine:
                  context: Any = None,
                  on_model: Optional[Callable[[Model], Optional[bool]]] = None,
                  on_fail_raise: Exception = None):
+        default_programs: List[tuple[str, Sequence[Symbol]]] = [RulebookProgram.BASE]
         ctl = self._create_control()
-        ctl.ground(programs + [RulebookProgram.BASE], context)
+        ctl.ground(default_programs + programs, context)
         result: SolveResult = ctl.solve(on_model=on_model)
         if not result.satisfiable:
             if on_fail_raise:
