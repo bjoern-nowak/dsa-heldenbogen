@@ -13,6 +13,7 @@ class ErrorAtom(str, BaseEnum):
     UNKNOWN = 'unknown'
     UNUSABLE_BY = 'unusable_by'
     MISSING_LEVEL = 'missing_level'
+    MAX_LVL_EXCEEDED = 'max_lvl_exceeded'
 
 
 class _ErrorAtomAddon(str, BaseEnum):
@@ -33,6 +34,8 @@ def as_error(error: Symbol) -> HeroValidationError:
             return _unusable_by_error(error)
         case ErrorAtom.MISSING_LEVEL:
             return _missing_level_error(error)
+        case ErrorAtom.MAX_LVL_EXCEEDED:
+            return _max_level_exceeded_error(error)
         case _:
             raise NotImplementedError(f"Found hero validation error without parsing definition.\n"
                                       f"Error name: {error.name}\n"
@@ -139,6 +142,23 @@ def _missing_level_error(error: Symbol):
                 'referred_feature_value_minimum_level': required_level.number,
             },
         )
+
+
+def _max_level_exceeded_error(error: Symbol):
+    caused_feature = error.arguments[0]
+    caused_feature_value = caused_feature.arguments[0].string
+    caused_feature_level = caused_feature.arguments[1].number
+    max_level = error.arguments[1].number
+    return HeroValidationError(
+        type=HeroValidationError.Type.MAX_LVL_EXCEEDED,
+        message=f"Heros '{caused_feature.name}' of '{caused_feature_value}' exceeds maximum level '{max_level}'.",
+        parameter={
+            'caused_feature': caused_feature.name,
+            'caused_feature_value': caused_feature_value,
+            'caused_feature_level': caused_feature_level,
+            'max_level': max_level,
+        },
+    )
 
 
 def _atypical_warning(warning: Symbol):

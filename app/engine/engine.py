@@ -34,6 +34,7 @@ class Engine:
     #   so that only one step per feature (instead of currently two) is used
     #  Anyway having steps is useful, since it allows rulebooks to intervene
     hero_validation_steps: dict[int, RulebookProgram | int] = {
+        50: RulebookProgram.VALIDATE_HERO_STEP_50,
         100: RulebookProgram.VALIDATE_HERO_STEP_100,
         150: RulebookProgram.VALIDATE_HERO_STEP_150,
         200: RulebookProgram.VALIDATE_HERO_STEP_200,

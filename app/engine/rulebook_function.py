@@ -23,6 +23,8 @@ class RulebookFunction(str, BaseEnum):
     @staticmethod
     def known(feature: Feature) -> str:
         match feature:
+            case Feature.EXPERIENCE_LEVEL:
+                return 'known_experience_level'
             case Feature.SPECIES:
                 return 'known_species'
             case Feature.CULTURE:

@@ -31,6 +31,9 @@ class HeroWrapper():
         super().__init__()
         self._hero = hero
 
+    def experience_level(self) -> Symbol:
+        return String(self._hero.experience_level)
+
     def species(self) -> Symbol:
         return String(self._hero.species)
 

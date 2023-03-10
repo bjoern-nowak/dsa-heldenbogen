@@ -32,6 +32,8 @@ class Collector:
     def known_feature_values(cls, model: Model, known_values: List[str], feature: Feature):
         cls._functions_first_string(known_values, model, RulebookFunction.known(feature))
 
+    # TODO improve below internal methods NOT filling an list parameter but RETURNING such
+
     @classmethod
     def _functions_first_string(cls, found: List[str], model: Model, by_name: str = None) -> None:
         """
@@ -41,10 +43,11 @@ class Collector:
         :param by_name: (optional) filter functions by given name
         :return:
         """
-        functions_args: List[List[str]] = []
-        cls._functions_strings(functions_args, model, by_name)
-        for func_args in functions_args:
-            found.append(func_args[0])
+        functions: List[Symbol] = []
+        cls._functions(functions, model)
+        for func in functions:
+            if not by_name or (by_name == func.name):
+                found.append(func.arguments[0].string)
 
     @classmethod
     def _functions_strings(cls, found: List[List[str]], model: Model, by_name: RulebookFunction = None) -> None:

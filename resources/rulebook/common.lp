@@ -4,6 +4,7 @@
 #defined rulebook_depends/2.
 #defined rulebook_unusable/2. #show rulebook_unusable/2.
 %% world facts
+#defined known_experience_level/1.
 #defined known_species/1.
 #defined known_culture/1.
 #defined known_profession/1.
@@ -26,6 +27,7 @@
 #defined unknown/1. #show unknown/1.
 #defined unusable_by/2. #show unusable_by/2.
 #defined missing_level/2. #show missing_level/2.
+#defined max_lvl_exceeded/2. #show max_lvl_exceeded/2.
 %% hero validation warnings
 #defined unusual_for/2. #show unusual_for/2.
 #defined missing_typical/2. #show missing_typical/2.
@@ -36,22 +38,45 @@ rulebook_unusable(R,D) :- rulebook_depends(R,D), rulebook(R), not rulebook(D).
 %% TODO add check that rulebook only uses known feature values, hence requires program world_facts
 
 
+#program world_facts.
+% CC := MAX_CHARACTERISTIC_LVL
+% S := MAX_SKILL_LVL
+% CT := MAX_COMBAT_TECHNIQUE_LVL
+% CCP := MAX_CHARACTERISTIC_POINTS
+% SL := MAX_SPELLS_AND_LITURGIES
+% FS := MAX_FOREIGN_SPELL
+%                                       CC  S   CT  CCP  SL  FS
+known_experience_level("Inexperienced", 12, 10,  8,  95,  8, 0 ).
+known_experience_level("Average",       13, 10, 10,  98, 10, 1 ).
+known_experience_level("Experienced",   14, 10, 12, 100, 12, 2 ).
+known_experience_level("Competent",     15, 13, 14, 102, 14, 3 ).
+known_experience_level("Masterful",     16, 16, 16, 105, 16, 4 ).
+known_experience_level("Brilliant",     17, 19, 18, 109, 18, 5 ).
+known_experience_level("Legendary",     18, 20, 20, 114, 20, 6 ).
+
+
 #program hero_facts.
 %% to be used with programs 'validate_hero_step<X>'
 %% requires 'hero_wrapper.py' as 'context'
-species(@species).
-culture(@culture).
-profession(@profession).
 %
 %% TODO these '__<XYZ>_wrapper' are ugly helper facts, try to remove it
 __talent_wrapper(@talents).
 __combat_technique_wrapper(@combat_techniques).
 __advantage_wrapper(@advantages).
 __disadvantage_wrapper(@disadvantages).
+%
+experience_level(@experience_level).
+species(@species).
+culture(@culture).
+profession(@profession).
 talent(T,LVL) :- __talent_wrapper((T,LVL)).
 combat_technique(CT,LVL) :- __combat_technique_wrapper((CT,LVL)).
 advantage(A,USES,LVL) :- __advantage_wrapper((A,USES,LVL)).
 disadvantage(DA,USES,LVL) :- __disadvantage_wrapper((DA,USES,LVL)).
+
+
+#program validate_hero_step_50. %% pre check
+unknown(experience_level(EL)) :- experience_level(EL), not known_experience_level(EL,_,_,_,_,_,_).
 
 
 #program validate_hero_step_100. %% check species usable
@@ -106,3 +131,6 @@ unknown(combat_technique(CT)) :- combat_technique(CT,_), not known_combat_techni
 
 
 #program validate_hero_step_550. %% check skills (talents, combat techniques) requirements
+max_lvl_exceeded(talent(T,LVL),MAX_LVL) :- talent(T,LVL), experience_level(EL), known_experience_level(EL,_,MAX_LVL,_,_,_,_), LVL > MAX_LVL.
+max_lvl_exceeded(combat_technique(CT,LVL),MAX_LVL) :- combat_technique(CT,LVL), experience_level(EL), known_experience_level(EL,_,_,MAX_LVL,_,_,_), LVL > MAX_LVL.
+

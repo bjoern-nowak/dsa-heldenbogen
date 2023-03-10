@@ -4,6 +4,7 @@ from pydantic import NonNegativeInt
 
 from app.models.base_model import BaseModel
 from app.models.dis_advantage import DisAdvantage
+from app.models.experience_level import ExperienceLevel
 from app.models.hero import Hero as ModelHero
 from app.models.skill import Skill
 
@@ -20,6 +21,8 @@ class Hero(BaseModel):
 
     name: str
 
+    experience_level: ExperienceLevel
+
     species: str
     culture: str
     profession: str
@@ -34,6 +37,7 @@ class Hero(BaseModel):
     def to_model(self) -> ModelHero:
         return ModelHero(
             name=self.name,
+            experience_level=self.experience_level,
             species=self.species,
             culture=self.culture,
             profession=self.profession,
@@ -55,6 +59,7 @@ class Hero(BaseModel):
         schema_extra = {
             "example": {
                 "name": "UncleBob",
+                "experience_level": "Legendary",
                 "species": "Elfen",
                 "culture": "Auelfen",
                 "profession": "Söldner",
