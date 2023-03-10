@@ -1,8 +1,8 @@
 import logging
 from typing import List
 
+from app import resource
 from app.models.rulebook import Rulebook
-from app.resource import list_files
 
 logger = logging.getLogger(__name__)
 
@@ -32,7 +32,7 @@ class RulebookValidator:
 
     @staticmethod
     def _files_valid(rulebook: Rulebook) -> bool:
-        found_files = set(list_files(f"{Rulebook.res_folder_name()}/{rulebook}"))
+        found_files = set(resource.list_files(rulebook.res_folder()))
         if not RulebookValidator.required_files.issubset(found_files):
             return False
         return True

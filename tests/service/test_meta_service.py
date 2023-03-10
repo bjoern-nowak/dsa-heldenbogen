@@ -16,9 +16,9 @@ class TestMetaService(unittest.TestCase):
     ])
     def test_feature_listing(self, expected_count: int, feature: Feature):
         # given:
-        rulebooks = [Rulebook.DSA5]
+        rulebooks = ['dsa5']
         # when:
-        found = self.service.list_known_feature_values(feature, rulebooks)
+        found = self.service.list_known_feature_values(feature, Rulebook.list_by(rulebooks))
         # then:
         self.assertIs(len(found), expected_count)
 

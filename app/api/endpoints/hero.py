@@ -27,10 +27,10 @@ router = APIRouter()
         }
     }
 )
-def validate(hero: Hero, rulebooks: List[Rulebook] = Query()) -> HeroValidationResult:
+def validate(hero: Hero, rulebooks: List[str] = Query(example=['dsa5'])) -> HeroValidationResult:
     try:
         logger.trace(f"(Request) validate\nrulebooks {rulebooks}\nhero: {hero}")
-        warnings: List[HeroValidationWarning] = HeroService().validate(hero.to_model(), rulebooks)
+        warnings: List[HeroValidationWarning] = HeroService().validate(hero.to_model(), Rulebook.list_by(rulebooks))
         return HeroValidationResult.passed(warnings)
     except HeroInvalidError as e:
         return HeroValidationResult.failed(e.errors, e.warnings)

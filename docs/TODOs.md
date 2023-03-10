@@ -15,3 +15,6 @@
 * Add handling of optional rules
 * Decide how to handle non-filled hero features (like supporting pre-checks, were only a species and culture has been selected)
 * May dockerize this app, see exmaple https://github.com/tiangolo/full-stack-fastapi-postgresql
+* add meta endpoint list of available rulebooks, making rulebook enum obsolete
+* add rule that rulebooks can declare incompatibility to others
+* add hero endpoint that gives possible values for an requested feature of a uncomplete hero

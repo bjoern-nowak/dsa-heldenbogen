@@ -16,7 +16,7 @@ class TestHeroValidation(unittest.TestCase):
     ])
     def test_species_usable(self, error_count: int, species: str):
         # given:
-        engine = Engine([Rulebook.DSA5])
+        engine = Engine(Rulebook.list_by(['dsa5']))
         hero = Hero(name="name", species=species, culture='Auelfen', profession='Händler', talents={}, combat_techniques={})
         # when:
         errors = engine.validate(hero)
@@ -31,7 +31,7 @@ class TestHeroValidation(unittest.TestCase):
     ])
     def test_culture_usable(self, error_count: int, species: str, culture: str):
         # given:
-        engine = Engine([Rulebook.DSA5])
+        engine = Engine(Rulebook.list_by(['dsa5']))
         hero = Hero(name="name", species=species, culture=culture, profession='Händler', talents={}, combat_techniques={})
         # when:
         errors = engine.validate(hero)
@@ -46,7 +46,7 @@ class TestHeroValidation(unittest.TestCase):
     ])
     def test_profession_usable(self, error_count: int, species: str, culture: str, profession: str):
         # given:
-        engine = Engine([Rulebook.DSA5])
+        engine = Engine(Rulebook.list_by(['dsa5']))
         hero = Hero(name="name", species=species, culture=culture, profession=profession, talents={}, combat_techniques={})
         # when:
         errors = engine.validate(hero)
@@ -71,7 +71,7 @@ class TestHeroValidation(unittest.TestCase):
     #                                      talents: dict[str, int],
     #                                      combat_techniques: dict[str, int]):
     #     # given:
-    #     engine = Engine([Rulebook.DSA5])
+    #     engine = Engine(Rulebook.list_by(['dsa5']))
     #     hero = Hero(name="name",
     #                 species=species,
     #                 culture=culture,

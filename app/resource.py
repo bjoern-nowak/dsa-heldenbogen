@@ -8,6 +8,10 @@ def list_files(filename: str) -> List[str]:
     return [f.name for f in files('resources').joinpath(filename).iterdir()]
 
 
+def list_dirs(filename: str) -> List[str]:
+    return [d.name for d in files('resources').joinpath(filename).iterdir() if d.is_dir()]
+
+
 def get_path(filename: str) -> Path:
     with as_file(files('resources').joinpath(filename)) as filepath:
         return filepath
