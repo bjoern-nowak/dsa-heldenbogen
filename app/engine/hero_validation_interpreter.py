@@ -150,9 +150,9 @@ def _atypical_warning(warning: Symbol):
         referred_feature_using = referred_feature.arguments[1].string
         return HeroValidationWarning(
             type=HeroValidationWarning.Type.ATYPICAL,
-            message=f"Heros '{caused_feature.name}' declares '{referred_feature.name}'"
+            message=f"For heros '{caused_feature.name}' is atypical: '{referred_feature.name}'"
                     f" of '{referred_feature_value}'"
-                    f" using '{referred_feature_using}' atypical.",
+                    f" using '{referred_feature_using}'.",
             parameter={
                 'caused_feature': caused_feature.name,
                 'caused_feature_value': caused_feature_value,
