@@ -8,4 +8,5 @@ class Feature(str, BaseEnum):
     PROFESSION = 'profession'
     ADVANTAGE = 'advantage'
     DISADVANTAGE = 'disadvantage'
-    SKILL = 'skill'
+    TALENT = 'talent'
+    COMBAT_TECHNIQUE = 'combat_technique'

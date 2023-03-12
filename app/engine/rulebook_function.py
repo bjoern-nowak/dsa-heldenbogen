@@ -35,7 +35,9 @@ class RulebookFunction(str, BaseEnum):
                 return 'known_advantage'
             case Feature.DISADVANTAGE:
                 return 'known_disadvantage'
-            case Feature.SKILL:
-                return 'known_skill'
+            case Feature.TALENT:
+                return 'known_talent'
+            case Feature.COMBAT_TECHNIQUE:
+                return 'known_combat_technique'
             case _:
                 raise NotImplementedError(f"Feature '{feature}' has no associated LP 'known' function.")
