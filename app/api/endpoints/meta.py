@@ -18,7 +18,7 @@ router = APIRouter()
 
 
 @router.get(
-    '/list/rulebook',
+    '/rulebook/list',
     description="Get list of available rulebooks.",
     responses={
         HTTPStatus.INTERNAL_SERVER_ERROR: {
@@ -41,7 +41,7 @@ def list_known_rulebooks() -> List[str]:
 
 
 @router.get(
-    '/list',
+    '/feature/list',
     description="Get list of possible values for a feature under given context (like active rulebooks).",
     responses={
         HTTPStatus.INTERNAL_SERVER_ERROR: {
