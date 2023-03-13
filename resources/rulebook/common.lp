@@ -15,6 +15,7 @@
 #defined requires/2.
 #defined has_usual/2.
 #defined has_typical/2.
+#defined has_atypical/2.
 %% hero facts
 #defined species/1. #show species/1.
 #defined culture/1. #show culture/1.
