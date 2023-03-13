@@ -22,8 +22,7 @@ class RulebookValidator:
             if RulebookValidator._check(book):
                 valid_books.append(book)
             else:
-                # TODO make it a warning and build a testcase for it, this shall not be thrown at runtime
-                logger.warning(f"Rulebook '{book}' is not valid and will be ignored.")
+                logger.error(f"Rulebook '{book}' is not valid and will be ignored.")
         return valid_books
 
     @staticmethod
@@ -32,7 +31,11 @@ class RulebookValidator:
 
     @staticmethod
     def _files_valid(rulebook: Rulebook) -> bool:
-        found_files = set(resource.list_files(rulebook.res_folder()))
-        if not RulebookValidator.required_files.issubset(found_files):
+        try:
+            found_files = set(resource.list_files(rulebook.res_folder()))
+            if not RulebookValidator.required_files.issubset(found_files):
+                return False
+            return True
+        except Exception:
+            logger.exception(f"Could not validate '{rulebook}' rulebook files.")
             return False
-        return True

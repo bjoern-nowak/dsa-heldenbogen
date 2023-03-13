@@ -44,7 +44,7 @@ class TestHeroService(unittest.TestCase):
                     disadvantages={},
                     )
         # when:
-        errors = self.service.validate(hero, Rulebook.list_by(rulebooks))
+        errors = self.service.validate(hero, Rulebook.map(rulebooks))
         # then:
         self.assertIs(len(errors), error_count, msg=errors)
 

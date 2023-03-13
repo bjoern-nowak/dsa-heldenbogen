@@ -6,12 +6,14 @@ from fastapi import APIRouter
 from fastapi import HTTPException
 from fastapi import Query
 
+from app.api.schemas.errors import ClientError
 from app.api.schemas.errors import ServerError
 from app.api.schemas.hero import Hero
 from app.api.schemas.hero_validation_result import HeroValidationResult
 from app.engine.exceptions import HeroInvalidError
 from app.models.hero_validation_warning import HeroValidationWarning
 from app.models.rulebook import Rulebook
+from app.models.rulebook import UnknownRulebookError
 from app.services.hero_service import HeroService
 
 logger = logging.getLogger(__name__)
@@ -22,6 +24,9 @@ router = APIRouter()
     '/validate',
     description="Validates hero against given rulebooks.",
     responses={
+        HTTPStatus.BAD_REQUEST: {
+            'model': ClientError,
+        },
         HTTPStatus.INTERNAL_SERVER_ERROR: {
             'model': ServerError,
             'description': "Unexpected server error"
@@ -31,16 +36,14 @@ router = APIRouter()
 def validate(hero: Hero, rulebooks: List[str] = Query(example=['dsa5'])) -> HeroValidationResult:
     try:
         logger.trace(f"(Request) validate\nrulebooks {rulebooks}\nhero: {hero}")
-        warnings: List[HeroValidationWarning] = HeroService().validate(hero.to_model(), Rulebook.list_by(rulebooks))
+        warnings: List[HeroValidationWarning] = HeroService().validate(hero.to_model(), Rulebook.map(rulebooks))
         return HeroValidationResult.passed(warnings)
     except HeroInvalidError as e:
         return HeroValidationResult.failed(e.errors, e.warnings)
-    except Exception as e:
-        logger.exception("Some exception occurred.")
-        # TODO [1] not a good practise to catch any error and publish its message
+    except UnknownRulebookError as e:
         raise HTTPException(
-            status_code=HTTPStatus.INTERNAL_SERVER_ERROR,
-            detail=ServerError.by(e)
+            status_code=HTTPStatus.BAD_REQUEST,
+            detail=ClientError.by(e)
         )
 
 
@@ -48,6 +51,9 @@ def validate(hero: Hero, rulebooks: List[str] = Query(example=['dsa5'])) -> Hero
     '/save',
     description="Save hero as new or whenever given hero name exists for user override it.",
     responses={
+        HTTPStatus.BAD_REQUEST: {
+            'model': ClientError,
+        },
         HTTPStatus.INTERNAL_SERVER_ERROR: {
             'model': ServerError,
             'description': "Unexpected server error"
@@ -57,13 +63,11 @@ def validate(hero: Hero, rulebooks: List[str] = Query(example=['dsa5'])) -> Hero
 def save(hero: Hero, rulebooks: List[str] = Query(example=['dsa5'])):
     try:
         logger.trace(f"(Request) save\nrulebooks {rulebooks}\nhero: {hero}")
-        HeroService().save(hero.to_model(), Rulebook.list_by(rulebooks))
-    except Exception as e:
-        logger.exception("Some exception occurred.")
-        # TODO [1] not a good practise to catch any error and publish its message
+        HeroService().save(hero.to_model(), Rulebook.map(rulebooks))
+    except UnknownRulebookError as e:
         raise HTTPException(
-            status_code=HTTPStatus.INTERNAL_SERVER_ERROR,
-            detail=ServerError.by(e)
+            status_code=HTTPStatus.BAD_REQUEST,
+            detail=ClientError.by(e)
         )
 
 
@@ -78,16 +82,8 @@ def save(hero: Hero, rulebooks: List[str] = Query(example=['dsa5'])):
     }
 )
 def export(hero_name: str):
-    try:
-        logger.trace(f"(Request) export hero with name '{hero_name}' of user ''")
-        HeroService().export(hero_name)
-    except Exception as e:
-        logger.exception("Some exception occurred.")
-        # TODO [1] not a good practise to catch any error and publish its message
-        raise HTTPException(
-            status_code=HTTPStatus.INTERNAL_SERVER_ERROR,
-            detail=ServerError.by(e)
-        )
+    logger.trace(f"(Request) export hero with name '{hero_name}' of user ''")
+    HeroService().export(hero_name)
 
 
 @router.delete(
@@ -101,13 +97,5 @@ def export(hero_name: str):
     }
 )
 def delete(hero_name: str):
-    try:
-        logger.trace(f"(Request) delete hero with name '{hero_name}' of user ''")
-        HeroService().delete(hero_name)
-    except Exception as e:
-        logger.exception("Some exception occurred.")
-        # TODO [1] not a good practise to catch any error and publish its message
-        raise HTTPException(
-            status_code=HTTPStatus.INTERNAL_SERVER_ERROR,
-            detail=ServerError.by(e)
-        )
+    logger.trace(f"(Request) delete hero with name '{hero_name}' of user ''")
+    HeroService().delete(hero_name)

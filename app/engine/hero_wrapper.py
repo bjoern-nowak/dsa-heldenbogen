@@ -21,7 +21,7 @@ def _map_dis_advantages(dis_advantages: List[DisAdvantage]) -> List[Symbol]:
 
 
 # TODO may provide a method which returns a list of literals instead of using a extra LP asking each feature
-class HeroWrapper():
+class HeroWrapper:
     """
     provide callables returning hero attributes as clingo symbols
     """
