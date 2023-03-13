@@ -32,3 +32,12 @@ class HeroService:
                 f"Warnings: {ex.warnings}"
             )
             raise ex
+
+    def save(self, hero: Hero, rulebooks: List[Rulebook]) -> bool:
+        raise NotImplementedError("Function 'save' is not yet implemented.")
+
+    def export(self, hero_name: str) -> bool:
+        raise NotImplementedError("Function 'export' is not yet implemented.")
+
+    def delete(self, hero_name: str) -> bool:
+        raise NotImplementedError("Function 'delete' is not yet implemented.")
