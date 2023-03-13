@@ -1,4 +1,5 @@
 #program world_facts.
+program("world_facts").
 requires(species("Elfen"),advantage("Zauberer","",1;"Zweistimmiger Gesang","",1)).
 % TODO [3] 'Elfen' does not hard-requires below (dis)advantages but these are strongly recommended, we need some extra result type, maybe: error > warning > note/hint, were warning is for such and note/hint for typical/usual
 requires(species("Elfen"),advantage("Altersresistenz","",1;"Dunkelsicht","",1;"Nichtschläfer","",1)).
