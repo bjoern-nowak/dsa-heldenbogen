@@ -2,7 +2,7 @@ from app.engine.rulebook_program import RulebookProgram
 from app.engine.rulebook_validator import RulebookValidator
 from app.models.rulebook import Rulebook
 from tests.base_test_case import BaseTestCase
-from engine.test_engine import TestEngine
+from tests.engine.test_engine import TestEngine
 
 FACT_RULEBOOK = 'rulebook'
 
