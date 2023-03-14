@@ -2,7 +2,7 @@
 #show. %% hide everything in output but
 %% rulebook_usable
 #defined rulebook_depends/2.
-#defined rulebook_unusable/2. #show rulebook_unusable/2.
+#defined rulebook_missing/2. #show rulebook_missing/2.
 %% world facts
 #defined known_experience_level/1.
 #defined known_species/1.
@@ -35,7 +35,7 @@
 
 
 #program rulebook_usable.
-rulebook_unusable(R,D) :- rulebook_depends(R,D), rulebook(R), not rulebook(D).
+rulebook_missing(R,D) :- rulebook_depends(R,D), rulebook(R), not rulebook(D).
 %% TODO add check that rulebook only uses known feature values, hence requires program world_facts
 
 

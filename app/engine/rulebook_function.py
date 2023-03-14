@@ -10,7 +10,7 @@ from app.models.feature import Feature
 # TODO add information about parameters
 class RulebookFunction(str, BaseEnum):
     # meta
-    RULEBOOK_UNUSABLE = 'rulebook_unusable'
+    RULEBOOK_MISSING = 'rulebook_missing'
     EXTRA_HERO_VALIDATION_STEP = 'extra_hero_validation_step'
     # hero facts
     ADVANTAGE = 'advantage'

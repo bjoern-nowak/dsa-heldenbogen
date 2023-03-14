@@ -15,7 +15,7 @@ class Collector:
 
     @classmethod
     def unusable_rulebooks(cls, model: Model, unusables: List[List[str]]):
-        unusables.extend(cls._functions_strings(model, RulebookFunction.RULEBOOK_UNUSABLE))
+        unusables.extend(cls._functions_strings(model, RulebookFunction.RULEBOOK_MISSING))
 
     @classmethod
     def extra_hero_validation_steps(cls, model: Model, steps: List[Symbol]):
