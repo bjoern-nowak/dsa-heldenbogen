@@ -13,6 +13,8 @@ class UnexpectedResultError(Exception):
 
 class UnusableRulebookError(Exception):
     """Set of rulebooks contains at least one unusable."""
+    # TODO distinguish error types (like rulebook missing) and provide parameters in error like in
+    #  specially types between client and server errors
 
 
 class HeroInvalidError(Exception):
