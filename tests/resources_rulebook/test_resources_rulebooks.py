@@ -1,14 +1,13 @@
-import unittest
-
 from app.engine.rulebook_program import RulebookProgram
 from app.engine.rulebook_validator import RulebookValidator
 from app.models.rulebook import Rulebook
+from tests.base_test_case import BaseTestCase
 from engine.test_engine import TestEngine
 
 FACT_RULEBOOK = 'rulebook'
 
 
-class TestResourcesRulebooks(unittest.TestCase):
+class TestResourcesRulebooks(BaseTestCase):
 
     def test_rulebook_valid(self):
         # given:
@@ -51,7 +50,3 @@ class TestResourcesRulebooks(unittest.TestCase):
         # then:
         if errors:
             self.fail('\n'.join(errors))
-
-
-if __name__ == '__main__':
-    unittest.main()

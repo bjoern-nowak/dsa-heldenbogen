@@ -1,13 +1,12 @@
-import unittest
-
 from parameterized import parameterized
 
 from app.engine.engine import Engine
 from app.models.hero import Hero
 from app.models.rulebook import Rulebook
+from tests.base_test_case import BaseTestCase
 
 
-class TestHeroValidation(unittest.TestCase):
+class TestHeroValidation(BaseTestCase):
 
     @parameterized.expand([
         (0, 'Elfen'),
@@ -82,7 +81,3 @@ class TestHeroValidation(unittest.TestCase):
     #     errors = engine.validate(hero)
     #     # then:
     #     self.assertIs(error_count, len(errors), msg=errors)
-
-
-if __name__ == '__main__':
-    unittest.main()

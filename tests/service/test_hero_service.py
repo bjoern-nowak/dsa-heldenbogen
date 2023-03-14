@@ -1,13 +1,12 @@
-import unittest
-
 from parameterized import parameterized
 
 from app.models.hero import Hero
 from app.models.rulebook import Rulebook
 from app.services.hero_service import HeroService
+from tests.base_test_case import BaseTestCase
 
 
-class TestHeroService(unittest.TestCase):
+class TestHeroService(BaseTestCase):
     service = HeroService()
 
     @parameterized.expand([
@@ -48,6 +47,3 @@ class TestHeroService(unittest.TestCase):
         # then:
         self.assertIs(len(errors), error_count, msg=errors)
 
-
-if __name__ == '__main__':
-    unittest.main()

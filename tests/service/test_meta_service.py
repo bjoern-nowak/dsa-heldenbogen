@@ -1,13 +1,12 @@
-import unittest
-
 from parameterized import parameterized
 
 from app.models.feature import Feature
 from app.models.rulebook import Rulebook
 from app.services.meta_service import MetaService
+from tests.base_test_case import BaseTestCase
 
 
-class TestMetaService(unittest.TestCase):
+class TestMetaService(BaseTestCase):
     service = MetaService()
 
     @parameterized.expand([
@@ -21,7 +20,3 @@ class TestMetaService(unittest.TestCase):
         found = self.service.list_known_feature_values(feature, Rulebook.map(rulebooks))
         # then:
         self.assertIs(len(found), expected_count)
-
-
-if __name__ == '__main__':
-    unittest.main()
