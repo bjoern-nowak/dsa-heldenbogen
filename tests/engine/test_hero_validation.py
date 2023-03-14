@@ -1,6 +1,10 @@
+from contextlib import nullcontext
+
 from parameterized import parameterized
 
 from app.engine.engine import Engine
+from app.engine.exceptions import HeroInvalidError
+from app.models.experience_level import ExperienceLevel
 from app.models.hero import Hero
 from app.models.rulebook import Rulebook
 from tests.base_test_case import BaseTestCase
@@ -16,11 +20,22 @@ class TestHeroValidation(BaseTestCase):
     def test_species_usable(self, error_count: int, species: str):
         # given:
         engine = Engine(Rulebook.map(['dsa5']))
-        hero = Hero(name="name", species=species, culture='Auelfen', profession='Händler', talents={}, combat_techniques={})
+        hero = Hero(name="name",
+                    experience_level=ExperienceLevel.AVERAGE,
+                    species=species,
+                    culture='Auelfen',
+                    profession='Händler',
+                    talents=[],
+                    combat_techniques=[],
+                    advantages=[],
+                    disadvantages=[],
+                    )
         # when:
-        errors = engine.validate(hero)
+        with self.assertRaises(HeroInvalidError) if error_count > 0 else nullcontext() as ctx:
+            engine.validate(hero)
         # then:
-        self.assertIs(error_count, len(errors), msg=errors)
+        if ctx and ctx.exception:
+            self.assertIs(error_count, len(ctx.exception.errors), msg=ctx.exception.errors)
 
     @parameterized.expand([
         (0, 'Elfen', 'Auelfen'),
@@ -31,11 +46,22 @@ class TestHeroValidation(BaseTestCase):
     def test_culture_usable(self, error_count: int, species: str, culture: str):
         # given:
         engine = Engine(Rulebook.map(['dsa5']))
-        hero = Hero(name="name", species=species, culture=culture, profession='Händler', talents={}, combat_techniques={})
+        hero = Hero(name="name",
+                    experience_level=ExperienceLevel.AVERAGE,
+                    species=species,
+                    culture=culture,
+                    profession='Händler',
+                    talents=[],
+                    combat_techniques=[],
+                    advantages=[],
+                    disadvantages=[],
+                    )
         # when:
-        errors = engine.validate(hero)
+        with self.assertRaises(HeroInvalidError) if error_count > 0 else nullcontext() as ctx:
+            engine.validate(hero)
         # then:
-        self.assertIs(error_count, len(errors), msg=errors)
+        if ctx and ctx.exception:
+            self.assertIs(error_count, len(ctx.exception.errors), msg=ctx.exception.errors)
 
     @parameterized.expand([
         (0, 'Mensch', 'Menschlichekultur', 'Händler'),
@@ -46,11 +72,22 @@ class TestHeroValidation(BaseTestCase):
     def test_profession_usable(self, error_count: int, species: str, culture: str, profession: str):
         # given:
         engine = Engine(Rulebook.map(['dsa5']))
-        hero = Hero(name="name", species=species, culture=culture, profession=profession, talents={}, combat_techniques={})
+        hero = Hero(name="name",
+                    experience_level=ExperienceLevel.AVERAGE,
+                    species=species,
+                    culture=culture,
+                    profession=profession,
+                    talents=[],
+                    combat_techniques=[],
+                    advantages=[],
+                    disadvantages=[],
+                    )
         # when:
-        errors = engine.validate(hero)
+        with self.assertRaises(HeroInvalidError) if error_count > 0 else nullcontext() as ctx:
+            engine.validate(hero)
         # then:
-        self.assertIs(error_count, len(errors), msg=errors)
+        if ctx and ctx.exception:
+            self.assertIs(error_count, len(ctx.exception.errors), msg=ctx.exception.errors)
 
     # @parameterized.expand([
     #     (0, 'Mensch', 'Menschlichekultur', 'Händler', {}, {}),

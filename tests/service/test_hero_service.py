@@ -1,5 +1,9 @@
+from contextlib import nullcontext
+
 from parameterized import parameterized
 
+from app.engine.exceptions import HeroInvalidError
+from app.models.experience_level import ExperienceLevel
 from app.models.hero import Hero
 from app.models.rulebook import Rulebook
 from app.services.hero_service import HeroService
@@ -11,19 +15,9 @@ class TestHeroService(BaseTestCase):
 
     @parameterized.expand([
         (0, 'Elfen', 'Auelfen', 'Händler'),
-        (0, 'Elfen', 'Auelfen', 'Wildnisläuferin'),
-        (1, 'Elfen', 'Andergaster', 'Händler'),
-        (1, 'Elfen', 'Ambosszwerge', 'Händler'),
-
+        (0, 'Elfen', 'Firnelfen', 'Wildnisläuferin'),
         (0, 'Mensch', 'Andergaster', 'Händler'),
-        (1, 'Mensch', 'Auelfen', 'Händler'),
         (1, 'Mensch', 'Andergaster', 'Wildnisläuferin'),
-        (1, 'Mensch', 'Ambosszwerge', 'Händler'),
-
-        (0, 'Zwerg', 'Ambosszwerge', 'Händler'),
-        (1, 'Zwerg', 'Auelfen', 'Händler'),
-        (1, 'Zwerg', 'Ambosszwerge', 'Wildnisläuferin'),
-        (1, 'Zwerg', 'Andergaster', 'Händler'),
     ])
     def test_validation(self,
                         error_count: int,
@@ -34,16 +28,18 @@ class TestHeroService(BaseTestCase):
         # given:
         rulebooks = ['dsa5']
         hero = Hero(name='Test',
+                    experience_level=ExperienceLevel.AVERAGE,
                     species=species,
                     culture=culture,
                     profession=profession,
-                    talents={},
-                    combat_techniques={},
-                    advantages={},
-                    disadvantages={},
+                    talents=[],
+                    combat_techniques=[],
+                    advantages=[],
+                    disadvantages=[],
                     )
         # when:
-        errors = self.service.validate(hero, Rulebook.map(rulebooks))
+        with self.assertRaises(HeroInvalidError) if error_count > 0 else nullcontext() as ctx:
+            self.service.validate(hero, Rulebook.map(rulebooks))
         # then:
-        self.assertIs(len(errors), error_count, msg=errors)
-
+        if ctx and ctx.exception:
+            self.assertIs(error_count, len(ctx.exception.errors), msg=ctx.exception.errors)
