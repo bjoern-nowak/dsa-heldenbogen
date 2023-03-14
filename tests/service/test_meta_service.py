@@ -10,7 +10,7 @@ class TestMetaService(BaseTestCase):
     service = MetaService()
 
     @parameterized.expand([
-        (3, Feature.SPECIES),
+        (4, Feature.SPECIES),
         (33, Feature.CULTURE),
     ])
     def test_feature_listing(self, expected_count: int, feature: Feature):
