@@ -7,5 +7,5 @@ class DisAdvantage(BaseModel):
     TODO make field 'uses' truly optional, handling "None" somewhere
     """
     name: str
-    uses: str
-    level: int
+    uses: str = ''
+    level: int = 1
