@@ -3,7 +3,7 @@ from app.models.experience_level import ExperienceLevel
 from app.models.hero import Hero
 from app.models.skill import Skill
 
-VALID_SOELDNER = Hero(
+SOELDNER = Hero(
     name='valid_söldner',
     experience_level=ExperienceLevel.AVERAGE,
     species='Zwerg',
@@ -38,7 +38,7 @@ VALID_SOELDNER = Hero(
     ],
 )
 
-VALID_ZAUBERWEBER = Hero(
+ZAUBERWEBER = Hero(
     name='valid_zauberweber',
     experience_level=ExperienceLevel.AVERAGE,
     species='Elfen',
@@ -64,7 +64,7 @@ VALID_ZAUBERWEBER = Hero(
     disadvantages=[],
 )
 
-VALID_HAENDLER = Hero(
+HAENDLER = Hero(
     name='valid_händler',
     experience_level=ExperienceLevel.AVERAGE,
     species='Mensch',
