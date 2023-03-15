@@ -1,5 +1,6 @@
 from app.models.base_enum import BaseEnum
 from app.models.base_model import BaseModel
+from app.models.hero_validation_param import HeroValidationParam
 
 
 class HeroValidationWarning(BaseModel):
@@ -17,7 +18,7 @@ class HeroValidationWarning(BaseModel):
 
     type: Type
     message: str
-    parameter: dict[str, str]
+    parameter: dict[HeroValidationParam, str]
 
     def __str__(self) -> str:
         return self.message

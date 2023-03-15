@@ -6,6 +6,7 @@ from clingo import SymbolType
 from app.engine.rulebook_function import RulebookFunction
 from app.models.base_enum import BaseEnum
 from app.models.hero_validation_error import HeroValidationError
+from app.models.hero_validation_param import HeroValidationParam
 from app.models.hero_validation_warning import HeroValidationWarning
 
 
@@ -68,10 +69,10 @@ def _unknown_error(error: Symbol):
             message=f"Heros '{caused_feature.name}' of '{caused_feature_value}' using '{caused_feature_using}'"
                     f" at level '{caused_feature_level}' is not known.",
             parameter={
-                'caused_feature': caused_feature.name,
-                'caused_feature_value': caused_feature_value,
-                'caused_feature_level': caused_feature_level,
-                'caused_feature_using': caused_feature_using,
+                HeroValidationParam.C_F: caused_feature.name,
+                HeroValidationParam.C_F_VALUE: caused_feature_value,
+                HeroValidationParam.C_F_LEVEL: caused_feature_level,
+                HeroValidationParam.C_F_USING: caused_feature_using,
             },
         )
     else:
@@ -79,8 +80,8 @@ def _unknown_error(error: Symbol):
             type=HeroValidationError.Type.UNKNOWN,
             message=f"Heros '{caused_feature.name}' value of '{caused_feature_value}' is not known.",
             parameter={
-                'caused_feature': caused_feature.name,
-                'caused_feature_value': caused_feature_value,
+                HeroValidationParam.C_F: caused_feature.name,
+                HeroValidationParam.C_F_VALUE: caused_feature_value,
             },
         )
 
@@ -94,10 +95,10 @@ def _unusable_by_error(error: Symbol):
         type=HeroValidationError.Type.UNUSABLE_BY,
         message=f"Heros '{caused_feature.name}' is unusable for heros '{referred_feature.name}'.",
         parameter={
-            'caused_feature': caused_feature.name,
-            'caused_feature_value': caused_feature_value,
-            'referred_feature': referred_feature.name,
-            'referred_feature_value': referred_feature_value,
+            HeroValidationParam.C_F: caused_feature.name,
+            HeroValidationParam.C_F_VALUE: caused_feature_value,
+            HeroValidationParam.R_F: referred_feature.name,
+            HeroValidationParam.R_F_VALUE: referred_feature_value,
         },
     )
 
@@ -119,12 +120,12 @@ def _missing_level_error(error: Symbol):
                     f" for '{choices}' '{referred_feature.name}'"
                     f" of '{selection}'.",
             parameter={
-                'caused_feature': caused_feature.name,
-                'caused_feature_value': caused_feature_value,
-                'referred_feature': referred_feature.name,
-                'referred_feature_value_selection': str(selection),
-                'referred_feature_value_minimum_level': required_level.number,
-                'referred_feature_value_selection_minium_choices': choices.number,
+                HeroValidationParam.C_F: caused_feature.name,
+                HeroValidationParam.C_F_VALUE: caused_feature_value,
+                HeroValidationParam.R_F: referred_feature.name,
+                HeroValidationParam.SELECTION: str(selection),
+                HeroValidationParam.MIN_LEVEL: required_level.number,
+                HeroValidationParam.SELECTION_MIN_CHOICES: choices.number,
             },
         )
     else:
@@ -135,11 +136,11 @@ def _missing_level_error(error: Symbol):
                     f" for '{referred_feature.name}'"
                     f" of '{referred_feature_sym.string}'.",
             parameter={
-                'caused_feature': caused_feature.name,
-                'caused_feature_value': caused_feature_value,
-                'referred_feature': referred_feature.name,
-                'referred_feature_value': referred_feature_sym.string,
-                'referred_feature_value_minimum_level': required_level.number,
+                HeroValidationParam.C_F: caused_feature.name,
+                HeroValidationParam.C_F_VALUE: caused_feature_value,
+                HeroValidationParam.R_F: referred_feature.name,
+                HeroValidationParam.R_F_VALUE: referred_feature_sym.string,
+                HeroValidationParam.MIN_LEVEL: required_level.number,
             },
         )
 
@@ -153,10 +154,10 @@ def _max_level_exceeded_error(error: Symbol):
         type=HeroValidationError.Type.MAX_LVL_EXCEEDED,
         message=f"Heros '{caused_feature.name}' of '{caused_feature_value}' exceeds maximum level '{max_level}'.",
         parameter={
-            'caused_feature': caused_feature.name,
-            'caused_feature_value': caused_feature_value,
-            'caused_feature_level': caused_feature_level,
-            'max_level': max_level,
+            HeroValidationParam.C_F: caused_feature.name,
+            HeroValidationParam.C_F_VALUE: caused_feature_value,
+            HeroValidationParam.C_F_LEVEL: caused_feature_level,
+            HeroValidationParam.MAX_LEVEL: max_level,
         },
     )
 
@@ -174,11 +175,11 @@ def _atypical_warning(warning: Symbol):
                     f" of '{referred_feature_value}'"
                     f" using '{referred_feature_using}'.",
             parameter={
-                'caused_feature': caused_feature.name,
-                'caused_feature_value': caused_feature_value,
-                'referred_feature': referred_feature.name,
-                'referred_feature_value': referred_feature_value,
-                'referred_feature_using': referred_feature_using,
+                HeroValidationParam.C_F: caused_feature.name,
+                HeroValidationParam.C_F_VALUE: caused_feature_value,
+                HeroValidationParam.R_F: referred_feature.name,
+                HeroValidationParam.R_F_VALUE: referred_feature_value,
+                HeroValidationParam.R_F_USING: referred_feature_using,
             },
         )
     else:
@@ -202,12 +203,12 @@ def _missing_typical_warning(warning: Symbol):
                     f" using '{referred_feature_using}'"
                     f" at level '{referred_feature_level}'.",
             parameter={
-                'caused_feature': caused_feature.name,
-                'caused_feature_value': caused_feature_value,
-                'referred_feature': referred_feature.name,
-                'referred_feature_value': referred_feature_value,
-                'referred_feature_level': referred_feature_level,
-                'referred_feature_using': referred_feature_using,
+                HeroValidationParam.C_F: caused_feature.name,
+                HeroValidationParam.C_F_VALUE: caused_feature_value,
+                HeroValidationParam.R_F: referred_feature.name,
+                HeroValidationParam.R_F_VALUE: referred_feature_value,
+                HeroValidationParam.R_F_LEVEL: referred_feature_level,
+                HeroValidationParam.R_F_USING: referred_feature_using,
             },
         )
     else:
@@ -217,10 +218,10 @@ def _missing_typical_warning(warning: Symbol):
             message=f"Heros '{caused_feature.name}' is missing typical '{referred_feature.name}'"
                     f" of '{referred_feature_value}'.",
             parameter={
-                'caused_feature': caused_feature.name,
-                'caused_feature_value': caused_feature_value,
-                'referred_feature': referred_feature.name,
-                'referred_feature_value': referred_feature_value,
+                HeroValidationParam.C_F: caused_feature.name,
+                HeroValidationParam.C_F_VALUE: caused_feature_value,
+                HeroValidationParam.R_F: referred_feature.name,
+                HeroValidationParam.R_F_VALUE: referred_feature_value,
             },
         )
 
@@ -235,10 +236,10 @@ def _missing_usual_warning(warning: Symbol):
         message=f"Heros '{caused_feature.name}' is missing usual '{referred_feature.name}'"
                 f" of '{referred_feature_value}'.",
         parameter={
-            'caused_feature': caused_feature.name,
-            'caused_feature_value': caused_feature_value,
-            'referred_feature': referred_feature.name,
-            'referred_feature_value': referred_feature_value,
+            HeroValidationParam.C_F: caused_feature.name,
+            HeroValidationParam.C_F_VALUE: caused_feature_value,
+            HeroValidationParam.R_F: referred_feature.name,
+            HeroValidationParam.R_F_VALUE: referred_feature_value,
         },
     )
 

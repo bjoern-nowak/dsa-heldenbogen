@@ -2,6 +2,7 @@ from typing import Optional
 
 from app.models.base_enum import BaseEnum
 from app.models.base_model import BaseModel
+from app.models.hero_validation_param import HeroValidationParam
 
 
 class HeroValidationError(BaseModel):
@@ -24,7 +25,7 @@ class HeroValidationError(BaseModel):
     type: Type
     addon: Optional[Addon]
     message: str
-    parameter: dict[str, str]
+    parameter: dict[HeroValidationParam, str]
 
     def __str__(self) -> str:
         return self.message
