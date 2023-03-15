@@ -1,3 +1,5 @@
+from typing import Any
+
 from app.models.base_enum import BaseEnum
 from app.models.base_model import BaseModel
 from app.models.hero_validation_param import HeroValidationParam
@@ -18,7 +20,7 @@ class HeroValidationWarning(BaseModel):
 
     type: Type
     message: str
-    parameter: dict[HeroValidationParam, int | str]  # hint: int must come first, since int could be passed to str
+    parameter: dict[HeroValidationParam, Any]
 
     def __str__(self) -> str:
         return self.message

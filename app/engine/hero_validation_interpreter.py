@@ -123,7 +123,7 @@ def _missing_level_error(error: Symbol):
                 HeroValidationParam.C_F: caused_feature.name,
                 HeroValidationParam.C_F_VALUE: caused_feature_value,
                 HeroValidationParam.R_F: referred_feature.name,
-                HeroValidationParam.SELECTION: str(selection),
+                HeroValidationParam.SELECTION: selection,
                 HeroValidationParam.MIN_LEVEL: required_level.number,
                 HeroValidationParam.SELECTION_MIN_CHOICES: choices.number,
             },
