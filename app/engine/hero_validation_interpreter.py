@@ -146,6 +146,7 @@ def _missing_level_error(error: Symbol):
 
 
 def _max_level_exceeded_error(error: Symbol):
+    # TODO actually below is the referred feature, the caused feature is experience_level
     caused_feature = error.arguments[0]
     caused_feature_value = caused_feature.arguments[0].string
     caused_feature_level = caused_feature.arguments[1].number
