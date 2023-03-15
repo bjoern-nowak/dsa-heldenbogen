@@ -7,7 +7,7 @@ from app.models.base_model import BaseModel
 
 class Skill(BaseModel):
     name: str
-    level: int
+    level: int = 1
 
     @staticmethod
     def list_by(skills: List[tuple[str, int]]) -> List[Skill]:

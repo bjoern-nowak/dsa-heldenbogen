@@ -17,13 +17,10 @@ UNKNOWN_SPECIES = (
         species='__unknown__',
         culture='Ambosszwerge',
         profession='Söldner',
-        talents=Skill.list_by([('Körperbeherrschung', 3), ('Kraftakt', 3), ('Selbstbeherrschung', 4), ('Zechen', 5),
-                               ('Menschenkenntnis', 3), ('Überreden', 3), ('Orientierung', 4), ('Wildnisleben', 3),
-                               ('Götter & Kulte', 3), ('Kriegskunst', 6), ('Sagen & Legenden', 5), ('Handel', 3),
-                               ('Heilkunde Wunden', 4)]),
-        combat_techniques=Skill.list_by([('Armbrüste', 10), ('Raufen', 10), ('Hiebwaffen', 10)]),
-        advantages=DisAdvantage.list_by([('Dunkelsicht',), ('Immunität', 'Tulmadron')]),
-        disadvantages=DisAdvantage.list_by([('Unfähig', 'Schwimmen')]),
+        talents=[],
+        combat_techniques=[],
+        advantages=[],
+        disadvantages=[],
     )
 )
 
@@ -39,13 +36,10 @@ UNKNOWN_CULTURE = (
         species='Zwerg',
         culture='__unknown__',
         profession='Söldner',
-        talents=Skill.list_by([('Körperbeherrschung', 3), ('Kraftakt', 3), ('Selbstbeherrschung', 4), ('Zechen', 5),
-                               ('Menschenkenntnis', 3), ('Überreden', 3), ('Orientierung', 4), ('Wildnisleben', 3),
-                               ('Götter & Kulte', 3), ('Kriegskunst', 6), ('Sagen & Legenden', 5), ('Handel', 3),
-                               ('Heilkunde Wunden', 4)]),
-        combat_techniques=Skill.list_by([('Armbrüste', 10), ('Raufen', 10), ('Hiebwaffen', 10)]),
-        advantages=DisAdvantage.list_by([('Dunkelsicht',), ('Immunität', 'Tulmadron')]),
-        disadvantages=DisAdvantage.list_by([('Unfähig', 'Schwimmen')]),
+        talents=[],
+        combat_techniques=[],
+        advantages=[],
+        disadvantages=[],
     )
 )
 
@@ -61,13 +55,10 @@ UNKNOWN_PROFESSION = (
         species='Zwerg',
         culture='Ambosszwerge',
         profession='__unknown__',
-        talents=Skill.list_by([('Körperbeherrschung', 3), ('Kraftakt', 3), ('Selbstbeherrschung', 4), ('Zechen', 5),
-                               ('Menschenkenntnis', 3), ('Überreden', 3), ('Orientierung', 4), ('Wildnisleben', 3),
-                               ('Götter & Kulte', 3), ('Kriegskunst', 6), ('Sagen & Legenden', 5), ('Handel', 3),
-                               ('Heilkunde Wunden', 4)]),
-        combat_techniques=Skill.list_by([('Armbrüste', 10), ('Raufen', 10), ('Hiebwaffen', 10)]),
-        advantages=DisAdvantage.list_by([('Dunkelsicht',), ('Immunität', 'Tulmadron')]),
-        disadvantages=DisAdvantage.list_by([('Unfähig', 'Schwimmen')]),
+        talents=[],
+        combat_techniques=[],
+        advantages=[],
+        disadvantages=[],
     )
 )
 
@@ -83,14 +74,10 @@ UNKNOWN_TALENT = (
         species='Zwerg',
         culture='Ambosszwerge',
         profession='Söldner',
-        talents=Skill.list_by([('__unknown__', 1),
-                               ('Körperbeherrschung', 3), ('Kraftakt', 3), ('Selbstbeherrschung', 4), ('Zechen', 5),
-                               ('Menschenkenntnis', 3), ('Überreden', 3), ('Orientierung', 4), ('Wildnisleben', 3),
-                               ('Götter & Kulte', 3), ('Kriegskunst', 6), ('Sagen & Legenden', 5), ('Handel', 3),
-                               ('Heilkunde Wunden', 4)]),
-        combat_techniques=Skill.list_by([('Armbrüste', 10), ('Raufen', 10), ('Hiebwaffen', 10)]),
-        advantages=DisAdvantage.list_by([('Dunkelsicht',), ('Immunität', 'Tulmadron')]),
-        disadvantages=DisAdvantage.list_by([('Unfähig', 'Schwimmen')]),
+        talents=[Skill(name='__unknown__')],
+        combat_techniques=[],
+        advantages=[],
+        disadvantages=[],
     )
 )
 
@@ -106,13 +93,10 @@ UNKNOWN_COMBAT_TECHNIQUE = (
         species='Zwerg',
         culture='Ambosszwerge',
         profession='Söldner',
-        talents=Skill.list_by([('Körperbeherrschung', 3), ('Kraftakt', 3), ('Selbstbeherrschung', 4), ('Zechen', 5),
-                               ('Menschenkenntnis', 3), ('Überreden', 3), ('Orientierung', 4), ('Wildnisleben', 3),
-                               ('Götter & Kulte', 3), ('Kriegskunst', 6), ('Sagen & Legenden', 5), ('Handel', 3),
-                               ('Heilkunde Wunden', 4)]),
-        combat_techniques=Skill.list_by([('__unknown__', 1), ('Armbrüste', 10), ('Raufen', 10), ('Hiebwaffen', 10)]),
-        advantages=DisAdvantage.list_by([('Dunkelsicht',), ('Immunität', 'Tulmadron')]),
-        disadvantages=DisAdvantage.list_by([('Unfähig', 'Schwimmen')]),
+        talents=[],
+        combat_techniques=[Skill(name='__unknown__')],
+        advantages=[],
+        disadvantages=[],
     )
 )
 
@@ -128,13 +112,10 @@ UNKNOWN_ADVANTAGE = (
         species='Zwerg',
         culture='Ambosszwerge',
         profession='Söldner',
-        talents=Skill.list_by([('Körperbeherrschung', 3), ('Kraftakt', 3), ('Selbstbeherrschung', 4), ('Zechen', 5),
-                               ('Menschenkenntnis', 3), ('Überreden', 3), ('Orientierung', 4), ('Wildnisleben', 3),
-                               ('Götter & Kulte', 3), ('Kriegskunst', 6), ('Sagen & Legenden', 5), ('Handel', 3),
-                               ('Heilkunde Wunden', 4)]),
-        combat_techniques=Skill.list_by([('Armbrüste', 10), ('Raufen', 10), ('Hiebwaffen', 10)]),
-        advantages=DisAdvantage.list_by([('__unknown__',), ('Dunkelsicht',), ('Immunität', 'Tulmadron')]),
-        disadvantages=DisAdvantage.list_by([('Unfähig', 'Schwimmen')]),
+        talents=[],
+        combat_techniques=[],
+        advantages=[DisAdvantage(name='__unknown__')],
+        disadvantages=[],
     )
 )
 
@@ -150,12 +131,9 @@ UNKNOWN_DISADVANTAGE = (
         species='Zwerg',
         culture='Ambosszwerge',
         profession='Söldner',
-        talents=Skill.list_by([('Körperbeherrschung', 3), ('Kraftakt', 3), ('Selbstbeherrschung', 4), ('Zechen', 5),
-                               ('Menschenkenntnis', 3), ('Überreden', 3), ('Orientierung', 4), ('Wildnisleben', 3),
-                               ('Götter & Kulte', 3), ('Kriegskunst', 6), ('Sagen & Legenden', 5), ('Handel', 3),
-                               ('Heilkunde Wunden', 4)]),
-        combat_techniques=Skill.list_by([('Armbrüste', 10), ('Raufen', 10), ('Hiebwaffen', 10)]),
-        advantages=DisAdvantage.list_by([('Dunkelsicht',), ('Immunität', 'Tulmadron')]),
-        disadvantages=DisAdvantage.list_by([('__unknown__',), ('Unfähig', 'Schwimmen')]),
+        talents=[],
+        combat_techniques=[],
+        advantages=[],
+        disadvantages=[DisAdvantage(name='__unknown__')],
     )
 )
