@@ -76,31 +76,35 @@ advantage(A,USES,LVL) :- __advantage_wrapper((A,USES,LVL)).
 disadvantage(DA,USES,LVL) :- __disadvantage_wrapper((DA,USES,LVL)).
 
 
-#program validate_hero_step_50. %% pre check
+#program validate_hero_step_50. %% pre check - values known
 unknown(experience_level(EL)) :- experience_level(EL), not known_experience_level(EL,_,_,_,_,_,_).
+unknown(species(S)) :- species(S), not known_species(S).
+unknown(culture(C)) :- culture(C), not known_culture(C).
+unknown(profession(P)) :- profession(P), not known_profession(P).
+unknown(advantage(A,USES,LVL)) :- advantage(A,USES,LVL), not known_advantage(A,USES,LVL).
+unknown(disadvantage(DA,USES,LVL)) :- disadvantage(DA,USES,LVL), not known_disadvantage(DA,USES,LVL).
+unknown(talent(T)) :- talent(T,_), not known_talent(T).
+unknown(combat_technique(CT)) :- combat_technique(CT,_), not known_combat_technique(CT).
 
 
 #program validate_hero_step_100. %% check species usable
-unknown(species(S)) :- species(S), not known_species(S).
 
 
 #program validate_hero_step_150. %% check species requirements
+% WARNINGS
+missing_usual(species(S),culture(C)) :- species(S), culture(C), #false : not has_usual(species(S),culture(_)); not has_usual(species(S),culture(C)).
 
 
 #program validate_hero_step_200. %% check culture usable
-unknown(culture(C)) :- culture(C), not known_culture(C).
 %% only check if there is a restriction ('#false : not' part)
 %% TODO extract all restriction conditions ('#false : not' part) as separate fact, so that other rulebooks can reuse it
 unusable_by(culture(C),species(S)) :- culture(C), species(S), #false : not requires(culture(C),species(_)); not requires(culture(C),species(S)).
-% WARNINGS
-missing_usual(species(S),culture(C)) :- species(S), culture(C), #false : not has_usual(species(S),culture(_)); not has_usual(species(S),culture(C)).
 
 
 #program validate_hero_step_250. %% check culture requirements
 
 
 #program validate_hero_step_300. %% check profession usable
-unknown(profession(P)) :- profession(P), not known_profession(P).
 unusable_by(profession(P),species(S)) :- profession(P), species(S), #false : not requires(profession(P),species(_)); not requires(profession(P),species(S)).
 unusable_by(profession(P),culture(C)) :- profession(P), culture(C), #false : not requires(profession(P),culture(_)); not requires(profession(P),culture(C)).
 
@@ -114,8 +118,6 @@ missing_level(profession(P),combat_technique(any_of(1,CTs),MIN_LVL)) :- professi
 
 
 #program validate_hero_step_400. %% check (dis)advantage usable
-unknown(advantage(A,USES,LVL)) :- advantage(A,USES,LVL), not known_advantage(A,USES,LVL).
-unknown(disadvantage(DA,USES,LVL)) :- disadvantage(DA,USES,LVL), not known_disadvantage(DA,USES,LVL).
 
 
 #program validate_hero_step_450. %% check (dis)advantage requirements
@@ -127,8 +129,6 @@ atypical(species(S),disadvantage(DA,USES)) :- species(S), #false : not has_atypi
 
 
 #program validate_hero_step_500. %% check skills (talents, combat techniques) usable
-unknown(talent(T)) :- talent(T,_), not known_talent(T).
-unknown(combat_technique(CT)) :- combat_technique(CT,_), not known_combat_technique(CT).
 
 
 #program validate_hero_step_550. %% check skills (talents, combat techniques) requirements

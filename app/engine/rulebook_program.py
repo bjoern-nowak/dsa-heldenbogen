@@ -24,7 +24,7 @@ class RulebookProgram(tuple[str, Sequence[Symbol]], BaseEnum):
     """Must contain all facts about the hero which can be directly taken from it"""
 
     VALIDATE_HERO_STEP_50 = (f"{_VALIDATE_HERO_STEP}_50", [])
-    """Validates hero - pre check"""
+    """Validates hero: pre check - values known"""
 
     VALIDATE_HERO_STEP_100 = (f"{_VALIDATE_HERO_STEP}_100", [])
     """Validates hero species usable"""

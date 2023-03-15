@@ -104,8 +104,8 @@ class Engine:
                 # TODO 'return' vs 'raise' is discussable.
                 #  One could argue that an HeroInvalidError should only be raised if the input values are e.g. unknown
                 #   and 'hero validation errors' are seen as normal case hence should be returned.
-                #  In contrast the main point is to find errors and should be prominent whenever found.
-                #   Using an return (tuple or class) could lead to higher chances of mishandling.
+                #  In contrast, the main point is to find errors and should be prominent whenever found.
+                #   Using a return (tuple or class) could lead to higher chances of mishandling.
                 #  What is bad now, is that warnings may be fetched by return or raise.
                 raise HeroInvalidError([hero_validation_interpreter.as_error(e) for e in step_errors], warnings)
         return warnings
