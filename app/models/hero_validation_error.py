@@ -25,7 +25,7 @@ class HeroValidationError(BaseModel):
     type: Type
     addon: Optional[Addon]
     message: str
-    parameter: dict[HeroValidationParam, str]
+    parameter: dict[HeroValidationParam, int | str]  # hint: int must come first, since int could be passed to str
 
     def __str__(self) -> str:
         return self.message
