@@ -123,7 +123,7 @@ Formal rules (functions) that triggers pre-defined rules producing above pre-def
   * `unusable_by` if `requires(<causingFeature>("<name>"),<referredFeature>("<name>")).`
   * `missing_level` if `requires(<causingFeature>("<name>"),<referredFeature>("<name>",<minLevel>)).`
   * `missing_level` with `any_of`
-    if `requires(<causingFeature>("<name>"),any_of(<choices>,<referredFeature>,<selectionTupleOfNames>,<minLevel>)).`
+    if `requires(<causingFeature>("<name>"),<referredFeature>(any_of(<choices>,<selectionTupleOfNames>),<minLevel>)).`
   * `missing_level` if `requires(<causingFeature>("<name>"),<referredFeature>("<name>","<refers>",<minLevel>)).`
 * ...warnings:
   * `missing_usual` if `has_usual(<causingFeature>("<name>"),<referredFeature>("<name>")).`

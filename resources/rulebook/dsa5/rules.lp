@@ -48,6 +48,6 @@ has_usual(culture("Auelfen"),profession("Wildnisläufer";"Zauberweber")).
 
 requires(profession("Söldner"),talent("Körperbeherrschung",3;"Kraftakt",3;"Selbstbeherrschung",4;"Zechen",5;"Menschenkenntnis",3;"Überreden",3;"Orientierung",4;"Wildnisleben",3;"Götter & Kulte",3;"Kriegskunst",6;"Sagen & Legenden",5;"Handel",3;"Heilkunde Wunden",4)).
 requires(profession("Söldner"),combat_technique("Armbrüste",10;"Raufen",10)).
-requires(profession("Söldner"),any_of(1,combat_technique,("Hiebwaffen","Schwerter","Stangenwaffen","Zweihandschwerter","Zweihandhiebwaffen"),10)).
+requires(profession("Söldner"),combat_technique(any_of(1,("Hiebwaffen","Schwerter","Stangenwaffen","Zweihandschwerter","Zweihandhiebwaffen")),10)).
 requires(profession("Zauberweber";"Wildnisläuferin"),species("Elfen")).
 requires(profession("Zauberweber"),talent("Körperbeherrschung",4;"Schwimmen",4;"Singen",5;"Willenskraft",3;"Fährtensuchen",4;"Orientierung",3;"Pflanzenkunde",5;"Wildnisleben",4;"Geschichtswissen",4;"Götter & Kulte",4;"Magiekunde",5;"Sternkunde",5;"Musizieren",7)).
