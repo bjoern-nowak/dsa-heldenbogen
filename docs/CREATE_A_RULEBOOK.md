@@ -129,3 +129,23 @@ Formal rules (functions) that triggers pre-defined rules producing above pre-def
   * `missing_usual` if `has_usual(<causingFeature>("<name>"),<referredFeature>("<name>")).`
   * `missing_typical` if `has_typical(<causingFeature>("<name>"),<referredFeature>("<name>","<refers>",<minLevel>)).`
   * `atypical` if `has_atypical(<causingFeature>("<name>"),<referredFeature>("<name>","<refers>",<minLevel>)).`
+
+## examples how to add a new profession using a new talent
+
+This rulebook (expansion) depends on the base rulebook 'dsa5' to work.
+
+1) make profession 'Fischer' and talent 'Angelwissen' known:
+  * in `meta.lp` at program `world_facts` add
+    * `known_profession("Fischer").`
+    * `known_talent("Angelwissen").`
+2) define the rules (validation errors) for this profession, using the new talent:
+  * in `rules.lp` at program `world_facts` add
+    * Only allow specific species for this profession: `requires(profession("Fischer"),culture("Elfen";"Halbelfen";"Mensch")).`
+    * Require a talents on a minimum level: `requires(profession("Fischer"),talent("Körperbeherrschung",4;"Angelwissen",6)).`
+    * Require two talents out of three on a minimum level of
+      four: `requires(profession("Fischer"),any_of(2,talent,("Wildnisleben","Selbstbeherrschung","Schwimmen"),4)).`
+3) define soft-rules (validation warnings) for this profession
+  * Usually used with specific cultures: `has_usual(profession("Fischer"),culture("Auelfen";"Waldelfen";"Aranier";"Novadis")).`
+  * Typically, has an advantage: `has_typical(profession("Fischer"),advantage("Richtungssinn","",2)).`
+  * Some disadvantages are
+    atypical: `has_atypical(profession("Fischer"),disadvantage("Krankheitsanfällig","",1;"Kälteempfindlich","",1)).`
