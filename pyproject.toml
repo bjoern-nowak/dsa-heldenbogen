@@ -11,8 +11,8 @@ python = "~3.11"
 ## python API for anwer set programming (ASP) by Potassco
 clingo = "5.6.2"
 ## web server deps
-fastapi = "0.89.0"
-uvicorn = { extras = ["standard"], version = "0.20.0" }
+fastapi = "0.94.1"
+uvicorn = { extras = ["standard"], version = "0.21.0" }
 
 
 [tool.poetry.group.dev.dependencies]
