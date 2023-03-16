@@ -3,6 +3,7 @@ from http import HTTPStatus
 from typing import List
 
 from fastapi import APIRouter
+from fastapi import Body
 from fastapi import HTTPException
 from fastapi import Query
 
@@ -24,6 +25,13 @@ router = APIRouter()
     '/validate',
     description="Validates hero against given rulebooks.",
     responses={
+        HTTPStatus.OK: {
+            'content': {
+                'application/json': {
+                    'examples': HeroValidationResult.Config.schema_extra["examples"]
+                }
+            },
+        },
         HTTPStatus.BAD_REQUEST: {
             'model': ClientError,
         },
@@ -33,7 +41,8 @@ router = APIRouter()
         }
     }
 )
-def validate(hero: Hero, rulebooks: List[str] = Query(example=['dsa5'])) -> HeroValidationResult:
+def validate(hero: Hero = Body(examples=Hero.Config.schema_extra["examples"]),
+             rulebooks: List[str] = Query(example=['dsa5'])) -> HeroValidationResult:
     try:
         logger.trace(f"(Request) validate\nrulebooks {rulebooks}\nhero: {hero}")
         warnings: List[HeroValidationWarning] = HeroService().validate(hero.to_model(), Rulebook.map(rulebooks))

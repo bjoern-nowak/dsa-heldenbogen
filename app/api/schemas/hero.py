@@ -57,18 +57,63 @@ class Hero(BaseModel):
 
     class Config:
         schema_extra = {
-            "example": {
-                "name": "UncleBob",
-                "experience_level": "Legendary",
-                "species": "Elfen",
-                "culture": "Auelfen",
-                "profession": "Söldner",
-                "talents": {"Körperbeherrschung": 3, "Kraftakt": 3, "Selbstbeherrschung": 4, "Zechen": 5, "Menschenkenntnis": 3,
-                            "Überreden": 3, "Orientierung": 4, "Wildnisleben": 3, "Götter & Kulte": 3, "Kriegskunst": 6,
-                            "Sagen & Legenden": 5, "Handel": 3, "Heilkunde Wunden": 4},
-                "combat_techniques": {"Armbrüste": 10, "Raufen": 10, "Stangenwaffen": 9, "Zweihandschwerter": 10},
-                "advantages": [("Begabung", "Singen", 1), ("Begabung", "Musizieren", 1), ("Beidhändig", "", 1),
-                               ("Dunkelsicht", "", 2)],
-                "disadvantages": [("Körpergebundene Kraft", "", 1), ("Lästige Mindergeister", "", 1), ("Wahrer Name", "", 1)]
+            "examples": {
+                "valid_with_warnings": {
+                    "summary": "[VALID] OK but having warnings",
+                    "value": {
+                        "name": "UncleBob",
+                        "experience_level": "Legendary",
+                        "species": "Elfen",
+                        "culture": "Auelfen",
+                        "profession": "Söldner",
+                        "talents": {"Körperbeherrschung": 3, "Kraftakt": 3, "Selbstbeherrschung": 4, "Zechen": 5,
+                                    "Menschenkenntnis": 3, "Überreden": 3, "Orientierung": 4, "Wildnisleben": 3,
+                                    "Götter & Kulte": 3,
+                                    "Kriegskunst": 6, "Sagen & Legenden": 5, "Handel": 3, "Heilkunde Wunden": 4},
+                        "combat_techniques": {"Armbrüste": 10, "Raufen": 10, "Stangenwaffen": 9, "Zweihandschwerter": 10},
+                        "advantages": [("Begabung", "Singen", 1), ("Begabung", "Musizieren", 1), ("Beidhändig", "", 1),
+                                       ("Dunkelsicht", "", 2)],
+                        "disadvantages": [("Körpergebundene Kraft", "", 1), ("Lästige Mindergeister", "", 1),
+                                          ("Wahrer Name", "", 1)]
+                    }
+                },
+                "invalid_unknown_value": {
+                    "summary": "[INVALID] Unknown species value",
+                    "value": {
+                        "name": "UncleBob",
+                        "experience_level": "Legendary",
+                        "species": "Elfen",
+                        "culture": "Auelfen",
+                        "profession": "Söldnera",
+                        "talents": {"Körperbeherrschung": 3, "Kraftakt": 3, "Selbstbeherrschung": 4, "Zechen": 5,
+                                    "Menschenkenntnis": 3, "Überreden": 3, "Orientierung": 4, "Wildnisleben": 3,
+                                    "Götter & Kulte": 3,
+                                    "Kriegskunst": 6, "Sagen & Legenden": 5, "Handel": 3, "Heilkunde Wunden": 4},
+                        "combat_techniques": {"Armbrüste": 10, "Raufen": 10, "Stangenwaffen": 9, "Zweihandschwerter": 10},
+                        "advantages": [("Begabung", "Singen", 1), ("Begabung", "Musizieren", 1), ("Beidhändig", "", 1),
+                                       ("Dunkelsicht", "", 2)],
+                        "disadvantages": [("Körpergebundene Kraft", "", 1), ("Lästige Mindergeister", "", 1),
+                                          ("Wahrer Name", "", 1)]
+                    }
+                },
+                "invalid_missing_level": {
+                    "summary": "[INVALID] Talent not an required minimum level",
+                    "value": {
+                        "name": "UncleBob",
+                        "experience_level": "Legendary",
+                        "species": "Elfen",
+                        "culture": "Auelfen",
+                        "profession": "Söldner",
+                        "talents": {"Körperbeherrschung": 2, "Kraftakt": 3, "Selbstbeherrschung": 4, "Zechen": 5,
+                                    "Menschenkenntnis": 3, "Überreden": 3, "Orientierung": 4, "Wildnisleben": 3,
+                                    "Götter & Kulte": 3,
+                                    "Kriegskunst": 6, "Sagen & Legenden": 5, "Handel": 3, "Heilkunde Wunden": 4},
+                        "combat_techniques": {"Armbrüste": 10, "Raufen": 10, "Stangenwaffen": 9, "Zweihandschwerter": 10},
+                        "advantages": [("Begabung", "Singen", 1), ("Begabung", "Musizieren", 1), ("Beidhändig", "", 1),
+                                       ("Dunkelsicht", "", 2)],
+                        "disadvantages": [("Körpergebundene Kraft", "", 1), ("Lästige Mindergeister", "", 1),
+                                          ("Wahrer Name", "", 1)]
+                    }
+                }
             }
         }
