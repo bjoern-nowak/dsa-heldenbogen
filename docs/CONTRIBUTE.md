@@ -16,8 +16,7 @@
   * (Optional) Test installation: `poetry --version`
   * (Optional) Activate shell auto-completion: `poetry completions bash >> ~/.bash_completion`
 * (Only if system python version differs from projects) Tell poetry which python version is to use: ` poetry env use python3.11`
-* Install projects python dependencies: `make install`
-* Install docker and docker-compose (oder docker cli plugin 'docker compose')
+* Install projects python dependencies (from project root): `make install`
 
 ## Run tests
 
