@@ -11,7 +11,7 @@ class DisAdvantage(BaseModel):
     TODO make field 'uses' truly optional, handling "None" somewhere
     """
     name: str
-    uses: str = ''
+    uses: str = ''  # TODO [on TODO list] this should be a function '<feature>("<uses>")'
     level: int = 1
 
     @staticmethod

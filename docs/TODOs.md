@@ -15,6 +15,7 @@
     * Add rule that rulebooks can declare incompatibility to others
     * Add handling of optional rules
     * [CONCEPT BRANCH] Make 'any_of' usable as replacement of an actual value (string) in formal rule definition
+    * DisAdvantages should/must refer concrete features not simple strings, so we can do further checks on having them
 
 
 * API related
