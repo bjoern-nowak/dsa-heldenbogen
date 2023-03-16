@@ -38,7 +38,9 @@ make start
 
 ### Available URLs
 
-* Backend OpenAPI Documentation: http://localhost:8000/docs
+* OpenAPI Documentation:
+  * SwaggerUI: http://localhost:8000/docs
+  * ReDoc: http://localhost:8000/redoc
 
 # HowTo...
 
