@@ -20,7 +20,8 @@ help:
 	@echo "  test        run all tests"
 	@echo "  prebuild    goals: lint, typehint and test"
 	@echo "  format      format code (experimental, check code changes)"
-	@echo "  run         start server"
+	@echo "  debug       start server for development"
+	@echo "  start       start server for production"
 	@echo ""
 
 .PHONY: clean 

@@ -18,16 +18,22 @@
 * (Only if system python version differs from projects) Tell poetry which python version is to use: ` poetry env use python3.11`
 * Install projects python dependencies (from project root): `make install`
 
-## Run tests
+## Controls
+
+From project root:
 
 ```bash
+# for more options
+make help
+
+# run linter and tests
 make prebuild
-```
 
-## Start server
-
-```bash
-make run
+# start server for...
+# ...development: single worker, auto reload files, debug log level
+make debug
+# ...production: multiple workers
+make start
 ```
 
 ### Available URLs
