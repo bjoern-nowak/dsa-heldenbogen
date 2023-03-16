@@ -46,7 +46,9 @@ def list_known_rulebooks() -> List[str]:
         }
     }
 )
-def list_known_feature_values(feature: Feature, rulebooks: List[str] = Query(example=['dsa5'])) -> List[str]:
+def list_known_feature_values(
+        feature: Feature,
+        rulebooks: List[str] = Query(example=['dsa5'])) -> List[tuple[str, str, int]] | List[str]:
     try:
         logger.trace(f"(Request) list feature value\nrulebooks: {rulebooks}\nfeature: {feature}")
         return MetaService().list_known_feature_values(feature, Rulebook.map(rulebooks))

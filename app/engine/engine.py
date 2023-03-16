@@ -126,14 +126,17 @@ class Engine:
         )
         return errors, warnings
 
-    def list_known_for(self, feature: Feature) -> List[str]:
-        known_values: List[str] = []
+    def list_known_for(self, feature: Feature) -> List[tuple[str, str, int]] | List[str]:
+        known_values: List[Symbol] = []
         self._execute(
             programs=[RulebookProgram.WORLD_FACTS],
             on_model=lambda m: Collector.known_feature_values(m, known_values, feature),
             on_fail_raise=UnexpectedResultError(f"Value listing for feature '{feature}' failed.")
         )
-        return known_values
+        if feature in [Feature.ADVANTAGE, Feature.DISADVANTAGE]:
+            return [(da.arguments[0].string, da.arguments[1].string, da.arguments[2].number) for da in known_values]
+        else:
+            return [k.arguments[0].string for k in known_values]
 
     def _execute(self,
                  programs: List[tuple[str, Sequence[Symbol]]],

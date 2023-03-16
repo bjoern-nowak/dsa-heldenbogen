@@ -15,7 +15,9 @@ class Collector:
 
     @classmethod
     def unusable_rulebooks(cls, model: Model, unusables: List[List[str]]):
-        unusables.extend(cls._functions_strings(model, RulebookFunction.RULEBOOK_MISSING))
+        functions = cls._functions(model, [RulebookFunction.RULEBOOK_MISSING])
+        for func in functions:
+            unusables.append([arg.string for arg in func.arguments])
 
     @classmethod
     def extra_hero_validation_steps(cls, model: Model, steps: List[Symbol]):
@@ -29,30 +31,8 @@ class Collector:
             logger.trace(f"Model of failed hero validation:\n{model.symbols(shown=True)}")
 
     @classmethod
-    def known_feature_values(cls, model: Model, known_values: List[str], feature: Feature):
-        known_values.extend(cls._functions_first_string(model, RulebookFunction.known(feature)))
-
-    @classmethod
-    def _functions_first_string(cls, model: Model, by_name: str = None) -> List[str]:
-        """
-        Collects all first arguments as a string of all functions
-        """
-        found = []
-        for func in cls._functions(model):
-            if not by_name or (by_name == func.name):
-                found.append(func.arguments[0].string)
-        return found
-
-    @classmethod
-    def _functions_strings(cls, model: Model, by_name: RulebookFunction = None) -> List[List[str]]:
-        """
-        Collects all arguments as a string of all functions
-        """
-        found = []
-        for func in cls._functions(model):
-            if not by_name or (by_name == func.name):
-                found.append([arg.string for arg in func.arguments])
-        return found
+    def known_feature_values(cls, model: Model, known_values: List[Symbol], feature: Feature):
+        known_values.extend(cls._functions(model, [RulebookFunction.known(feature)]))
 
     @staticmethod
     def _functions(model: Model, name_whitelist: List[str] = None) -> List[Symbol]:
