@@ -1,11 +1,10 @@
 from app.models.dis_advantage import DisAdvantage
-from app.models.experience_level import ExperienceLevel
 from app.models.hero import Hero
 from app.models.skill import Skill
 
 SOELDNER = Hero(
     name='valid_söldner',
-    experience_level=ExperienceLevel.AVERAGE,
+    experience_level='Average',
     species='Zwerg',
     culture='Ambosszwerge',
     profession='Söldner',
@@ -20,7 +19,7 @@ SOELDNER = Hero(
 
 ZAUBERWEBER = Hero(
     name='valid_zauberweber',
-    experience_level=ExperienceLevel.AVERAGE,
+    experience_level='Average',
     species='Elfen',
     culture='Waldelfen',
     profession='Zauberweber',
@@ -34,7 +33,7 @@ ZAUBERWEBER = Hero(
 
 HAENDLER = Hero(
     name='valid_händler',
-    experience_level=ExperienceLevel.AVERAGE,
+    experience_level='Average',
     species='Mensch',
     culture='Andergaster',
     profession='Händler',

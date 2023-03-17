@@ -1,5 +1,4 @@
 from app.models.dis_advantage import DisAdvantage
-from app.models.experience_level import ExperienceLevel
 from app.models.hero import Hero
 from app.models.hero_validation_error import HeroValidationError
 from app.models.hero_validation_param import HeroValidationParam
@@ -13,7 +12,7 @@ UNKNOWN_SPECIES = (
     },
     Hero(
         name='valid_söldner',
-        experience_level=ExperienceLevel.AVERAGE,
+        experience_level='Average',
         species='__unknown__',
         culture='Ambosszwerge',
         profession='Söldner',
@@ -32,7 +31,7 @@ UNKNOWN_CULTURE = (
     },
     Hero(
         name='valid_söldner',
-        experience_level=ExperienceLevel.AVERAGE,
+        experience_level='Average',
         species='Zwerg',
         culture='__unknown__',
         profession='Söldner',
@@ -51,7 +50,7 @@ UNKNOWN_PROFESSION = (
     },
     Hero(
         name='valid_söldner',
-        experience_level=ExperienceLevel.AVERAGE,
+        experience_level='Average',
         species='Zwerg',
         culture='Ambosszwerge',
         profession='__unknown__',
@@ -70,7 +69,7 @@ UNKNOWN_TALENT = (
     },
     Hero(
         name='valid_söldner',
-        experience_level=ExperienceLevel.AVERAGE,
+        experience_level='Average',
         species='Zwerg',
         culture='Ambosszwerge',
         profession='Söldner',
@@ -89,7 +88,7 @@ UNKNOWN_COMBAT_TECHNIQUE = (
     },
     Hero(
         name='valid_söldner',
-        experience_level=ExperienceLevel.AVERAGE,
+        experience_level='Average',
         species='Zwerg',
         culture='Ambosszwerge',
         profession='Söldner',
@@ -108,7 +107,7 @@ UNKNOWN_ADVANTAGE = (
     },
     Hero(
         name='valid_söldner',
-        experience_level=ExperienceLevel.AVERAGE,
+        experience_level='Average',
         species='Zwerg',
         culture='Ambosszwerge',
         profession='Söldner',
@@ -127,7 +126,7 @@ UNKNOWN_DISADVANTAGE = (
     },
     Hero(
         name='valid_söldner',
-        experience_level=ExperienceLevel.AVERAGE,
+        experience_level='Average',
         species='Zwerg',
         culture='Ambosszwerge',
         profession='Söldner',
@@ -148,7 +147,7 @@ CULTURE_UNUSABLE_BY_SPECIES = (
     },
     Hero(
         name='valid_söldner',
-        experience_level=ExperienceLevel.AVERAGE,
+        experience_level='Average',
         species='Zwerg',
         culture='Andergaster',
         profession='Söldner',
@@ -169,7 +168,7 @@ PROFESSION_UNUSABLE_BY_SPECIES = (
     },
     Hero(
         name='valid_söldner',
-        experience_level=ExperienceLevel.AVERAGE,
+        experience_level='Average',
         species='Zwerg',
         culture='Ambosszwerge',
         profession='Zauberweber',
@@ -190,7 +189,7 @@ PROFESSION_UNUSABLE_BY_CULTURE = (
     },
     Hero(
         name='valid_söldner',
-        experience_level=ExperienceLevel.AVERAGE,
+        experience_level='Average',
         species='Zwerg',
         culture='Ambosszwerge',
         profession='Skuldrun',
@@ -213,7 +212,7 @@ PROFESSION_MISSING_LEVEL_FOR_TALENT = (
     },
     Hero(
         name='valid_söldner',
-        experience_level=ExperienceLevel.AVERAGE,
+        experience_level='Average',
         species='Zwerg',
         culture='Ambosszwerge',
         profession='Söldner',
@@ -235,7 +234,7 @@ PROFESSION_MISSING_LEVEL_FOR_COMBAT_TECHNIQUE = (
     },
     Hero(
         name='valid_söldner',
-        experience_level=ExperienceLevel.AVERAGE,
+        experience_level='Average',
         species='Zwerg',
         culture='Ambosszwerge',
         profession='Söldner',
@@ -259,7 +258,7 @@ PROFESSION_MISSING_LEVEL_FOR_ANY_OF_COMBAT_TECHNIQUES = (
     },
     Hero(
         name='valid_söldner',
-        experience_level=ExperienceLevel.AVERAGE,
+        experience_level='Average',
         species='Zwerg',
         culture='Ambosszwerge',
         profession='Söldner',
@@ -280,7 +279,7 @@ TALENT_EXCEEDS_MAX_LEVEL_BY_EXPERIENCE = (
     },
     Hero(
         name='valid_söldner',
-        experience_level=ExperienceLevel.MASTERFUL,
+        experience_level='Masterful',
         species='Zwerg',
         culture='Ambosszwerge',
         profession='Söldner',
@@ -304,7 +303,7 @@ COMBAT_TECHNIQUE_EXCEEDS_MAX_LEVEL_BY_EXPERIENCE = (
     },
     Hero(
         name='valid_söldner',
-        experience_level=ExperienceLevel.MASTERFUL,
+        experience_level='Masterful',
         species='Zwerg',
         culture='Ambosszwerge',
         profession='Söldner',

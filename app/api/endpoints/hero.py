@@ -56,7 +56,7 @@ def validate(hero: Hero = Body(examples=Hero.Config.schema_extra["examples"]),
         )
 
 
-@router.post(
+@router.put(
     '/save',
     description="Save hero as new or whenever given hero name exists for user override it.",
     responses={

@@ -4,7 +4,6 @@ from parameterized import parameterized
 
 from app.engine.engine import Engine
 from app.engine.exceptions import HeroInvalidError
-from app.models.experience_level import ExperienceLevel
 from app.models.hero import Hero
 from app.models.rulebook import Rulebook
 from tests.base_test_case import BaseTestCase
@@ -21,7 +20,7 @@ class TestHeroValidation(BaseTestCase):
         # given:
         engine = Engine(Rulebook.map(['dsa5']))
         hero = Hero(name="name",
-                    experience_level=ExperienceLevel.AVERAGE,
+                    experience_level='Average',
                     species=species,
                     culture='Auelfen',
                     profession='Händler',
@@ -47,7 +46,7 @@ class TestHeroValidation(BaseTestCase):
         # given:
         engine = Engine(Rulebook.map(['dsa5']))
         hero = Hero(name="name",
-                    experience_level=ExperienceLevel.AVERAGE,
+                    experience_level='Average',
                     species=species,
                     culture=culture,
                     profession='Händler',
@@ -73,7 +72,7 @@ class TestHeroValidation(BaseTestCase):
         # given:
         engine = Engine(Rulebook.map(['dsa5']))
         hero = Hero(name="name",
-                    experience_level=ExperienceLevel.AVERAGE,
+                    experience_level='Average',
                     species=species,
                     culture=culture,
                     profession=profession,
