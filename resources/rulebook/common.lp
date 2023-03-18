@@ -40,7 +40,7 @@ rulebook_missing(R,D) :- rulebook_depends(R,D), rulebook(R), not rulebook(D).
 
 
 #program world_facts.
-% CC := MAX_CHARACTERISTIC_LVL
+% CC := MAX_CHARACTERISTIC_LVL (only on character creation)
 % S := MAX_SKILL_LVL
 % CT := MAX_COMBAT_TECHNIQUE_LVL
 % CCP := MAX_CHARACTERISTIC_POINTS
@@ -59,7 +59,6 @@ known_experience_level("Legendary",     18, 20, 20, 114, 20, 6 ).
 #program hero_facts.
 %% to be used with programs 'validate_hero_step<X>'
 %% requires 'hero_wrapper.py' as 'context'
-%
 %% TODO these '__<XYZ>_wrapper' are ugly helper facts, try to remove it
 __talent_wrapper(@talents).
 __combat_technique_wrapper(@combat_techniques).
