@@ -25,8 +25,8 @@
           selected)
     * Give hints which hero feature values are usable considering given hero and rulebooks, instead of simple feedback of unusable
       feature value due to 'higher' (in sense of more general) hero feature. Including for warnings, like atypical (hint which
-      would
-      be typical)
+      would be typical)
+    * Make hero validation warnings ignorable (as game master accepted)
 
 
 * Hero related
