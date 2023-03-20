@@ -14,3 +14,4 @@ class HeroValidationParam(str, BaseEnum):
     SELECTION = 'selection'
     SELECTION_MIN_CHOICES = 'selection_min_choices'
     MAX_LEVEL = 'max_level'
+    MAX_COUNT = 'max_count'

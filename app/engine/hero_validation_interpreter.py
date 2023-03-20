@@ -15,6 +15,7 @@ class ErrorAtom(str, BaseEnum):
     UNUSABLE_BY = 'unusable_by'
     MISSING_LEVEL = 'missing_level'
     MAX_LVL_EXCEEDED = 'max_lvl_exceeded'
+    MAX_COUNT_EXCEEDED = 'max_count_exceeded'
 
 
 class _ErrorAtomAddon(str, BaseEnum):
@@ -37,6 +38,8 @@ def as_error(error: Symbol) -> HeroValidationError:
             return _missing_level_error(error)
         case ErrorAtom.MAX_LVL_EXCEEDED:
             return _max_level_exceeded_error(error)
+        case ErrorAtom.MAX_COUNT_EXCEEDED:
+            return _max_count_exceeded_error(error)
         case _:
             raise NotImplementedError(f"Found hero validation error without parsing definition.\n"
                                       f"Error name: {error.name}\n"
@@ -159,6 +162,19 @@ def _max_level_exceeded_error(error: Symbol):
             HeroValidationParam.C_F_VALUE: caused_feature_value,
             HeroValidationParam.C_F_LEVEL: caused_feature_level,
             HeroValidationParam.MAX_LEVEL: max_level,
+        },
+    )
+
+
+def _max_count_exceeded_error(error: Symbol):
+    referred_feature = error.arguments[0]
+    max_count = error.arguments[1].number
+    return HeroValidationError(
+        type=HeroValidationError.Type.MAX_COUNT_EXCEEDED,
+        message=f"Hero has too many '{referred_feature.name}'. Maximum is '{max_count}'.",
+        parameter={
+            HeroValidationParam.C_F: referred_feature.name,
+            HeroValidationParam.MAX_COUNT: max_count
         },
     )
 

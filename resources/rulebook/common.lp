@@ -87,6 +87,7 @@ unknown(combat_technique(CT)) :- combat_technique(CT,_), not known_combat_techni
 
 
 #program validate_hero_step_100. %% check species usable
+max_count_exceeded(species,MAX) :- COUNT = #count{ S:species(S) }, MAX = #max{ MC:max_count(species,MC) }, COUNT > MAX.
 
 
 #program validate_hero_step_150. %% check species requirements
@@ -95,6 +96,7 @@ missing_usual(species(S),culture(C)) :- species(S), culture(C), #false : not has
 
 
 #program validate_hero_step_200. %% check culture usable
+max_count_exceeded(culture,MAX) :- COUNT = #count{ C:culture(C) }, MAX = #max{ MC:max_count(culture,MC) }, COUNT > MAX.
 %% only check if there is a restriction ('#false : not' part)
 %% TODO extract all restriction conditions ('#false : not' part) as separate fact, so that other rulebooks can reuse it
 unusable_by(culture(C),species(S)) :- culture(C), species(S), #false : not requires(culture(C),species(_)); not requires(culture(C),species(S)).
@@ -104,6 +106,7 @@ unusable_by(culture(C),species(S)) :- culture(C), species(S), #false : not requi
 
 
 #program validate_hero_step_300. %% check profession usable
+max_count_exceeded(profession,MAX) :- COUNT = #count{ P:profession(P) }, MAX = #max{ MC:max_count(profession,MC) }, COUNT > MAX.
 unusable_by(profession(P),species(S)) :- profession(P), species(S), #false : not requires(profession(P),species(_)); not requires(profession(P),species(S)).
 unusable_by(profession(P),culture(C)) :- profession(P), culture(C), #false : not requires(profession(P),culture(_)); not requires(profession(P),culture(C)).
 

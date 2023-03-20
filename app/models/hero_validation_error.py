@@ -19,6 +19,7 @@ class HeroValidationError(BaseModel):
         UNUSABLE_BY = 'unusable_by'
         MISSING_LEVEL = 'missing_level'
         MAX_LVL_EXCEEDED = 'max_lvl_exceeded'
+        MAX_COUNT_EXCEEDED = 'max_count_exceeded'
 
     class Addon(str, BaseEnum):
         ANY_OF = 'any_of'
