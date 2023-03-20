@@ -16,6 +16,7 @@ class ErrorAtom(str, BaseEnum):
     MISSING_LEVEL = 'missing_level'
     MAX_LVL_EXCEEDED = 'max_lvl_exceeded'
     MAX_COUNT_EXCEEDED = 'max_count_exceeded'
+    MISSING_MIN_LVL = 'missing_min_lvl'
 
 
 class _ErrorAtomAddon(str, BaseEnum):
@@ -40,6 +41,8 @@ def as_error(error: Symbol) -> HeroValidationError:
             return _max_level_exceeded_error(error)
         case ErrorAtom.MAX_COUNT_EXCEEDED:
             return _max_count_exceeded_error(error)
+        case ErrorAtom.MISSING_MIN_LVL:
+            return _missing_min_lvl_error(error)
         case _:
             raise NotImplementedError(f"Found hero validation error without parsing definition.\n"
                                       f"Error name: {error.name}\n"
@@ -175,6 +178,23 @@ def _max_count_exceeded_error(error: Symbol):
         parameter={
             HeroValidationParam.C_F: referred_feature.name,
             HeroValidationParam.MAX_COUNT: max_count
+        },
+    )
+
+
+def _missing_min_lvl_error(error: Symbol):
+    referred_feature = error.arguments[0]
+    referred_feature_value = referred_feature.arguments[0].string
+    referred_feature_level = referred_feature.arguments[1].number
+    min_level = error.arguments[1].number
+    return HeroValidationError(
+        type=HeroValidationError.Type.MISSING_MIN_LVL,
+        message=f"Heros '{referred_feature.name}' of '{referred_feature_value}' is below minimum '{min_level}'.",
+        parameter={
+            HeroValidationParam.C_F: referred_feature.name,
+            HeroValidationParam.C_F_VALUE: referred_feature_value,
+            HeroValidationParam.C_F_LEVEL: referred_feature_level,
+            HeroValidationParam.MIN_LEVEL: min_level
         },
     )
 

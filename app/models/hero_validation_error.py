@@ -20,6 +20,7 @@ class HeroValidationError(BaseModel):
         MISSING_LEVEL = 'missing_level'
         MAX_LVL_EXCEEDED = 'max_lvl_exceeded'
         MAX_COUNT_EXCEEDED = 'max_count_exceeded'
+        MISSING_MIN_LVL = 'missing_min_lvl'
 
     class Addon(str, BaseEnum):
         ANY_OF = 'any_of'

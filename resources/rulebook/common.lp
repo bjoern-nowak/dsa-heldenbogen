@@ -131,6 +131,8 @@ atypical(species(S),disadvantage(DA,USES)) :- species(S), #false : not has_atypi
 
 
 #program validate_hero_step_500. %% check skills (talents, combat techniques) usable
+missing_min_lvl(talent(T,LVL),MIN) :- talent(T,LVL), MIN = 0, LVL < MIN.
+missing_min_lvl(combat_technique(CT,LVL),MIN) :- combat_technique(CT,LVL), MIN = 0, LVL < MIN.
 max_lvl_exceeded(talent(T,LVL),MAX_LVL) :- talent(T,LVL), experience_level(EL), known_experience_level(EL,_,MAX_LVL,_,_,_,_), LVL > MAX_LVL.
 max_lvl_exceeded(combat_technique(CT,LVL),MAX_LVL) :- combat_technique(CT,LVL), experience_level(EL), known_experience_level(EL,_,_,MAX_LVL,_,_,_), LVL > MAX_LVL.
 
