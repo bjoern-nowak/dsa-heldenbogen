@@ -123,6 +123,8 @@ missing_level(profession(P),combat_technique(any_of(1,CTs),MIN_LVL)) :- professi
 
 
 #program validate_hero_step_450. %% check (dis)advantage requirements
+missing(species(S),advantage(A,USES,LVL)) :- species(S), #false : not requires(species(S),advantage(_,_,_)); requires(species(S),advantage(A,USES,LVL)), not advantage(A,USES,LVL).
+missing(species(S),disadvantage(DA,USES,LVL)) :- species(S), #false : not requires(species(S),disadvantage(_,_,_)); requires(species(S),disadvantage(DA,USES,LVL)), not disadvantage(DA,USES,LVL).
 % WARNINGS
 missing_typical(species(S),advantage(A,USES,LVL)) :- species(S), #false : not has_typical(species(S),advantage(_,_,_)); has_typical(species(S),advantage(A,USES,LVL)), not advantage(A,USES,LVL).
 missing_typical(species(S),disadvantage(DA,USES,LVL)) :- species(S), #false : not has_typical(species(S),disadvantage(_,_,_)); has_typical(species(S),disadvantage(DA,USES,LVL)), not disadvantage(DA,USES,LVL).

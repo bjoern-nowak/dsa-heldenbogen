@@ -13,6 +13,7 @@ from app.models.hero_validation_warning import HeroValidationWarning
 class ErrorAtom(str, BaseEnum):
     UNKNOWN = 'unknown'
     UNUSABLE_BY = 'unusable_by'
+    MISSING = 'missing'
     MISSING_LEVEL = 'missing_level'
     MAX_LVL_EXCEEDED = 'max_lvl_exceeded'
     MAX_COUNT_EXCEEDED = 'max_count_exceeded'
@@ -35,6 +36,8 @@ def as_error(error: Symbol) -> HeroValidationError:
             return _unknown_error(error)
         case ErrorAtom.UNUSABLE_BY:
             return _unusable_by_error(error)
+        case ErrorAtom.MISSING:
+            return _missing_error(error)
         case ErrorAtom.MISSING_LEVEL:
             return _missing_level_error(error)
         case ErrorAtom.MAX_LVL_EXCEEDED:
@@ -107,6 +110,33 @@ def _unusable_by_error(error: Symbol):
             HeroValidationParam.R_F_VALUE: referred_feature_value,
         },
     )
+
+
+def _missing_error(error: Symbol):
+    caused_feature = error.arguments[0]
+    caused_feature_value = caused_feature.arguments[0].string
+    referred_feature = error.arguments[1]
+    if RulebookFunction.is_dis_advantage(referred_feature):
+        referred_feature_value = referred_feature.arguments[0].string
+        referred_feature_using = referred_feature.arguments[1].string
+        referred_feature_level = referred_feature.arguments[2].number
+        return HeroValidationError(
+            type=HeroValidationError.Type.MISSING,
+            message=f"Heros '{caused_feature.name}' of '{caused_feature_value}' is missing '{referred_feature.name}'"
+                    f" of '{referred_feature_value}'"
+                    f" using '{referred_feature_using}'"
+                    f" on level '{referred_feature_level}'.",
+            parameter={
+                HeroValidationParam.C_F: caused_feature.name,
+                HeroValidationParam.C_F_VALUE: caused_feature_value,
+                HeroValidationParam.R_F: referred_feature.name,
+                HeroValidationParam.R_F_VALUE: referred_feature_value,
+                HeroValidationParam.R_F_USING: referred_feature_using,
+                HeroValidationParam.R_F_LEVEL: referred_feature_level,
+            },
+        )
+    else:
+        raise NotImplementedError("Using 'missing' referring non (dis)advantages is yet to be implemented.")
 
 
 def _missing_level_error(error: Symbol):

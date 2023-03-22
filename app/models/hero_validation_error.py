@@ -17,6 +17,7 @@ class HeroValidationError(BaseModel):
     class Type(str, BaseEnum):
         UNKNOWN = 'unknown'
         UNUSABLE_BY = 'unusable_by'
+        MISSING = 'missing'
         MISSING_LEVEL = 'missing_level'
         MAX_LVL_EXCEEDED = 'max_lvl_exceeded'
         MAX_COUNT_EXCEEDED = 'max_count_exceeded'
