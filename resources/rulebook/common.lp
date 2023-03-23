@@ -27,11 +27,16 @@
 %% hero validation errors
 #defined unknown/1. #show unknown/1.
 #defined unusable_by/2. #show unusable_by/2.
+#defined missing/2. #show missing/2.
 #defined missing_level/2. #show missing_level/2.
+#defined missing_min_lvl/2. #show missing_min_lvl/2.
 #defined max_lvl_exceeded/2. #show max_lvl_exceeded/2.
+#defined max_count_exceeded/2. #show max_count_exceeded/2.
 %% hero validation warnings
 #defined unusual_for/2. #show unusual_for/2.
+#defined missing_usual/2. #show missing_usual/2.
 #defined missing_typical/2. #show missing_typical/2.
+#defined atypical/2. #show atypical/2.
 
 
 #program rulebook_usable.
