@@ -1,9 +1,7 @@
 from __future__ import annotations  # required till PEP 563
 
 import logging
-from typing import Callable
 from typing import List
-from typing import Optional
 from typing import Sequence
 
 from clingo import Control
@@ -32,22 +30,20 @@ class ClingoEngine:
     def execute(self,
                 programs: List[tuple[str, Sequence[Symbol]]],
                 context: Hero = None,
-                on_model: Optional[Callable[[Model], Optional[bool]]] = None,
-                on_fail_raise: Exception = None) -> None:
+                on_fail: Exception = None) -> Model:
         """
         Do a clean clingo solve run
         :param programs: to ground
         :param context: hero to use
-        :param on_model: is called when run succeeded
-        :param on_fail_raise: called on unsatisfiable run
+        :param on_fail: called on unsatisfiable run
+        :returns: clingo Model when run was satisfied
         """
         ctl = self._create_control(self.default_programs + programs, context)
-        result: SolveResult = ctl.solve(on_model=on_model)
-        if not result.satisfiable:
-            if on_fail_raise:
-                raise on_fail_raise
-            else:
-                logger.warning(f"No exception raise defined, but could not execute programs: {[p[0] for p in programs]}")
+        model: List[Model] = []
+        result: SolveResult = ctl.solve(on_model=lambda m: model.append(m))  # lambda cannot handle var assignment hence a list
+        if not model or not result.satisfiable:
+            raise on_fail if on_fail else RuntimeError(f"Could not execute clingo programs: {[p[0] for p in programs]}")
+        return model[0]
 
     def _create_control(self, programs: List[tuple[str, Sequence[Symbol]]], context: Hero = None) -> Control:
         """

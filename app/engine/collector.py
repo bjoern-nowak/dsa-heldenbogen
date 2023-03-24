@@ -12,27 +12,33 @@ logger = logging.getLogger(__name__)
 
 
 class Collector:
+    """Collects specific facts (clingo functions) from clingo model"""
 
     @classmethod
-    def unusable_rulebooks(cls, model: Model, unusables: List[List[str]]):
-        functions = cls._functions(model, [RulebookFunction.RULEBOOK_MISSING])
-        for func in functions:
+    def unusable_rulebooks(cls, model: Model) -> List[List[str]]:
+        unusables: List[List[str]] = []
+        for func in cls._functions(model, [RulebookFunction.RULEBOOK_MISSING]):
             unusables.append([arg.string for arg in func.arguments])
+        return unusables
 
     @classmethod
-    def extra_hero_validation_steps(cls, model: Model, steps: List[Symbol]):
-        steps.extend(cls._functions(model, [RulebookFunction.EXTRA_HERO_VALIDATION_STEP]))
+    def extra_hero_validation_steps(cls, model: Model) -> List[Symbol]:
+        return cls._functions(model, [RulebookFunction.EXTRA_HERO_VALIDATION_STEP])
 
     @classmethod
-    def hero_validation_errors_and_warnings(cls, model: Model, errors: List[Symbol], warnings: List[Symbol]):
-        errors.extend(cls._functions(model, hero_validation_interpreter.ErrorAtom.list()))
-        warnings.extend(cls._functions(model, hero_validation_interpreter.WarningAtom.list()))
+    def hero_validation_errors(cls, model: Model) -> List[Symbol]:
+        errors: List[Symbol] = cls._functions(model, hero_validation_interpreter.ErrorAtom.list())
         if errors:
             logger.trace(f"Model of failed hero validation:\n{model.symbols(shown=True)}")
+        return errors
 
     @classmethod
-    def known_feature_values(cls, model: Model, known_values: List[Symbol], feature: Feature):
-        known_values.extend(cls._functions(model, [RulebookFunction.known(feature)]))
+    def hero_validation_warnings(cls, model: Model) -> List[Symbol]:
+        return cls._functions(model, hero_validation_interpreter.WarningAtom.list())
+
+    @classmethod
+    def known_feature_values(cls, model: Model, feature: Feature) -> List[Symbol]:
+        return cls._functions(model, [RulebookFunction.known(feature)])
 
     @staticmethod
     def _functions(model: Model, name_whitelist: List[str] = None) -> List[Symbol]:
@@ -48,7 +54,3 @@ class Collector:
             if not name_whitelist or sym.name in name_whitelist:
                 found.append(sym)
         return found
-
-    @staticmethod
-    def _symbols(model: Model) -> List[Symbol]:
-        return [sym for sym in model.symbols(atoms=True)]

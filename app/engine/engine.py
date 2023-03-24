@@ -54,11 +54,11 @@ class Engine:
         self.hero_validation_steps = dict(sorted(self.hero_validation_steps.items()))  # sort by keys
 
     def _check_rulebooks_usable(self) -> None:
-        unusables: List[List[str]] = []
-        self.clingo_engine.execute(
-            programs=[RulebookProgram.RULEBOOK_USABLE],
-            on_model=lambda m: Collector.unusable_rulebooks(m, unusables),
-            on_fail_raise=UnexpectedResultError(f"Failed to collect unusable rulebooks.")
+        unusables: List[List[str]] = Collector.unusable_rulebooks(
+            self.clingo_engine.execute(
+                programs=[RulebookProgram.RULEBOOK_USABLE],
+                on_fail=UnexpectedResultError(f"Failed to collect unusable rulebooks.")
+            )
         )
         if unusables:
             messages = []
@@ -67,11 +67,11 @@ class Engine:
             raise UnusableRulebookError(chr(10).join(messages))  # chr(10) := '\n' (line break)
 
     def _find_extra_hero_validation_steps(self) -> None:
-        steps: List[Symbol] = []
-        self.clingo_engine.execute(
-            programs=[RulebookProgram.META],
-            on_model=lambda m: Collector.extra_hero_validation_steps(m, steps),
-            on_fail_raise=UnexpectedResultError(f"Failed to find extra hero validation steps.")
+        steps: List[Symbol] = Collector.extra_hero_validation_steps(
+            self.clingo_engine.execute(
+                programs=[RulebookProgram.META],
+                on_fail=UnexpectedResultError(f"Failed to find extra hero validation steps.")
+            )
         )
         if steps:
             logger.debug(f"Found extra hero validation steps: {steps}")
@@ -112,24 +112,24 @@ class Engine:
                                       hero: Hero,
                                       program: tuple[str, Sequence[Symbol]]) -> tuple[List[Symbol], List[Symbol]]:
         """
-        :return: tuple of errors and warnings
+        :return: tuple of (errors, warnings)
         """
-        errors: List[Symbol] = []
-        warnings: List[Symbol] = []
-        self.clingo_engine.execute(
+        model = self.clingo_engine.execute(
             programs=[RulebookProgram.WORLD_FACTS, RulebookProgram.HERO_FACTS, program],
             context=hero,
-            on_model=lambda m: Collector.hero_validation_errors_and_warnings(m, errors, warnings),
-            on_fail_raise=UnexpectedResultError(f"Hero validation could not be performed at: {program[0]}")
+            on_fail=UnexpectedResultError(f"Hero validation could not be performed at: {program[0]}")
         )
+        errors: List[Symbol] = Collector.hero_validation_errors(model)
+        warnings: List[Symbol] = Collector.hero_validation_warnings(model)
         return errors, warnings
 
     def list_known_for(self, feature: Feature) -> List[tuple[str, str, int]] | List[str]:
-        known_values: List[Symbol] = []
-        self.clingo_engine.execute(
-            programs=[RulebookProgram.WORLD_FACTS],
-            on_model=lambda m: Collector.known_feature_values(m, known_values, feature),
-            on_fail_raise=UnexpectedResultError(f"Value listing for feature '{feature}' failed.")
+        known_values: List[Symbol] = Collector.known_feature_values(
+            self.clingo_engine.execute(
+                programs=[RulebookProgram.WORLD_FACTS],
+                on_fail=UnexpectedResultError(f"Value listing for feature '{feature}' failed.")
+            ),
+            feature
         )
         if feature in [Feature.ADVANTAGE, Feature.DISADVANTAGE]:
             return [(da.arguments[0].string, da.arguments[1].string, da.arguments[2].number) for da in known_values]
