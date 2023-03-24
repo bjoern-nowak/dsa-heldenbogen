@@ -8,6 +8,10 @@ _VALIDATE_HERO_STEP = 'validate_hero_step'
 
 
 class RulebookProgram(tuple[str, Sequence[Symbol]], BaseEnum):
+    """
+    LP program parts known/used by the engine.
+    """
+
     BASE = ('base', [])
     """Is always executed, controls default clingo output and pre-defines possible atoms"""
 

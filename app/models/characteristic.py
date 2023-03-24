@@ -2,8 +2,10 @@ from app.models.base_enum import BaseEnum
 
 
 # TODO [ASK] are there expansions which adss more? then this must be dynamiclly in the LP
-# TODO to be used
 class Characteristic(str, BaseEnum):
+    """
+    TODO currently not in use
+    """
     COURAGE = 'Courage'
     WISDOM = 'Wisdom'
     INTUITION = 'Intuition'

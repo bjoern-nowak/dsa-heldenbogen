@@ -6,6 +6,7 @@ from app.models.skill import Skill
 
 
 class Hero(BaseModel):
+    """Represents an actual hero/character"""
     name: str
     experience_level: str
 

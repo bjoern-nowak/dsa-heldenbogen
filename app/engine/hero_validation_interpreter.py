@@ -11,6 +11,7 @@ from app.models.hero_validation_warning import HeroValidationWarning
 
 
 class ErrorAtom(str, BaseEnum):
+    """Result fact to be interpreted as an error"""
     UNKNOWN = 'unknown'
     UNUSABLE_BY = 'unusable_by'
     MISSING = 'missing'
@@ -25,12 +26,17 @@ class _ErrorAtomAddon(str, BaseEnum):
 
 
 class WarningAtom(str, BaseEnum):
+    """Result fact to be interpreted as a warning"""
     MISSING_USUAL = 'missing_usual'
     MISSING_TYPICAL = 'missing_typical'
     ATYPICAL = 'atypical'
 
 
 def as_error(error: Symbol) -> HeroValidationError:
+    """
+    Converts clingo symbol to a hero validation error
+    :param error: expected to be a result fact of a hero validation run
+    """
     match error.name:
         case ErrorAtom.UNKNOWN:
             return _unknown_error(error)
@@ -47,12 +53,16 @@ def as_error(error: Symbol) -> HeroValidationError:
         case ErrorAtom.MISSING_MIN_LVL:
             return _missing_min_lvl_error(error)
         case _:
-            raise NotImplementedError(f"Found hero validation error without parsing definition.\n"
-                                      f"Error name: {error.name}\n"
-                                      f"Error parameters: {[str(a) for a in error.arguments]}.")
+            raise NotImplementedError(f"There is no 'error' parsing definition for given result fact.\n"
+                                      f"Result fact name: {error.name}\n"
+                                      f"Result fact parameters: {[str(a) for a in error.arguments]}.")
 
 
 def as_warning(warning: Symbol) -> HeroValidationWarning:
+    """
+    Converts clingo symbol to a hero validation warning
+    :param warning: expected to be a result fact of a hero validation run
+    """
     match warning.name:
         case WarningAtom.ATYPICAL:
             return _atypical_warning(warning)
@@ -61,9 +71,9 @@ def as_warning(warning: Symbol) -> HeroValidationWarning:
         case WarningAtom.MISSING_USUAL:
             return _missing_usual_warning(warning)
         case _:
-            raise NotImplementedError(f"Found hero validation warning without parsing definition.\n"
-                                      f"Warning name: {warning.name}\n"
-                                      f"Warning parameters: {[str(a) for a in warning.arguments]}.")
+            raise NotImplementedError(f"There is no 'warning' parsing definition for given result fact.\n"
+                                      f"Result fact name: {warning.name}\n"
+                                      f"Result fact parameters: {[str(a) for a in warning.arguments]}.")
 
 
 def _unknown_error(error: Symbol):
@@ -312,4 +322,7 @@ def _missing_usual_warning(warning: Symbol):
 
 
 def _matches(function_name: str, symbol: Symbol) -> bool:
+    """
+    :returns: True whenever the symbol is a clingo function and the name matches
+    """
     return symbol.type == SymbolType.Function and symbol.name == function_name

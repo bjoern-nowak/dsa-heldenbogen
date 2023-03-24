@@ -14,8 +14,9 @@ class HeroService:
 
     def validate(self, hero: Hero, rulebooks: List[Rulebook]) -> List[HeroValidationWarning]:
         """
-        Check whenever the given hero comply under given rulebooks else it raises errors.
-        :returns: list of warnings, when validation passed (hero is valid)
+        Check whenever the given hero comply under given rulebooks.
+        :returns: when validation passed (hero is valid) a list of warnings
+        :raises HeroInvalidError: whenever hero breaks a rule
         """
         engine = Engine(rulebooks)
         try:
@@ -34,10 +35,13 @@ class HeroService:
             raise ex
 
     def save(self, hero: Hero, rulebooks: List[Rulebook]) -> bool:
+        # TODO implement me
         raise NotImplementedError("Function 'save' is not yet implemented.")
 
     def export(self, hero_name: str) -> bool:
+        # TODO implement me
         raise NotImplementedError("Function 'export' is not yet implemented.")
 
     def delete(self, hero_name: str) -> bool:
+        # TODO implement me
         raise NotImplementedError("Function 'delete' is not yet implemented.")

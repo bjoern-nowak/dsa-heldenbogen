@@ -72,7 +72,7 @@ class TestEngine:
         ctl = Control()
         ctl.load(Rulebook.common_file())
         for rulebook in self.rulebooks:
-            ctl.load(rulebook.entrypoint())
+            ctl.load(rulebook.entrypoint_file())
         return ctl
 
     @staticmethod

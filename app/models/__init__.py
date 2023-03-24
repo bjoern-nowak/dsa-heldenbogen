@@ -1,3 +1,3 @@
 """
-Layer: Domain (Model)
+Layer: Domain Model
 """

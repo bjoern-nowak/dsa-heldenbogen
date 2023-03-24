@@ -6,6 +6,7 @@ from app.models.base_model import BaseModel
 
 
 class Skill(BaseModel):
+    """A skill is a category of hero features which have just a level, like talents and combat techniques"""
     name: str
     level: int = 1
 

@@ -5,35 +5,31 @@ from typing import List
 from app import resource
 from app.models.base_model import BaseModel
 
-_RULEBOOK_RES_FOLDER = 'rulebook'
-_RULEBOOK_ENTRYPOINT = '_entrypoint.lp'
+_RESOURCE_FOLDER = 'rulebook'
+_ENTRYPOINT_FILE = '_entrypoint.lp'
 _COMMON_FILE = 'common.lp'
 
 
 class Rulebook(BaseModel):
     name: str
 
-    def entrypoint(self) -> str:
-        return resource.get_abs_path(f"{_RULEBOOK_RES_FOLDER}/{self.name}/{_RULEBOOK_ENTRYPOINT}")
+    def entrypoint_file(self) -> str:
+        return resource.get_abs_path(f"{_RESOURCE_FOLDER}/{self.name}/{_ENTRYPOINT_FILE}")
 
-    def res_folder(self) -> str:
-        return f"{_RULEBOOK_RES_FOLDER}/{self.name}"
-
-    @staticmethod
-    def entrypoint_name() -> str:
-        return _RULEBOOK_ENTRYPOINT
+    def folder(self) -> str:
+        return f"{_RESOURCE_FOLDER}/{self.name}"
 
     @staticmethod
-    def res_folder_name() -> str:
-        return _RULEBOOK_RES_FOLDER
+    def entrypoint_file_name() -> str:
+        return _ENTRYPOINT_FILE
 
     @staticmethod
-    def common_file_name() -> str:
-        return _COMMON_FILE
+    def resource_folder_name() -> str:
+        return _RESOURCE_FOLDER
 
     @staticmethod
     def common_file() -> str:
-        return resource.get_abs_path(f"{_RULEBOOK_RES_FOLDER}/{_COMMON_FILE}")
+        return resource.get_abs_path(f"{_RESOURCE_FOLDER}/{_COMMON_FILE}")
 
     @staticmethod
     def map(rulebooks: List[str]) -> List[Rulebook]:

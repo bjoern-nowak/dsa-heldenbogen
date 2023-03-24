@@ -7,8 +7,10 @@ from app.models.base_enum import BaseEnum
 from app.models.feature import Feature
 
 
-# TODO add information about parameters
+# TODO may add information about parameters
 class RulebookFunction(str, BaseEnum):
+    """Collection of some explicitly used LP function names"""
+
     # meta
     RULEBOOK_MISSING = 'rulebook_missing'
     EXTRA_HERO_VALIDATION_STEP = 'extra_hero_validation_step'
@@ -22,6 +24,10 @@ class RulebookFunction(str, BaseEnum):
 
     @staticmethod
     def known(feature: Feature) -> str:
+        """
+        Map heros/characters fields/features to corresponding 'known' facts
+        # TODO may should be determined dynamically by given rulebooks
+        """
         match feature:
             case Feature.EXPERIENCE_LEVEL:
                 return 'known_experience_level'

@@ -20,10 +20,10 @@ config: uvicorn.Config = uvicorn.Config(
     'api.root:app',  # <file_path>:<variable>
     workers=args.workers,
     reload=args.reload,  # automatically load changed py-files
-    log_level=args.loglevel.uvicorn,
+    log_level=args.loglevel.uvicorn,  # uvicorn server log level, not python
 )
 
 if __name__ == '__main__':
-    logger.init_config(args.loglevel)
+    logger.init_config(args.loglevel)  # python log level
     server = uvicorn.Server(config)
     server.run()

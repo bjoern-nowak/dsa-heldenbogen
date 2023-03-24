@@ -30,7 +30,7 @@ router = APIRouter()
 )
 def list_known_rulebooks() -> List[str]:
     logger.trace(f"(Request) list available rulebooks")
-    return [r.name for r in MetaService().list_known_rulebooks()]
+    return [r.name for r in MetaService().list_usable_rulebooks()]
 
 
 @router.get(

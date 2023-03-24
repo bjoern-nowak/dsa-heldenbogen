@@ -24,6 +24,7 @@ class HeroValidationError(BaseModel):
         MISSING_MIN_LVL = 'missing_min_lvl'
 
     class Addon(str, BaseEnum):
+        """Represents special cases, so that 'type' must be handled differently"""
         ANY_OF = 'any_of'
 
     type: Type

@@ -7,6 +7,8 @@ from app.models.base_model import BaseModel
 
 class DisAdvantage(BaseModel):
     """
+    Represents either an advantage or a disadvantage.
+
     Field 'uses' can be empty (meant to be optional)
     TODO make field 'uses' truly optional, handling "None" somewhere
     """
@@ -17,6 +19,8 @@ class DisAdvantage(BaseModel):
     @staticmethod
     def list_by(dis_advantages: List[tuple]) -> List[DisAdvantage]:
         """
+        Convenient method to parse tuples of different length.
+
         a tuple can have following forms:
          * (name:str, uses:str, level:int)
          * (name:str, uses:str)

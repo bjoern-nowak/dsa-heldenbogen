@@ -9,11 +9,10 @@ logger = logging.getLogger(__name__)
 
 class RulebookValidator:
     """
-    Validates that a rulebook resource folder has specific files.
-    It does not check if any of these files are loaded.
-    Only entrypoint will be loaded by the engine
+    Validates that within a rulebook resource folder all required files are present.
+    TODO It does not check if any of these files are loaded (LP: #include).
     """
-    required_files: set[str] = {Rulebook.entrypoint_name(), 'meta.lp', 'rules.lp'}
+    required_files: set[str] = {Rulebook.entrypoint_file_name(), 'meta.lp', 'rules.lp'}
 
     @staticmethod
     def filter(rulebooks: List[Rulebook]) -> List[Rulebook]:
@@ -32,7 +31,7 @@ class RulebookValidator:
     @staticmethod
     def _files_valid(rulebook: Rulebook) -> bool:
         try:
-            found_files = set(resource.list_files(rulebook.res_folder()))
+            found_files = set(resource.list_files(rulebook.folder()))
             if not RulebookValidator.required_files.issubset(found_files):
                 return False
             return True

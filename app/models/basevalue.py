@@ -1,8 +1,10 @@
 from app.models.base_enum import BaseEnum
 
 
-# TODO to be used
 class Basevalue(str, BaseEnum):
+    """
+    TODO currently not in use
+    """
     LIFEENERGY = 'Lifeenergy'
     ASTRALENERGY = 'Astralenergy'
     CARMAENERGY = 'Carmaenergy'
