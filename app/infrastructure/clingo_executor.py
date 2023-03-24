@@ -15,7 +15,7 @@ from app.models.hero import Hero
 logger = logging.getLogger(__name__)
 
 
-class ClingoEngine:
+class ClingoExecutor:
     """
     This class is the engines last-mile to call/run clingo.
     """
@@ -27,10 +27,10 @@ class ClingoEngine:
         self.lp_files = lp_files
         self.default_programs = default_programs if default_programs else []
 
-    def execute(self,
-                programs: List[tuple[str, Sequence[Symbol]]],
-                context: Hero = None,
-                on_fail: Exception = None) -> Model:
+    def run(self,
+            programs: List[tuple[str, Sequence[Symbol]]],
+            context: Hero = None,
+            on_fail: Exception = None) -> Model:
         """
         Do a clean clingo solve run
         :param programs: to ground
