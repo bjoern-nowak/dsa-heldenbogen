@@ -1,15 +1,9 @@
 from __future__ import annotations  # required till PEP 563
 
 import logging
-from typing import Any
-from typing import Callable
 from typing import List
-from typing import Optional
 from typing import Sequence
 
-from clingo import Control
-from clingo import Model
-from clingo import SolveResult
 from clingo import Symbol
 
 from app.engine import hero_validation_interpreter
@@ -17,9 +11,9 @@ from app.engine.collector import Collector
 from app.engine.exceptions import HeroInvalidError
 from app.engine.exceptions import UnexpectedResultError
 from app.engine.exceptions import UnusableRulebookError
-from app.engine.hero_wrapper import HeroWrapper
 from app.engine.rulebook_program import RulebookProgram
 from app.engine.rulebook_validator import RulebookValidator
+from app.infrastructure.clingo_engine import ClingoEngine
 from app.models.feature import Feature
 from app.models.hero import Hero
 from app.models.hero_validation_warning import HeroValidationWarning
@@ -50,13 +44,18 @@ class Engine:
 
     def __init__(self, rulebooks: List[Rulebook]) -> None:
         self.rulebooks = RulebookValidator.filter(rulebooks)
+        self.clingo_engine = ClingoEngine(
+            [Rulebook.common_file()] + [r.entrypoint_file() for r in self.rulebooks],
+            [RulebookProgram.BASE]
+        )
         self._check_rulebooks_usable()
+
         self._find_extra_hero_validation_steps()
         self.hero_validation_steps = dict(sorted(self.hero_validation_steps.items()))  # sort by keys
 
     def _check_rulebooks_usable(self) -> None:
         unusables: List[List[str]] = []
-        self._execute(
+        self.clingo_engine.execute(
             programs=[RulebookProgram.RULEBOOK_USABLE],
             on_model=lambda m: Collector.unusable_rulebooks(m, unusables),
             on_fail_raise=UnexpectedResultError(f"Failed to collect unusable rulebooks.")
@@ -69,7 +68,7 @@ class Engine:
 
     def _find_extra_hero_validation_steps(self) -> None:
         steps: List[Symbol] = []
-        self._execute(
+        self.clingo_engine.execute(
             programs=[RulebookProgram.META],
             on_model=lambda m: Collector.extra_hero_validation_steps(m, steps),
             on_fail_raise=UnexpectedResultError(f"Failed to find extra hero validation steps.")
@@ -86,7 +85,7 @@ class Engine:
             else:
                 self.hero_validation_steps[step] = step
 
-    def validate(self, _hero: Hero) -> List[HeroValidationWarning]:
+    def validate(self, hero: Hero) -> List[HeroValidationWarning]:
         """
         If this method passes without an exception the hero has passed the validation positively
         It breaks validation steps-wise on validation errors, but collect warnings step-wide.
@@ -94,7 +93,6 @@ class Engine:
         :raises HeroInvalidError: whenever any hero validation step has an error
         :raises UnexpectedResultError: whenever any hero validation step could not be performed
         """
-        hero = HeroWrapper(_hero)
         warnings: List[HeroValidationWarning] = []
         for step in self.hero_validation_steps:
             program = step if isinstance(step, RulebookProgram) else RulebookProgram.hero_validation_step_for(step)
@@ -111,14 +109,14 @@ class Engine:
         return warnings
 
     def _perform_hero_validation_step(self,
-                                      hero: HeroWrapper,
+                                      hero: Hero,
                                       program: tuple[str, Sequence[Symbol]]) -> tuple[List[Symbol], List[Symbol]]:
         """
         :return: tuple of errors and warnings
         """
         errors: List[Symbol] = []
         warnings: List[Symbol] = []
-        self._execute(
+        self.clingo_engine.execute(
             programs=[RulebookProgram.WORLD_FACTS, RulebookProgram.HERO_FACTS, program],
             context=hero,
             on_model=lambda m: Collector.hero_validation_errors_and_warnings(m, errors, warnings),
@@ -128,7 +126,7 @@ class Engine:
 
     def list_known_for(self, feature: Feature) -> List[tuple[str, str, int]] | List[str]:
         known_values: List[Symbol] = []
-        self._execute(
+        self.clingo_engine.execute(
             programs=[RulebookProgram.WORLD_FACTS],
             on_model=lambda m: Collector.known_feature_values(m, known_values, feature),
             on_fail_raise=UnexpectedResultError(f"Value listing for feature '{feature}' failed.")
@@ -137,25 +135,3 @@ class Engine:
             return [(da.arguments[0].string, da.arguments[1].string, da.arguments[2].number) for da in known_values]
         else:
             return [k.arguments[0].string for k in known_values]
-
-    def _execute(self,
-                 programs: List[tuple[str, Sequence[Symbol]]],
-                 context: Any = None,
-                 on_model: Optional[Callable[[Model], Optional[bool]]] = None,
-                 on_fail_raise: Exception = None):
-        default_programs: List[tuple[str, Sequence[Symbol]]] = [RulebookProgram.BASE]
-        ctl = self._create_control()
-        ctl.ground(default_programs + programs, context)
-        result: SolveResult = ctl.solve(on_model=on_model)
-        if not result.satisfiable:
-            if on_fail_raise:
-                raise on_fail_raise
-            else:
-                logger.warning(f"No exception raise defined, but could not execute programs: {[p[0] for p in programs]}")
-
-    def _create_control(self) -> Control:
-        ctl = Control()
-        ctl.load(Rulebook.common_file())
-        for rulebook in self.rulebooks:
-            ctl.load(rulebook.entrypoint())
-        return ctl
