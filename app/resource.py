@@ -20,9 +20,6 @@ def list_dirs(folder: str) -> List[str]:
     """
     return [d.name for d in files('resources').joinpath(folder).iterdir() if d.is_dir()]
 
-def get_path(filename: str) -> Path:
-    with as_file(files('resources').joinpath(filename)) as filepath:
-        return filepath
 
 def get_abs_path(path: str) -> str:
     """
