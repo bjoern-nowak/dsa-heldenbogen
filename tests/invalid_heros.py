@@ -288,8 +288,8 @@ TALENT_EXCEEDS_MAX_LEVEL_BY_EXPERIENCE = (
                                ('Götter & Kulte', 3), ('Kriegskunst', 6), ('Sagen & Legenden', 5), ('Handel', 3),
                                ('Heilkunde Wunden', 4)]),
         combat_techniques=Skill.list_by([('Armbrüste', 10), ('Raufen', 10), ('Hiebwaffen', 10)]),
-        advantages=[],
-        disadvantages=[],
+        advantages=DisAdvantage.list_by([('Dunkelsicht',), ('Immunität', 'Tulmadron')]),
+        disadvantages=DisAdvantage.list_by([('Unfähig', 'Schwimmen')]),
     )
 )
 
@@ -312,7 +312,7 @@ COMBAT_TECHNIQUE_EXCEEDS_MAX_LEVEL_BY_EXPERIENCE = (
                                ('Götter & Kulte', 3), ('Kriegskunst', 6), ('Sagen & Legenden', 5), ('Handel', 3),
                                ('Heilkunde Wunden', 4)]),
         combat_techniques=Skill.list_by([('Armbrüste', 17), ('Raufen', 10), ('Hiebwaffen', 10)]),
-        advantages=[],
-        disadvantages=[],
+        advantages=DisAdvantage.list_by([('Dunkelsicht',), ('Immunität', 'Tulmadron')]),
+        disadvantages=DisAdvantage.list_by([('Unfähig', 'Schwimmen')]),
     )
 )

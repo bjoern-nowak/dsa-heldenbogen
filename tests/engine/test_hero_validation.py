@@ -12,7 +12,7 @@ from tests.base_test_case import BaseTestCase
 class TestHeroValidation(BaseTestCase):
 
     @parameterized.expand([
-        (0, 'Elfen'),
+        (0, 'Mensch'),
         (1, '',),
         (1, '_invalid_'),
     ])
@@ -22,7 +22,7 @@ class TestHeroValidation(BaseTestCase):
         hero = Hero(name="name",
                     experience_level='Average',
                     species=species,
-                    culture='Auelfen',
+                    culture='Aranier',
                     profession='Händler',
                     talents=[],
                     combat_techniques=[],
@@ -37,10 +37,10 @@ class TestHeroValidation(BaseTestCase):
             self.assertIs(error_count, len(ctx.exception.errors), msg=ctx.exception.errors)
 
     @parameterized.expand([
-        (0, 'Elfen', 'Auelfen'),
-        (1, 'Elfen', ''),
-        (1, 'Elfen', '_invalid_'),
-        (1, 'Elfen', 'Menschlichekultur'),
+        (0, 'Mensch', 'Aranier'),
+        (1, 'Mensch', ''),
+        (1, 'Mensch', '_invalid_'),
+        (1, 'Mensch', 'Erzzwerge'),
     ])
     def test_culture_usable(self, error_count: int, species: str, culture: str):
         # given:
