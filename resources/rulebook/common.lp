@@ -40,7 +40,7 @@
 
 
 #program rulebook_usable.
-rulebook_missing(R,D) :- rulebook_depends(R,D), rulebook(R), not rulebook(D).
+rulebook_missing(R,D) :- rulebook(R), rulebook_depends(R,D), not rulebook(D).
 
 
 #program rulebook_requirements.
@@ -100,12 +100,12 @@ max_count_exceeded(species,MAX) :- COUNT = #count{ S:species(S) }, MAX = #max{ M
 
 #program validate_hero_step_150. %% check species requirements
 % WARNINGS
-missing_usual(species(S),culture(C)) :- species(S), culture(C), has_usual(species(S),culture(_)), not has_usual(species(S),culture(C)).
+missing_usual(species(S),culture(C)) :- species(S), has_usual(species(S),culture(_)), culture(C), not has_usual(species(S),culture(C)).
 
 
 #program validate_hero_step_200. %% check culture usable
 max_count_exceeded(culture,MAX) :- COUNT = #count{ C:culture(C) }, MAX = #max{ MC:max_count(culture,MC) }, COUNT > MAX.
-unusable_by(culture(C),species(S)) :- culture(C), species(S), requires(culture(C),species(_)), not requires(culture(C),species(S)).
+unusable_by(culture(C),species(S)) :- culture(C), requires(culture(C),species(_)), species(S), not requires(culture(C),species(S)).
 
 
 #program validate_hero_step_250. %% check culture requirements
@@ -113,8 +113,8 @@ unusable_by(culture(C),species(S)) :- culture(C), species(S), requires(culture(C
 
 #program validate_hero_step_300. %% check profession usable
 max_count_exceeded(profession,MAX) :- COUNT = #count{ P:profession(P) }, MAX = #max{ MC:max_count(profession,MC) }, COUNT > MAX.
-unusable_by(profession(P),species(S)) :- profession(P), species(S), requires(profession(P),species(_)), not requires(profession(P),species(S)).
-unusable_by(profession(P),culture(C)) :- profession(P), culture(C), requires(profession(P),culture(_)), not requires(profession(P),culture(C)).
+unusable_by(profession(P),species(S)) :- profession(P), requires(profession(P),species(_)), species(S), not requires(profession(P),species(S)).
+unusable_by(profession(P),culture(C)) :- profession(P), requires(profession(P),culture(_)), culture(C), not requires(profession(P),culture(C)).
 
 
 #program validate_hero_step_350. %% check profession requirements
@@ -141,8 +141,8 @@ atypical(species(S),disadvantage(DA,USES)) :- species(S), has_atypical(species(S
 #program validate_hero_step_500. %% check skills (talents, combat techniques) usable
 missing_min_lvl(talent(T,LVL),MIN) :- talent(T,LVL), MIN = 0, LVL < MIN.
 missing_min_lvl(combat_technique(CT,LVL),MIN) :- combat_technique(CT,LVL), MIN = 0, LVL < MIN.
-max_lvl_exceeded(talent(T,LVL),MAX_LVL) :- talent(T,LVL), experience_level(EL), known_experience_level(EL,_,MAX_LVL,_,_,_,_), LVL > MAX_LVL.
-max_lvl_exceeded(combat_technique(CT,LVL),MAX_LVL) :- combat_technique(CT,LVL), experience_level(EL), known_experience_level(EL,_,_,MAX_LVL,_,_,_), LVL > MAX_LVL.
+max_lvl_exceeded(talent(T,LVL),MAX_LVL) :- experience_level(EL), known_experience_level(EL,_,MAX_LVL,_,_,_,_), talent(T,LVL), LVL > MAX_LVL.
+max_lvl_exceeded(combat_technique(CT,LVL),MAX_LVL) :- experience_level(EL), known_experience_level(EL,_,_,MAX_LVL,_,_,_), combat_technique(CT,LVL), LVL > MAX_LVL.
 
 
 #program validate_hero_step_550. %% check skills (talents, combat techniques) requirements
