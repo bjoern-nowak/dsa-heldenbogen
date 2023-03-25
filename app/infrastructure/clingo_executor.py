@@ -5,7 +5,6 @@ from typing import List
 from typing import Sequence
 
 from clingo import Control
-from clingo import Model
 from clingo import SolveResult
 from clingo import Symbol
 
@@ -30,20 +29,20 @@ class ClingoExecutor:
     def run(self,
             programs: List[tuple[str, Sequence[Symbol]]],
             context: Hero = None,
-            on_fail: Exception = None) -> Model:
+            on_fail: Exception = None) -> List[Symbol]:
         """
         Do a clean clingo solve run
         :param programs: to ground
         :param context: hero to use
         :param on_fail: called on unsatisfiable run
-        :returns: clingo Model when run was satisfied
+        :returns: all clingo symbols (even not shown ones) when run was satisfied
         """
         ctl = self._create_control(self.default_programs + programs, context)
-        model: List[Model] = []
-        result: SolveResult = ctl.solve(on_model=lambda m: model.append(m))  # lambda cannot handle var assignment hence a list
-        if not model or not result.satisfiable:
+        symbols: List[Symbol] = []
+        result: SolveResult = ctl.solve(on_model=lambda m: symbols.extend(m.symbols(atoms=True)))
+        if not result.satisfiable:
             raise on_fail if on_fail else RuntimeError(f"Could not execute clingo programs: {[p[0] for p in programs]}")
-        return model[0]
+        return symbols
 
     def _create_control(self, programs: List[tuple[str, Sequence[Symbol]]], context: Hero = None) -> Control:
         """

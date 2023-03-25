@@ -41,8 +41,8 @@ class TestResourcesRulebooks(BaseTestCase):
         errors = []
         for rulebook in known_rulebooks:
             engine = TestEngine(rulebook)
-            has_function, others = engine.has_only_function([RulebookProgram.RULEBOOK_USABLE], FACT_RULEBOOK, rulebook.name)
-            if not has_function:
+            found, others = engine.has_function_with_value([RulebookProgram.RULEBOOK_USABLE], FACT_RULEBOOK, rulebook.name)
+            if not found:
                 errors.append(f"Rulebook '{rulebook}' does not declares itself as fact.")
             if others:
                 errors.append(f"Rulebook '{rulebook}' declares to be other rulebook(s): {others}")
