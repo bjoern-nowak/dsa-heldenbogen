@@ -2,7 +2,7 @@ from app.engine.rulebook_program import RulebookProgram
 from app.engine.rulebook_validator import RulebookValidator
 from app.models.rulebook import Rulebook
 from tests.base_test_case import BaseTestCase
-from tests.engine.test_engine import TestEngine
+from tests.engine.tester_engine import TesterEngine
 
 FACT_RULEBOOK = 'rulebook'
 
@@ -25,7 +25,7 @@ class TestResourcesRulebooks(BaseTestCase):
         # when:
         errors = []
         for rulebook in known_rulebooks:
-            engine = TestEngine(rulebook)
+            engine = TesterEngine(rulebook)
             missing_programs = engine.has_programs(required_programs)
             if missing_programs:
                 errors.append(f"Rulebook '{rulebook}' missing required programs: {missing_programs}")
@@ -40,7 +40,7 @@ class TestResourcesRulebooks(BaseTestCase):
         # when:
         errors = []
         for rulebook in known_rulebooks:
-            engine = TestEngine(rulebook)
+            engine = TesterEngine(rulebook)
             found, others = engine.has_function_with_value([RulebookProgram.RULEBOOK_USABLE], FACT_RULEBOOK, rulebook.name)
             if not found:
                 errors.append(f"Rulebook '{rulebook}' does not declares itself as fact.")
