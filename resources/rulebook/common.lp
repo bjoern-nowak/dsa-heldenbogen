@@ -41,7 +41,10 @@
 
 #program rulebook_usable.
 rulebook_missing(R,D) :- rulebook_depends(R,D), rulebook(R), not rulebook(D).
-%% TODO add check that rulebook only uses known feature values, hence requires program world_facts
+
+
+#program rulebook_requirements.
+%% TODO add check that rulebook only uses known feature values, to be executed by testcases
 
 
 #program world_facts.
