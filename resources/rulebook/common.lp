@@ -100,14 +100,12 @@ max_count_exceeded(species,MAX) :- COUNT = #count{ S:species(S) }, MAX = #max{ M
 
 #program validate_hero_step_150. %% check species requirements
 % WARNINGS
-missing_usual(species(S),culture(C)) :- species(S), culture(C), #false : not has_usual(species(S),culture(_)); not has_usual(species(S),culture(C)).
+missing_usual(species(S),culture(C)) :- species(S), culture(C), has_usual(species(S),culture(_)), not has_usual(species(S),culture(C)).
 
 
 #program validate_hero_step_200. %% check culture usable
 max_count_exceeded(culture,MAX) :- COUNT = #count{ C:culture(C) }, MAX = #max{ MC:max_count(culture,MC) }, COUNT > MAX.
-%% only check if there is a restriction ('#false : not' part)
-%% TODO extract all restriction conditions ('#false : not' part) as separate fact, so that other rulebooks can reuse it
-unusable_by(culture(C),species(S)) :- culture(C), species(S), #false : not requires(culture(C),species(_)); not requires(culture(C),species(S)).
+unusable_by(culture(C),species(S)) :- culture(C), species(S), requires(culture(C),species(_)), not requires(culture(C),species(S)).
 
 
 #program validate_hero_step_250. %% check culture requirements
@@ -115,29 +113,29 @@ unusable_by(culture(C),species(S)) :- culture(C), species(S), #false : not requi
 
 #program validate_hero_step_300. %% check profession usable
 max_count_exceeded(profession,MAX) :- COUNT = #count{ P:profession(P) }, MAX = #max{ MC:max_count(profession,MC) }, COUNT > MAX.
-unusable_by(profession(P),species(S)) :- profession(P), species(S), #false : not requires(profession(P),species(_)); not requires(profession(P),species(S)).
-unusable_by(profession(P),culture(C)) :- profession(P), culture(C), #false : not requires(profession(P),culture(_)); not requires(profession(P),culture(C)).
+unusable_by(profession(P),species(S)) :- profession(P), species(S), requires(profession(P),species(_)), not requires(profession(P),species(S)).
+unusable_by(profession(P),culture(C)) :- profession(P), culture(C), requires(profession(P),culture(_)), not requires(profession(P),culture(C)).
 
 
 #program validate_hero_step_350. %% check profession requirements
-missing_level(profession(P),talent(T,MIN_LVL)) :- profession(P), #false : not requires(profession(P),talent(_,_)); requires(profession(P),talent(T,MIN_LVL)), not talent(T,_).
-missing_level(profession(P),talent(T,MIN_LVL)) :- profession(P), #false : not requires(profession(P),talent(_,_)); requires(profession(P),talent(T,MIN_LVL)), talent(T,LVL), LVL < MIN_LVL.
-missing_level(profession(P),combat_technique(CT,MIN_LVL)) :- profession(P), #false : not requires(profession(P),combat_technique(_,_)); requires(profession(P),combat_technique(CT,MIN_LVL)), not combat_technique(CT,_).
-missing_level(profession(P),combat_technique(CT,MIN_LVL)) :- profession(P), #false : not requires(profession(P),combat_technique(_,_)); requires(profession(P),combat_technique(CT,MIN_LVL)), combat_technique(CT,LVL), LVL < MIN_LVL.
-missing_level(profession(P),combat_technique(any_of(1,CTs),MIN_LVL)) :- profession(P), #false : not requires(profession(P),any_of(_,combat_technique,_,_)); requires(profession(P),any_of(CHOICES,combat_technique,CTs,MIN_LVL)), #false : @any_of_has_minimum_level(CHOICES,combat_technique,CTs,MIN_LVL) = 1.
+missing_level(profession(P),talent(T,MIN_LVL)) :- profession(P), requires(profession(P),talent(T,MIN_LVL)), not talent(T,_).
+missing_level(profession(P),talent(T,MIN_LVL)) :- profession(P), requires(profession(P),talent(T,MIN_LVL)), talent(T,LVL), LVL < MIN_LVL.
+missing_level(profession(P),combat_technique(CT,MIN_LVL)) :- profession(P), requires(profession(P),combat_technique(CT,MIN_LVL)), not combat_technique(CT,_).
+missing_level(profession(P),combat_technique(CT,MIN_LVL)) :- profession(P), requires(profession(P),combat_technique(CT,MIN_LVL)), combat_technique(CT,LVL), LVL < MIN_LVL.
+missing_level(profession(P),combat_technique(any_of(1,CTs),MIN_LVL)) :- profession(P), requires(profession(P),any_of(CHOICES,combat_technique,CTs,MIN_LVL)), @any_of_has_minimum_level(CHOICES,combat_technique,CTs,MIN_LVL) != 1.
 
 
 #program validate_hero_step_400. %% check (dis)advantage usable
 
 
 #program validate_hero_step_450. %% check (dis)advantage requirements
-missing(species(S),advantage(A,USES,LVL)) :- species(S), #false : not requires(species(S),advantage(_,_,_)); requires(species(S),advantage(A,USES,LVL)), not advantage(A,USES,LVL).
-missing(species(S),disadvantage(DA,USES,LVL)) :- species(S), #false : not requires(species(S),disadvantage(_,_,_)); requires(species(S),disadvantage(DA,USES,LVL)), not disadvantage(DA,USES,LVL).
+missing(species(S),advantage(A,USES,LVL)) :- species(S), requires(species(S),advantage(A,USES,LVL)), not advantage(A,USES,LVL).
+missing(species(S),disadvantage(DA,USES,LVL)) :- species(S), requires(species(S),disadvantage(DA,USES,LVL)), not disadvantage(DA,USES,LVL).
 % WARNINGS
-missing_typical(species(S),advantage(A,USES,LVL)) :- species(S), #false : not has_typical(species(S),advantage(_,_,_)); has_typical(species(S),advantage(A,USES,LVL)), not advantage(A,USES,LVL).
-missing_typical(species(S),disadvantage(DA,USES,LVL)) :- species(S), #false : not has_typical(species(S),disadvantage(_,_,_)); has_typical(species(S),disadvantage(DA,USES,LVL)), not disadvantage(DA,USES,LVL).
-atypical(species(S),advantage(A,USES)) :- species(S), #false : not has_atypical(species(S),advantage(_,_,_)); has_atypical(species(S),advantage(A,USES,_)), advantage(A,USES,_).
-atypical(species(S),disadvantage(DA,USES)) :- species(S), #false : not has_atypical(species(S),disadvantage(_,_,_)); has_atypical(species(S),disadvantage(DA,USES,_)), disadvantage(DA,USES,_).
+missing_typical(species(S),advantage(A,USES,LVL)) :- species(S), has_typical(species(S),advantage(A,USES,LVL)), not advantage(A,USES,LVL).
+missing_typical(species(S),disadvantage(DA,USES,LVL)) :- species(S), has_typical(species(S),disadvantage(DA,USES,LVL)), not disadvantage(DA,USES,LVL).
+atypical(species(S),advantage(A,USES)) :- species(S), has_atypical(species(S),advantage(A,USES,_)), advantage(A,USES,_).
+atypical(species(S),disadvantage(DA,USES)) :- species(S), has_atypical(species(S),disadvantage(DA,USES,_)), disadvantage(DA,USES,_).
 
 
 #program validate_hero_step_500. %% check skills (talents, combat techniques) usable
