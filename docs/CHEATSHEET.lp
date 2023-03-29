@@ -282,6 +282,10 @@ max(X) :- X = #max   { 2:a ; 3:a }. %% if a hold 'max(3)' else 'max(#inf)'
 %%
 %% get edges having a cost which is higher then 10
 10 < #sum { C,X,Y : edge(X,Y) : cost(X,Y,C) }.
+%%
+%% special case: choice construct/rule
+%%  here it is possible to derive any of the atoms (for buy).
+{ buy(pizza) ; buy(wine) ; buy(corn) } :- at(grocery).
 
 
 
