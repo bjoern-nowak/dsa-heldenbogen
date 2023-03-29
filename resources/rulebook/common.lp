@@ -95,7 +95,7 @@ unknown(combat_technique(CT)) :- combat_technique(CT,_), not known_combat_techni
 
 
 #program validate_hero_step_100. %% check species usable
-max_count_exceeded(species,MAX) :- COUNT = #count{ S:species(S) }, MAX = #max{ MC:max_count(species,MC) }, COUNT > MAX.
+max_count_exceeded(species,MAX) :- COUNT=#count{ S:species(S) }, MAX=#max{ MC:max_count(species,MC) }, COUNT > MAX.
 
 
 #program validate_hero_step_150. %% check species requirements
@@ -104,7 +104,7 @@ missing_usual(species(S),culture(C)) :- species(S), has_usual(species(S),culture
 
 
 #program validate_hero_step_200. %% check culture usable
-max_count_exceeded(culture,MAX) :- COUNT = #count{ C:culture(C) }, MAX = #max{ MC:max_count(culture,MC) }, COUNT > MAX.
+max_count_exceeded(culture,MAX) :- COUNT=#count{ C:culture(C) }, MAX=#max{ MC:max_count(culture,MC) }, COUNT > MAX.
 unusable_by(culture(C),species(S)) :- culture(C), requires(culture(C),species(_)), species(S), not requires(culture(C),species(S)).
 
 
@@ -112,7 +112,7 @@ unusable_by(culture(C),species(S)) :- culture(C), requires(culture(C),species(_)
 
 
 #program validate_hero_step_300. %% check profession usable
-max_count_exceeded(profession,MAX) :- COUNT = #count{ P:profession(P) }, MAX = #max{ MC:max_count(profession,MC) }, COUNT > MAX.
+max_count_exceeded(profession,MAX) :- COUNT=#count{ P:profession(P) }, MAX=#max{ MC:max_count(profession,MC) }, COUNT > MAX.
 unusable_by(profession(P),species(S)) :- profession(P), requires(profession(P),species(_)), species(S), not requires(profession(P),species(S)).
 unusable_by(profession(P),culture(C)) :- profession(P), requires(profession(P),culture(_)), culture(C), not requires(profession(P),culture(C)).
 
@@ -137,8 +137,8 @@ atypical(species(S),disadvantage(DA,USES)) :- species(S), has_atypical(species(S
 
 
 #program validate_hero_step_500. %% check skills (talents, combat techniques) usable
-missing_min_lvl(talent(T,LVL),MIN) :- talent(T,LVL), MIN = 0, LVL < MIN.
-missing_min_lvl(combat_technique(CT,LVL),MIN) :- combat_technique(CT,LVL), MIN = 0, LVL < MIN.
+missing_min_lvl(talent(T,LVL),MIN) :- talent(T,LVL), MIN=0, LVL < MIN.
+missing_min_lvl(combat_technique(CT,LVL),MIN) :- combat_technique(CT,LVL), MIN=0, LVL < MIN.
 max_lvl_exceeded(talent(T,LVL),MAX_LVL) :- experience_level(EL), known_experience_level(EL,_,MAX_LVL,_,_,_,_), talent(T,LVL), LVL > MAX_LVL.
 max_lvl_exceeded(combat_technique(CT,LVL),MAX_LVL) :- experience_level(EL), known_experience_level(EL,_,_,MAX_LVL,_,_,_), combat_technique(CT,LVL), LVL > MAX_LVL.
 
