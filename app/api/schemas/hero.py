@@ -22,7 +22,7 @@ class Hero(BaseModel):
 
     experience_level: str
 
-    species: str
+    race: str
     culture: str
     profession: str
 
@@ -37,7 +37,7 @@ class Hero(BaseModel):
         return ModelHero(
             name=self.name,
             experience_level=self.experience_level,
-            species=self.species,
+            race=self.race,
             culture=self.culture,
             profession=self.profession,
             talents=Hero._dict_to_skills(self.talents),
@@ -62,7 +62,7 @@ class Hero(BaseModel):
                     "value": {
                         "name": "UncleBob",
                         "experience_level": "Legendary",
-                        "species": "Elfen",
+                        "race": "Elfen",
                         "culture": "Auelfen",
                         "profession": "Söldner",
                         "talents": {"Körperbeherrschung": 3, "Kraftakt": 3, "Selbstbeherrschung": 4, "Zechen": 5,
@@ -77,11 +77,11 @@ class Hero(BaseModel):
                     }
                 },
                 "invalid_unknown_value": {
-                    "summary": "[INVALID] Unknown species value",
+                    "summary": "[INVALID] Unknown race value",
                     "value": {
                         "name": "UncleBob",
                         "experience_level": "Legendary",
-                        "species": "Elfen",
+                        "race": "Elfen",
                         "culture": "Auelfen",
                         "profession": "Söldnera",
                         "talents": {"Körperbeherrschung": 3, "Kraftakt": 3, "Selbstbeherrschung": 4, "Zechen": 5,
@@ -100,7 +100,7 @@ class Hero(BaseModel):
                     "value": {
                         "name": "UncleBob",
                         "experience_level": "Legendary",
-                        "species": "Elfen",
+                        "race": "Elfen",
                         "culture": "Auelfen",
                         "profession": "Söldner",
                         "talents": {"Körperbeherrschung": 2, "Kraftakt": 3, "Selbstbeherrschung": 4, "Zechen": 5,

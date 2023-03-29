@@ -10,7 +10,7 @@ class Hero(BaseModel):
     name: str
     experience_level: str
 
-    species: str
+    race: str
     culture: str
 
     profession: str

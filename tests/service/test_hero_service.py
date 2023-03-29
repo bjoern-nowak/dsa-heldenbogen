@@ -22,15 +22,15 @@ class TestHeroService(BaseTestCase):
     service = HeroService()
 
     @parameterized.expand([
-        (invalid_heros.UNKNOWN_SPECIES,),  # case 0
+        (invalid_heros.UNKNOWN_RACE,),  # case 0
         (invalid_heros.UNKNOWN_CULTURE,),  # case 1 ...
         (invalid_heros.UNKNOWN_PROFESSION,),
         (invalid_heros.UNKNOWN_TALENT,),
         (invalid_heros.UNKNOWN_COMBAT_TECHNIQUE,),
         (invalid_heros.UNKNOWN_ADVANTAGE,),
         (invalid_heros.UNKNOWN_DISADVANTAGE,),
-        (invalid_heros.CULTURE_UNUSABLE_BY_SPECIES,),
-        (invalid_heros.PROFESSION_UNUSABLE_BY_SPECIES,),
+        (invalid_heros.CULTURE_UNUSABLE_BY_RACE,),
+        (invalid_heros.PROFESSION_UNUSABLE_BY_RACE,),
         (invalid_heros.PROFESSION_UNUSABLE_BY_CULTURE,),
         (invalid_heros.PROFESSION_MISSING_LEVEL_FOR_TALENT,),
         (invalid_heros.PROFESSION_MISSING_LEVEL_FOR_COMBAT_TECHNIQUE,),

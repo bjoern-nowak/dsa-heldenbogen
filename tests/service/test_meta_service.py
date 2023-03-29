@@ -10,7 +10,7 @@ class TestMetaService(BaseTestCase):
     service = MetaService()
 
     @parameterized.expand([
-        (4, Feature.SPECIES),
+        (4, Feature.RACE),
         (33, Feature.CULTURE),
         (4, Feature.PROFESSION),
         (34, Feature.ADVANTAGE),

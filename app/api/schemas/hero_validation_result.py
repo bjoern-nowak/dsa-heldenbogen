@@ -31,9 +31,9 @@ class HeroValidationResult(BaseModel):
                         "warnings": [
                             {
                                 "type": "missing_typical",
-                                "message": "Heros 'species' is missing typical 'advantage' of 'Schlangenmensch' using '' at level '1'.",
+                                "message": "Heros 'race' is missing typical 'advantage' of 'Schlangenmensch' using '' at level '1'.",
                                 "parameter": {
-                                    "caused_feature": "species",
+                                    "caused_feature": "race",
                                     "caused_feature_value": "Elfen",
                                     "referred_feature": "advantage",
                                     "referred_feature_value": "Schlangenmensch",
@@ -43,9 +43,9 @@ class HeroValidationResult(BaseModel):
                             },
                             {
                                 "type": "missing_typical",
-                                "message": "Heros 'species' is missing typical 'advantage' of 'Verbesserte Regeneration' using 'Astralenergie' at level '1'.",
+                                "message": "Heros 'race' is missing typical 'advantage' of 'Verbesserte Regeneration' using 'Astralenergie' at level '1'.",
                                 "parameter": {
-                                    "caused_feature": "species",
+                                    "caused_feature": "race",
                                     "caused_feature_value": "Elfen",
                                     "referred_feature": "advantage",
                                     "referred_feature_value": "Verbesserte Regeneration",
@@ -57,7 +57,7 @@ class HeroValidationResult(BaseModel):
                     }
                 },
                 "invalid_unknown_value": {
-                    "summary": "[INVALID] Unknown species value",
+                    "summary": "[INVALID] Unknown race value",
                     "value": {
                         "valid": False,
                         "errors": [

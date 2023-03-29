@@ -5,7 +5,7 @@
 #defined rulebook_missing/2. #show rulebook_missing/2.
 %% world facts
 #defined known_experience_level/1.
-#defined known_species/1.
+#defined known_race/1.
 #defined known_culture/1.
 #defined known_profession/1.
 #defined known_advantage/3.
@@ -17,7 +17,7 @@
 #defined has_typical/2.
 #defined has_atypical/2.
 %% hero facts
-#defined species/1. #show species/1.
+#defined race/1. #show race/1.
 #defined culture/1. #show culture/1.
 #defined profession/1. #show profession/1.
 #defined talent/2. #show talent/2.
@@ -40,7 +40,7 @@
 
 
 #program rulebook_usable.
-rulebook_missing(R,D) :- rulebook(R), rulebook_depends(R,D), not rulebook(D).
+rulebook_missing(RB,D) :- rulebook(RB), rulebook_depends(RB,D), not rulebook(D).
 
 
 #program rulebook_requirements.
@@ -74,7 +74,7 @@ __advantage_wrapper(@advantages).
 __disadvantage_wrapper(@disadvantages).
 %
 experience_level(@experience_level).
-species(@species).
+race(@race).
 culture(@culture).
 profession(@profession).
 talent(T,LVL) :- __talent_wrapper((T,LVL)).
@@ -85,7 +85,7 @@ disadvantage(DA,USES,LVL) :- __disadvantage_wrapper((DA,USES,LVL)).
 
 #program validate_hero_step_50. %% pre check - values known
 unknown(experience_level(EL)) :- experience_level(EL), not known_experience_level(EL,_,_,_,_,_,_).
-unknown(species(S)) :- species(S), not known_species(S).
+unknown(race(R)) :- race(R), not known_race(R).
 unknown(culture(C)) :- culture(C), not known_culture(C).
 unknown(profession(P)) :- profession(P), not known_profession(P).
 unknown(advantage(A,USES,LVL)) :- advantage(A,USES,LVL), not known_advantage(A,USES,LVL).
@@ -94,18 +94,18 @@ unknown(talent(T)) :- talent(T,_), not known_talent(T).
 unknown(combat_technique(CT)) :- combat_technique(CT,_), not known_combat_technique(CT).
 
 
-#program validate_hero_step_100. %% check species usable
-max_count_exceeded(species,MAX) :- COUNT=#count{ S:species(S) }, MAX=#max{ MC:max_count(species,MC) }, COUNT > MAX.
+#program validate_hero_step_100. %% check race usable
+max_count_exceeded(race,MAX) :- COUNT=#count{ R:race(R) }, MAX=#max{ MC:max_count(race,MC) }, COUNT > MAX.
 
 
-#program validate_hero_step_150. %% check species requirements
+#program validate_hero_step_150. %% check race requirements
 % WARNINGS
-missing_usual(species(S),culture(C)) :- species(S), has_usual(species(S),culture(_)), culture(C), not has_usual(species(S),culture(C)).
+missing_usual(race(R),culture(C)) :- race(R), has_usual(race(R),culture(_)), culture(C), not has_usual(race(R),culture(C)).
 
 
 #program validate_hero_step_200. %% check culture usable
 max_count_exceeded(culture,MAX) :- COUNT=#count{ C:culture(C) }, MAX=#max{ MC:max_count(culture,MC) }, COUNT > MAX.
-unusable_by(culture(C),species(S)) :- culture(C), requires(culture(C),species(_)), species(S), not requires(culture(C),species(S)).
+unusable_by(culture(C),race(R)) :- culture(C), requires(culture(C),race(_)), race(R), not requires(culture(C),race(R)).
 
 
 #program validate_hero_step_250. %% check culture requirements
@@ -113,7 +113,7 @@ unusable_by(culture(C),species(S)) :- culture(C), requires(culture(C),species(_)
 
 #program validate_hero_step_300. %% check profession usable
 max_count_exceeded(profession,MAX) :- COUNT=#count{ P:profession(P) }, MAX=#max{ MC:max_count(profession,MC) }, COUNT > MAX.
-unusable_by(profession(P),species(S)) :- profession(P), requires(profession(P),species(_)), species(S), not requires(profession(P),species(S)).
+unusable_by(profession(P),race(R)) :- profession(P), requires(profession(P),race(_)), race(R), not requires(profession(P),race(R)).
 unusable_by(profession(P),culture(C)) :- profession(P), requires(profession(P),culture(_)), culture(C), not requires(profession(P),culture(C)).
 
 
@@ -127,13 +127,13 @@ missing_level(profession(P),combat_technique(any_of(CHOICES,CTs),MIN_LVL)) :- pr
 
 
 #program validate_hero_step_450. %% check (dis)advantage requirements
-missing(species(S),advantage(A,USES,LVL)) :- species(S), requires(species(S),advantage(A,USES,LVL)), not advantage(A,USES,LVL).
-missing(species(S),disadvantage(DA,USES,LVL)) :- species(S), requires(species(S),disadvantage(DA,USES,LVL)), not disadvantage(DA,USES,LVL).
+missing(race(R),advantage(A,USES,LVL)) :- race(R), requires(race(R),advantage(A,USES,LVL)), not advantage(A,USES,LVL).
+missing(race(R),disadvantage(DA,USES,LVL)) :- race(R), requires(race(R),disadvantage(DA,USES,LVL)), not disadvantage(DA,USES,LVL).
 % WARNINGS
-missing_typical(species(S),advantage(A,USES,LVL)) :- species(S), has_typical(species(S),advantage(A,USES,LVL)), not advantage(A,USES,LVL).
-missing_typical(species(S),disadvantage(DA,USES,LVL)) :- species(S), has_typical(species(S),disadvantage(DA,USES,LVL)), not disadvantage(DA,USES,LVL).
-atypical(species(S),advantage(A,USES)) :- species(S), has_atypical(species(S),advantage(A,USES,_)), advantage(A,USES,_).
-atypical(species(S),disadvantage(DA,USES)) :- species(S), has_atypical(species(S),disadvantage(DA,USES,_)), disadvantage(DA,USES,_).
+missing_typical(race(R),advantage(A,USES,LVL)) :- race(R), has_typical(race(R),advantage(A,USES,LVL)), not advantage(A,USES,LVL).
+missing_typical(race(R),disadvantage(DA,USES,LVL)) :- race(R), has_typical(race(R),disadvantage(DA,USES,LVL)), not disadvantage(DA,USES,LVL).
+atypical(race(R),advantage(A,USES)) :- race(R), has_atypical(race(R),advantage(A,USES,_)), advantage(A,USES,_).
+atypical(race(R),disadvantage(DA,USES)) :- race(R), has_atypical(race(R),disadvantage(DA,USES,_)), disadvantage(DA,USES,_).
 
 
 #program validate_hero_step_500. %% check skills (talents, combat techniques) usable

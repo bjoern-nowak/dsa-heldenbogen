@@ -31,8 +31,8 @@ class RulebookFunction(str, BaseEnum):
         match feature:
             case Feature.EXPERIENCE_LEVEL:
                 return 'known_experience_level'
-            case Feature.SPECIES:
-                return 'known_species'
+            case Feature.RACE:
+                return 'known_race'
             case Feature.CULTURE:
                 return 'known_culture'
             case Feature.PROFESSION:

@@ -16,12 +16,12 @@ class TestHeroValidation(BaseTestCase):
         (1, '',),
         (1, '_invalid_'),
     ])
-    def test_species_usable(self, error_count: int, species: str):
+    def test_race_usable(self, error_count: int, race: str):
         # given:
         engine = Engine(Rulebook.map(['dsa5']))
         hero = Hero(name="name",
                     experience_level='Average',
-                    species=species,
+                    race=race,
                     culture='Aranier',
                     profession='Händler',
                     talents=[],
@@ -42,12 +42,12 @@ class TestHeroValidation(BaseTestCase):
         (1, 'Mensch', '_invalid_'),
         (1, 'Mensch', 'Erzzwerge'),
     ])
-    def test_culture_usable(self, error_count: int, species: str, culture: str):
+    def test_culture_usable(self, error_count: int, race: str, culture: str):
         # given:
         engine = Engine(Rulebook.map(['dsa5']))
         hero = Hero(name="name",
                     experience_level='Average',
-                    species=species,
+                    race=race,
                     culture=culture,
                     profession='Händler',
                     talents=[],
@@ -68,12 +68,12 @@ class TestHeroValidation(BaseTestCase):
         (1, 'Mensch', 'Menschlichekultur', '_invalid_'),
         (1, 'Mensch', 'Menschlichekultur', 'Zauberweber'),
     ])
-    def test_profession_usable(self, error_count: int, species: str, culture: str, profession: str):
+    def test_profession_usable(self, error_count: int, race: str, culture: str, profession: str):
         # given:
         engine = Engine(Rulebook.map(['dsa5']))
         hero = Hero(name="name",
                     experience_level='Average',
-                    species=species,
+                    race=race,
                     culture=culture,
                     profession=profession,
                     talents=[],
@@ -100,7 +100,7 @@ class TestHeroValidation(BaseTestCase):
     # ])
     # def test_profession_requirements_met(self,
     #                                      error_count: int,
-    #                                      species: str,
+    #                                      race: str,
     #                                      culture: str,
     #                                      profession: str,
     #                                      talents: dict[str, int],
@@ -108,7 +108,7 @@ class TestHeroValidation(BaseTestCase):
     #     # given:
     #     engine = Engine(Rulebook.list_by(['dsa5']))
     #     hero = Hero(name="name",
-    #                 species=species,
+    #                 race=race,
     #                 culture=culture,
     #                 profession=profession,
     #                 talents=talents,

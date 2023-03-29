@@ -4,16 +4,16 @@ from app.models.hero_validation_error import HeroValidationError
 from app.models.hero_validation_param import HeroValidationParam
 from app.models.skill import Skill
 
-UNKNOWN_SPECIES = (
+UNKNOWN_RACE = (
     HeroValidationError.Type.UNKNOWN,
     {
-        HeroValidationParam.C_F: 'species',
+        HeroValidationParam.C_F: 'race',
         HeroValidationParam.C_F_VALUE: '__unknown__',
     },
     Hero(
         name='valid_söldner',
         experience_level='Average',
-        species='__unknown__',
+        race='__unknown__',
         culture='Ambosszwerge',
         profession='Söldner',
         talents=[],
@@ -32,7 +32,7 @@ UNKNOWN_CULTURE = (
     Hero(
         name='valid_söldner',
         experience_level='Average',
-        species='Zwerg',
+        race='Zwerg',
         culture='__unknown__',
         profession='Söldner',
         talents=[],
@@ -51,7 +51,7 @@ UNKNOWN_PROFESSION = (
     Hero(
         name='valid_söldner',
         experience_level='Average',
-        species='Zwerg',
+        race='Zwerg',
         culture='Ambosszwerge',
         profession='__unknown__',
         talents=[],
@@ -70,7 +70,7 @@ UNKNOWN_TALENT = (
     Hero(
         name='valid_söldner',
         experience_level='Average',
-        species='Zwerg',
+        race='Zwerg',
         culture='Ambosszwerge',
         profession='Söldner',
         talents=[Skill(name='__unknown__')],
@@ -89,7 +89,7 @@ UNKNOWN_COMBAT_TECHNIQUE = (
     Hero(
         name='valid_söldner',
         experience_level='Average',
-        species='Zwerg',
+        race='Zwerg',
         culture='Ambosszwerge',
         profession='Söldner',
         talents=[],
@@ -108,7 +108,7 @@ UNKNOWN_ADVANTAGE = (
     Hero(
         name='valid_söldner',
         experience_level='Average',
-        species='Zwerg',
+        race='Zwerg',
         culture='Ambosszwerge',
         profession='Söldner',
         talents=[],
@@ -127,7 +127,7 @@ UNKNOWN_DISADVANTAGE = (
     Hero(
         name='valid_söldner',
         experience_level='Average',
-        species='Zwerg',
+        race='Zwerg',
         culture='Ambosszwerge',
         profession='Söldner',
         talents=[],
@@ -137,18 +137,18 @@ UNKNOWN_DISADVANTAGE = (
     )
 )
 
-CULTURE_UNUSABLE_BY_SPECIES = (
+CULTURE_UNUSABLE_BY_RACE = (
     HeroValidationError.Type.UNUSABLE_BY,
     {
         HeroValidationParam.C_F: 'culture',
         HeroValidationParam.C_F_VALUE: 'Andergaster',
-        HeroValidationParam.R_F: 'species',
+        HeroValidationParam.R_F: 'race',
         HeroValidationParam.R_F_VALUE: 'Zwerg',
     },
     Hero(
         name='valid_söldner',
         experience_level='Average',
-        species='Zwerg',
+        race='Zwerg',
         culture='Andergaster',
         profession='Söldner',
         talents=[],
@@ -158,18 +158,18 @@ CULTURE_UNUSABLE_BY_SPECIES = (
     )
 )
 
-PROFESSION_UNUSABLE_BY_SPECIES = (
+PROFESSION_UNUSABLE_BY_RACE = (
     HeroValidationError.Type.UNUSABLE_BY,
     {
         HeroValidationParam.C_F: 'profession',
         HeroValidationParam.C_F_VALUE: 'Zauberweber',
-        HeroValidationParam.R_F: 'species',
+        HeroValidationParam.R_F: 'race',
         HeroValidationParam.R_F_VALUE: 'Zwerg',
     },
     Hero(
         name='valid_söldner',
         experience_level='Average',
-        species='Zwerg',
+        race='Zwerg',
         culture='Ambosszwerge',
         profession='Zauberweber',
         talents=[],
@@ -190,7 +190,7 @@ PROFESSION_UNUSABLE_BY_CULTURE = (
     Hero(
         name='valid_söldner',
         experience_level='Average',
-        species='Zwerg',
+        race='Zwerg',
         culture='Ambosszwerge',
         profession='Skuldrun',
         talents=[],
@@ -213,7 +213,7 @@ PROFESSION_MISSING_LEVEL_FOR_TALENT = (
     Hero(
         name='valid_söldner',
         experience_level='Average',
-        species='Zwerg',
+        race='Zwerg',
         culture='Ambosszwerge',
         profession='Söldner',
         talents=[],
@@ -235,7 +235,7 @@ PROFESSION_MISSING_LEVEL_FOR_COMBAT_TECHNIQUE = (
     Hero(
         name='valid_söldner',
         experience_level='Average',
-        species='Zwerg',
+        race='Zwerg',
         culture='Ambosszwerge',
         profession='Söldner',
         talents=[],
@@ -259,7 +259,7 @@ PROFESSION_MISSING_LEVEL_FOR_ANY_OF_COMBAT_TECHNIQUES = (
     Hero(
         name='valid_söldner',
         experience_level='Average',
-        species='Zwerg',
+        race='Zwerg',
         culture='Ambosszwerge',
         profession='Söldner',
         talents=[],
@@ -280,7 +280,7 @@ TALENT_EXCEEDS_MAX_LEVEL_BY_EXPERIENCE = (
     Hero(
         name='valid_söldner',
         experience_level='Masterful',
-        species='Zwerg',
+        race='Zwerg',
         culture='Ambosszwerge',
         profession='Söldner',
         talents=Skill.list_by([('Körperbeherrschung', 17), ('Kraftakt', 3), ('Selbstbeherrschung', 4), ('Zechen', 5),
@@ -304,7 +304,7 @@ COMBAT_TECHNIQUE_EXCEEDS_MAX_LEVEL_BY_EXPERIENCE = (
     Hero(
         name='valid_söldner',
         experience_level='Masterful',
-        species='Zwerg',
+        race='Zwerg',
         culture='Ambosszwerge',
         profession='Söldner',
         talents=Skill.list_by([('Körperbeherrschung', 3), ('Kraftakt', 3), ('Selbstbeherrschung', 4), ('Zechen', 5),

@@ -21,7 +21,7 @@
 * API related
     * Add an import and export endpoint, may use a format already supported by other tools
     * Add hero endpoint that gives possible values for a requested feature of an uncompleted hero
-        * Decide how to handle non-filled hero features (like supporting pre-checks, were only a species and culture has been
+        * Decide how to handle non-filled hero features (like supporting pre-checks, were only a race and culture has been
           selected)
     * Give hints which hero feature values are usable considering given hero and rulebooks, instead of simple feedback of unusable
       feature value due to 'higher' (in sense of more general) hero feature. Including for warnings, like atypical (hint which

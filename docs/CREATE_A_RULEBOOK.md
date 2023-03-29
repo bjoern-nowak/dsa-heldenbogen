@@ -28,7 +28,7 @@
 See `CHEATSHEET.lp` for a quick introduction and overview into clingo language of logic programs.
 
 Most functions (like 'requires') have two parameters (X,Y) and can be read as "X requires Y", so that the function name is
-inbetween. An e.g. can be `requires(culture("Auelfen"),species("Elfen")).` which means that "culture of 'Auelfen' requires species
+inbetween. An e.g. can be `requires(culture("Auelfen"),race("Elfen")).` which means that "culture of 'Auelfen' requires race
 to be 'Elfen'".
 It is recommended to follow the approach of having the 'causing' feature which defines the rule to be the first parameter. It
 allows better backtracking of the rule to the actual rule within the actual published rulebook.
@@ -54,8 +54,8 @@ Following programs are known/designed/pre-defined by the engine:
 ...hero validation steps (actually programs):
 
 * `validate_hero_step_50`: general pre-check: e.g. checks that experience level is known
-* `validate_hero_step_100`: check species usable
-* `validate_hero_step_150`: check species requirements
+* `validate_hero_step_100`: check race usable
+* `validate_hero_step_150`: check race requirements
 * `validate_hero_step_200`: check culture usable
 * `validate_hero_step_250`: check culture requirements
 * `validate_hero_step_300`: check profession usable
@@ -74,7 +74,7 @@ Following programs are known/designed/pre-defined by the engine:
 ...hero feature facts:
 
 * `experience_level("<name>").`
-* `species("<name>").`
+* `race("<name>").`
 * `culture("<name>").`
 * `profession("<name>").`
 * `talent("<name>",<level>).`
@@ -109,7 +109,7 @@ Following programs are known/designed/pre-defined by the engine:
 
 World known features:
 
-* `known_species("<name>").`
+* `known_race("<name>").`
 * `known_culture("<name>").`
 * `known_profession("<name>").`
 * `known_advantage("<name>","<refers>",<level>).` : with <refers> being optionally (can be empty)
@@ -140,7 +140,7 @@ This rulebook (expansion) depends on the base rulebook 'dsa5' to work.
     * `known_talent("Angelwissen").`
 2) define the rules (validation errors) for this profession, using the new talent:
   * in `rules.lp` at program `world_facts` add
-    * Only allow specific species for this profession: `requires(profession("Fischer"),culture("Elfen";"Halbelfen";"Mensch")).`
+    * Only allow specific race for this profession: `requires(profession("Fischer"),culture("Elfen";"Halbelfen";"Mensch")).`
     * Require a talents on a minimum level: `requires(profession("Fischer"),talent("Körperbeherrschung",4;"Angelwissen",6)).`
     * Require two talents out of three on a minimum level of
       four: `requires(profession("Fischer"),any_of(2,talent,("Wildnisleben","Selbstbeherrschung","Schwimmen"),4)).`

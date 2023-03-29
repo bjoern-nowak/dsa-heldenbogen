@@ -34,8 +34,8 @@ class HeroWrapper:
     def experience_level(self) -> Symbol:
         return String(self._hero.experience_level)
 
-    def species(self) -> Symbol:
-        return String(self._hero.species)
+    def race(self) -> Symbol:
+        return String(self._hero.race)
 
     def culture(self) -> Symbol:
         return String(self._hero.culture)

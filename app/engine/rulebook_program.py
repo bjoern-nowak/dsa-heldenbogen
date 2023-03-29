@@ -31,10 +31,10 @@ class RulebookProgram(tuple[str, Sequence[Symbol]], BaseEnum):
     """Validates hero: pre check - values known"""
 
     VALIDATE_HERO_STEP_100 = (f"{_VALIDATE_HERO_STEP}_100", [])
-    """Validates hero species usable"""
+    """Validates hero race usable"""
 
     VALIDATE_HERO_STEP_150 = (f"{_VALIDATE_HERO_STEP}_150", [])
-    """Validates hero species requirements"""
+    """Validates hero race requirements"""
 
     VALIDATE_HERO_STEP_200 = (f"{_VALIDATE_HERO_STEP}_200", [])
     """Validates hero culture usable"""
