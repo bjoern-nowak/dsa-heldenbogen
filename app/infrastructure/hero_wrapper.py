@@ -53,16 +53,13 @@ class HeroWrapper:
     def disadvantages(self) -> List[Symbol]:
         return _map_dis_advantages(self._hero.disadvantages)
 
-    def any_of(self, choices: Symbol, feature: Symbol, options: Symbol, min_lvl: Symbol) -> Symbol:
+    def count_by(self, feature: Symbol, options: Symbol, min_lvl: Symbol) -> Symbol:
         """
-        can be read as: any <number of choices> <feature> of <selection> has a minimum level of <minimum_level>
-        like: any two talents of <talent selection list> has a minimum level of 10
-        :return: 1 if count of feature values passing minimum level is at least number of 'choices'
+        :return: count of feature values ('options') of 'feature' passing minimum level
         """
         # dynamically get class field (with 'getattr') instead of manual mapping with a switch-case
         #  this requires feature.name (LP function name) to be exactly the field name of the actual hero model
-        values_lvl: dict[str, int] = {fv.name: fv.level for fv in getattr(self._hero, feature.name)}
+        values_lvl: dict[str, int] = {fv.name: fv.level for fv in getattr(self._hero, feature.string)}
         # count all features having the minimum level
         passed = sum(1 for opt in options.arguments if min_lvl.number <= values_lvl.get(opt.string, 0))
-        # Clingo-Python-API does not support returning booleans
-        return Number(1) if passed >= choices.number else Number(0)
+        return Number(passed)
