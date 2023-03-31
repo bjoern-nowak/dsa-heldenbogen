@@ -120,7 +120,7 @@ unusable_by(profession(P),culture(C)) :- profession(P), requires(profession(P),c
 #program validate_hero_step_350. %% check profession requirements
 missing_level(profession(P),talent(T,MIN_LVL)) :- profession(P), requires(profession(P),talent(T,MIN_LVL)), 1 = #count{ 1: not talent(T,_) ; 1: talent(T,LVL), LVL < MIN_LVL }.
 missing_level(profession(P),combat_technique(CT,MIN_LVL)) :- profession(P), requires(profession(P),combat_technique(CT,MIN_LVL)), 1 = #count{ 1: not combat_technique(CT,_) ; 1: combat_technique(CT,LVL), LVL < MIN_LVL }.
-missing_level(profession(P),combat_technique(any_of(CHOICES,CTs),MIN_LVL)) :- profession(P), requires(profession(P),any_of(CHOICES,combat_technique,CTs,MIN_LVL)), @any_of_has_minimum_level(CHOICES,combat_technique,CTs,MIN_LVL) != 1.
+missing_level(profession(P),combat_technique(any_of(CHOICES,CTs),MIN_LVL)) :- profession(P), requires(profession(P),any_of(CHOICES,combat_technique,CTs,MIN_LVL)), @any_of(CHOICES,combat_techniques,CTs,MIN_LVL) != 1.
 
 
 #program validate_hero_step_400. %% check (dis)advantage usable

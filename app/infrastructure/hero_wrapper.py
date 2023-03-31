@@ -1,5 +1,3 @@
-from __future__ import annotations  # required till PEP 563
-
 from typing import List
 
 from clingo import Number
@@ -55,24 +53,16 @@ class HeroWrapper:
     def disadvantages(self) -> List[Symbol]:
         return _map_dis_advantages(self._hero.disadvantages)
 
-    def any_of_has_minimum_level(self, choices: Symbol, feature: Symbol, selection: Symbol, minimum_level: Symbol) -> Symbol:
+    def any_of(self, choices: Symbol, feature: Symbol, options: Symbol, min_lvl: Symbol) -> Symbol:
         """
         can be read as: any <number of choices> <feature> of <selection> has a minimum level of <minimum_level>
         like: any two talents of <talent selection list> has a minimum level of 10
+        :return: 1 if count of feature values passing minimum level is at least number of 'choices'
         """
-        feature_values_with_level: dict[str, int]
-        match feature.name:
-            case 'talent':
-                feature_values_with_level = {t.name: t.level for t in self._hero.talents}
-            case 'combat_technique':
-                feature_values_with_level = {ct.name: ct.level for ct in self._hero.combat_techniques}
-            case _:
-                raise RuntimeError(f"HeroWrappers 'any_has_minimum_level' method called with an unsupported feature '{feature.name}'.")
-
-        passed = 0
-        for option in selection.arguments:
-            if option.string in feature_values_with_level and minimum_level.number <= feature_values_with_level[option.string]:
-                passed += 1
-
-        # TODO find out how to return a boolean to clingo
+        # dynamically get class field (with 'getattr') instead of manual mapping with a switch-case
+        #  this requires feature.name (LP function name) to be exactly the field name of the actual hero model
+        values_lvl: dict[str, int] = {fv.name: fv.level for fv in getattr(self._hero, feature.name)}
+        # count all features having the minimum level
+        passed = sum(1 for opt in options.arguments if min_lvl.number <= values_lvl.get(opt.string, 0))
+        # Clingo-Python-API does not support returning booleans
         return Number(1) if passed >= choices.number else Number(0)
