@@ -424,6 +424,7 @@ step(@increase(S)) :- #maximize{ S : step(S)}.
 %% also returnable are:
 %%  strings with 'clingo.String(<string>)'
 %%  functions with 'clingo.Function(<name>,<arguments>)'
+%%  a boolean indirectly with 'clingo.Function(<name>)' as a positive constant
 %%
 %%
 %% python code must not be implemented within a '#script'; using the python api
