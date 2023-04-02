@@ -21,6 +21,7 @@ framework [clingo](https://potassco.org/clingo/) (from Potassco, the Potsdam Ans
 ## Documentations
 
 * See how to contribute at [docs/CONTRIBUTE.md](./docs/CONTRIBUTE.md).
+  * Always follow as much [https://clean-code-developer.com/](clean code principles) as you can.
   * See how to add a new rulebook (expansion) at [docs/CREATE_A_RULEBOOK.md](./docs/CREATE_A_RULEBOOK.md).
   * Understand ASP modelling (logic program language by clingo) at [docs/CHEATSHEET.lp](./docs/CHEATSHEET.lp).
 
