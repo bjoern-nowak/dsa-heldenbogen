@@ -1,3 +1,0 @@
-"""
-Layer: Domain Model
-"""

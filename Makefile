@@ -2,7 +2,7 @@
 
 ## meta vars
 ROOT=./
-SRC=$(ROOT)app/
+SRC=$(ROOT)src/
 TESTS=$(ROOT)tests/
 MAIN=$(SRC)main.py
 

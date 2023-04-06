@@ -1,6 +1,6 @@
 import unittest
 
-from app import logger
+from src.app import logger
 
 
 class BaseTestCase(unittest.TestCase):

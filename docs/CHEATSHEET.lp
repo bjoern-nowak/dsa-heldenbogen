@@ -431,6 +431,7 @@ step(@increase(S)) :- #maximize{ S : step(S)}.
 %%  the 'clingo.Control().ground()' method provides a parameter 'context'
 %%  which would be a class instance
 %%  which methods can be called by '@' (as before)
+%% see example/clingo_context.py
 
 
 %% --- SOLVING UNDER ASSUMPTIONS

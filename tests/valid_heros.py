@@ -1,6 +1,6 @@
-from app.models.dis_advantage import DisAdvantage
-from app.models.hero import Hero
-from app.models.skill import Skill
+from src.app.models.dis_advantage import DisAdvantage
+from src.app.models.hero import Hero
+from src.app.models.skill import Skill
 
 SOELDNER = Hero(
     name='valid_söldner',
