@@ -1,8 +1,8 @@
 from parameterized import parameterized
 
-from src.app.models.feature import Feature
-from src.app.models.rulebook import Rulebook
-from src.app.services.meta_service import MetaService
+from dsaheldenbogen.app.models.feature import Feature
+from dsaheldenbogen.app.models.rulebook import Rulebook
+from dsaheldenbogen.app.services.meta_service import MetaService
 from tests.base_test_case import BaseTestCase
 
 

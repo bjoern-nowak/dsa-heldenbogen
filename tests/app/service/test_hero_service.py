@@ -3,12 +3,12 @@ from typing import Optional
 
 from parameterized import parameterized
 
-from src.app.engine.exceptions import HeroInvalidError
-from src.app.models.hero import Hero
-from src.app.models.hero_validation_error import HeroValidationError
-from src.app.models.hero_validation_param import HeroValidationParam
-from src.app.models.rulebook import Rulebook
-from src.app.services.hero_service import HeroService
+from dsaheldenbogen.app.engine.exceptions import HeroInvalidError
+from dsaheldenbogen.app.models.hero import Hero
+from dsaheldenbogen.app.models.hero_validation_error import HeroValidationError
+from dsaheldenbogen.app.models.hero_validation_param import HeroValidationParam
+from dsaheldenbogen.app.models.rulebook import Rulebook
+from dsaheldenbogen.app.services.hero_service import HeroService
 from tests import invalid_heros
 from tests import valid_heros
 from tests.base_test_case import BaseTestCase

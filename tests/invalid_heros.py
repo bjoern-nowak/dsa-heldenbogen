@@ -1,8 +1,8 @@
-from src.app.models.dis_advantage import DisAdvantage
-from src.app.models.hero import Hero
-from src.app.models.hero_validation_error import HeroValidationError
-from src.app.models.hero_validation_param import HeroValidationParam
-from src.app.models.skill import Skill
+from dsaheldenbogen.app.models.dis_advantage import DisAdvantage
+from dsaheldenbogen.app.models.hero import Hero
+from dsaheldenbogen.app.models.hero_validation_error import HeroValidationError
+from dsaheldenbogen.app.models.hero_validation_param import HeroValidationParam
+from dsaheldenbogen.app.models.skill import Skill
 
 UNKNOWN_RACE = (
     HeroValidationError.Type.UNKNOWN,

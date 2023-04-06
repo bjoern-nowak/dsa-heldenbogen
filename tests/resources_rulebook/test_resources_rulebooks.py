@@ -1,6 +1,6 @@
-from src.app.engine.rulebook_program import RulebookProgram
-from src.app.engine.rulebook_validator import RulebookValidator
-from src.app.models.rulebook import Rulebook
+from dsaheldenbogen.app.engine.rulebook_program import RulebookProgram
+from dsaheldenbogen.app.engine.rulebook_validator import RulebookValidator
+from dsaheldenbogen.app.models.rulebook import Rulebook
 from tests.app.engine.tester_engine import TesterEngine
 from tests.base_test_case import BaseTestCase
 

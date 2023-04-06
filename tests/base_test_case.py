@@ -1,6 +1,6 @@
 import unittest
 
-from src.app import logger
+from dsaheldenbogen.app import logger
 
 
 class BaseTestCase(unittest.TestCase):

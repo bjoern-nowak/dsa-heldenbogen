@@ -2,10 +2,10 @@ from contextlib import nullcontext
 
 from parameterized import parameterized
 
-from src.app.engine.engine import Engine
-from src.app.engine.exceptions import HeroInvalidError
-from src.app.models.hero import Hero
-from src.app.models.rulebook import Rulebook
+from dsaheldenbogen.app.engine.engine import Engine
+from dsaheldenbogen.app.engine.exceptions import HeroInvalidError
+from dsaheldenbogen.app.models.hero import Hero
+from dsaheldenbogen.app.models.rulebook import Rulebook
 from tests.base_test_case import BaseTestCase
 
 

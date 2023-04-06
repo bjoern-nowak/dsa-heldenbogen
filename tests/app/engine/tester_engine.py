@@ -9,9 +9,9 @@ from clingo import String
 from clingo import Symbol
 from clingo import SymbolType
 
-from src.app.engine.rulebook_program import RulebookProgram
-from src.app.models.rulebook import Rulebook
-from src.infrastructure.clingo_executor import ClingoExecutor
+from dsaheldenbogen.app.engine.rulebook_program import RulebookProgram
+from dsaheldenbogen.app.models.rulebook import Rulebook
+from dsaheldenbogen.infrastructure.clingo_executor import ClingoExecutor
 
 logger = logging.getLogger(__name__)
 
