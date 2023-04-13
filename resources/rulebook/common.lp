@@ -48,20 +48,6 @@ rulebook_missing(RB,D) :- rulebook(RB), rulebook_depends(RB,D), not rulebook(D).
 
 
 #program world_facts.
-% CC := MAX_CHARACTERISTIC_LVL (only on character creation)
-% S := MAX_SKILL_LVL
-% CT := MAX_COMBAT_TECHNIQUE_LVL
-% CCP := MAX_CHARACTERISTIC_POINTS
-% SL := MAX_SPELLS_AND_LITURGIES
-% FS := MAX_FOREIGN_SPELL
-%                                       CC  S   CT  CCP  SL  FS
-known_experience_level("Inexperienced", 12, 10,  8,  95,  8, 0 ).
-known_experience_level("Average",       13, 10, 10,  98, 10, 1 ).
-known_experience_level("Experienced",   14, 10, 12, 100, 12, 2 ).
-known_experience_level("Competent",     15, 13, 14, 102, 14, 3 ).
-known_experience_level("Masterful",     16, 16, 16, 105, 16, 4 ).
-known_experience_level("Brilliant",     17, 19, 18, 109, 18, 5 ).
-known_experience_level("Legendary",     18, 20, 20, 114, 20, 6 ).
 
 
 #program hero_facts.
