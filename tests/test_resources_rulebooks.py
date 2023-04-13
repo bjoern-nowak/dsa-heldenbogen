@@ -4,6 +4,10 @@ from dsaheldenbogen.app.models.rulebook import Rulebook
 from tests.app.engine.tester_engine import TesterEngine
 from tests.base_test_case import BaseTestCase
 
+REQUIRED_PROGRAMS = [
+    RulebookProgram.RULEBOOK_USABLE,
+]
+
 FACT_RULEBOOK = 'rulebook'
 
 
@@ -21,12 +25,11 @@ class TestResourcesRulebooks(BaseTestCase):
     def test_rulebook_has_required_programs(self):
         # given:
         known_rulebooks = Rulebook.list_known()
-        required_programs = [RulebookProgram.RULEBOOK_USABLE]
         # when:
         errors = []
         for rulebook in known_rulebooks:
             engine = TesterEngine(rulebook)
-            missing_programs = engine.has_programs(required_programs)
+            missing_programs = engine.has_programs(REQUIRED_PROGRAMS)
             if missing_programs:
                 errors.append(f"Rulebook '{rulebook}' missing required programs: {missing_programs}")
 
