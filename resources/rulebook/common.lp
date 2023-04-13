@@ -4,7 +4,7 @@
 #defined rulebook_depends/2.
 #defined rulebook_missing/2. #show rulebook_missing/2.
 %% world facts
-#defined known_experience_level/1.
+#defined known_experience_level/7.
 #defined known_race/1.
 #defined known_culture/1.
 #defined known_profession/1.
