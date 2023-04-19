@@ -25,7 +25,7 @@ class Rulebook:
     def map(cls, rulebooks: List[str]) -> List[Rulebook]:
         known = [r.name for r in Rulebook.list_known()]
         if set(rulebooks) - set(known):
-            raise UnknownRulebookError(rulebooks)
+            raise UnknownRulebookError(list(set(rulebooks) - set(known)))
         return [Rulebook(r, cls.__create_key) for r in rulebooks]
 
     @classmethod
