@@ -16,8 +16,7 @@ from dsaheldenbogen.infrastructure.clingo_executor import ClingoExecutor
 logger = logging.getLogger(__name__)
 
 
-class TesterEngine:
-    """This does not test the engine, it is an engine for testing"""
+class RulebookTester:
     FUNCTION_PROGRAM = 'program'
 
     def __init__(self, rulebook: Rulebook) -> None:
@@ -32,8 +31,8 @@ class TesterEngine:
         :return: List of not found programs
         TODO how to test program existence without having an pseudo atom representing it: then remove these from rulebooks
         """
-        functions: List[Symbol] = TesterEngine._collect_functions(self.clingo_executor.run(programs),
-                                                                  TesterEngine.FUNCTION_PROGRAM)
+        functions: List[Symbol] = RulebookTester._collect_functions(self.clingo_executor.run(programs),
+                                                                    RulebookTester.FUNCTION_PROGRAM)
         if functions:
             return list(set([p[0] for p in programs]) - set([f.arguments[0].string for f in functions]))
         else:
@@ -43,7 +42,7 @@ class TesterEngine:
         """
         :return: tuple of (<has function with value>, <other found values>
         """
-        functions: List[Symbol] = TesterEngine._collect_functions(self.clingo_executor.run(programs), name)
+        functions: List[Symbol] = RulebookTester._collect_functions(self.clingo_executor.run(programs), name)
         if functions:
             target = Function(name, [String(value)])
             others = set(f.arguments[0].string for f in functions if f.name == name)

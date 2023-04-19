@@ -1,8 +1,8 @@
 from dsaheldenbogen.app.engine.rulebook_program import RulebookProgram
 from dsaheldenbogen.app.engine.rulebook_validator import RulebookValidator
 from dsaheldenbogen.app.models.rulebook import Rulebook
-from tests.app.engine.tester_engine import TesterEngine
 from tests.base_test_case import BaseTestCase
+from tests.rulebook_tester import RulebookTester
 
 REQUIRED_PROGRAMS = [
     RulebookProgram.RULEBOOK_USABLE,
@@ -28,8 +28,8 @@ class TestResourcesRulebooks(BaseTestCase):
         # when:
         errors = []
         for rulebook in known_rulebooks:
-            engine = TesterEngine(rulebook)
-            missing_programs = engine.has_programs(REQUIRED_PROGRAMS)
+            tester = RulebookTester(rulebook)
+            missing_programs = tester.has_programs(REQUIRED_PROGRAMS)
             if missing_programs:
                 errors.append(f"Rulebook '{rulebook}' missing required programs: {missing_programs}")
 
@@ -43,8 +43,8 @@ class TestResourcesRulebooks(BaseTestCase):
         # when:
         errors = []
         for rulebook in known_rulebooks:
-            engine = TesterEngine(rulebook)
-            found, others = engine.has_function_with_value([RulebookProgram.RULEBOOK_USABLE], FACT_RULEBOOK, rulebook.name)
+            tester = RulebookTester(rulebook)
+            found, others = tester.has_function_with_value([RulebookProgram.RULEBOOK_USABLE], FACT_RULEBOOK, rulebook.name)
             if not found:
                 errors.append(f"Rulebook '{rulebook}' does not declares itself as fact.")
             if others:
