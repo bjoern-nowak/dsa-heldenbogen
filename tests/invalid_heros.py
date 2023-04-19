@@ -1,15 +1,30 @@
+from typing import List
+from typing import NamedTuple
+from typing import Optional
+
 from dsaheldenbogen.app.models.dis_advantage import DisAdvantage
 from dsaheldenbogen.app.models.hero import Hero
 from dsaheldenbogen.app.models.hero_validation_error import HeroValidationError
 from dsaheldenbogen.app.models.hero_validation_param import HeroValidationParam
 from dsaheldenbogen.app.models.skill import Skill
 
-UNKNOWN_RACE = (
+
+class InvalidHeroTestcase(NamedTuple):
+    # expected:
+    error_type: HeroValidationError.Type
+    error_params: dict[HeroValidationParam, str, Optional[List[str]]]
+    # given:
+    rulebooks: List[str]
+    hero: Hero
+
+
+UNKNOWN_RACE = InvalidHeroTestcase(
     HeroValidationError.Type.UNKNOWN,
     {
         HeroValidationParam.C_F: 'race',
         HeroValidationParam.C_F_VALUE: '__unknown__',
     },
+    ['dsa5'],
     Hero(
         name='valid_söldner',
         experience_level='Average',
@@ -23,12 +38,13 @@ UNKNOWN_RACE = (
     )
 )
 
-UNKNOWN_CULTURE = (
+UNKNOWN_CULTURE = InvalidHeroTestcase(
     HeroValidationError.Type.UNKNOWN,
     {
         HeroValidationParam.C_F: 'culture',
         HeroValidationParam.C_F_VALUE: '__unknown__',
     },
+    ['dsa5'],
     Hero(
         name='valid_söldner',
         experience_level='Average',
@@ -42,12 +58,13 @@ UNKNOWN_CULTURE = (
     )
 )
 
-UNKNOWN_PROFESSION = (
+UNKNOWN_PROFESSION = InvalidHeroTestcase(
     HeroValidationError.Type.UNKNOWN,
     {
         HeroValidationParam.C_F: 'profession',
         HeroValidationParam.C_F_VALUE: '__unknown__',
     },
+    ['dsa5'],
     Hero(
         name='valid_söldner',
         experience_level='Average',
@@ -61,12 +78,13 @@ UNKNOWN_PROFESSION = (
     )
 )
 
-UNKNOWN_TALENT = (
+UNKNOWN_TALENT = InvalidHeroTestcase(
     HeroValidationError.Type.UNKNOWN,
     {
         HeroValidationParam.C_F: 'talent',
         HeroValidationParam.C_F_VALUE: '__unknown__',
     },
+    ['dsa5'],
     Hero(
         name='valid_söldner',
         experience_level='Average',
@@ -80,12 +98,13 @@ UNKNOWN_TALENT = (
     )
 )
 
-UNKNOWN_COMBAT_TECHNIQUE = (
+UNKNOWN_COMBAT_TECHNIQUE = InvalidHeroTestcase(
     HeroValidationError.Type.UNKNOWN,
     {
         HeroValidationParam.C_F: 'combat_technique',
         HeroValidationParam.C_F_VALUE: '__unknown__',
     },
+    ['dsa5'],
     Hero(
         name='valid_söldner',
         experience_level='Average',
@@ -99,12 +118,13 @@ UNKNOWN_COMBAT_TECHNIQUE = (
     )
 )
 
-UNKNOWN_ADVANTAGE = (
+UNKNOWN_ADVANTAGE = InvalidHeroTestcase(
     HeroValidationError.Type.UNKNOWN,
     {
         HeroValidationParam.C_F: 'advantage',
         HeroValidationParam.C_F_VALUE: '__unknown__',
     },
+    ['dsa5'],
     Hero(
         name='valid_söldner',
         experience_level='Average',
@@ -118,12 +138,13 @@ UNKNOWN_ADVANTAGE = (
     )
 )
 
-UNKNOWN_DISADVANTAGE = (
+UNKNOWN_DISADVANTAGE = InvalidHeroTestcase(
     HeroValidationError.Type.UNKNOWN,
     {
         HeroValidationParam.C_F: 'disadvantage',
         HeroValidationParam.C_F_VALUE: '__unknown__',
     },
+    ['dsa5'],
     Hero(
         name='valid_söldner',
         experience_level='Average',
@@ -137,7 +158,7 @@ UNKNOWN_DISADVANTAGE = (
     )
 )
 
-CULTURE_UNUSABLE_BY_RACE = (
+CULTURE_UNUSABLE_BY_RACE = InvalidHeroTestcase(
     HeroValidationError.Type.UNUSABLE_BY,
     {
         HeroValidationParam.C_F: 'culture',
@@ -145,6 +166,7 @@ CULTURE_UNUSABLE_BY_RACE = (
         HeroValidationParam.R_F: 'race',
         HeroValidationParam.R_F_VALUE: 'Zwerg',
     },
+    ['dsa5'],
     Hero(
         name='valid_söldner',
         experience_level='Average',
@@ -158,7 +180,7 @@ CULTURE_UNUSABLE_BY_RACE = (
     )
 )
 
-PROFESSION_UNUSABLE_BY_RACE = (
+PROFESSION_UNUSABLE_BY_RACE = InvalidHeroTestcase(
     HeroValidationError.Type.UNUSABLE_BY,
     {
         HeroValidationParam.C_F: 'profession',
@@ -166,6 +188,7 @@ PROFESSION_UNUSABLE_BY_RACE = (
         HeroValidationParam.R_F: 'race',
         HeroValidationParam.R_F_VALUE: 'Zwerg',
     },
+    ['dsa5'],
     Hero(
         name='valid_söldner',
         experience_level='Average',
@@ -179,7 +202,7 @@ PROFESSION_UNUSABLE_BY_RACE = (
     )
 )
 
-PROFESSION_UNUSABLE_BY_CULTURE = (
+PROFESSION_UNUSABLE_BY_CULTURE = InvalidHeroTestcase(
     HeroValidationError.Type.UNUSABLE_BY,
     {
         HeroValidationParam.C_F: 'profession',
@@ -187,6 +210,7 @@ PROFESSION_UNUSABLE_BY_CULTURE = (
         HeroValidationParam.R_F: 'culture',
         HeroValidationParam.R_F_VALUE: 'Ambosszwerge',
     },
+    ['dsa5', 'dsa5_aventurisches_götterwirken_2'],
     Hero(
         name='valid_söldner',
         experience_level='Average',
@@ -197,11 +221,10 @@ PROFESSION_UNUSABLE_BY_CULTURE = (
         combat_techniques=[],
         advantages=[],
         disadvantages=[],
-    ),
-    ['dsa5', 'dsa5_aventurisches_götterwirken_2']
+    )
 )
 
-PROFESSION_MISSING_LEVEL_FOR_TALENT = (
+PROFESSION_MISSING_LEVEL_FOR_TALENT = InvalidHeroTestcase(
     HeroValidationError.Type.MISSING_LEVEL,
     {
         HeroValidationParam.C_F: 'profession',
@@ -210,6 +233,7 @@ PROFESSION_MISSING_LEVEL_FOR_TALENT = (
         HeroValidationParam.R_F_VALUE: 'Körperbeherrschung',
         HeroValidationParam.MIN_LEVEL: 3,
     },
+    ['dsa5'],
     Hero(
         name='valid_söldner',
         experience_level='Average',
@@ -223,7 +247,7 @@ PROFESSION_MISSING_LEVEL_FOR_TALENT = (
     )
 )
 
-PROFESSION_MISSING_LEVEL_FOR_COMBAT_TECHNIQUE = (
+PROFESSION_MISSING_LEVEL_FOR_COMBAT_TECHNIQUE = InvalidHeroTestcase(
     HeroValidationError.Type.MISSING_LEVEL,
     {
         HeroValidationParam.C_F: 'profession',
@@ -232,6 +256,7 @@ PROFESSION_MISSING_LEVEL_FOR_COMBAT_TECHNIQUE = (
         HeroValidationParam.R_F_VALUE: 'Armbrüste',
         HeroValidationParam.MIN_LEVEL: 10,
     },
+    ['dsa5'],
     Hero(
         name='valid_söldner',
         experience_level='Average',
@@ -245,7 +270,7 @@ PROFESSION_MISSING_LEVEL_FOR_COMBAT_TECHNIQUE = (
     )
 )
 
-PROFESSION_MISSING_LEVEL_FOR_ANY_OF_COMBAT_TECHNIQUES = (
+PROFESSION_MISSING_LEVEL_FOR_ANY_OF_COMBAT_TECHNIQUES = InvalidHeroTestcase(
     HeroValidationError.Type.MISSING_LEVEL,
     {
         HeroValidationParam.C_F: 'profession',
@@ -256,6 +281,7 @@ PROFESSION_MISSING_LEVEL_FOR_ANY_OF_COMBAT_TECHNIQUES = (
         HeroValidationParam.MIN_LEVEL: 10,
         HeroValidationParam.SELECTION_MIN_CHOICES: 1,
     },
+    ['dsa5'],
     Hero(
         name='valid_söldner',
         experience_level='Average',
@@ -269,7 +295,7 @@ PROFESSION_MISSING_LEVEL_FOR_ANY_OF_COMBAT_TECHNIQUES = (
     )
 )
 
-TALENT_EXCEEDS_MAX_LEVEL_BY_EXPERIENCE = (
+TALENT_EXCEEDS_MAX_LEVEL_BY_EXPERIENCE = InvalidHeroTestcase(
     HeroValidationError.Type.MAX_LVL_EXCEEDED,
     {
         HeroValidationParam.C_F: 'talent',
@@ -277,6 +303,7 @@ TALENT_EXCEEDS_MAX_LEVEL_BY_EXPERIENCE = (
         HeroValidationParam.C_F_LEVEL: 17,
         HeroValidationParam.MAX_LEVEL: 16,
     },
+    ['dsa5'],
     Hero(
         name='valid_söldner',
         experience_level='Masterful',
@@ -293,7 +320,7 @@ TALENT_EXCEEDS_MAX_LEVEL_BY_EXPERIENCE = (
     )
 )
 
-COMBAT_TECHNIQUE_EXCEEDS_MAX_LEVEL_BY_EXPERIENCE = (
+COMBAT_TECHNIQUE_EXCEEDS_MAX_LEVEL_BY_EXPERIENCE = InvalidHeroTestcase(
     HeroValidationError.Type.MAX_LVL_EXCEEDED,
     {
         HeroValidationParam.C_F: 'combat_technique',
@@ -301,6 +328,7 @@ COMBAT_TECHNIQUE_EXCEEDS_MAX_LEVEL_BY_EXPERIENCE = (
         HeroValidationParam.C_F_LEVEL: 17,
         HeroValidationParam.MAX_LEVEL: 16,
     },
+    ['dsa5'],
     Hero(
         name='valid_söldner',
         experience_level='Masterful',

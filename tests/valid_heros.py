@@ -1,8 +1,17 @@
+from typing import List
+from typing import NamedTuple
+
 from dsaheldenbogen.app.models.dis_advantage import DisAdvantage
 from dsaheldenbogen.app.models.hero import Hero
 from dsaheldenbogen.app.models.skill import Skill
 
-SOELDNER = Hero(
+
+class ValidHeroTestcase(NamedTuple):
+    rulebooks: List[str]
+    hero: Hero
+
+
+SOELDNER = ValidHeroTestcase(['dsa5'], Hero(
     name='valid_söldner',
     experience_level='Average',
     race='Zwerg',
@@ -15,9 +24,9 @@ SOELDNER = Hero(
     combat_techniques=Skill.list_by([('Armbrüste', 10), ('Raufen', 10), ('Hiebwaffen', 10)]),
     advantages=DisAdvantage.list_by([('Dunkelsicht',), ('Immunität', 'Tulmadron')]),
     disadvantages=DisAdvantage.list_by([('Unfähig', 'Schwimmen')]),
-)
+))
 
-ZAUBERWEBER = Hero(
+ZAUBERWEBER = ValidHeroTestcase(['dsa5'], Hero(
     name='valid_zauberweber',
     experience_level='Average',
     race='Elfen',
@@ -30,9 +39,9 @@ ZAUBERWEBER = Hero(
     advantages=DisAdvantage.list_by([('Zauberer',), ('Zweistimmiger Gesang',), ('Altersresistenz',), ('Dunkelsicht',),
                                      ('Nichtschläfer',)]),
     disadvantages=DisAdvantage.list_by([('Sensibler Geruchssinn',), ('Unfähig', 'Zechen')]),
-)
+))
 
-HAENDLER = Hero(
+HAENDLER = ValidHeroTestcase(['dsa5'], Hero(
     name='valid_händler',
     experience_level='Average',
     race='Mensch',
@@ -42,4 +51,4 @@ HAENDLER = Hero(
     combat_techniques=[],
     advantages=[],
     disadvantages=[],
-)
+))
