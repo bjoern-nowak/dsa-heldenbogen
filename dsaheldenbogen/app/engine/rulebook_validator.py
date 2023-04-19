@@ -1,8 +1,8 @@
 import logging
 from typing import List
 
-from dsaheldenbogen.app import resource
 from dsaheldenbogen.app.models.rulebook import Rulebook
+from dsaheldenbogen.app.resource import Resource
 
 logger = logging.getLogger(__name__)
 
@@ -31,7 +31,7 @@ class RulebookValidator:
     @staticmethod
     def _files_valid(rulebook: Rulebook) -> bool:
         try:
-            found_files = set(resource.list_files(rulebook.folder()))
+            found_files = set(Resource.list_files(rulebook.folder()))
             if not RulebookValidator.required_files.issubset(found_files):
                 return False
             return True

@@ -11,6 +11,9 @@ logger = logging.getLogger(__name__)
 
 class MetaService:
 
+    def __init__(self, engine_clz: type = Engine) -> None:
+        self.engine_clz = engine_clz
+
     def list_usable_rulebooks(self) -> List[Rulebook]:
         """
         List all rulebooks which are ready to use
@@ -22,7 +25,7 @@ class MetaService:
         List all known feature values of given feature considering given rulebooks
         :return: List[tuple[str, str, int]] in case of DisAdvantages else List[str]
         """
-        engine = Engine(rulebooks)
+        engine = self.engine_clz(rulebooks)
         known_values = engine.list_known_for(feature)
         logger.debug(f"Value list of '{feature}' with rulebooks {[str(r) for r in rulebooks]}: {known_values}")
         return known_values

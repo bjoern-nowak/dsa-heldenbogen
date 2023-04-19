@@ -12,13 +12,16 @@ logger = logging.getLogger(__name__)
 
 class HeroService:
 
+    def __init__(self, engine_clz: type = Engine) -> None:
+        self.engine_clz = engine_clz
+
     def validate(self, hero: Hero, rulebooks: List[Rulebook]) -> List[HeroValidationWarning]:
         """
         Check whenever the given hero comply under given rulebooks.
         :returns: when validation passed (hero is valid) a list of warnings
         :raises HeroInvalidError: whenever hero breaks a rule
         """
-        engine = Engine(rulebooks)
+        engine = self.engine_clz(rulebooks)
         try:
             warnings: List[HeroValidationWarning] = engine.validate(hero)
             logger.trace(f"Hero validation passed.\n"
