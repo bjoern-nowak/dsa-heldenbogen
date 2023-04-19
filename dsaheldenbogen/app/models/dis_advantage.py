@@ -41,12 +41,16 @@ class DisAdvantage(BaseModel):
         for da in dis_advantages:
             match len(da):
                 case 3:
+                    # (name:str, uses:str, level:int)
                     result.append(DisAdvantage(name=da[0], uses=da[1], level=da[2]))
                 case 2:
                     if type(da[1]) == str:
+                        # (name:str, uses:str)
                         result.append(DisAdvantage(name=da[0], uses=da[1]))
                     else:
-                        result.append(DisAdvantage(name=da[0], level=da[2]))
+                        # (name:str, level:int)
+                        result.append(DisAdvantage(name=da[0], level=da[1]))
                 case 1:
+                    # (name:str,)
                     result.append(DisAdvantage(name=da[0]))
         return result
