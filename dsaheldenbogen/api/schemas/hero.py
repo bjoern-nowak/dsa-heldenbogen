@@ -61,7 +61,7 @@ class Hero(BaseModel):
                     "summary": "[VALID] OK but having warnings",
                     "value": {
                         "name": "UncleBob",
-                        "experience_level": "Legendary",
+                        "experience_level": "Legendär",
                         "race": "Elfen",
                         "culture": "Auelfen",
                         "profession": "Söldner",
@@ -80,7 +80,7 @@ class Hero(BaseModel):
                     "summary": "[INVALID] Unknown race value",
                     "value": {
                         "name": "UncleBob",
-                        "experience_level": "Legendary",
+                        "experience_level": "Legendär",
                         "race": "Elfen",
                         "culture": "Auelfen",
                         "profession": "Söldnera",
@@ -99,7 +99,7 @@ class Hero(BaseModel):
                     "summary": "[INVALID] Talent not an required minimum level",
                     "value": {
                         "name": "UncleBob",
-                        "experience_level": "Legendary",
+                        "experience_level": "Legendär",
                         "race": "Elfen",
                         "culture": "Auelfen",
                         "profession": "Söldner",

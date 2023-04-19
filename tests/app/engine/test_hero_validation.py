@@ -20,7 +20,7 @@ class TestHeroValidation(BaseTestCase):
         # given:
         engine = Engine(Rulebook.map(['dsa5']))
         hero = Hero(name="name",
-                    experience_level='Average',
+                    experience_level='Durchschnittlich',
                     race=race,
                     culture='Aranier',
                     profession='Händler',
@@ -46,7 +46,7 @@ class TestHeroValidation(BaseTestCase):
         # given:
         engine = Engine(Rulebook.map(['dsa5']))
         hero = Hero(name="name",
-                    experience_level='Average',
+                    experience_level='Durchschnittlich',
                     race=race,
                     culture=culture,
                     profession='Händler',
@@ -72,7 +72,7 @@ class TestHeroValidation(BaseTestCase):
         # given:
         engine = Engine(Rulebook.map(['dsa5']))
         hero = Hero(name="name",
-                    experience_level='Average',
+                    experience_level='Durchschnittlich',
                     race=race,
                     culture=culture,
                     profession=profession,

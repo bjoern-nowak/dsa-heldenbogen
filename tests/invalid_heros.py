@@ -35,7 +35,7 @@ class InvalidHeroTestcases(InvalidHeroTestcase, Enum):
         ['dsa5'],
         Hero(
             name='valid_söldner',
-            experience_level='Average',
+            experience_level='Durchschnittlich',
             race='__unknown__',
             culture='Ambosszwerge',
             profession='Söldner',
@@ -55,7 +55,7 @@ class InvalidHeroTestcases(InvalidHeroTestcase, Enum):
         ['dsa5'],
         Hero(
             name='valid_söldner',
-            experience_level='Average',
+            experience_level='Durchschnittlich',
             race='Zwerg',
             culture='__unknown__',
             profession='Söldner',
@@ -75,7 +75,7 @@ class InvalidHeroTestcases(InvalidHeroTestcase, Enum):
         ['dsa5'],
         Hero(
             name='valid_söldner',
-            experience_level='Average',
+            experience_level='Durchschnittlich',
             race='Zwerg',
             culture='Ambosszwerge',
             profession='__unknown__',
@@ -95,7 +95,7 @@ class InvalidHeroTestcases(InvalidHeroTestcase, Enum):
         ['dsa5'],
         Hero(
             name='valid_söldner',
-            experience_level='Average',
+            experience_level='Durchschnittlich',
             race='Zwerg',
             culture='Ambosszwerge',
             profession='Söldner',
@@ -115,7 +115,7 @@ class InvalidHeroTestcases(InvalidHeroTestcase, Enum):
         ['dsa5'],
         Hero(
             name='valid_söldner',
-            experience_level='Average',
+            experience_level='Durchschnittlich',
             race='Zwerg',
             culture='Ambosszwerge',
             profession='Söldner',
@@ -135,7 +135,7 @@ class InvalidHeroTestcases(InvalidHeroTestcase, Enum):
         ['dsa5'],
         Hero(
             name='valid_söldner',
-            experience_level='Average',
+            experience_level='Durchschnittlich',
             race='Zwerg',
             culture='Ambosszwerge',
             profession='Söldner',
@@ -155,7 +155,7 @@ class InvalidHeroTestcases(InvalidHeroTestcase, Enum):
         ['dsa5'],
         Hero(
             name='valid_söldner',
-            experience_level='Average',
+            experience_level='Durchschnittlich',
             race='Zwerg',
             culture='Ambosszwerge',
             profession='Söldner',
@@ -177,7 +177,7 @@ class InvalidHeroTestcases(InvalidHeroTestcase, Enum):
         ['dsa5'],
         Hero(
             name='valid_söldner',
-            experience_level='Average',
+            experience_level='Durchschnittlich',
             race='Zwerg',
             culture='Andergaster',
             profession='Söldner',
@@ -199,7 +199,7 @@ class InvalidHeroTestcases(InvalidHeroTestcase, Enum):
         ['dsa5'],
         Hero(
             name='valid_söldner',
-            experience_level='Average',
+            experience_level='Durchschnittlich',
             race='Zwerg',
             culture='Ambosszwerge',
             profession='Zauberweber',
@@ -221,7 +221,7 @@ class InvalidHeroTestcases(InvalidHeroTestcase, Enum):
         ['dsa5', 'dsa5_aventurisches_götterwirken_2'],
         Hero(
             name='valid_söldner',
-            experience_level='Average',
+            experience_level='Durchschnittlich',
             race='Zwerg',
             culture='Ambosszwerge',
             profession='Skuldrun',
@@ -244,7 +244,7 @@ class InvalidHeroTestcases(InvalidHeroTestcase, Enum):
         ['dsa5'],
         Hero(
             name='valid_söldner',
-            experience_level='Average',
+            experience_level='Durchschnittlich',
             race='Zwerg',
             culture='Ambosszwerge',
             profession='Söldner',
@@ -267,7 +267,7 @@ class InvalidHeroTestcases(InvalidHeroTestcase, Enum):
         ['dsa5'],
         Hero(
             name='valid_söldner',
-            experience_level='Average',
+            experience_level='Durchschnittlich',
             race='Zwerg',
             culture='Ambosszwerge',
             profession='Söldner',
@@ -292,7 +292,7 @@ class InvalidHeroTestcases(InvalidHeroTestcase, Enum):
         ['dsa5'],
         Hero(
             name='valid_söldner',
-            experience_level='Average',
+            experience_level='Durchschnittlich',
             race='Zwerg',
             culture='Ambosszwerge',
             profession='Söldner',
@@ -314,7 +314,7 @@ class InvalidHeroTestcases(InvalidHeroTestcase, Enum):
         ['dsa5'],
         Hero(
             name='valid_söldner',
-            experience_level='Masterful',
+            experience_level='Meisterlich',
             race='Zwerg',
             culture='Ambosszwerge',
             profession='Söldner',
@@ -339,7 +339,7 @@ class InvalidHeroTestcases(InvalidHeroTestcase, Enum):
         ['dsa5'],
         Hero(
             name='valid_söldner',
-            experience_level='Masterful',
+            experience_level='Meisterlich',
             race='Zwerg',
             culture='Ambosszwerge',
             profession='Söldner',

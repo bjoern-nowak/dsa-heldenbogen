@@ -21,7 +21,7 @@ class ValidHeroTestcases(ValidHeroTestcase, Enum):
 
     SOELDNER = ValidHeroTestcase(['dsa5'], Hero(
         name='valid_söldner',
-        experience_level='Average',
+        experience_level='Durchschnittlich',
         race='Zwerg',
         culture='Ambosszwerge',
         profession='Söldner',
@@ -36,7 +36,7 @@ class ValidHeroTestcases(ValidHeroTestcase, Enum):
 
     ZAUBERWEBER = ValidHeroTestcase(['dsa5'], Hero(
         name='valid_zauberweber',
-        experience_level='Average',
+        experience_level='Durchschnittlich',
         race='Elfen',
         culture='Waldelfen',
         profession='Zauberweber',
@@ -52,7 +52,7 @@ class ValidHeroTestcases(ValidHeroTestcase, Enum):
 
     HAENDLER = ValidHeroTestcase(['dsa5'], Hero(
         name='valid_händler',
-        experience_level='Average',
+        experience_level='Durchschnittlich',
         race='Mensch',
         culture='Andergaster',
         profession='Händler',
