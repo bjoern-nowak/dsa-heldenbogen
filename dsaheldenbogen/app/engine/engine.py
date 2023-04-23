@@ -12,7 +12,6 @@ from dsaheldenbogen.app.engine.exceptions import HeroInvalidError
 from dsaheldenbogen.app.engine.exceptions import UnexpectedResultError
 from dsaheldenbogen.app.engine.exceptions import UnusableRulebookError
 from dsaheldenbogen.app.engine.rulebook_program import RulebookProgram
-from dsaheldenbogen.app.engine.rulebook_validator import RulebookValidator
 from dsaheldenbogen.app.models.feature import Feature
 from dsaheldenbogen.app.models.hero import Hero
 from dsaheldenbogen.app.models.hero_validation_warning import HeroValidationWarning
@@ -43,7 +42,7 @@ class Engine:
     DEFAULT_HERO_VALIDATION_STEPS = hero_validation_steps.keys()
 
     def __init__(self, rulebooks: List[Rulebook]) -> None:
-        self.rulebooks = RulebookValidator.filter(rulebooks)
+        self.rulebooks = rulebooks
         self.clingo_executor = ClingoExecutor(
             [Rulebook.common_file()] + [r.entrypoint_file() for r in self.rulebooks],
             [RulebookProgram.BASE]
