@@ -1,55 +1,17 @@
-from dsaheldenbogen.app.engine.rulebook_program import RulebookProgram
-from dsaheldenbogen.app.engine.rulebook_validator import RulebookValidator
 from dsaheldenbogen.app.models.rulebook import Rulebook
+from dsaheldenbogen.app.services.rulebook_validator import RulebookValidator
 from tests.base_test_case import BaseTestCase
-from tests.rulebook_tester import RulebookTester
-
-REQUIRED_PROGRAMS = [
-    RulebookProgram.RULEBOOK_USABLE,
-]
-
-FACT_RULEBOOK = 'rulebook'
 
 
 class TestResourcesRulebooks(BaseTestCase):
 
-    def test_rulebook_valid(self):
-        # given:
-        rulebooks = Rulebook.list_known()
-        # when:
-        valid_rulebooks = RulebookValidator.filter(rulebooks)
-        # then: no rulebook has been filtered
-        diff = {r.name for r in rulebooks} ^ {r.name for r in valid_rulebooks}
-        self.assertFalse(diff, msg="List of invalid rulebooks shall be empty.")
-
-    def test_rulebook_has_required_programs(self):
+    def test_rulebooks_valid(self):
         # given:
         known_rulebooks = Rulebook.list_known()
         # when:
         errors = []
         for rulebook in known_rulebooks:
-            tester = RulebookTester(rulebook)
-            missing_programs = tester.has_programs(REQUIRED_PROGRAMS)
-            if missing_programs:
-                errors.append(f"Rulebook '{rulebook}' missing required programs: {missing_programs}")
-
-        # then:
-        if errors:
-            self.fail('\n'.join(errors))
-
-    def test_rulebook_facts_only_itself(self):
-        # given:
-        known_rulebooks = Rulebook.list_known()
-        # when:
-        errors = []
-        for rulebook in known_rulebooks:
-            tester = RulebookTester(rulebook)
-            found, others = tester.has_function_with_value([RulebookProgram.RULEBOOK_USABLE], FACT_RULEBOOK, rulebook.name)
-            if not found:
-                errors.append(f"Rulebook '{rulebook}' does not declares itself as fact.")
-            if others:
-                errors.append(f"Rulebook '{rulebook}' declares to be other rulebook(s): {others}")
-
+            errors = errors + RulebookValidator.check(rulebook)
         # then:
         if errors:
             self.fail('\n'.join(errors))

@@ -12,6 +12,7 @@ class RulebookFunction(str, BaseEnum):
     """Collection of some explicitly used LP function names"""
 
     # meta
+    RULEBOOK = 'rulebook'
     RULEBOOK_MISSING = 'rulebook_missing'
     EXTRA_HERO_VALIDATION_STEP = 'extra_hero_validation_step'
     # hero facts
