@@ -29,7 +29,7 @@ router = APIRouter()
     }
 )
 def list_known_rulebooks() -> List[str]:
-    logger.trace(f"(Request) list available rulebooks")
+    logger.trace("(Request) list available rulebooks")
     return [r.name for r in MetaService().list_usable_rulebooks()]
 
 
@@ -52,13 +52,15 @@ def list_known_feature_values(
     try:
         logger.trace(f"(Request) list feature value\nrulebooks: {rulebooks}\nfeature: {feature}")
         return MetaService().list_known_feature_values(feature, Rulebook.map(rulebooks))
-    except UnusableRulebookError as e:
+    except UnusableRulebookError as ex:
+        # pylint: disable-next=raise-missing-from
         raise HTTPException(
             status_code=HTTPStatus.INTERNAL_SERVER_ERROR,
-            detail=ServerError.by(e)
+            detail=ServerError.by(ex)
         )
-    except UnknownRulebookError as e:
+    except UnknownRulebookError as ex:
+        # pylint: disable-next=raise-missing-from
         raise HTTPException(
             status_code=HTTPStatus.BAD_REQUEST,
-            detail=ClientError.by(e)
+            detail=ClientError.by(ex)
         )

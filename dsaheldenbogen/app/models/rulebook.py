@@ -20,7 +20,8 @@ class Rulebook:
     __create_key = object()
 
     def __init__(self, name, create_key=None):
-        assert (create_key == self.__create_key), "Constructor is private, call denied."
+        if create_key != self.__create_key:
+            raise AssertionError("Constructor is private, call denied.")
         self.name = name
 
     @classmethod

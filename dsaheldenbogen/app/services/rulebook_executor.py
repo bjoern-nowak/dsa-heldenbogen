@@ -35,8 +35,7 @@ class RulebookExecutor:
                                                                       RulebookExecutor.FUNCTION_PROGRAM)
         if functions:
             return list(set([p[0] for p in programs]) - set([f.arguments[0].string for f in functions]))
-        else:
-            return [p[0] for p in programs]
+        return [p[0] for p in programs]
 
     def has_function_with_value(self, programs: List[RulebookProgram], name: str, value: str) -> tuple[bool, Set[str]]:
         """
@@ -49,10 +48,8 @@ class RulebookExecutor:
             if target in functions:
                 others.remove(value)
                 return True, others
-            else:
-                return False, others
-        else:
-            return False, set()
+            return False, others
+        return False, set()
 
     @staticmethod
     def _collect_functions(symbols: List[Symbol], name: str) -> List[Symbol]:

@@ -50,4 +50,4 @@ class TestHeroService(BaseTestCase):
             self.service.validate(testcase.hero, rulebooks)
         # then:
         except HeroInvalidError:
-            self.fail(f"A valid Hero has validation errors.")
+            self.fail("A valid Hero has validation errors.")

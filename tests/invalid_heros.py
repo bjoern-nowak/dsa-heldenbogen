@@ -10,6 +10,8 @@ from dsaheldenbogen.app.models.hero_validation_param import HeroValidationParam
 from dsaheldenbogen.app.models.skill import Skill
 
 
+# pylint: disable=duplicate-code
+
 class InvalidHeroTestcase(NamedTuple):
     # expected:
     error_type: HeroValidationError.Type

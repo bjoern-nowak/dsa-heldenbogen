@@ -7,6 +7,8 @@ from dsaheldenbogen.app.models.hero import Hero
 from dsaheldenbogen.app.models.skill import Skill
 
 
+# pylint: disable=duplicate-code
+
 class ValidHeroTestcase(NamedTuple):
     rulebooks: List[str]
     hero: Hero

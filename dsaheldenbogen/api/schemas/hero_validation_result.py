@@ -21,6 +21,7 @@ class HeroValidationResult(BaseModel):
         return HeroValidationResult(valid=False, errors=errors, warnings=warnings if warnings else [])
 
     class Config:
+        # pylint: disable=line-too-long
         schema_extra = {
             "examples": {
                 "valid_with_warnings": {

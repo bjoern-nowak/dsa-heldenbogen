@@ -56,20 +56,20 @@ class Engine:
         unusables: List[List[str]] = Collector.unusable_rulebooks(
             self.clingo_executor.run(
                 programs=[RulebookProgram.RULEBOOK_USABLE],
-                on_fail=UnexpectedResultError(f"Failed to collect unusable rulebooks.")
+                on_fail=UnexpectedResultError("Failed to collect unusable rulebooks.")
             )
         )
         if unusables:
             messages = []
-            for a in unusables:
-                messages.append(f"Rulebook '{a[0]}' missing '{a[1]}'.")
+            for sym in unusables:
+                messages.append(f"Rulebook '{sym[0]}' missing '{sym[1]}'.")
             raise UnusableRulebookError(chr(10).join(messages))  # chr(10) := '\n' (line break)
 
     def _find_extra_hero_validation_steps(self) -> None:
         steps: List[Symbol] = Collector.extra_hero_validation_steps(
             self.clingo_executor.run(
                 programs=[RulebookProgram.META],
-                on_fail=UnexpectedResultError(f"Failed to find extra hero validation steps.")
+                on_fail=UnexpectedResultError("Failed to find extra hero validation steps.")
             )
         )
         if steps:
@@ -79,7 +79,7 @@ class Engine:
             if step in self.DEFAULT_HERO_VALIDATION_STEPS:
                 # TODO should be a testcase instead of a runtime check
                 logger.warning(f"Some rulebook redeclare default hero validation step '{step}' as extra. "
-                               f"It does not harm but it is not recommended for clarity. "
+                               "It does not harm but it is not recommended for clarity. "
                                f"Used rulebooks: {self.rulebooks}")
             else:
                 self.hero_validation_steps[step] = step
@@ -132,5 +132,4 @@ class Engine:
         )
         if feature in [Feature.ADVANTAGE, Feature.DISADVANTAGE]:
             return [(da.arguments[0].string, da.arguments[1].string, da.arguments[2].number) for da in known_values]
-        else:
-            return [k.arguments[0].string for k in known_values]
+        return [k.arguments[0].string for k in known_values]

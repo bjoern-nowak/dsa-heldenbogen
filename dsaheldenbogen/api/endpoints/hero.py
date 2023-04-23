@@ -47,12 +47,13 @@ def validate(hero: Hero = Body(examples=Hero.Config.schema_extra["examples"]),
         logger.trace(f"(Request) validate\nrulebooks {rulebooks}\nhero: {hero}")
         warnings: List[HeroValidationWarning] = HeroService().validate(hero.to_model(), Rulebook.map(rulebooks))
         return HeroValidationResult.passed(warnings)
-    except HeroInvalidError as e:
-        return HeroValidationResult.failed(e.errors, e.warnings)
-    except UnknownRulebookError as e:
+    except HeroInvalidError as ex:
+        return HeroValidationResult.failed(ex.errors, ex.warnings)
+    except UnknownRulebookError as ex:
+        # pylint: disable-next=raise-missing-from
         raise HTTPException(
             status_code=HTTPStatus.BAD_REQUEST,
-            detail=ClientError.by(e)
+            detail=ClientError.by(ex)
         )
 
 
@@ -73,10 +74,11 @@ def save(hero: Hero, rulebooks: List[str] = Query(example=['dsa5'])):
     try:
         logger.trace(f"(Request) save\nrulebooks {rulebooks}\nhero: {hero}")
         HeroService().save(hero.to_model(), Rulebook.map(rulebooks))
-    except UnknownRulebookError as e:
+    except UnknownRulebookError as ex:
+        # pylint: disable-next=raise-missing-from
         raise HTTPException(
             status_code=HTTPStatus.BAD_REQUEST,
-            detail=ClientError.by(e)
+            detail=ClientError.by(ex)
         )
 
 

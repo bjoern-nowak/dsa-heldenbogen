@@ -38,11 +38,11 @@ def add_logging_level(level_name, level_num, method_name=None):
         method_name = level_name.lower()
 
     if hasattr(logging, level_name):
-        raise AttributeError('{} already defined in logging module'.format(level_name))
+        raise AttributeError(f"{level_name} already defined in logging module")
     if hasattr(logging, method_name):
-        raise AttributeError('{} already defined in logging module'.format(method_name))
+        raise AttributeError(f"{method_name} already defined in logging module")
     if hasattr(logging.getLoggerClass(), method_name):
-        raise AttributeError('{} already defined in logger class'.format(method_name))
+        raise AttributeError(f"{method_name} already defined in logger class")
 
     # This method was inspired by the answers to Stack Overflow post
     # http://stackoverflow.com/q/2183233/2988730, especially
@@ -87,12 +87,12 @@ class LogLevel(Enum):
         self.python = python
 
     @staticmethod
-    def argparse(s):
+    def argparse(arg):
         """Make argument case in-sensitiv"""
         try:
-            return LogLevel[s.upper()]
+            return LogLevel[arg.upper()]
         except KeyError:
-            return s
+            return arg
 
     def __str__(self) -> str:
         return self.name

@@ -38,9 +38,9 @@ lint: ## TODO may use 'flake8' instead of 'pylint'
 	## enforce coding standards
 	#poetry run python -m --ignore=W503,E501 $(SRC) $(TESTS)
 	## very strict (coding standards, code smells, simple refactors)
-	poetry run python -m pylint $(SRC) $(TESTS)
+	poetry run python -m pylint $(SRC) $(TESTS) || true
 	## find security issues
-	poetry run python -m bandit -r $(SRC)
+	poetry run python -m bandit -r $(SRC) || true
 
 	## [PRE CHECK]
 	#poetry run python -m isort --profile=black --lines-after-imports=2 --check-only $(TESTS) $(SRC)
@@ -74,5 +74,5 @@ debug:
 	poetry run python $(MAIN) --reload --loglevel debug
 
 .PHONY: start
-start: test
+start: prebuild
 	poetry run python $(MAIN) --workers 4

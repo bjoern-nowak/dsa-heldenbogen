@@ -17,12 +17,12 @@ class BaseError(BaseModel):
 class ServerError(BaseError):
 
     @staticmethod
-    def by(e: Exception) -> ServerError:
-        return jsonable_encoder(ServerError(type=type(e).__name__, message=f"{e}", details=vars(e)))
+    def by(ex: Exception) -> ServerError:
+        return jsonable_encoder(ServerError(type=type(ex).__name__, message=f"{ex}", details=vars(ex)))
 
 
 class ClientError(BaseError):
 
     @staticmethod
-    def by(e: Exception) -> ClientError:
-        return jsonable_encoder(ClientError(type=type(e).__name__, message=f"{e}", details=vars(e)))
+    def by(ex: Exception) -> ClientError:
+        return jsonable_encoder(ClientError(type=type(ex).__name__, message=f"{ex}", details=vars(ex)))

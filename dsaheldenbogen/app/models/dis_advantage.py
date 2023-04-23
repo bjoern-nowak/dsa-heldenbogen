@@ -44,7 +44,7 @@ class DisAdvantage(BaseModel):
                     # (name:str, uses:str, level:int)
                     result.append(DisAdvantage(name=da[0], uses=da[1], level=da[2]))
                 case 2:
-                    if type(da[1]) == str:
+                    if isinstance(da[1], str):
                         # (name:str, uses:str)
                         result.append(DisAdvantage(name=da[0], uses=da[1]))
                     else:
