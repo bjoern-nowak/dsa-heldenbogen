@@ -11,7 +11,7 @@ from dsaheldenbogen.infrastructure.clingo_executor import ClingoExecutor
 logger = logging.getLogger(__name__)
 
 
-class TestEngine(Engine):
+class TestingEngine(Engine):
     """
     This is the actual engine for test implementations of rulebooks and hence having some modifications:
      - given rulebooks can be real ones or test implementations (TestRulebook), so mixing is possible

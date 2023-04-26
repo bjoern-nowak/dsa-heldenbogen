@@ -2,13 +2,13 @@ from parameterized import parameterized
 
 from dsaheldenbogen.app.models.feature import Feature
 from dsaheldenbogen.app.services.meta_service import MetaService
-from tests.app.engine.engine import TestEngine
+from tests.app.engine.testing_engine import TestingEngine
 from tests.app.models.rulebook import TestRulebook
 from tests.base_test_case import BaseTestCase
 
 
 class TestMetaService(BaseTestCase):
-    service = MetaService(TestEngine)
+    service = MetaService(TestingEngine)
 
     @parameterized.expand([
         (1, Feature.EXPERIENCE_LEVEL),
