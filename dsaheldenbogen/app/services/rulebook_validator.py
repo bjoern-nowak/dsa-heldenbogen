@@ -22,11 +22,11 @@ class RulebookValidator:
 
     required_files: set[str] = {Rulebook.entrypoint_file_name(), 'meta.lp', 'rules.lp'}
 
-    @staticmethod
-    def filter(rulebooks: List[Rulebook]) -> List[Rulebook]:
+    @classmethod
+    def filter(cls, rulebooks: List[Rulebook]) -> List[Rulebook]:
         valid_books = []
         for rulebook in rulebooks:
-            errors = RulebookValidator.check(rulebook)
+            errors = cls.check(rulebook)
             if errors:
                 logger.warning(f"Rulebook '{rulebook}' is not valid and will be ignored.")
                 logger.debug(errors)
@@ -34,24 +34,25 @@ class RulebookValidator:
                 valid_books.append(rulebook)
         return valid_books
 
-    @staticmethod
-    def check(rulebook: Rulebook) -> List[str]:
+    @classmethod
+    def check(cls, rulebook: Rulebook) -> List[str]:
         """
         :return: list of errors, rulebook is valid when empty
         """
         try:
-            errors = [RulebookValidator._file_structure_valid(rulebook),
-                      RulebookValidator._has_required_programs(rulebook)] + RulebookValidator._only_declares_itself(rulebook)
+            errors = [cls._file_structure_valid(rulebook),
+                      cls._has_required_programs(rulebook)] \
+                     + cls._only_declares_itself(rulebook)
             return [err for err in errors if err is not None]
         except Exception as ex:
             logger.exception(f"Could not validate rulebook '{rulebook}'.")
             raise ex
 
-    @staticmethod
-    def _file_structure_valid(rulebook: Rulebook) -> Optional[str]:
+    @classmethod
+    def _file_structure_valid(cls, rulebook: Rulebook) -> Optional[str]:
         found_files = set(Resource.list_files(rulebook.folder()))
-        if not RulebookValidator.required_files.issubset(found_files):
-            return f"Rulebook '{rulebook}' missing required file(s): {RulebookValidator.required_files - found_files}"
+        if not cls.required_files.issubset(found_files):
+            return f"Rulebook '{rulebook}' missing required file(s): {cls.required_files - found_files}"
 
     @classmethod
     def _has_required_programs(cls, rulebook: Rulebook) -> Optional[str]:
