@@ -35,3 +35,7 @@
     * Add special talents to hero features
     * Give hero an 'sex' attribute, since it could be used as a requirement (see https://ulisses-regelwiki.de/pro_mawdli.html
       and https://ulisses-regelwiki.de/ZB_Derwisch.html)
+
+
+* Test related
+    * make all tests independent from real rulebook implementations like test_meta_service.py
