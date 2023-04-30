@@ -11,3 +11,6 @@
 
 ## mypy (typehint check) cache
 .mypy_cache/
+
+# pytest
+.pytest_cache

@@ -2,7 +2,7 @@ from clingo import Model
 from clingo.control import Control
 
 
-class ClingoPlayground():
+class ClingoPlayground:
     def test_asp(self):
         ctl = Control()
         ctl.load('clingo_playground.lp')

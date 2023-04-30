@@ -4,10 +4,9 @@ from dsaheldenbogen.app.models.feature import Feature
 from dsaheldenbogen.app.services.meta_service import MetaService
 from tests.app.engine.testing_engine import TestingEngine
 from tests.app.models.testing_rulebook import TestingRulebook
-from tests.base_test_case import BaseTestCase
 
 
-class TestMetaService(BaseTestCase):
+class TestMetaService:
     service = MetaService(TestingEngine)
 
     @parameterized.expand([
@@ -26,4 +25,4 @@ class TestMetaService(BaseTestCase):
         # when:
         found = self.service.list_known_feature_values(feature, TestingRulebook.map(rulebooks))
         # then:
-        self.assertIs(len(found), expected_count)
+        assert len(found) == expected_count

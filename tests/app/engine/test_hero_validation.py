@@ -1,15 +1,15 @@
 from contextlib import nullcontext
 
+import pytest
 from parameterized import parameterized
 
 from dsaheldenbogen.app.engine.engine import Engine
 from dsaheldenbogen.app.engine.exceptions import HeroInvalidError
 from dsaheldenbogen.app.models.hero import Hero
 from dsaheldenbogen.app.models.rulebook import Rulebook
-from tests.base_test_case import BaseTestCase
 
 
-class TestHeroValidation(BaseTestCase):
+class TestHeroValidation:
 
     @parameterized.expand([
         (0, 'Mensch'),
@@ -30,11 +30,11 @@ class TestHeroValidation(BaseTestCase):
                     disadvantages=[],
                     )
         # when:
-        with self.assertRaises(HeroInvalidError) if error_count > 0 else nullcontext() as ctx:
+        with pytest.raises(HeroInvalidError) if error_count > 0 else nullcontext() as ctx:
             engine.validate(hero)
         # then:
-        if ctx and ctx.exception:
-            self.assertIs(error_count, len(ctx.exception.errors), msg=ctx.exception.errors)
+        if ctx and ctx.value:
+            assert error_count == len(ctx.value.errors), ctx.value.errors
 
     @parameterized.expand([
         (0, 'Mensch', 'Aranier'),
@@ -56,11 +56,11 @@ class TestHeroValidation(BaseTestCase):
                     disadvantages=[],
                     )
         # when:
-        with self.assertRaises(HeroInvalidError) if error_count > 0 else nullcontext() as ctx:
+        with pytest.raises(HeroInvalidError) if error_count > 0 else nullcontext() as ctx:
             engine.validate(hero)
         # then:
-        if ctx and ctx.exception:
-            self.assertIs(error_count, len(ctx.exception.errors), msg=ctx.exception.errors)
+        if ctx and ctx.value:
+            assert error_count == len(ctx.value.errors), ctx.value.errors
 
     @parameterized.expand([
         (0, 'Mensch', 'Menschlichekultur', 'Händler'),
@@ -82,11 +82,11 @@ class TestHeroValidation(BaseTestCase):
                     disadvantages=[],
                     )
         # when:
-        with self.assertRaises(HeroInvalidError) if error_count > 0 else nullcontext() as ctx:
+        with pytest.raises(HeroInvalidError) if error_count > 0 else nullcontext() as ctx:
             engine.validate(hero)
         # then:
-        if ctx and ctx.exception:
-            self.assertIs(error_count, len(ctx.exception.errors), msg=ctx.exception.errors)
+        if ctx and ctx.value:
+            assert error_count == len(ctx.value.errors), ctx.value.errors
 
     # @parameterized.expand([
     #     (0, 'Mensch', 'Menschlichekultur', 'Händler', {}, {}),
@@ -116,4 +116,4 @@ class TestHeroValidation(BaseTestCase):
     #     # when:
     #     errors = engine.validate(hero)
     #     # then:
-    #     self.assertIs(error_count, len(errors), msg=errors)
+    #     assert error_count == len(errors), errors

@@ -52,7 +52,7 @@ typehint:
 
 .PHONY: test 
 test:
-	poetry run python -m unittest discover --start-directory $(TESTS) --top-level-directory $(ROOT)
+	poetry run python -m pytest --quiet --log-level=WARNING $(TESTS)
 
 .PHONY: format 
 format: ## TODO currently experimental

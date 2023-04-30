@@ -1,5 +1,3 @@
-import unittest
-
 from clingo.control import Control
 from clingo.symbol import Number
 
@@ -12,7 +10,7 @@ class Context:
         return [x, y]
 
 
-class ClingoContextExample(unittest.TestCase):
+class ClingoContextExample:
     def test_asp(self):
         ctl = Control()
         ctl.load('clingo_context.lp')
@@ -24,10 +22,4 @@ class ClingoContextExample(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    unittest.main()
-
-
-
-
-
-
+    ClingoContextExample().test_asp()

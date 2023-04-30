@@ -1,10 +1,8 @@
-from tests.base_test_case import BaseTestCase
-
 from dsaheldenbogen.app.models.rulebook import Rulebook
 from dsaheldenbogen.app.services.rulebook_validator import RulebookValidator
 
 
-class TestResourcesRulebooks(BaseTestCase):
+class TestResourcesRulebooks:
 
     def test_rulebooks_valid(self):
         # given:
