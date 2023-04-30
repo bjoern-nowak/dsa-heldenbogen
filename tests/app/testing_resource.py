@@ -1,5 +1,5 @@
 from dsaheldenbogen.app.resource import Resource
 
 
-class TestResource(Resource):
+class TestingResource(Resource):
     RESOURCE_ROOT = 'tests_resources'
