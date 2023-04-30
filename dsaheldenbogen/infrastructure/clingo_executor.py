@@ -1,6 +1,5 @@
 from __future__ import annotations  # required till PEP 563
 
-import logging
 from typing import List
 from typing import Sequence
 
@@ -8,10 +7,11 @@ from clingo import Control
 from clingo import SolveResult
 from clingo import Symbol
 
+from dsaheldenbogen.app.logger import getLogger
 from dsaheldenbogen.app.models.hero import Hero
 from dsaheldenbogen.infrastructure.hero_wrapper import HeroWrapper
 
-logger = logging.getLogger(__name__)
+logger = getLogger(__name__)
 
 
 class ClingoExecutor:

@@ -1,6 +1,5 @@
 from __future__ import annotations  # required till PEP 563
 
-import logging
 from typing import List
 from typing import Sequence
 
@@ -12,13 +11,14 @@ from dsaheldenbogen.app.engine.exceptions import HeroInvalidError
 from dsaheldenbogen.app.engine.exceptions import UnexpectedResultError
 from dsaheldenbogen.app.engine.exceptions import UnusableRulebookError
 from dsaheldenbogen.app.engine.rulebook_program import RulebookProgram
+from dsaheldenbogen.app.logger import getLogger
 from dsaheldenbogen.app.models.feature import Feature
 from dsaheldenbogen.app.models.hero import Hero
 from dsaheldenbogen.app.models.hero_validation_warning import HeroValidationWarning
 from dsaheldenbogen.app.models.rulebook import Rulebook
 from dsaheldenbogen.infrastructure.clingo_executor import ClingoExecutor
 
-logger = logging.getLogger(__name__)
+logger = getLogger(__name__)
 
 
 class Engine:

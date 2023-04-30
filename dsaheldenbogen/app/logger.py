@@ -6,6 +6,14 @@ from enum import Enum
 
 logger = logging.getLogger(__name__)
 
+default_init = True
+
+
+def getLogger(name=None):
+    if default_init:
+        init_config(LogLevel.INFO)
+    return logging.getLogger(name)
+
 
 # author: https://stackoverflow.com/users/2988730/mad-physicist
 # source: https://stackoverflow.com/questions/2183233/how-to-add-a-custom-loglevel-to-pythons-logging-facility/35804945#35804945

@@ -1,4 +1,3 @@
-import logging
 from http import HTTPStatus
 from typing import List
 
@@ -9,12 +8,13 @@ from fastapi import Query
 from dsaheldenbogen.api.schemas.exceptions import ClientError
 from dsaheldenbogen.api.schemas.exceptions import ServerError
 from dsaheldenbogen.app.engine.exceptions import UnusableRulebookError
+from dsaheldenbogen.app.logger import getLogger
 from dsaheldenbogen.app.models.exceptions import UnknownRulebookError
 from dsaheldenbogen.app.models.feature import Feature
 from dsaheldenbogen.app.models.rulebook import Rulebook
 from dsaheldenbogen.app.services.meta_service import MetaService
 
-logger = logging.getLogger(__name__)
+logger = getLogger(__name__)
 router = APIRouter()
 
 

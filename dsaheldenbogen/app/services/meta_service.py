@@ -1,12 +1,12 @@
-import logging
 from typing import List
 
 from dsaheldenbogen.app.engine.engine import Engine
+from dsaheldenbogen.app.logger import getLogger
 from dsaheldenbogen.app.models.feature import Feature
 from dsaheldenbogen.app.models.rulebook import Rulebook
 from dsaheldenbogen.app.services.rulebook_validator import RulebookValidator
 
-logger = logging.getLogger(__name__)
+logger = getLogger(__name__)
 
 
 class MetaService:

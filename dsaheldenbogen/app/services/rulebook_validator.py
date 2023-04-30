@@ -1,14 +1,14 @@
-import logging
 from typing import List
 from typing import Optional
 
 from dsaheldenbogen.app.engine.rulebook_function import RulebookFunction
 from dsaheldenbogen.app.engine.rulebook_program import RulebookProgram
+from dsaheldenbogen.app.logger import getLogger
 from dsaheldenbogen.app.models.rulebook import Rulebook
 from dsaheldenbogen.app.resource import Resource
 from dsaheldenbogen.app.services.rulebook_executor import RulebookExecutor
 
-logger = logging.getLogger(__name__)
+logger = getLogger(__name__)
 
 
 class RulebookValidator:

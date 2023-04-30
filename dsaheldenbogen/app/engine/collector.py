@@ -1,13 +1,13 @@
-import logging
 from typing import List
 
 from clingo import Symbol
 
 from dsaheldenbogen.app.engine import hero_validation_interpreter
 from dsaheldenbogen.app.engine.rulebook_function import RulebookFunction
+from dsaheldenbogen.app.logger import getLogger
 from dsaheldenbogen.app.models.feature import Feature
 
-logger = logging.getLogger(__name__)
+logger = getLogger(__name__)
 
 
 class Collector:

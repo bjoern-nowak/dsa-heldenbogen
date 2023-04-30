@@ -1,13 +1,13 @@
-import logging
 from typing import List
 
 from dsaheldenbogen.app.engine.engine import Engine
 from dsaheldenbogen.app.engine.exceptions import HeroInvalidError
+from dsaheldenbogen.app.logger import getLogger
 from dsaheldenbogen.app.models.hero import Hero
 from dsaheldenbogen.app.models.hero_validation_warning import HeroValidationWarning
 from dsaheldenbogen.app.models.rulebook import Rulebook
 
-logger = logging.getLogger(__name__)
+logger = getLogger(__name__)
 
 
 class HeroService:

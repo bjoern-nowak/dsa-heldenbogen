@@ -1,6 +1,5 @@
 from __future__ import annotations  # required till PEP 563
 
-import logging
 from typing import List
 from typing import Set
 
@@ -10,10 +9,11 @@ from clingo import Symbol
 from clingo import SymbolType
 
 from dsaheldenbogen.app.engine.rulebook_program import RulebookProgram
+from dsaheldenbogen.app.logger import getLogger
 from dsaheldenbogen.app.models.rulebook import Rulebook
 from dsaheldenbogen.infrastructure.clingo_executor import ClingoExecutor
 
-logger = logging.getLogger(__name__)
+logger = getLogger(__name__)
 
 
 class RulebookExecutor:

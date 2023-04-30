@@ -1,4 +1,3 @@
-import logging
 from http import HTTPStatus
 from typing import List
 
@@ -12,12 +11,13 @@ from dsaheldenbogen.api.schemas.exceptions import ServerError
 from dsaheldenbogen.api.schemas.hero import Hero
 from dsaheldenbogen.api.schemas.hero_validation_result import HeroValidationResult
 from dsaheldenbogen.app.engine.exceptions import HeroInvalidError
+from dsaheldenbogen.app.logger import getLogger
 from dsaheldenbogen.app.models.exceptions import UnknownRulebookError
 from dsaheldenbogen.app.models.hero_validation_warning import HeroValidationWarning
 from dsaheldenbogen.app.models.rulebook import Rulebook
 from dsaheldenbogen.app.services.hero_service import HeroService
 
-logger = logging.getLogger(__name__)
+logger = getLogger(__name__)
 router = APIRouter()
 
 
