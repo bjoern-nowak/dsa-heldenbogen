@@ -1,13 +1,13 @@
 from parameterized import parameterized
+from tests.base_test_case import BaseTestCase
 
 from dsaheldenbogen.app.engine.exceptions import HeroInvalidError
 from dsaheldenbogen.app.models.rulebook import Rulebook
 from dsaheldenbogen.app.services.hero_service import HeroService
-from tests.base_test_case import BaseTestCase
-from tests.invalid_heros import InvalidHeroTestcase
-from tests.invalid_heros import InvalidHeroTestcases
-from tests.valid_heros import ValidHeroTestcase
-from tests.valid_heros import ValidHeroTestcases
+from tests.e2e.invalid_heros import InvalidHeroTestcase
+from tests.e2e.invalid_heros import InvalidHeroTestcases
+from tests.e2e.valid_heros import ValidHeroTestcase
+from tests.e2e.valid_heros import ValidHeroTestcases
 
 
 def _is_subset_of(subset: dict, superset: dict) -> bool:
