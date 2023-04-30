@@ -3,11 +3,9 @@ from typing import List
 from typing import NamedTuple
 from typing import Optional
 
-from dsaheldenbogen.app.models.dis_advantage import DisAdvantage
-from dsaheldenbogen.app.models.hero import Hero
+from dsaheldenbogen.api.schemas.hero import Hero
 from dsaheldenbogen.app.models.hero_validation_error import HeroValidationError
 from dsaheldenbogen.app.models.hero_validation_param import HeroValidationParam
-from dsaheldenbogen.app.models.skill import Skill
 
 
 # pylint: disable=duplicate-code
@@ -41,8 +39,8 @@ class InvalidHeroTestcases(InvalidHeroTestcase, Enum):
             race='__unknown__',
             culture='Ambosszwerge',
             profession='Söldner',
-            talents=[],
-            combat_techniques=[],
+            talents={},
+            combat_techniques={},
             advantages=[],
             disadvantages=[],
         )
@@ -61,8 +59,8 @@ class InvalidHeroTestcases(InvalidHeroTestcase, Enum):
             race='Zwerg',
             culture='__unknown__',
             profession='Söldner',
-            talents=[],
-            combat_techniques=[],
+            talents={},
+            combat_techniques={},
             advantages=[],
             disadvantages=[],
         )
@@ -81,8 +79,8 @@ class InvalidHeroTestcases(InvalidHeroTestcase, Enum):
             race='Zwerg',
             culture='Ambosszwerge',
             profession='__unknown__',
-            talents=[],
-            combat_techniques=[],
+            talents={},
+            combat_techniques={},
             advantages=[],
             disadvantages=[],
         )
@@ -101,8 +99,8 @@ class InvalidHeroTestcases(InvalidHeroTestcase, Enum):
             race='Zwerg',
             culture='Ambosszwerge',
             profession='Söldner',
-            talents=[Skill(name='__unknown__')],
-            combat_techniques=[],
+            talents={'__unknown__': 1},
+            combat_techniques={},
             advantages=[],
             disadvantages=[],
         )
@@ -121,8 +119,8 @@ class InvalidHeroTestcases(InvalidHeroTestcase, Enum):
             race='Zwerg',
             culture='Ambosszwerge',
             profession='Söldner',
-            talents=[],
-            combat_techniques=[Skill(name='__unknown__')],
+            talents={},
+            combat_techniques={'__unknown__': 1},
             advantages=[],
             disadvantages=[],
         )
@@ -141,9 +139,9 @@ class InvalidHeroTestcases(InvalidHeroTestcase, Enum):
             race='Zwerg',
             culture='Ambosszwerge',
             profession='Söldner',
-            talents=[],
-            combat_techniques=[],
-            advantages=[DisAdvantage(name='__unknown__')],
+            talents={},
+            combat_techniques={},
+            advantages=[('__unknown__', '', 1)],
             disadvantages=[],
         )
     )
@@ -161,10 +159,10 @@ class InvalidHeroTestcases(InvalidHeroTestcase, Enum):
             race='Zwerg',
             culture='Ambosszwerge',
             profession='Söldner',
-            talents=[],
-            combat_techniques=[],
+            talents={},
+            combat_techniques={},
             advantages=[],
-            disadvantages=[DisAdvantage(name='__unknown__')],
+            disadvantages=[('__unknown__', '', 1)],
         )
     )
 
@@ -183,8 +181,8 @@ class InvalidHeroTestcases(InvalidHeroTestcase, Enum):
             race='Zwerg',
             culture='Andergaster',
             profession='Söldner',
-            talents=[],
-            combat_techniques=[],
+            talents={},
+            combat_techniques={},
             advantages=[],
             disadvantages=[],
         )
@@ -205,8 +203,8 @@ class InvalidHeroTestcases(InvalidHeroTestcase, Enum):
             race='Zwerg',
             culture='Ambosszwerge',
             profession='Zauberweber',
-            talents=[],
-            combat_techniques=[],
+            talents={},
+            combat_techniques={},
             advantages=[],
             disadvantages=[],
         )
@@ -227,8 +225,8 @@ class InvalidHeroTestcases(InvalidHeroTestcase, Enum):
             race='Zwerg',
             culture='Ambosszwerge',
             profession='Skuldrun',
-            talents=[],
-            combat_techniques=[],
+            talents={},
+            combat_techniques={},
             advantages=[],
             disadvantages=[],
         )
@@ -250,8 +248,8 @@ class InvalidHeroTestcases(InvalidHeroTestcase, Enum):
             race='Zwerg',
             culture='Ambosszwerge',
             profession='Söldner',
-            talents=[],
-            combat_techniques=[],
+            talents={},
+            combat_techniques={},
             advantages=[],
             disadvantages=[],
         )
@@ -273,8 +271,8 @@ class InvalidHeroTestcases(InvalidHeroTestcase, Enum):
             race='Zwerg',
             culture='Ambosszwerge',
             profession='Söldner',
-            talents=[],
-            combat_techniques=[],
+            talents={},
+            combat_techniques={},
             advantages=[],
             disadvantages=[],
         )
@@ -298,8 +296,8 @@ class InvalidHeroTestcases(InvalidHeroTestcase, Enum):
             race='Zwerg',
             culture='Ambosszwerge',
             profession='Söldner',
-            talents=[],
-            combat_techniques=[],
+            talents={},
+            combat_techniques={},
             advantages=[],
             disadvantages=[],
         )
@@ -320,13 +318,12 @@ class InvalidHeroTestcases(InvalidHeroTestcase, Enum):
             race='Zwerg',
             culture='Ambosszwerge',
             profession='Söldner',
-            talents=Skill.list_by([('Körperbeherrschung', 17), ('Kraftakt', 3), ('Selbstbeherrschung', 4), ('Zechen', 5),
-                                   ('Menschenkenntnis', 3), ('Überreden', 3), ('Orientierung', 4), ('Wildnisleben', 3),
-                                   ('Götter & Kulte', 3), ('Kriegskunst', 6), ('Sagen & Legenden', 5), ('Handel', 3),
-                                   ('Heilkunde Wunden', 4)]),
-            combat_techniques=Skill.list_by([('Armbrüste', 10), ('Raufen', 10), ('Hiebwaffen', 10)]),
-            advantages=DisAdvantage.list_by([('Dunkelsicht',), ('Immunität', 'Tulmadron')]),
-            disadvantages=DisAdvantage.list_by([('Unfähig', 'Schwimmen')]),
+            talents={'Körperbeherrschung': 17, 'Kraftakt': 3, 'Selbstbeherrschung': 4, 'Zechen': 5, 'Menschenkenntnis': 3,
+                     'Überreden': 3, 'Orientierung': 4, 'Wildnisleben': 3, 'Götter & Kulte': 3, 'Kriegskunst': 6,
+                     'Sagen & Legenden': 5, 'Handel': 3, 'Heilkunde Wunden': 4},
+            combat_techniques={'Armbrüste': 10, 'Raufen': 10, 'Hiebwaffen': 10},
+            advantages=[('Dunkelsicht', '', 1), ('Immunität', 'Tulmadron', 1)],
+            disadvantages=[('Unfähig', 'Schwimmen', 1)],
         )
     )
 
@@ -345,12 +342,11 @@ class InvalidHeroTestcases(InvalidHeroTestcase, Enum):
             race='Zwerg',
             culture='Ambosszwerge',
             profession='Söldner',
-            talents=Skill.list_by([('Körperbeherrschung', 3), ('Kraftakt', 3), ('Selbstbeherrschung', 4), ('Zechen', 5),
-                                   ('Menschenkenntnis', 3), ('Überreden', 3), ('Orientierung', 4), ('Wildnisleben', 3),
-                                   ('Götter & Kulte', 3), ('Kriegskunst', 6), ('Sagen & Legenden', 5), ('Handel', 3),
-                                   ('Heilkunde Wunden', 4)]),
-            combat_techniques=Skill.list_by([('Armbrüste', 17), ('Raufen', 10), ('Hiebwaffen', 10)]),
-            advantages=DisAdvantage.list_by([('Dunkelsicht',), ('Immunität', 'Tulmadron')]),
-            disadvantages=DisAdvantage.list_by([('Unfähig', 'Schwimmen')]),
+            talents={'Körperbeherrschung': 3, 'Kraftakt': 3, 'Selbstbeherrschung': 4, 'Zechen': 5, 'Menschenkenntnis': 3,
+                     'Überreden': 3, 'Orientierung': 4, 'Wildnisleben': 3, 'Götter & Kulte': 3, 'Kriegskunst': 6,
+                     'Sagen & Legenden': 5, 'Handel': 3, 'Heilkunde Wunden': 4},
+            combat_techniques={'Armbrüste': 17, 'Raufen': 10, 'Hiebwaffen': 10},
+            advantages=[('Dunkelsicht', '', 1), ('Immunität', 'Tulmadron', 1)],
+            disadvantages=[('Unfähig', 'Schwimmen', 1)],
         )
     )
