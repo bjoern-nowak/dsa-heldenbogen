@@ -25,4 +25,6 @@ framework [clingo](https://potassco.org/clingo/) (from Potassco, the Potsdam Ans
   * See how to add a new rulebook (expansion) at [docs/CREATE_A_RULEBOOK.md](./docs/CREATE_A_RULEBOOK.md).
   * Understand ASP modelling (logic program language by clingo) at [docs/CHEATSHEET.lp](./docs/CHEATSHEET.lp).
 
-* See list of open todos at [docs/TODOs.md](./docs/TODOs.md). (there are even more within the code)
+* See concept excerpt (from a bachelor thesis) which this project is based on at [docs/concept-excerpt.pdf](./docs/concept-excerpt.pdf) (german only).
+* 
+* See list of open todos at [docs/TODOs.md](./docs/TODOs.md) (there are even more within the code).
