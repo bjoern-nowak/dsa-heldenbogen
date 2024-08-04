@@ -1,3 +1,5 @@
+[Corresponding bachelor thesis](./BA_Nowak_print.pdf)
+
 # DSA ("Das Schwarze Auge") Heldenbogen - Backend
 
 This project represents a new way of formalizing the rules of germans most popular
